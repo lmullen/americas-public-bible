@@ -8,7 +8,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 all : extract
 
 download :
-	wget --continue --progress=bar --mirror --no-parent --background \
+	wget --continue --progress=bar --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url)
 
 %.tar.bz2.EXTRACTED : %.tar.bz2
