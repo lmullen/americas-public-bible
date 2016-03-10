@@ -1,0 +1,24 @@
+---
+title: "America's Public Bible, 1836-1922"
+author: "Lincoln Mullen"
+---
+
+This is a project to detect the biblical quotations in the [Chronicling America](http://chroniclingamerica.loc.gov/) dataset of historical newspapers, then to interpret and visualize the patterns.
+
+See the notebook sections below for my work in progress.
+
+### Table of contents
+
+```{r echo=FALSE, results='asis'}
+rmd <- Sys.glob("*.Rmd")
+rmd <- rmd[rmd != "index.Rmd"]
+html <- sub(".Rmd", ".html", rmd)
+lines <- lapply(rmd, readLines)
+yaml <- lapply(lines, rmarkdown:::parse_yaml_front_matter)
+cat("<ul>")
+for (i in seq_along(rmd)) {
+  cat(paste0("<li><a href='", html[i], "'>", yaml[[i]]$title, "</a><br/>",
+             "<code>", rmd[i], "</code>", "</li>"))
+}
+cat("</ul>")
+```
