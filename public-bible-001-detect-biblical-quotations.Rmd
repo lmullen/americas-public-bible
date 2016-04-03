@@ -1,0 +1,264 @@
+---
+title: "America's Public Bible 001: Detecting biblical quotations in an OCRed page"
+project: "public-bible"
+tags:
+- computation
+- text-analysis
+- Bible
+- Chronicling America
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The dataset has one text file for each page in the [Chronicling America](http://chroniclingamerica.loc.gov/), some 10.5 million of them at last count. I also have the King James Version of the Bible in text files, with one line per verse. The aim is to create document-term matrices for both the Bible and a subset of the Chronicling America dataset. These document-term matrices will use the same vocabulary, implying that they will have the same term dimension (the columns). We can therefore multiple one matrix by the transpose of the other matrix, creating a document-document matrix, where the values are a score that measures the likelihood that the page in Chronicling America contains the corresponding biblical verse. The purpose of this notebook is to figure out how best to create and multiply those matrices, and to test several ways of normalizing those matrices.
+
+```{r, message=FALSE}
+library(MASS)
+library(Matrix)
+library(broom)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(readr)
+library(stringr)
+library(text2vec)
+library(tokenizers)
+```
+
+Create a character vector of each verse in the KJV, including the Apocrypha. The names of the character vector will be the verse references.
+
+```{r}
+chapter_files <- list.files("data/kjv", pattern = "\\.txt$",
+                            recursive = TRUE, full.names = TRUE) 
+
+chapter_names <- chapter_files %>% 
+  str_replace("\\.txt", "") %>% 
+  str_replace("data/kjv/.+\\/", "") %>% 
+  str_replace("(\\d+)$", " \\1:") %>% 
+  str_replace("Psalms", "Psalm")
+
+chapter_texts <- chapter_files %>% 
+  map(read_lines) %>% 
+  at_depth(1, str_replace, "\\d+\\s", "") 
+
+names(chapter_texts) <- chapter_names 
+bible_verses <- chapter_texts %>% unlist() 
+
+# Sample verses
+bible_verses[c("Romans 1:16", "John 3:16", "1 Esdras 1:1", "Psalm 95:1")] %>%
+  unname()
+```
+
+Now we are going to build a vocabulary from those biblical texts. In this case we will just use 5-grams. In practice we will likely use a mix of various n-grams.
+
+```{r}
+fivegrammer <- function(x) tokenize_ngrams(x, n = 5)
+verses_it <- itoken(bible_verses, tokenizer = fivegrammer)
+biblical_vocab <- create_vocabulary(verses_it)
+```
+
+With that vocabulary, we are going to build two document-term matrices with the number of occurences of each n-gram in each document. The first is of the uses of each n-gram in the Bible.
+
+```{r}
+verses_it <- itoken(bible_verses, tokenizer = fivegrammer)
+bible_dtm <- create_dtm(verses_it, vocab_vectorizer(biblical_vocab))
+```
+
+Now we will do the same for a sample set of publications in Chronicling America. Notice that we are going to use the biblical vocabulary, not a vocabulary defined by the contents of the newspaper pages, so we are looking only for biblical language.
+
+```{r}
+newspaper_pages <- list.files("data/sample-data", pattern = "\\.txt$", 
+                              full.names = TRUE, recursive = TRUE)
+
+# Munge the paths of the OCR pages to part of a URL to  Chronicling America
+newspaper_id <- newspaper_pages %>% 
+  str_replace("data/sample-data/", "") %>% 
+  str_replace("ocr.txt", "") %>% 
+  str_replace("(\\d{4})/(\\d{2})/(\\d{2})", "\\1-\\2-\\3")
+```
+
+There are `r length(newspaper_pages) %>% prettyNum(big.mark = ",")` pages in the test data. We will time how long it takes to make the DTM. 
+
+```{r}
+system.time({
+  files_it <- ifiles(newspaper_pages, reader_function = read_file)
+  pages_it <- itoken(files_it, tokenizer = fivegrammer)
+  newspaper_dtm <- create_dtm(pages_it, vocab_vectorizer(biblical_vocab))
+  rownames(newspaper_dtm) <- newspaper_id
+})
+```
+
+Both of these are very sparse matrices.
+
+```{r}
+sparsity <- function(m) {
+  nnzero(m) / length(m)
+}
+sparsity(bible_dtm) 
+sparsity(newspaper_dtm) 
+```
+
+What we want to know is which Bible verses appear on which newspaper pages. We can do that by multiplying the Bible verses matrix by the transpose of the newspaper matrix. Notice that our two document-term matrices share a common dimension, thanks to the fact that we are using the same 4-grams as the columns of both. 
+
+```{r}
+dim(bible_dtm)
+dim(newspaper_dtm)
+```
+
+If we multiply the two matrices without normalizing them, the meaning of the score is a count of the number of tokens that appear in both documents.
+
+```{r}
+similarity_count <- tcrossprod(bible_dtm, newspaper_dtm)
+```
+
+A few helper functions to help us navigate the data.
+
+```{r}
+stopwords <- c("a", "an", "and", "are", "as", "at", "be", "but", "by", "for",
+               "if", "in", "into", "is", "it", "no", "not", "of", "on", "or",
+               "such", "that", "the", "their", "then", "there", "these", 
+               "they", "this", "to", "was", "will", "with", "i", "said", 
+               "should", "from", "he", "have", "us", "our", "his", "shall",
+               "him", "so", "yet")
+words_on_page <- function(id) {
+  used <- newspaper_dtm[id, , drop = TRUE]
+  used <- used[used > 0] %>% sort(decreasing = TRUE)
+  used <- names(used)
+  used <- str_c(used, collapse = " ")
+  used <- tokenize_words(used, simplify = TRUE) %>% unique()
+  used <- used[!used %in% stopwords]
+  str_c(used, collapse = " ")
+}
+words_on_page <- Vectorize(words_on_page, SIMPLIFY = TRUE, USE.NAMES = FALSE)
+
+words_on_page(c("sn87065520/1846-03-07/ed-1/seq-3/", "sn87065520/1846-03-07/ed-1/seq-3/")) 
+
+extract_date <- function(x) {
+  str_extract(x, "\\d{4}-\\d{2}-\\d{2}")[[1]] %>% as.Date()
+}
+
+extract_date("sn87065520/1846-03-07/ed-1/seq-3/")
+
+ca_url <- function(lccn, words) {
+  words <- tokenize_words(words)[[1]] %>% str_c(collapse = "+")
+  str_c("http://chroniclingamerica.loc.gov/lccn/", lccn, "#words=", words)
+}
+ca_url <- Vectorize(ca_url, USE.NAMES = FALSE)
+
+ca_url("sn87065520/1846-03-07/ed-1/seq-3/", c("sample words"))
+```
+
+Now we can turn our document to document matrix into a data frame, extract the date and URL from the page information, and browse the Chronicling America website with key terms highlighted.
+
+```{r}
+test_matches <- similarity_count %>% 
+  tidy() %>% 
+  tbl_df() %>% 
+  rename(verse = row, page = column, score = value) %>% 
+  arrange(desc(score)) %>% 
+  head(20) %>% 
+  mutate(date = extract_date(page), 
+         url = ca_url(page, words_on_page(page))) 
+test_matches
+```
+
+If we look at those pages on Chronicling America, this is what we find. [This  page](http://chroniclingamerica.loc.gov/lccn/sn87065520/1846-03-07/ed-1/seq-3/#words=fowl+air+heathen+thine+inheritance+thee+give+me+over+every+unto+them+fruitful+god+blessed+female+created+male+image+man+creeping+thing+earth+sea+fish+dominion+let+likeness+make+face+uttermost+parts+creepeth+streets+city+law+ask+replenish+head), for example, contains a report of a speech by John Quincy Adams in the House of Representatives, which quotes Genesis 1:26--28 and Psalm 2:8 in full, as well as various other partial quotations or allusions.^[The Panola Miss. lynx. (Panola, Mi. [i.e. Miss.]), 07 March 1846. Chronicling America: Historic American Newspapers. Lib. of Congress. <http://chroniclingamerica.loc.gov/lccn/sn87065520/1846-03-07/ed-1/seq-3/>] But there are also false positives, such as [this page](http://chroniclingamerica.loc.gov/lccn/sn87065520/1846-03-07/ed-1/seq-3/) is a false match.^[The Inter-mountain farmer and ranchman. (Salt Lake City, Utah), 18 Feb. 1902. Chronicling America: Historic American Newspapers. Lib. of Congress. <http://chroniclingamerica.loc.gov/lccn/2010218500/1902-02-18/ed-1/seq-5/>] It has a number of biblical n-grams, but none of them are particularly biblical: they could appear in many different English sentences. This points out that the method needs some refinement: we probably need more than just n-grams where $n$ is bigger than 4 to detect more unusual langauge; we should not just be counting up "biblical" language but should be looking for matches to particular verses; and we may need to scale the occurence matrix so that we weight phrases which tend to appear only in the Bible more that phrases which can be a part of any English sentence.
+
+There is also a quotation from Lamentations 1:1. If we look up the newspaper page, we find [this story](http://chroniclingamerica.loc.gov/lccn/sn84026005/1871-10-28/ed-1/seq-2/) in the *Petroleum Centre Daily Record* (text taken from OCR file).^[The Petroleum Centre daily record. (Petroleum Center, Pa.), 28 Oct. 1871. Chronicling America: Historic American Newspapers. Lib. of Congress. <http://chroniclingamerica.loc.gov/lccn/sn84026005/1871-10-28/ed-1/seq-2/>]
+
+> One o! tbe most remarkable lootdenls or the Cbicagojflte was tbe saving of just one leaf of s quarto Bible out or tbe whole tlock of books magazines and newspspers belong ing to tbe Western Newt Comp oy. It con- tained tbe first chapter ot tbe Lamentations of Jeremiah, which opens with the following words: "How doth the city sit solitary that was full of people! bow is she ' become as a widow ! she that was great amoog the nstlons sod princes among tbe provinces, howls sbe become tributary! She weepetb tore in tbe night, andber ears are on her cheeks, smeng all ber lovers tbe bath none to comfort t er "
+
+The reference to Ephesians 5:31 [is a joke](http://chroniclingamerica.loc.gov/lccn/sn85026279/1858-11-19/ed-1/seq-1/) at the expense of an "old Scotch Highland minister" which turns on changing a word of that verse.
+
+We need to think more carefully, though, about what the scores represent. Because of the way matrix multiplication works, they essentially represent the sum of the n-grams that appear in each newspaper page that also appear in a given verse. This will of course give higher scores to longer quotations from longer verses.
+
+It would be more useful to know something like a probability that a verse appears on a page. That would give our method more interpretability (e.g., we would better know which matches to throw away). Alternatively, we might get more reliable results by normalizing the matrices according to a scheme like TF-IDF instead of weighting all biblical n-grams equally. We will give extra weight to n-grams which appear in only one verse or a few verses, and give little weight to n-grams which appear in many verses (for example, "thus saith the Lord", "and it came to pass").
+
+We will test this by creating the document-to-document similarity matrices for several different weighting schemes.
+
+First, use the un-normalized similarity scores.
+
+```{r}
+similarity_count_df <- similarity_count %>% 
+  tidy() %>% 
+  tbl_df() %>%
+  rename(verse = row, page = column, score_count = value) 
+```
+
+Weight the verses DTM by term frequency (which is the same as dividing each element in a row by the sum of the row) and the newspaper DTM by dividing each element in a column by its column sums.
+
+```{r}
+transform_colsums <- function(m) {
+  m %*% Diagonal(x = 1 / colSums(m)) 
+}
+
+similarity_prob <- tcrossprod(transform_tf(bible_dtm), 
+                              transform_colsums(newspaper_dtm))
+similarity_prob_df <- similarity_prob %>% 
+  tidy() %>% 
+  tbl_df() %>% 
+  rename(verse = row, page = column, score_prob = value) 
+```
+
+Weight the verses DTM by term frequency, and leave the newspaper DTM unweighted.
+
+```{r}
+similarity_tf <- tcrossprod(transform_tf(bible_dtm), newspaper_dtm)
+similarity_tf_df <- similarity_tf %>% 
+  tidy() %>% 
+  tbl_df() %>% 
+  rename(verse = row, page = column, score_tf = value) 
+```
+
+Weight the verses DTM by TF-IDF, and leave the newspaper DTM unweighted.
+
+```{r}
+similarity_tfidf <- tcrossprod(transform_tfidf(bible_dtm), newspaper_dtm)
+similarity_tfidf_df <- similarity_tfidf %>% 
+  tidy() %>% 
+  tbl_df() %>% 
+  rename(verse = row, page = column, score_tfidf = value) 
+```
+
+Now we can join all of those data frames together and plot them in a parallel coordinates plot.
+
+```{r}
+score_cf <- similarity_count_df %>% 
+  left_join(similarity_prob_df, by = c("verse", "page")) %>% 
+  left_join(similarity_tf_df, by = c("verse", "page")) %>% 
+  left_join(similarity_tfidf_df, by = c("verse", "page")) 
+
+score_cf %>% 
+  dplyr::select(starts_with("score")) %>% 
+  MASS::parcoord(col = rgb(0, 0, 0, alpha = 0.2),
+           main = "Comparison of various measures")
+```
+
+It appears that different ways of normalizing the matrices affect the rankings, sometimes in substantial ways. We will need to use a more formal method to evaluate exactly which kind of normalization is best, as well as what the cut-off point is between matches and non-matches. We can turn this into a supervised classification problem by creating a test set of known matches and non-matches. As a preliminary to doing so, let's look at a few instances.
+
+```{r}
+score_cf_urls <- score_cf %>% 
+  arrange(desc(score_prob)) %>% 
+  top_n(20, score_prob) %>% 
+  mutate(date = extract_date(page), 
+         url = ca_url(page, words_on_page(page))) 
+score_cf_urls
+```
+
+This is an [interesting example](http://chroniclingamerica.loc.gov/lccn/2010218500/1902-11-11/ed-1/seq-4/#words=stand+before+kings+diligent+business+man+thou+army+lusts+flesh)^[The Inter-mountain farmer and ranchman. (Salt Lake City, Utah), 11 Nov. 1902. Chronicling America: Historic American Newspapers. Lib. of Congress. <http://chroniclingamerica.loc.gov/lccn/2010218500/1902-11-11/ed-1/seq-4/>]:
+
+```{r}
+score_cf_urls %>% slice(8)
+```
+
+We have found the one reference to Proverbs 5:5 (text from OCR):
+
+> Ret McCann, a young woman residing at Babylon, one of taal class of wnom it is said in Proverbs: "Hor feet go down to death; her steps take bold oa bull," died yesterday afternoon uuder circumstances which lead lo tbo supposition tbat she Com mitted eulcltls by the uso ol chloiofoim. 
+
+But we did not find the reference at the end of the passage, for which only the 3-gram "bitter as wormwood" survives unmangled by the OCR:
+
+> Her e.-td is bitter as wormwood, sbaip as a Iwo-rdMi rwurd. "
+
+We will also have to consider the best way of tokenizing the text.
