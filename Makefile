@@ -17,6 +17,7 @@ all : $(NOTEBOOKS)
 
 clean :
 	rm -rf $(NOTEBOOKS)
+	rm -rf *_files
 
 # Tasks to put notebooks in wiki
 wiki : $(NOTEBOOKS)
