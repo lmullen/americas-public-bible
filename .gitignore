@@ -3,3 +3,4 @@
 .RData
 wget-log
 temp/
+data/sample-data
