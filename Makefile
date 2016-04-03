@@ -1,6 +1,6 @@
 # Variables for notebook pages
-INCLUDES  := $(wildcard www-lib/*.html)
-NOTEBOOKS := $(patsubst %.Rmd, %.html, $(wildcard *.Rmd))
+NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
+NOTEBOOK_DIR := ~/acad/notebook2
 
 # Variables for downloading Chronicling America
 chronicling_dir := /Volumes/RESEARCH/chronicling-america
@@ -10,15 +10,19 @@ chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data
 chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Tasks to build notebooks
-all : $(NOTEBOOKS)
+all : $(NOTEBOOKS) 
 
-%.html : %.Rmd $(INCLUDES)
+%.md : %.Rmd $(INCLUDES)
 	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
 
-index.html : index.Rmd $(INCLUDES) $(filter-out index.html, $(NOTEBOOKS))
-
 clean :
-	rm -rf $(NOTEBOOKS) index.html
+	rm -rf $(NOTEBOOKS)
+
+# Tasks to put notebooks in wiki
+wiki : $(NOTEBOOKS)
+	cp $(NOTEBOOKS) $(NOTEBOOK_DIR)/_note/
+	mkdir -p $(NOTEBOOK_DIR)/figures/$*/
+	cp -r *_files $(NOTEBOOK_DIR)/figures/
 
 # Tasks to download and extract Chronicling America data
 # These are not run automatically
