@@ -1,4 +1,4 @@
-# Variables for notebook pages
+
 NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
 NOTEBOOK_DIR := ~/acad/notebook2
 
@@ -10,7 +10,7 @@ chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data
 chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Tasks to build notebooks
-all : $(NOTEBOOKS) 
+all : $(NOTEBOOKS) temp/pub-years.txt
 
 %.md : %.Rmd $(INCLUDES)
 	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
@@ -24,6 +24,16 @@ wiki : $(NOTEBOOKS)
 	cp $(NOTEBOOKS) $(NOTEBOOK_DIR)/_note/
 	mkdir -p $(NOTEBOOK_DIR)/figures/$*/
 	cp -r *_files $(NOTEBOOK_DIR)/figures/
+
+# Tasks to create a sample dataset
+sample-data : temp/sample-files.txt
+	./scripts/copy-sample-files.sh
+
+temp/sample-files.txt : temp/pub-years.txt
+	Rscript --vanilla ./scripts/generate-sample-pages.R
+
+temp/pub-years.txt :
+	./scripts/generate-publication-years.sh > $@
 
 # Tasks to download and extract Chronicling America data
 # These are not run automatically
