@@ -126,7 +126,7 @@ system.time({
 ```
 
     ##    user  system elapsed 
-    ##  88.606  17.524 109.230
+    ##  89.880  17.761 110.212
 
 Both of these are very sparse matrices.
 
@@ -199,7 +199,7 @@ words_on_page(c("sn87065520/1846-03-07/ed-1/seq-3/", "sn87065520/1846-03-07/ed-1
 
 ``` {.r}
 extract_date <- function(x) {
-  str_extract(x, "\\d{4}-\\d{2}-\\d{2}")[[1]] %>% as.Date()
+  str_extract_all(x, "\\d{4}-\\d{2}-\\d{2}") %>% unlist() %>% as.Date()
 }
 
 extract_date("sn87065520/1846-03-07/ed-1/seq-3/")
@@ -385,7 +385,7 @@ score_cf %>%
            main = "Comparison of various measures")
 ```
 
-<img src="public-bible-001-detect-biblical-quotations_files/figure-markdown/unnamed-chunk-16-1.png" title="" alt="" width="672" />
+<img src="public-bible-001-detect-biblical-quotations_files/figure-markdown/unnamed-chunk-16-1.png" width="672" />
 
 It appears that different ways of normalizing the matrices affect the
 rankings, sometimes in substantial ways. We will need to use a more
@@ -397,27 +397,28 @@ let's look at a few instances.
 
 ``` {.r}
 score_cf_urls <- score_cf %>% 
-  arrange(desc(score_prob)) %>% 
-  top_n(20, score_prob) %>% 
-  mutate(date = extract_date(page), 
+  arrange(desc(score_tfidf)) %>% 
+  top_n(100, score_tfidf) %>%
+  mutate(page = as.character(page),
+         date = extract_date(page), 
          url = ca_url(page, words_on_page(page))) 
 score_cf_urls
 ```
 
-    ## Source: local data frame [21 x 8]
+    ## Source: local data frame [100 x 8]
     ## 
     ##             verse                              page score_count score_prob
-    ##            (fctr)                            (fctr)       (dbl)      (dbl)
-    ## 1       Psalm 2:8 sn87065520/1846-03-07/ed-1/seq-3/          15  0.7894737
-    ## 2     Exodus 20:8 sn84026005/1870-03-22/ed-1/seq-2/           4  0.7500000
-    ## 3       Mark 10:7 sn85026279/1858-11-19/ed-1/seq-1/           8  0.6666667
-    ## 4       Job 13:25 sn94052752/1902-06-19/ed-1/seq-3/           8  0.6666667
-    ## 5    Genesis 1:27 sn87065520/1846-03-07/ed-1/seq-3/          10  0.5555556
-    ## 6    Genesis 1:28 sn87065520/1846-03-07/ed-1/seq-3/          25  0.5476190
-    ## 7  Proverbs 22:29 2010218500/1902-11-11/ed-1/seq-4/           8  0.5000000
-    ## 8    Proverbs 5:5 sn84026005/1873-10-14/ed-1/seq-2/           4  0.5000000
-    ## 9    Genesis 1:26 sn87065520/1846-03-07/ed-1/seq-3/          25  0.5000000
-    ## 10   Romans 14:16 sn85026279/1857-01-02/ed-1/seq-2/           2  0.4000000
+    ##            (fctr)                             (chr)       (dbl)      (dbl)
+    ## 1     Exodus 20:8 sn84026005/1870-03-22/ed-1/seq-2/           4  0.7500000
+    ## 2       Psalm 2:8 sn87065520/1846-03-07/ed-1/seq-3/          15  0.7894737
+    ## 3       Job 13:25 sn94052752/1902-06-19/ed-1/seq-3/           8  0.6666667
+    ## 4       Mark 10:7 sn85026279/1858-11-19/ed-1/seq-1/           8  0.6666667
+    ## 5    Genesis 1:28 sn87065520/1846-03-07/ed-1/seq-3/          25  0.5476190
+    ## 6    Genesis 1:27 sn87065520/1846-03-07/ed-1/seq-3/          10  0.5555556
+    ## 7    Genesis 1:26 sn87065520/1846-03-07/ed-1/seq-3/          25  0.5000000
+    ## 8     Exodus 20:8 sn84026005/1872-11-17/ed-1/seq-2/           2  0.2500000
+    ## 9    Proverbs 5:5 sn84026005/1873-10-14/ed-1/seq-2/           4  0.5000000
+    ## 10 Proverbs 22:29 2010218500/1902-11-11/ed-1/seq-4/           8  0.5000000
     ## ..            ...                               ...         ...        ...
     ## Variables not shown: score_tf (dbl), score_tfidf (dbl), date (date), url
     ##   (chr)
@@ -431,9 +432,9 @@ score_cf_urls %>% slice(8)
 
     ## Source: local data frame [1 x 8]
     ## 
-    ##          verse                              page score_count score_prob
-    ##         (fctr)                            (fctr)       (dbl)      (dbl)
-    ## 1 Proverbs 5:5 sn84026005/1873-10-14/ed-1/seq-2/           4        0.5
+    ##         verse                              page score_count score_prob
+    ##        (fctr)                             (chr)       (dbl)      (dbl)
+    ## 1 Exodus 20:8 sn84026005/1872-11-17/ed-1/seq-2/           2       0.25
     ## Variables not shown: score_tf (dbl), score_tfidf (dbl), date (date), url
     ##   (chr)
 
