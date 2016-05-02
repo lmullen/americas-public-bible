@@ -136,7 +136,7 @@ words_on_page <- Vectorize(words_on_page, SIMPLIFY = TRUE, USE.NAMES = FALSE)
 words_on_page(c("sn87065520/1846-03-07/ed-1/seq-3/", "sn87065520/1846-03-07/ed-1/seq-3/")) 
 
 extract_date <- function(x) {
-  str_extract(x, "\\d{4}-\\d{2}-\\d{2}")[[1]] %>% as.Date()
+  str_extract_all(x, "\\d{4}-\\d{2}-\\d{2}") %>% unlist() %>% as.Date()
 }
 
 extract_date("sn87065520/1846-03-07/ed-1/seq-3/")
@@ -240,9 +240,10 @@ It appears that different ways of normalizing the matrices affect the rankings, 
 
 ```{r}
 score_cf_urls <- score_cf %>% 
-  arrange(desc(score_prob)) %>% 
-  top_n(20, score_prob) %>% 
-  mutate(date = extract_date(page), 
+  arrange(desc(score_tfidf)) %>% 
+  top_n(100, score_tfidf) %>%
+  mutate(page = as.character(page),
+         date = extract_date(page), 
          url = ca_url(page, words_on_page(page))) 
 score_cf_urls
 ```
