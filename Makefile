@@ -1,4 +1,3 @@
-
 NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
 NOTEBOOK_DIR := ~/acad/notebook2
 
@@ -9,15 +8,23 @@ chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
 chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
-# Tasks to build notebooks
-all : $(NOTEBOOKS) temp/pub-years.txt
+# Variables for extracting features
+PUBYEARS := $(shell find ./data/sample -mindepth 2 -maxdepth 2 -type d)
+FEATURES := $(addsuffix /features.feather, $(PUBYEARS))
 
+all : $(NOTEBOOKS) temp/pub-years.txt temp/all-features.feather
+
+# Tasks to build notebooks
 %.md : %.Rmd $(INCLUDES)
 	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
 
 clean :
 	rm -rf $(NOTEBOOKS)
 	rm -rf *_files
+
+clobber-features :
+	rm -rf $(FEATURES)
+	rm -rf temp/all-features.feather
 
 # Tasks to put notebooks in wiki
 wiki : $(NOTEBOOKS)
@@ -28,6 +35,12 @@ wiki : $(NOTEBOOKS)
 # Tasks to extract features
 temp/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
+
+temp/all-features.feather : $(FEATURES)
+	./scripts/collect-features.R
+
+./data/sample/%.feather :
+	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 # Tasks to create a sample dataset
 sample-data : temp/sample-files.txt

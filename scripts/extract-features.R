@@ -27,16 +27,36 @@ newspaper_id <- newspaper_pages %>%
   str_replace("ocr.txt", "") %>%
   str_replace("(\\d{4})/(\\d{2})/(\\d{2})", "\\1-\\2-\\3")
 
+# Some files are empty, so capture errors in reading files
+read_file_safely <- dplyr::failwith("", readr::read_file)
+
 # Load the files
 newspaper_text <- data_frame(
   page = newspaper_id,
-  text = map_chr(newspaper_pages, read_file)) %>%
+  text = map_chr(newspaper_pages, read_file_safely)) %>%
   mutate(tokens = bible_tokenizer(text))
 
 # Create the newspaper DTM
 pages_it <- itoken(newspaper_text$text, tokenizer = bible_tokenizer)
 newspaper_dtm <- create_dtm(pages_it, vocab_vectorizer(bible_vocab))
 rownames(newspaper_dtm) <- newspaper_id
+
+# Some newspapers have zero matches to the biblical vocabulary. If that's the case
+# then write an empty file and quit early
+if (nnzero(newspaper_dtm) == 0) {
+  scores <- data_frame(
+    reference = character(0),
+    page = character(0),
+    token_count = numeric(0),
+    tfidf = numeric(0),
+    tf = numeric(0),
+    probability = numeric(0),
+    position_range = numeric(0),
+    position_sd = numeric(0)
+  )
+  write_feather(scores, file_out)
+  quit(save = "no", status = 0)
+}
 
 # Some helper functions
 transform_colsums <- function(m) {
@@ -46,7 +66,8 @@ transform_colsums <- function(m) {
 # Create the various scores
 token_count <- tcrossprod(bible_dtm, newspaper_dtm) %>%
   tidy() %>% rename(token_count = value)
-tfidf <- tcrossprod(transform_tfidf(bible_dtm), newspaper_dtm) %>%
+idf <- get_idf(bible_dtm)
+tfidf <- tcrossprod(transform_tfidf(bible_dtm, idf), newspaper_dtm) %>%
   tidy() %>% rename(tfidf = value)
 tf <- tcrossprod(transform_tf(bible_dtm), newspaper_dtm) %>%
   tidy() %>% rename(tf = value)
