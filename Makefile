@@ -25,6 +25,10 @@ wiki : $(NOTEBOOKS)
 	mkdir -p $(NOTEBOOK_DIR)/figures/$*/
 	cp -r *_files $(NOTEBOOK_DIR)/figures/
 
+# Tasks to extract features
+temp/bible.rda :
+	Rscript --vanilla ./scripts/create-bible-dtm.R
+
 # Tasks to create a sample dataset
 sample-data : temp/sample-files.txt
 	./scripts/copy-sample-files.sh
