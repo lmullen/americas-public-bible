@@ -39,7 +39,7 @@ temp/bible.rda :
 temp/all-features.feather : $(FEATURES)
 	./scripts/collect-features.R
 
-./data/sample/%.feather :
+./data/sample/%.feather : temp/bible.rda
 	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 # Tasks to create a sample dataset

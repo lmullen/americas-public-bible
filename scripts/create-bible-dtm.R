@@ -44,7 +44,7 @@ bible_verses <- bible_verses %>%
 # Create the Bible DTM
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_vocab <- create_vocabulary(verses_it)
-bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 50)
+bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 20)
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_dtm <- create_dtm(verses_it, vocab_vectorizer(bible_vocab))
 rownames(bible_dtm) <- bible_verses$reference
