@@ -28,13 +28,29 @@ chapter_texts <- chapter_files %>%
 names(chapter_texts) <- chapter_names
 bible_verses <- chapter_texts %>% unlist()
 
-# TODO Remove this temporary filter for verses with fewer than 5 words, once the
+# TODO Remove this temporary filter for verses with fewer than 6 words, once the
 # bug in tokenizers::tokenize_ngrams is fixed
-wc <- vapply(bible_verses, textreuse::wordcount, integer(1))
-bible_verses <- bible_verses[wc >= 5]
+wordcounter <- function(x) {
+  bible_stops <- c("a", "an", "and", "are", "at", "be", "but", "by", "for",
+                   "he",  "her", "his", "i", "in", "into", "is", "it", "of",
+                   "on", "or",  "she", "that", "the", "their", "there", "these",
+                   "they", "this",  "to", "was", "will", "with", "you")
+  tokens <- tokenizers::tokenize_words(x, stopwords = bible_stops)
+  vapply(tokens, length, integer(1))
+}
+
+wc <- wordcounter(bible_verses)
+bible_verses <- bible_verses[wc >= 6]
 
 # Turn the Bible verses into a data frame an precompute the tokens
-bible_tokenizer <- function(x) tokenizers::tokenize_ngrams(x, n = 5, n_min = 4)
+bible_tokenizer <- function(x) {
+  bible_stops <- c("a", "an", "and", "are", "at", "be", "but", "by", "for",
+                   "he",  "her", "his", "i", "in", "into", "is", "it", "of",
+                   "on", "or",  "she", "that", "the", "their", "there", "these",
+                   "they", "this",  "to", "was", "will", "with", "you")
+  tokenizers::tokenize_ngrams(x, n = 6, n_min = 4, stopwords = bible_stops)
+}
+
 bible_verses <- bible_verses %>%
   tidy() %>%
   rename(reference = names, verse = x) %>%
@@ -44,11 +60,11 @@ bible_verses <- bible_verses %>%
 # Create the Bible DTM
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_vocab <- create_vocabulary(verses_it)
-bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 20)
+bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 25)
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_dtm <- create_dtm(verses_it, vocab_vectorizer(bible_vocab))
 rownames(bible_dtm) <- bible_verses$reference
 
 # Save everything we will need for the feature
 save(bible_verses, bible_dtm, bible_vocab, bible_tokenizer,
-     file = "temp/bible.rda", compress = FALSE)
+     file = "data/bible.rda", compress = FALSE)

@@ -33,13 +33,13 @@ wiki : $(NOTEBOOKS)
 	cp -r *_files $(NOTEBOOK_DIR)/figures/
 
 # Tasks to extract features
-temp/bible.rda :
+data/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
 
 temp/all-features.feather : $(FEATURES)
 	./scripts/collect-features.R
 
-./data/sample/%.feather : temp/bible.rda
+./data/sample/%.feather : data/bible.rda
 	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 # Tasks to create a sample dataset

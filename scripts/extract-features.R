@@ -15,7 +15,7 @@ file_out <- commandArgs(trailingOnly = TRUE)[2]
 stopifnot(dir.exists(path_in))
 
 # Load the Bible DTM and other data
-load("temp/bible.rda")
+load("data/bible.rda")
 
 newspaper_pages <- list.files(path_in, pattern = "\\.txt$",
                               full.names = TRUE, recursive = TRUE)
