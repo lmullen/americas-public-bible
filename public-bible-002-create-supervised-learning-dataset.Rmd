@@ -16,7 +16,7 @@ library(text2vec)
 library(Matrix)
 
 scores <- read_feather("temp/all-features.feather")
-load("temp/bible.rda")
+load("data/bible.rda")
 ```
 
 
@@ -104,6 +104,3 @@ sample_matches <- sample_matches %>%
 ```{r}
 write_csv(sample_matches, "data/matches-for-model-training.csv")
 ```
-
-
-
