@@ -9,7 +9,7 @@ chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data
 chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Variables for extracting features
-PUBYEARS := $(shell find ./data/sample -mindepth 2 -maxdepth 2 -type d)
+PUBYEARS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBYEARS))
 
 all : $(NOTEBOOKS) temp/pub-years.txt temp/all-features.feather
