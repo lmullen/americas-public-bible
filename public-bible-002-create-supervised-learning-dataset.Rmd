@@ -78,6 +78,7 @@ newspaper_dtm <- create_dtm(pages_it, vocab_vectorizer(bible_vocab)) %>%
 rownames(newspaper_dtm) <- newspaper_text$page
 
 most_unusual_phrase <- function(page, reference) {
+  message(page, " ", reference)
   matching_tokens <- bible_verses[bible_verses$reference == reference, ]$tokens[[1]]
   matching_columns <- which(colnames(newspaper_dtm) %in% matching_tokens)
   tokens <- newspaper_dtm[page, matching_columns, drop = TRUE] 

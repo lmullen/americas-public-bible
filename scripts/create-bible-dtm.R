@@ -48,7 +48,7 @@ bible_tokenizer <- function(x) {
                    "he",  "her", "his", "i", "in", "into", "is", "it", "of",
                    "on", "or",  "she", "that", "the", "their", "there", "these",
                    "they", "this",  "to", "was", "will", "with", "you")
-  tokenizers::tokenize_ngrams(x, n = 6, n_min = 4, stopwords = bible_stops)
+  tokenizers::tokenize_ngrams(x, n = 6, n_min = 3, stopwords = bible_stops)
 }
 
 bible_verses <- bible_verses %>%
