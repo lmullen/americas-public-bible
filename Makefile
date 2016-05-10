@@ -12,11 +12,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 PUBYEARS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBYEARS))
 
-all : $(NOTEBOOKS) temp/pub-years.txt temp/all-features.feather
-
-# Tasks to build notebooks
-%.md : %.Rmd $(INCLUDES)
-	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
+all : $(NOTEBOOKS) temp/pub-years.txt temp/all-features.feather data/all-lccn.txt 
 
 clean :
 	rm -rf $(NOTEBOOKS)
@@ -26,11 +22,19 @@ clobber-features :
 	rm -rf $(FEATURES)
 	rm -rf temp/all-features.feather
 
+# Tasks to build notebooks
+%.md : %.Rmd $(INCLUDES)
+	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
+
 # Tasks to put notebooks in wiki
 wiki : $(NOTEBOOKS)
 	cp $(NOTEBOOKS) $(NOTEBOOK_DIR)/_note/
 	mkdir -p $(NOTEBOOK_DIR)/figures/$*/
 	cp -r *_files $(NOTEBOOK_DIR)/figures/
+
+# Tasks to download newspaper metadata
+data/all-lccn.txt :
+	./scripts/download-newspaper-list.R
 
 # Tasks to extract features
 data/bible.rda :
