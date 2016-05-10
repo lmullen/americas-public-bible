@@ -12,6 +12,11 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 PUBYEARS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBYEARS))
 
+# Variables for downloading newspaper metadata
+LCCN := $(shell cat data/all-lccn.txt)
+LCCN := $(addsuffix .json, $(LCCN))
+LCCN := $(addprefix data/newspapers/, $(LCCN))
+
 all : $(NOTEBOOKS) temp/pub-years.txt temp/all-features.feather data/all-lccn.txt 
 
 clean :
@@ -67,5 +72,11 @@ extract : $(chronicling_untars)
 download :
 	wget --continue --progress=bar --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url)
+
+metadata : $(LCCN)
+
+data/newspapers/%.json : data/all-lccn.txt
+	curl http://chroniclingamerica.loc.gov/lccn/$*.json > $@ && sleep 0.5
+
 
 .PHONY : clean clobber extract download
