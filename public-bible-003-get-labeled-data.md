@@ -1,14 +1,20 @@
 ---
 title: "Get supervised learning dataset for model making"
-author: "Lincoln Mullen"
-date: "May 7, 2016"
-output: html_document
+project: "public-bible"
+tags:
+- computation
+- text-analysis
+- Bible
+- Chronicling America
 ---
 
 ---
-author: Lincoln Mullen
-date: 'May 7, 2016'
-output: 'html\_document'
+project: 'public-bible'
+tags:
+- computation
+- 'text-analysis'
+- Bible
+- Chronicling America
 title: Get supervised learning dataset for model making
 ---
 

@@ -1,14 +1,20 @@
 ---
 title: "Create the supervised learning dataset"
-author: "Lincoln Mullen"
-date: "May 3, 2016"
-output: html_document
+project: "public-bible"
+tags:
+- computation
+- text-analysis
+- Bible
+- Chronicling America
 ---
 
 ---
-author: Lincoln Mullen
-date: 'May 3, 2016'
-output: 'html\_document'
+project: 'public-bible'
+tags:
+- computation
+- 'text-analysis'
+- Bible
+- Chronicling America
 title: Create the supervised learning dataset
 ---
 
