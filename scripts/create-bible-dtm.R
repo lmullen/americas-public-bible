@@ -3,13 +3,13 @@
 # Create a Bible DTM and a character vector of Bible verses
 
 suppressPackageStartupMessages(library(text2vec))
-library(Matrix)
-library(stringr)
-library(purrr)
-library(readr)
-library(tokenizers)
-library(broom)
-library(dplyr)
+suppressPackageStartupMessages(library(Matrix))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(purrr))
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(tokenizers))
+suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(dplyr))
 
 # Load the Bible text files
 chapter_files <- list.files("data/kjv", pattern = "\\.txt$",
@@ -19,35 +19,30 @@ chapter_names <- chapter_files %>%
   str_replace("\\.txt", "") %>%
   str_replace("data/kjv/.+\\/", "") %>%
   str_replace("(\\d+)$", " \\1:") %>%
-  str_replace("Psalms", "Psalm")
+  str_replace("Psalms", "Psalm") %>%
+  str_replace("of the Apostles", "")
 
 chapter_texts <- chapter_files %>%
   map(read_lines) %>%
   at_depth(1, str_replace, "\\d+\\s", "")
 
 names(chapter_texts) <- chapter_names
-bible_verses <- chapter_texts %>% unlist()
+bible_verses <- chapter_texts %>%
+  unlist()
 
-# TODO Remove this temporary filter for verses with fewer than 6 words, once the
-# bug in tokenizers::tokenize_ngrams is fixed
-wordcounter <- function(x) {
-  bible_stops <- c("a", "an", "and", "are", "at", "be", "but", "by", "for",
-                   "he",  "her", "his", "i", "in", "into", "is", "it", "of",
-                   "on", "or",  "she", "that", "the", "their", "there", "these",
-                   "they", "this",  "to", "was", "will", "with", "you")
-  tokens <- tokenizers::tokenize_words(x, stopwords = bible_stops)
-  vapply(tokens, length, integer(1))
-}
+names(bible_verses) <- names(bible_verses) %>% str_c(" (KJV)")
 
-wc <- wordcounter(bible_verses)
-bible_verses <- bible_verses[wc >= 6]
-
-# Turn the Bible verses into a data frame an precompute the tokens
+# Turn the Bible verses into a data frame and precompute the tokens
 bible_tokenizer <- function(x) {
-  bible_stops <- c("a", "an", "and", "are", "at", "be", "but", "by", "for",
+  bible_stops <- c("a", "an", "and", "are", "as", "at", "be", "but", "by", "for",
                    "he",  "her", "his", "i", "in", "into", "is", "it", "of",
                    "on", "or",  "she", "that", "the", "their", "there", "these",
-                   "they", "this",  "to", "was", "will", "with", "you")
+                   "they", "this",  "to", "was", "will", "with", "you",
+                   "two", "four", "five", "six", "seven", "eight", "nine", "ten",
+                   "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                   "sixteen", "seventeen", "eighteen", "nineteen", "twenty",
+                   "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
+                   "ninety", "hundred")
   tokenizers::tokenize_ngrams(x, n = 6, n_min = 3, stopwords = bible_stops)
 }
 
