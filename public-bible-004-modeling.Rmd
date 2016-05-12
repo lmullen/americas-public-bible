@@ -1,0 +1,165 @@
+---
+title: "Create models"
+project: "public-bible"
+tags:
+- computation
+- text-analysis
+- Bible
+- Chronicling America
+---
+
+# Use caret ensemble
+
+Clean up Bible 
+Predict as mu
+
+https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(feather)
+library(dplyr)
+library(ggplot2)
+library(caret)
+
+labeled <- read_feather("data/labeled-features.feather")
+```
+
+
+Test correlation
+
+# TODO Need to replace NA values
+
+```{r}
+replace_na <- function(x, replace) {
+  ifelse(is.na(x), replace, x)
+}
+
+relabel_matches <- function(x) {
+  stopifnot(is.logical(x))
+  x <- ifelse(x, "quotation", "noise")
+  x <- factor(x, levels = c("quotation", "noise"))
+  x
+}
+
+predictors_m <- labeled %>% 
+  select(-reference, -page, -match) %>% 
+  mutate(position_sd = replace_na(position_sd, 10e3))
+
+cor(predictors_m) %>% knitr::kable()
+cor(predictors_m) %>% heatmap(main = "Correlation", margins = c(10, 10))
+```
+
+
+Create training/test split
+
+```{r}
+predictors <- labeled %>% 
+  select(-reference, -page) %>% 
+  select(match, everything()) %>% 
+  mutate(match = relabel_matches(match))
+
+set.seed(734627)
+split_i <- createDataPartition(y = predictors$match, p = 0.7, list = FALSE)
+training <- predictors[split_i, ]
+testing  <- predictors[-split_i, ]
+```
+
+And do the training
+
+Random forest
+
+```{r}
+rf_fit <- train(match ~ .,
+                data = training,
+                method = "rf",
+                preProc = c("center", "scale"),
+                metric = "ROC",
+                tuneLength = 15,
+                trControl = trainControl(method = "repeatedcv", 
+                                         number = 10,
+                                         repeats = 5,
+                                         classProbs = TRUE,
+                                         summaryFunction = twoClassSummary))
+rf_fit
+```
+
+
+Partial least squares
+
+```{r}
+pls_fit <- train(match ~ .,
+                data = training,
+                method = "pls",
+                preProc = c("center", "scale"),
+                metric = "ROC",
+                tuneLength = 15,
+                trControl = trainControl(method = "repeatedcv", 
+                                         number = 10,
+                                         repeats = 5,
+                                         classProbs = TRUE,
+                                         summaryFunction = twoClassSummary))
+pls_fit
+```
+
+SVM
+
+```{r}
+svm_fit <- train(match ~ .,
+                data = training,
+                method = "svmLinear",
+                preProc = c("center", "scale"),
+                metric = "ROC",
+                tuneLength = 15,
+                trControl = trainControl(method = "repeatedcv", 
+                                         number = 10,
+                                         repeats = 5,
+                                         classProbs = TRUE,
+                                         summaryFunction = twoClassSummary))
+svm_fit
+
+svm_fit2 <- train(match ~ tfidf + probability + token_count,
+                data = training,
+                method = "svmLinear",
+                preProc = c("center", "scale"),
+                metric = "ROC",
+                tuneLength = 15,
+                trControl = trainControl(method = "repeatedcv", 
+                                         number = 10,
+                                         repeats = 5,
+                                         classProbs = TRUE,
+                                         summaryFunction = twoClassSummary))
+svm_fit2
+
+```
+
+
+Resampling?
+
+```{r}
+resamps <- resamples(list(pls = pls_fit, svm = svm_fit, rf = rf_fit))
+summary(resamps)
+
+xyplot(resamps, what = "BlandAltman")
+
+diffs <- diff(resamps)
+summary(diffs)
+```
+
+
+The aim of this notebook it to create models with our training data.
+
+Types of models to try:
+SVM
+logistic regression
+tree based model
+knn
+
+Predictors to try:
+All the predictors so far
+All the non-correlated predictors
+All the non-correlated predictors minus range and sd
+All the predictors minus range and sd
