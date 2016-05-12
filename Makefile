@@ -33,7 +33,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task: runs scripts and generates notebooks
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.feather
+all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda
 
 # Also tasks to clean and clobber
 clean :
@@ -60,7 +60,7 @@ LCCN := $(shell cat data/all-lccn.txt)
 LCCN := $(addsuffix .json, $(LCCN))
 LCCN := $(addprefix data/newspapers/, $(LCCN))
 
-data/newspaper-metadata.feather : data/all-lccn.txt $(LCCN)
+data/newspaper-metadata.rda : data/all-lccn.txt $(LCCN)
 	./scripts/gather-newspaper-metadata.R
 
 data/all-lccn.txt :
@@ -70,7 +70,7 @@ data/newspapers/%.json : data/all-lccn.txt
 	curl http://chroniclingamerica.loc.gov/lccn/$*.json > $@ && sleep 0.5
 
 clobber-metadata :
-	rm -rf data/newspaper-metadata.feather
+	rm -rf data/newspaper-metadata.rda
 	rm -rf data/all-lccn.txt
 
 # Tasks related to feature extraction
@@ -87,6 +87,12 @@ data/bible.rda :
 
 data/all-features.feather : $(FEATURES)
 	./scripts/collect-features.R
+
+data/matches-for-model-training.csv : data/all-features.feather
+	./scripts/create-supervised-learning-data.R
+
+data/labeled-features.feather : data/matches-for-model-training.csv
+	./scripts/download-labeled-data.R
 
 clobber-features :
 	rm -rf $(FEATURES)
