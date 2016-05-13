@@ -13,6 +13,7 @@
 # 8. Download labeled data and create the version for model training
 # 9. Train the model
 # 10. Download the newspaper metadata
+# 11. Count the words in the newspaper pages
 #
 # Most of these pieces are run from scripts as detailed below. The rest are run
 # Rmd notebook files.
@@ -33,7 +34,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task: runs scripts and generates notebooks
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda
+all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/sample-newspaper-wordcounts.csv data/newspaper-wordcounts.csv
 
 # Also tasks to clean and clobber
 clean :
@@ -105,6 +106,24 @@ clobber-features :
 	rm -rf data/labeled-features.feather
 	rm -rf data/matches-for-model-training.csv
 
+# Tasks to create word counts of each page
+# ----------------------------------------------------------------------------
+data/sample-newspaper-wordcounts.csv : 
+	find data/sample -mindepth 1 -maxdepth 1 -type d | \
+		parallel -j 6 -k ./scripts/wordcounter.sh \
+		> $@
+		# xargs -n 1 -P 6 ./scripts/wordcounter.sh \
+		# > $@
+
+data/newspaper-wordcounts.csv : 
+	find $(chronicling_ocr) -mindepth 1 -maxdepth 1 -type d | \
+		xargs -n 1 -P 6 ./scripts/wordcounter.sh \
+		> $@
+
+clobber-wordcounts :
+	rm -rf data/sample-newspaper-wordcounts.csv
+	rm -rf data/newspaper-wordcounts.csv
+
 # Tasks to create a sample dataset
 # ----------------------------------------------------------------------------
 sample-data : temp/sample-files.txt
@@ -128,4 +147,4 @@ download :
 	wget --continue --progress=bar --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url)
 
-.PHONY : clean clobber-metadata clobber-features clobber-all extract download
+.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download
