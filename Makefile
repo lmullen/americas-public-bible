@@ -41,12 +41,14 @@ clean :
 	rm -rf *_files
 	temp/pub-years.txt
 
-clobber-all : clobber-metadata clobber-features
+clobber-all : clobber-metadata clobber-features clobber-wordcounts
 
 # Tasks to build notebooks
 # -----------------------------------------------------------------------------
 %.md : %.Rmd $(INCLUDES)
 	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
+
+public-bible-004-modeling.md : data/labeled-features.feather
 
 # Copy notebooks to wiki
 wiki : $(NOTEBOOKS)
@@ -78,11 +80,12 @@ clobber-metadata :
 # Run the feature extraction script on each publication in the sample
 PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
+WORDCOUNTS := $(addsuffix /wordcounts.csv, $(PUBLICATIONS))
 
 data/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
 
-./data/sample/%.feather : data/bible.rda
+data/sample/%.feather : data/bible.rda
 	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 data/all-features.feather : $(FEATURES)

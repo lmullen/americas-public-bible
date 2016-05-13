@@ -7,4 +7,4 @@ feature_files <- list.files("data/sample", pattern = "features\\.feather$",
                             full.names = TRUE, recursive = TRUE)
 
 df <- map(feature_files, read_feather) %>% bind_rows()
-write_feather(df, "temp/all-features.feather")
+write_feather(df, "data/all-features.feather")

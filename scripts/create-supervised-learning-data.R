@@ -22,7 +22,7 @@ assign_likelihood <- function(p) {
 }
 
 sample_matches <- scores %>%
-  mutate(likely = assign_likelihood(probability)) %>%
+  mutate(likely = assign_likelihood(proportion)) %>%
   group_by(likely) %>%
   sample_n(400) %>%
   ungroup() %>%
@@ -69,11 +69,11 @@ newspaper_dtm <- create_dtm(pages_it, vocab_vectorizer(bible_vocab)) %>%
 rownames(newspaper_dtm) <- newspaper_text$page
 
 most_unusual_phrase <- function(page, reference) {
-  message(page, " ", reference)
   matching_tokens <- bible_verses[bible_verses$reference == reference, ]$tokens[[1]]
   matching_columns <- which(colnames(newspaper_dtm) %in% matching_tokens)
-  tokens <- newspaper_dtm[page, matching_columns, drop = TRUE]
-  names(which.max(tokens))
+  tokens <- newspaper_dtm[page, matching_columns, drop = FALSE]
+  tokens <- as.matrix(tokens)
+  colnames(tokens)[which.max(tokens)]
 }
 
 mups <- map2_chr(sample_matches$page, sample_matches$reference, most_unusual_phrase)
@@ -81,11 +81,14 @@ mups <- map2_chr(sample_matches$page, sample_matches$reference, most_unusual_phr
 sample_matches <- sample_matches %>% mutate(most_unusual_phrase = mups)
 
 # Put data in final form for checking matches.
+# TODO remove line fixing double space in Acts once the fix is made upstream
 sample_matches <- sample_matches %>%
   mutate(url = urls,
          match = "") %>%
   select(reference, verse, url, match, likely, most_unusual_phrase, token_count,
-         probability, tfidf, tf,  position_range, position_sd, everything()) %>%
-  select(-words, -tokens)
+         proportion, tfidf, tf, salted, position_range, position_sd,
+         everything()) %>%
+  select(-words, -tokens) %>%
+  mutate(reference = str_replace(reference, "Acts  ", "Acts "))
 
 write_csv(sample_matches, "data/matches-for-model-training.csv")

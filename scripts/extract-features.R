@@ -3,11 +3,11 @@
 suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(purrr))
-library(readr)
-library(stringr)
-library(Matrix)
-library(broom)
-library(feather)
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(Matrix))
+suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(feather))
 
 # This script takes a directory as a command line argument
 path_in <- commandArgs(trailingOnly = TRUE)[1]
@@ -31,9 +31,8 @@ newspaper_id <- newspaper_pages %>%
 read_file_safely <- dplyr::failwith("", readr::read_file)
 
 # Load the files
-newspaper_text <- data_frame(
-  page = newspaper_id,
-  text = map_chr(newspaper_pages, read_file_safely)) %>%
+newspaper_text <- data_frame(page = newspaper_id,
+                             text = map_chr(newspaper_pages, read_file_safely)) %>%
   mutate(tokens = bible_tokenizer(text))
 
 # Create the newspaper DTM
@@ -50,7 +49,7 @@ if (nnzero(newspaper_dtm) == 0) {
     token_count = numeric(0),
     tfidf = numeric(0),
     tf = numeric(0),
-    probability = numeric(0),
+    proportion = numeric(0),
     position_range = numeric(0),
     position_sd = numeric(0)
   )
@@ -71,14 +70,17 @@ tfidf <- tcrossprod(transform_tfidf(bible_dtm, idf), newspaper_dtm) %>%
   tidy() %>% rename(tfidf = value)
 tf <- tcrossprod(transform_tf(bible_dtm), newspaper_dtm) %>%
   tidy() %>% rename(tf = value)
-probability <- tcrossprod(transform_tf(bible_dtm),
+proportion <- tcrossprod(transform_tf(bible_dtm),
                             transform_colsums(newspaper_dtm)) %>%
-  tidy() %>% rename(probability = value)
+  tidy() %>% rename(proportion = value)
+salted <- tcrossprod(salted_tfidf, newspaper_dtm) %>%
+  tidy() %>% rename(salted = value)
 
 scores <- token_count %>%
   left_join(tfidf, by = c("row", "column")) %>%
   left_join(tf, by = c("row", "column")) %>%
-  left_join(probability, by = c("row", "column")) %>%
+  left_join(proportion, by = c("row", "column")) %>%
+  left_join(salted, by = c("row", "column")) %>%
   rename(reference = row, page = column) %>%
   mutate(reference = as.character(reference),
          page = as.character(page)) %>%
@@ -93,7 +95,8 @@ get_page_tokens <- function(page) {
 }
 
 get_position_features <- function(ref, page, token_count) {
-  if (token_count <= 1) return(list(position_range = 0, position_sd = NA_real_))
+  if (token_count <= 1)
+    return(list(position_range = NA_real_, position_sd = NA_real_))
   indices <- which(get_page_tokens(page) %in% get_bible_tokens(ref))
   range_dist <- range(indices)[2] - range(indices)[1]
   list(position_range = range_dist, position_sd = sd(indices))

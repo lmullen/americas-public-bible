@@ -5,11 +5,13 @@
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(feather))
+suppressPackageStartupMessages(library(stringr))
 
 # Google Sheet where the data is being labeld
 # https://docs.google.com/spreadsheets/d/1_hcNdWPMSaQvLlfLZH2UEk5gMI9qkVJaATU5d79QAEM/edit?usp=sharing
 
-download.file("https://docs.google.com/spreadsheets/d/1_hcNdWPMSaQvLlfLZH2UEk5gMI9qkVJaATU5d79QAEM/pub?gid=1028340440&single=true&output=csv", destfile = "data/labeled-data.csv")
+download.file("https://docs.google.com/spreadsheets/d/1_hcNdWPMSaQvLlfLZH2UEk5gMI9qkVJaATU5d79QAEM/pub?gid=1028340440&single=true&output=csv",
+              destfile = "data/labeled-data.csv", quiet = TRUE)
 
 labeled <- read_csv("data/labeled-data.csv") %>%
   select(reference, page, match) %>%
@@ -26,7 +28,9 @@ error_checking <- labeled %>% count(reference, page) %>% `$`("n")
 stopifnot(!any(error_checking > 1))
 
 # Load the most recent features data
-features <- read_feather("data/all-features.feather")
+# TODO remove line fixing double space in Acts once the fix is made upstream
+features <- read_feather("data/all-features.feather") %>%
+  mutate(reference = str_replace(reference, "Acts  ", "Acts "))
 
 # Merge in the labels to the feature data by page ID and verse reference,
 # then keep only the data that is labeled.
