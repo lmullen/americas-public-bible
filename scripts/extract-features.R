@@ -73,14 +73,11 @@ tf <- tcrossprod(transform_tf(bible_dtm), newspaper_dtm) %>%
 proportion <- tcrossprod(transform_tf(bible_dtm),
                             transform_colsums(newspaper_dtm)) %>%
   tidy() %>% rename(proportion = value)
-salted <- tcrossprod(salted_tfidf, newspaper_dtm) %>%
-  tidy() %>% rename(salted = value)
 
 scores <- token_count %>%
   left_join(tfidf, by = c("row", "column")) %>%
   left_join(tf, by = c("row", "column")) %>%
   left_join(proportion, by = c("row", "column")) %>%
-  left_join(salted, by = c("row", "column")) %>%
   rename(reference = row, page = column) %>%
   mutate(reference = as.character(reference),
          page = as.character(page)) %>%
