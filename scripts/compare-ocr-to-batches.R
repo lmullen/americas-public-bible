@@ -8,7 +8,7 @@ library(mullenMisc)
 library(clipr)
 library(rvest)
 
-num_pages <- 56
+num_pages <- 57
 batches_l <- vector(mode = "list", length = num_pages)
 
 get_batch_json <- function(i) {
@@ -37,15 +37,8 @@ ocr <- ocr$ocr %>%
 ocr_downloads <- read_html("http://chroniclingamerica.loc.gov/data/ocr/") %>%
   html_table()
 ocr_downloads <- ocr_downloads[[1]]
-ocr_downloads <- ocr_downloads[-c(1, 2, 1382), 2:4] %>%
+ocr_downloads <- ocr_downloads[-c(1, 2, 1402), 2:4] %>%
   mutate(batch_id = str_replace(Name, "\\.tar.bz2", ""))
-
-# downloaded <- list.files("/Volumes/RESEARCH/chronicling-america/chroniclingamerica.loc.gov/data/ocr/", pattern = "\\.bz2$")
-downloaded <- readLines("~/Desktop/downloaded.txt")
-extracted <- readLines("~/Desktop/extracted.txt")
-# extracted <- list.files("/Volumes/RESEARCH/chronicling-america/chroniclingamerica.loc.gov/data/ocr/", pattern = "\\.bz2.EXTRACTED")
-writeLines(extracted, "~/Desktop/extracted.txt")
-writeLines(downloaded, "~/Desktop/downloaded.txt")
 
 
 missing_from_ocr <- anti_join(batches, ocr, by = c("name" = "batch_id"))
