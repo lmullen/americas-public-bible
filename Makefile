@@ -112,12 +112,10 @@ data/sample-newspaper-wordcounts.csv :
 	find data/sample -mindepth 1 -maxdepth 1 -type d | \
 		parallel -j 6 -k ./scripts/wordcounter.sh \
 		> $@
-		# xargs -n 1 -P 6 ./scripts/wordcounter.sh \
-		# > $@
 
 data/newspaper-wordcounts.csv : 
-	find $(chronicling_ocr) -mindepth 1 -maxdepth 1 -type d | \
-		xargs -n 1 -P 6 ./scripts/wordcounter.sh \
+	find $(chronicling_ocr) -mindepth 3 -maxdepth 3 -type d | \
+		parallel -j 4 -k ./scripts/wordcounter.sh \
 		> $@
 
 clobber-wordcounts :
