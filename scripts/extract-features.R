@@ -8,6 +8,7 @@ suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(Matrix))
 suppressPackageStartupMessages(library(broom))
 suppressPackageStartupMessages(library(feather))
+suppressPackageStartupMessages(library(tseries))
 
 # This script takes a directory as a command line argument
 path_in <- commandArgs(trailingOnly = TRUE)[1]
@@ -51,7 +52,8 @@ if (nnzero(newspaper_dtm) == 0) {
     tf = numeric(0),
     proportion = numeric(0),
     position_range = numeric(0),
-    position_sd = numeric(0)
+    position_sd = numeric(0),
+    runs_pval = numeric(0)
   )
   write_feather(scores, file_out)
   quit(save = "no", status = 0)
@@ -92,11 +94,17 @@ get_page_tokens <- function(page) {
 }
 
 get_position_features <- function(ref, page, token_count) {
-  if (token_count <= 1)
-    return(list(position_range = NA_real_, position_sd = NA_real_))
-  indices <- which(get_page_tokens(page) %in% get_bible_tokens(ref))
-  range_dist <- range(indices)[2] - range(indices)[1]
-  list(position_range = range_dist, position_sd = sd(indices))
+  matches <- get_page_tokens(page) %in% get_bible_tokens(ref)
+  indices <- which(matches)
+  if (token_count <= 1) {
+    range_dist = NA_real_
+    match_sd <- NA_real_
+  } else {
+    range_dist <- range(indices)[2] - range(indices)[1]
+    match_sd <- sd(indices)
+  }
+  runs_pval <- runs.test(as.factor(matches))$p.value
+  list(position_range = range_dist, position_sd = match_sd, runs_pval = runs_pval)
 }
 
 position_features <- pmap(list(scores$reference, scores$page, scores$token_count),
@@ -106,6 +114,7 @@ position_features <- pmap(list(scores$reference, scores$page, scores$token_count
 
 scores <- scores %>%
   mutate(position_range = position_features$position_range,
-         position_sd = position_features$position_sd)
+         position_sd = position_features$position_sd,
+         runs_pval = position_features$runs_pval)
 
 write_feather(scores, file_out)
