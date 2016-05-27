@@ -86,7 +86,7 @@ sample_matches <- sample_matches %>%
   mutate(url = urls,
          match = "") %>%
   select(reference, verse, url, match, likely, most_unusual_phrase, token_count,
-         proportion, tfidf, tf, salted, position_range, position_sd,
+         proportion, tfidf, tf, position_range, position_sd,
          everything()) %>%
   select(-words, -tokens) %>%
   mutate(reference = str_replace(reference, "Acts  ", "Acts "))
