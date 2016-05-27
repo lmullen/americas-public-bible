@@ -25,7 +25,7 @@ NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
 NOTEBOOK_DIR := ~/acad/notebook2
 
 # Variables for downloading Chronicling America
-chronicling_dir := /Volumes/RESEARCH/chronicling-america
+chronicling_dir := /media/lmullen/data/chronicling-america
 chronicling_ocr := $(chronicling_dir)/ocr
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
@@ -34,7 +34,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task: runs scripts and generates notebooks
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/sample-newspaper-wordcounts.csv data/newspaper-wordcounts.csv
+all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv
 
 # Also tasks to clean and clobber
 clean :
@@ -79,9 +79,8 @@ clobber-metadata :
 # Tasks related to feature extraction
 # -----------------------------------------------------------------------------
 # Run the feature extraction script on each publication in the sample
-PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
+# PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
-WORDCOUNTS := $(addsuffix /wordcounts.csv, $(PUBLICATIONS))
 
 data/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
@@ -108,19 +107,18 @@ clobber-features :
 
 # Tasks to create word counts of each page
 # ----------------------------------------------------------------------------
-data/sample-newspaper-wordcounts.csv : 
-	find data/sample -mindepth 1 -maxdepth 1 -type d | \
-		parallel -j 6 -k ./scripts/wordcounter.sh \
-		> $@
+PUBLICATION_MONTHS := $(shell find $(chronicling_ocr) -mindepth 3 -maxdepth 3 -type d)
+WORDCOUNTS := $(addsuffix /wordcounts.csv, $(PUBLICATION_MONTHS))
 
-data/newspaper-wordcounts.csv : 
-	find $(chronicling_ocr) -mindepth 3 -maxdepth 3 -type d | \
-		parallel -j 4 -k ./scripts/wordcounter.sh \
-		> $@
+data/newspaper-wordcounts.csv : $(WORDCOUNTS)
+	./scripts/gather-wordcounts.R
+
+%/wordcounts.csv : %
+	./scripts/wordcounter.sh $^
 
 clobber-wordcounts :
-	rm -rf data/sample-newspaper-wordcounts.csv
 	rm -rf data/newspaper-wordcounts.csv
+	rm -rf $(WORDCOUNTS)
 
 # Tasks to create a sample dataset
 # ----------------------------------------------------------------------------
