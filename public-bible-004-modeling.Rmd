@@ -1,5 +1,5 @@
 ---
-title: "Create models"
+title: "Create predictive model from labeled data"
 project: "public-bible"
 tags:
 - computation
@@ -8,32 +8,26 @@ tags:
 - Chronicling America
 ---
 
-# Use caret ensemble
-
-Clean up Bible 
-Predict as mu
-
-https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+I have created a set of labeled data that marks pairs of verses and newspaper pages as matches. The data requires some cleanup to make the `TRUE`/`FALSE` values into a factor. We also have two variables, `position_range` and `position_sd`, which are undefined for matches with only one token. To those we will assign a value of `0`. And then we will create a separate data frame, `predictors`, removing the page and verse reference.  
+
+```{r, message=FALSE, warning=FALSE}
 library(feather)
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 library(caret)
+library(randomForest)
+library(pls)
+library(pROC)
+library(kernlab)
+library(doParallel)
+library(nnet)
+library(caretEnsemble)
 
-labeled <- read_feather("data/labeled-features.feather")
-```
-
-
-Test correlation
-
-# TODO Need to replace NA values
-
-```{r}
 replace_na <- function(x, replace) {
   ifelse(is.na(x), replace, x)
 }
@@ -45,121 +39,173 @@ relabel_matches <- function(x) {
   x
 }
 
-predictors_m <- labeled %>% 
-  select(-reference, -page, -match) %>% 
-  mutate(position_sd = replace_na(position_sd, 10e3))
+labeled <- read_feather("data/labeled-features.feather") %>% 
+  select(reference, page, match, everything()) %>% 
+  mutate(match = relabel_matches(match),
+         position_sd = replace_na(position_sd, 0),
+         position_range = replace_na(position_range, 0))
 
+predictors <- labeled %>% select(-page, -reference)
+predictors_m <- predictors %>% select(-match) %>% as.matrix()
+```
+
+Now we want to test the correlations between the different predictors. The predictors fall into certain groups. The `token_count`, `tf` and `tfidf` count how many matching n-grams there are, the latter two being weighted. The `proportion` measures what percentage of the total tokens in the verse are present on the newspaper page. `position_sd` and `position_range` measure how far apart matching tokens are from one another on the page. The assumption is that tokens that are closer together are more likely to indicate a match. (Though sometimes in sermons fragments of the verse get quoted over and over.) I have my doubts about the usefulness of those two predictors.  And `runs_pval` is a statistical test for randomness in the run of matches: a lower score means it is more likely to be a non-random match. 
+
+If any of the predictors are highly correlated, that is a strong indication that they are measuring the same information and are unlikely to provide more information when used together.
+
+```{r}
 cor(predictors_m) %>% knitr::kable()
 cor(predictors_m) %>% heatmap(main = "Correlation", margins = c(10, 10))
 ```
 
+Some observations:
 
-Create training/test split
+- The count of tokens and the TFIDF weighting have a fairly low correlation, so they can be used together.
+- The TFIDF and TF have a very high correlation. We can drop TF.
+- Proportion and TFIDF are highly correlated, but it may be worthwhile to keep proportion since it is highly interpretable.
+- The range and sd positions are highly correlated: probably should keep only one of those.
+- The runs test is not hingly correlated with anything, so it is providing different information.
+
+Let's look at some scatterplots of the predictors to see whether they are useful.
 
 ```{r}
-predictors <- labeled %>% 
-  select(-reference, -page) %>% 
-  select(match, everything()) %>% 
-  mutate(match = relabel_matches(match))
+base <- ggplot(predictors, aes(color = match)) 
 
-set.seed(734627)
+base + geom_point(aes(token_count, tfidf), shape = 1) + ggtitle("Tokens vs TFIDF")
+base + geom_point(aes(token_count, tfidf), shape = 1) + ggtitle("Tokens vs TFIDF region of uncertainty") + xlim(0, 20) + ylim(0,5)
+base + geom_point(aes(token_count, proportion), shape = 1) + ggtitle("Tokens vs proportion")
+base + geom_point(aes(tfidf, proportion), shape = 1) + ggtitle("TFIDF vs proportion")
+base + geom_point(aes(token_count, position_range), shape = 1) + ggtitle("Tokens vs position")
+base + geom_point(aes(token_count, runs_pval), shape = 1) + ggtitle("Tokens vs runs test p-value")
+base + geom_jitter(aes(token_count, runs_pval), shape = 1, alpha = 0.5) + ggtitle("Tokens vs runs test p-value (zoom to cluster, jittered)") + xlim(0, 6) + ylim(0.95, 1.0)
+```
+
+We can therefore try to create two sets of predictors: our best guess at the useful predictors, and a collections of all the predictors. Update: in practice we are never going to use the position range or position SD.
+
+```{r}
+predict_selected <- match ~ token_count + tfidf + proportion + runs_pval
+```
+
+Now we will create a training/test split of our `nrow(labeled)` observations.
+
+```{r}
+set.seed(7347)
 split_i <- createDataPartition(y = predictors$match, p = 0.7, list = FALSE)
 training <- predictors[split_i, ]
+rownames(training) <- NULL
 testing  <- predictors[-split_i, ]
+testing_references <- labeled[-split_i, ]
 ```
 
-And do the training
-
-Random forest
+And we intend to use repeated cross-validation, so prepare our training control.
 
 ```{r}
-rf_fit <- train(match ~ .,
-                data = training,
-                method = "rf",
-                preProc = c("center", "scale"),
-                metric = "ROC",
-                tuneLength = 15,
-                trControl = trainControl(method = "repeatedcv", 
-                                         number = 10,
-                                         repeats = 5,
-                                         classProbs = TRUE,
-                                         summaryFunction = twoClassSummary))
-rf_fit
+tr_ctrl <- trainControl(method = "repeatedcv", 
+                        number = 10, 
+                        repeats = 5, 
+                        savePredictions = "final",
+                        classProbs = TRUE,
+                        index = createResample(training$match, 5),
+                        summaryFunction = twoClassSummary)
 ```
 
-
-Partial least squares
+Now we are going to train a list of models 
 
 ```{r}
-pls_fit <- train(match ~ .,
-                data = training,
-                method = "pls",
-                preProc = c("center", "scale"),
-                metric = "ROC",
-                tuneLength = 15,
-                trControl = trainControl(method = "repeatedcv", 
-                                         number = 10,
-                                         repeats = 5,
-                                         classProbs = TRUE,
-                                         summaryFunction = twoClassSummary))
-pls_fit
+set.seed(7347)
+registerDoParallel(8, cores = 8)
+getDoParWorkers()
+model_list <- caretList(
+  predict_selected,
+  data = training, 
+  metric = "ROC",
+  preProc = c("center", "scale"),
+  trControl = tr_ctrl,
+  tuneLength = 30,
+  methodList = c("rf", "pls", "svmLinear", "nnet", "knn", "rpart")
+  )
 ```
 
-SVM
+Having trained several models, we want to evaluate their performance.
 
 ```{r}
-svm_fit <- train(match ~ .,
-                data = training,
-                method = "svmLinear",
-                preProc = c("center", "scale"),
-                metric = "ROC",
-                tuneLength = 15,
-                trControl = trainControl(method = "repeatedcv", 
-                                         number = 10,
-                                         repeats = 5,
-                                         classProbs = TRUE,
-                                         summaryFunction = twoClassSummary))
-svm_fit
-
-svm_fit2 <- train(match ~ tfidf + probability + token_count,
-                data = training,
-                method = "svmLinear",
-                preProc = c("center", "scale"),
-                metric = "ROC",
-                tuneLength = 15,
-                trControl = trainControl(method = "repeatedcv", 
-                                         number = 10,
-                                         repeats = 5,
-                                         classProbs = TRUE,
-                                         summaryFunction = twoClassSummary))
-svm_fit2
-
+resamp <- resamples(model_list)
+modelCor(resamp) 
+dotplot(resamp, metric = "ROC")
+rocDiffs <- diff(resamp, metric = "ROC")
+summary(rocDiffs) 
+dotplot(rocDiffs)
 ```
 
-
-Resampling?
 
 ```{r}
-resamps <- resamples(list(pls = pls_fit, svm = svm_fit, rf = rf_fit))
-summary(resamps)
+models_selected <- model_list
+models_selected$svmLinear <- NULL
+models_selected$nnet <- NULL
+models_selected$rpart <- NULL
+ensemble <- caretEnsemble(
+  models_selected,
+  metric = "ROC",
+  trControl = trainControl(
+    number = 20,
+    summaryFunction = twoClassSummary,
+    classProbs = TRUE
+    ))
+summary(ensemble)
+```
 
-xyplot(resamps, what = "BlandAltman")
+```{r}
+model_preds <- lapply(model_list, predict, newdata = testing)
+model_preds_prob <- lapply(model_list, predict, newdata=testing, type = "prob")
+ens_preds <- predict(ensemble, newdata = testing)
+ens_preds_prob <- predict(ensemble, newdata = testing, type = "prob")
+model_preds$ensemble <- ens_preds
 
-diffs <- diff(resamps)
-summary(diffs)
+conf <- lapply(model_preds, confusionMatrix, testing$match)
+
+get_accuracy_measures <- function(model_name, cm) {
+  x <- cm$byClass
+  data_frame(model = model_name, measure = names(x), value = unname(x))
+}
+
+lapply(names(conf), function(n) { get_accuracy_measures(n, conf[[n]])}) %>% 
+  bind_rows() %>%
+  spread(measure, value) %>% 
+  knitr::kable()
+
+# Find out which predictions were wrong
+# bind_cols(testing_references, data_frame(prediction = ens_preds)) %>% 
+#   filter(match != prediction) %>% 
+#   View
+```
+
+We will test the ensemble model on the unlabeled data.
+
+```{r}
+sample_predictors <- read_feather("data/all-features.feather")
+nrow(sample_predictors)
+
+system.time({
+all_predictions_ensemble <- sample_predictors %>% 
+  mutate(prediction = predict(ensemble, newdata = sample_predictors))
+})
+
+system.time({
+all_predictions_nnet <- sample_predictors %>% 
+  mutate(prediction = predict(model_list$nnet, newdata = sample_predictors))
+})
+
+table(all_predictions_ensemble$prediction)
+table(all_predictions_nnet$prediction)
+```
+
+Let's write the model and the Bible data payload to disk for use in our script.
+
+```{r}
+load("data/bible.rda")
+save(ensemble, bible_verses, bible_dtm, bible_vocab, bible_tokenizer, 
+     file = "data/prediction-payload.rda", compress = FALSE)
 ```
 
 
-The aim of this notebook it to create models with our training data.
 
-Types of models to try:
-SVM
-logistic regression
-tree based model
-knn
-
-Predictors to try:
-All the predictors so far
-All the non-correlated predictors
-All the non-correlated predictors minus range and sd
-All the predictors minus range and sd
