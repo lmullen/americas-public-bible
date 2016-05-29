@@ -23,6 +23,8 @@ parser <- OptionParser(
   add_option(c("-i", "--input"), help = "A serialized data frame") %>%
   add_option(c("-o", "--output"), help = "A serialized data frame") %>%
   add_option(c("-m", "--model"), help = "The model and other data") %>%
+  add_option(c("-t", "--threshold"), type = "double", default = 0.25,
+             help = "Probability threshold for keeping matchs") %>%
   add_option(c("-l", "--log"), default = "console",
              help = "File for logging") %>%
   add_option(c("-d", "--debug"), default = FALSE,
@@ -125,9 +127,9 @@ log_debug("Getting just the matches")
 output <- scores %>%
   mutate(prediction = predictions,
          probability = 1 - probabilities) %>%
-  filter(prediction == "quotation")
+  filter(probability >= args$threshold)
 
-log_info(~ "Model predicted ${nrow(output)} matches")
+log_info(~ "Model predicted ${nrow(output)} matches with p > ${args$threshold}")
 
 # Write to disk
 log_debug("Writing the matches to disk")
