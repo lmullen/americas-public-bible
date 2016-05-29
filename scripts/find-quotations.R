@@ -97,22 +97,22 @@ log_debug(~ "There are ${nrow(scores)} potential matches")
 # Get the runs testing p-value
 log_debug("Getting the p-value for randomness in runs testing")
 
-get_bible_tokens <- function(ref) {
-  bible_verses$tokens[bible_verses$reference == ref][[1]]
+get_runs_pval <- function(df) {
+  if (df$token_count == 1) return(0.985) # Don't run an expensive calculation
+                                         # in most instances, replace it with
+                                         # an approximately correct value
+  matches <- unlist(df$tokens) %in% unlist(df$bible_tokens)
+  runs.test(as.factor(matches))$p.value
 }
 
-get_page_tokens <- function(page) {
-  newspaper$tokens[newspaper$page == page][[1]]
-}
+runs_df <- scores %>%
+  left_join(newspaper, by = "page") %>%
+  left_join(rename(bible_verses, bible_tokens = tokens), by = "reference") %>%
+  rowwise() %>%
+  do(runs_pval = get_runs_pval(.))
 
-get_runs_test <- function(ref, page) {
-  matches <- get_page_tokens(page) %in% get_bible_tokens(ref)
-  runs_pval <- runs.test(as.factor(matches))$p.value
-  runs_pval
-}
-
-runs <- map2_dbl(scores$reference, scores$page, get_runs_test)
-scores <- scores %>% mutate(runs_pval = runs)
+scores <- scores %>%
+  mutate(runs_pval = unlist(runs_df$runs_pval))
 
 # Make the predictions
 log_info("Predicting matches from scores")
