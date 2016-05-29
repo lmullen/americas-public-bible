@@ -45,7 +45,6 @@ log_formatter <- function(event) {
 }
 log_file(args$log, subscriptions = log_level, .formatter = log_formatter)
 
-
 # Read the model file
 log_debug("Reading the prediction payload")
 load(args$model)
@@ -125,9 +124,9 @@ probabilities <- predict(ensemble, newdata = scores, type = "prob")
 log_debug("Getting just the matches")
 output <- scores %>%
   mutate(prediction = predictions,
-         probability = probabilities$quotation) %>%
+         probability = 1 - probabilities) %>%
   filter(prediction == "quotation") %>%
-  select(page, reference)
+  select(page, reference, probability)
 
 log_info(~ "Model predicted ${nrow(output)} matches")
 
