@@ -120,6 +120,20 @@ clobber-wordcounts :
 	rm -rf data/newspaper-wordcounts.csv
 	rm -rf $(WORDCOUNTS)
 
+# Tasks to create data frames of the text
+# ----------------------------------------------------------------------------
+PUBLICATION_YEARS := $(shell find $(chronicling_ocr) -mindepth 2 -maxdepth 2 -type d)
+TEXT_DF := $(subst $(chronicling_ocr)/,, $(PUBLICATION_YEARS))
+TEXT_DF := $(subst /,-,$(TEXT_DF))
+TEXT_DF := $(addsuffix .rds, $(TEXT_DF))
+TEXT_DF := $(addprefix $(chronicling_dir)/df/, $(TEXT_DF))
+
+df : $(TEXT_DF)
+
+$(chronicling_dir)/df/%.rds :
+	Rscript --vanilla ./scripts/textdir2dataframe.R $@ $(chronicling_ocr) $(chronicling_dir)/df
+
+
 # Tasks to create a sample dataset
 # ----------------------------------------------------------------------------
 sample-data : temp/sample-files.txt

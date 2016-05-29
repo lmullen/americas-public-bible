@@ -10,3 +10,6 @@ data/bible.rda
 data/newspapers
 data/newspaper-wordcounts.csv
 scratch
+logs/
+nohup.out
+

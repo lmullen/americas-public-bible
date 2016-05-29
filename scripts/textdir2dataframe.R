@@ -5,19 +5,25 @@
 # millions of text files.
 #
 # Usage:
-# textdir2dataframe path/to/inputdir outfile.rda
+# textdir2dataframe path/to/inputdir path/to/outfiles
 
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
 
 args <- commandArgs(trailingOnly = TRUE)
-dir_in <- args[1]
-df_out <- args[2]
+file_out <- args[1]
+dir_in <- args[2]
+dir_out <- args[3]
 
-stopifnot(dir.exists(dir_in))
+dir_read <- file_out %>%
+    str_replace(".rds", "") %>%
+    str_replace(dir_out, "") %>%
+    str_replace("-", "/")
+dir_read <- str_c(dir_in, dir_read)
+stopifnot(dir.exists(dir_read))
 
-files <- list.files(path = dir_in, pattern = "\\.txt$", full.names = TRUE,
+files <- list.files(path = dir_read, pattern = "\\.txt$", full.names = TRUE,
                     recursive = TRUE)
 
 path_to_id <- function(p) {
@@ -33,4 +39,4 @@ read_safely <- failwith(NA_character_, readr::read_file)
 text <- vapply(files, read_safely, character(1))
 
 df <- data_frame(page = ids, text = text)
-saveRDS(df, file = df_out, compress = "xz")
+saveRDS(df, file = file_out, compress = "xz")
