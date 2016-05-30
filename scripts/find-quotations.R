@@ -22,6 +22,7 @@ parser <- OptionParser(
 ) %>%
   add_option(c("-i", "--input"), help = "A serialized data frame") %>%
   add_option(c("-o", "--output"), help = "A serialized data frame") %>%
+  add_option(c("-q", "--quotation"), help = "The DTM of quotations and tokenizer") %>%
   add_option(c("-m", "--model"), help = "The model and other data") %>%
   add_option(c("-t", "--threshold"), type = "double", default = 0.25,
              help = "Probability threshold for keeping matchs") %>%
@@ -33,6 +34,7 @@ args <- parse_args(parser)
 
 stopifnot(file.exists(args$input))
 stopifnot(file.exists(args$model))
+stopifnot(file.exists(args$quotation))
 
 # Setup the log file
 if (args$debug) {
@@ -47,9 +49,11 @@ log_formatter <- function(event) {
 }
 log_file(args$log, subscriptions = log_level, .formatter = log_formatter)
 
-# Read the model file
-log_debug("Reading the prediction payload")
+# Read the model file and the DTM with tokenizers
+log_debug("Reading the prediction model")
 load(args$model)
+log_debug("Reading the quotation DTM and tokenizers")
+load(args$quotation)
 
 # Read and tokenize the newspaper pages
 log_debug("Reading the newspaper data frame")
