@@ -10,7 +10,7 @@ library(caretEnsemble)
 library(randomForest)
 library(kernlab)
 library(nnet)
-library(parallel)
+library(doParallel)
 
 relabel_matches <- function(x) {
   stopifnot(is.logical(x))
@@ -79,41 +79,41 @@ dotplot(resamp, metric = "ROC")
 # summary(rocDiffs)
 # dotplot(rocDiffs)
 
-train_ensemble <- function(m_list) {
-caretEnsemble(
-  m_list,
-  metric = "ROC",
-  trControl = trainControl(
-    number = 40,
-    summaryFunction = twoClassSummary,
-    classProbs = TRUE
-    ))
-}
-
-ensemble0 <- train_ensemble(model_list)
-
-models_ensemble1 <- model_list
-models_ensemble1$svmRadial <- NULL
-models_ensemble1$svmLinear <- NULL
-models_ensemble1$rf <- NULL
-ensemble1 <- train_ensemble(models_ensemble1)
-
-models_ensemble2 <- model_list
-models_ensemble2$svmRadial <- NULL
-models_ensemble2$rf <- NULL
-models_ensemble2$nnet <- NULL
-ensemble2 <- train_ensemble(models_ensemble2)
-
-models_ensemble3 <- model_list
-models_ensemble3$knn <- NULL
-models_ensemble3$rf <- NULL
-models_ensemble3$nnet <- NULL
-ensemble3 <- train_ensemble(models_ensemble3)
-
-model_list$ensemble0 <- ensemble0
-model_list$ensemble1 <- ensemble1
-model_list$ensemble2 <- ensemble2
-model_list$ensemble3 <- ensemble3
+# train_ensemble <- function(m_list) {
+# caretEnsemble(
+#   m_list,
+#   metric = "ROC",
+#   trControl = trainControl(
+#     number = 40,
+#     summaryFunction = twoClassSummary,
+#     classProbs = TRUE
+#     ))
+# }
+#
+# ensemble0 <- train_ensemble(model_list)
+#
+# models_ensemble1 <- model_list
+# models_ensemble1$svmRadial <- NULL
+# models_ensemble1$svmLinear <- NULL
+# models_ensemble1$rf <- NULL
+# ensemble1 <- train_ensemble(models_ensemble1)
+#
+# models_ensemble2 <- model_list
+# models_ensemble2$svmRadial <- NULL
+# models_ensemble2$rf <- NULL
+# models_ensemble2$nnet <- NULL
+# ensemble2 <- train_ensemble(models_ensemble2)
+#
+# models_ensemble3 <- model_list
+# models_ensemble3$knn <- NULL
+# models_ensemble3$rf <- NULL
+# models_ensemble3$nnet <- NULL
+# ensemble3 <- train_ensemble(models_ensemble3)
+#
+# model_list$ensemble0 <- ensemble0
+# model_list$ensemble1 <- ensemble1
+# model_list$ensemble2 <- ensemble2
+# model_list$ensemble3 <- ensemble3
 
 model_preds_train <- lapply(model_list, predict, newdata = select(training, -match))
 conf_train <- lapply(model_preds_train, confusionMatrix, training$match)
@@ -131,21 +131,22 @@ get_accuracy_measures <- function(confusion) {
 
 accuracy_train <- get_accuracy_measures(conf_train)
 accuracy_test <- get_accuracy_measures(conf_test)
+print(accuracy_test)
+print(accuracy_train)
 
 # Find out which predictions were wrong
 # bind_cols(testing_references, data_frame(prediction = ens_preds)) %>%
 #   filter(match != prediction) %>%
 #   View
 
-all_features <- read_feather("data/all-features.feather")
-sample_predictors <- all_features %>%
-  select(token_count, tfidf, proportion, runs_pval)
-
-model_list_test <- model_list[c("rf", "nnet")]
-res <- lapply(model_list_test, predict, newdata = sample_predictors) %>%
-  as_data_frame()
-
-bind_cols(all_features, res) %>% str
+# all_features <- read_feather("data/all-features.feather")
+# sample_predictors <- all_features %>%
+#   select(token_count, tfidf, proportion, runs_pval)
+#
+# res <- lapply(model_list, predict, newdata = sample_predictors) %>%
+#   as_data_frame() %>%
+#   bind_cols(all_features, .)
+# print(res)
 
 saveRDS(model_list$nnet, file = "bin/prediction-model.rds",
         compress = FALSE)

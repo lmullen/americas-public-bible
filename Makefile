@@ -34,7 +34,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task: runs scripts and generates notebooks
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv
+all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv bin/prediction-model.rds
 
 # Also tasks to clean and clobber
 clean :
@@ -97,6 +97,9 @@ data/matches-for-model-training.csv : data/all-features.feather
 data/labeled-features.feather : data/matches-for-model-training.csv
 	./scripts/download-labeled-data.R
 
+bin/prediction-model.rds : bin/bible.rda data/labeled-features.feather
+	./scripts/train-model.R
+
 clobber-features :
 	rm -rf $(FEATURES)
 	rm -rf data/all-features.feather
@@ -104,6 +107,7 @@ clobber-features :
 	rm -rf bin/bible.rda
 	rm -rf data/labeled-features.feather
 	rm -rf data/matches-for-model-training.csv
+	rm -rf bin/prediction-model.rds
 
 # Tasks to create word counts of each page
 # ----------------------------------------------------------------------------
