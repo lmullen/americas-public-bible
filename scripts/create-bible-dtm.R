@@ -34,16 +34,16 @@ names(bible_verses) <- names(bible_verses) %>% str_c(" (KJV)")
 
 # Turn the Bible verses into a data frame and precompute the tokens
 bible_tokenizer <- function(x) {
-  bible_stops <- c("a", "an", "and", "are", "as", "at", "be", "but", "by", "for",
-                   "he",  "her", "his", "i", "in", "into", "is", "it", "of",
-                   "on", "or",  "she", "that", "the", "their", "there", "these",
-                   "they", "this",  "to", "was", "will", "with", "you",
-                   "two", "four", "five", "six", "seven", "eight", "nine", "ten",
-                   "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-                   "sixteen", "seventeen", "eighteen", "nineteen", "twenty",
-                   "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
-                   "ninety", "hundred")
-  tokenizers::tokenize_ngrams(x, n = 6, n_min = 3, stopwords = bible_stops)
+  bible_stops <- c("a", "an", "at", "and", "are", "as", "at", "be", "but", "by",
+                   "do", "for", "from", "he",  "her", "his", "i", "in", "into",
+                   "is", "it",  "my", "of", "on", "or",  "say", "she", "that",
+                   "the", "their", "there", "these", "they", "this",  "to",
+                   "was", "what", "will", "with", "you", "two", "four", "five",
+                   "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+                   "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+                   "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty",
+                   "sixty", "seventy", "eighty", "ninety", "hundred")
+  tokenizers::tokenize_ngrams(x, n = 5, n_min = 3, stopwords = bible_stops)
 }
 
 bible_verses <- bible_verses %>%
@@ -55,7 +55,7 @@ bible_verses <- bible_verses %>%
 # Create the Bible DTM
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_vocab <- create_vocabulary(verses_it)
-bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 20)
+bible_vocab <- prune_vocabulary(bible_vocab, term_count_max = 5)
 verses_it <- itoken(bible_verses$verse, tokenizer = bible_tokenizer)
 bible_dtm <- create_dtm(verses_it, vocab_vectorizer(bible_vocab))
 rownames(bible_dtm) <- bible_verses$reference
