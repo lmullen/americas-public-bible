@@ -82,10 +82,10 @@ clobber-metadata :
 PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
 
-data/bible.rda :
+bin/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
 
-data/sample/%.feather : data/bible.rda
+data/sample/%.feather : bin/bible.rda
 	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 data/all-features.feather : $(FEATURES)
@@ -101,7 +101,7 @@ clobber-features :
 	rm -rf $(FEATURES)
 	rm -rf data/all-features.feather
 	rm -rf data/labeled-data.csv
-	rm -rf data/bible.rda
+	rm -rf bin/bible.rda
 	rm -rf data/labeled-features.feather
 	rm -rf data/matches-for-model-training.csv
 
