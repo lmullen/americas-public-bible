@@ -79,7 +79,7 @@ clobber-metadata :
 # Tasks related to feature extraction
 # -----------------------------------------------------------------------------
 # Run the feature extraction script on each publication in the sample
-# PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
+PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
 
 data/bible.rda :
