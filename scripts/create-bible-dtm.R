@@ -62,4 +62,4 @@ rownames(bible_dtm) <- bible_verses$reference
 
 # Save everything we will need for the feature
 save(bible_verses, bible_dtm, bible_vocab, bible_tokenizer,
-     file = "data/bible.rda", compress = FALSE)
+     file = "bin/bible.rda", compress = FALSE)

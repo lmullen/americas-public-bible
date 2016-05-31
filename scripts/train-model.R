@@ -143,6 +143,6 @@ res <- lapply(model_list_test, predict, newdata = sample_predictors) %>%
 
 bind_cols(all_features, res) %>% str
 
-saveRDS(model_list$nnet$finalModel, file = "data/prediction-model.rds",
+saveRDS(model_list$nnet$finalModel, file = "bin/prediction-model.rds",
         compress = FALSE)
 
