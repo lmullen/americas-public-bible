@@ -157,4 +157,9 @@ download :
 	wget --continue --progress=bar --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url)
 
+# Tasks to send files to VRC
+# -----------------------------------------------------------------------------
+transfer-vrc :
+	rsync --archive -P bin/* vrc:/data/chronicling-america/scripts
+
 .PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download
