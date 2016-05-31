@@ -3,7 +3,7 @@
 # Find biblical quotations in ChronAm newspaper pages
 suppressPackageStartupMessages(library(Matrix))
 suppressPackageStartupMessages(library(broom))
-suppressPackageStartupMessages(library(caretEnsemble))
+# suppressPackageStartupMessages(library(caretEnsemble))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(feather))
 suppressPackageStartupMessages(library(loggr))
@@ -25,8 +25,8 @@ parser <- OptionParser(
   add_option(c("-o", "--output"), help = "A serialized data frame") %>%
   add_option(c("-q", "--quotation"), help = "The DTM of quotations and tokenizer") %>%
   add_option(c("-m", "--model"), help = "The model and other data") %>%
-  # add_option(c("-t", "--threshold"), type = "double", default = 0.25,
-  #            help = "Probability threshold for keeping matchs") %>%
+  add_option(c("-t", "--threshold"), type = "double", default = 0.25,
+             help = "Probability threshold for keeping matchs") %>%
   add_option(c("-l", "--log"), default = "console",
              help = "File for logging") %>%
   add_option(c("-d", "--debug"), default = FALSE,
@@ -48,7 +48,8 @@ log_formatter <- function(event) {
   paste(c(format(event$time, "%Y-%m-%d %H:%M:%OS3"), event$level, log_id,
           event$message), collapse = " - ")
 }
-log_file(args$log, subscriptions = log_level, .formatter = log_formatter)
+log_file(args$log, subscriptions = log_level, .formatter = log_formatter,
+         .error = FALSE, .message = FALSE, overwrite = FALSE)
 
 # Read the model file and the DTM with tokenizers
 log_debug("Reading the prediction model")
@@ -59,20 +60,20 @@ load(args$quotation)
 # Read and tokenize the newspaper pages
 log_debug("Reading the newspaper data frame")
 newspaper <- readRDS(args$input)
-log_info(~ "Number of newspaper pages: ${nrow(newspaper)}")
+log_debug(~ "Number of newspaper pages: ${nrow(newspaper)}")
 log_debug(~ "Tokenizing the newspaper pages")
 newspaper <- newspaper %>%
   filter(!is.na(text)) %>%
   mutate(tokens = bible_tokenizer(text))
 
 # Turn the newspaper pages into a DTM
-log_info("Creating the newspaper DTM")
+log_debug("Creating the newspaper DTM")
 pages_it <- itoken(newspaper$tokens)
 newspaper_dtm <- create_dtm(pages_it, vocab_vectorizer(bible_vocab))
 rownames(newspaper_dtm) <- newspaper$page
 
 # Extract the predictors from the DTM matrix
-log_info("Extracting the predictors")
+log_debug("Extracting the predictors")
 transform_colsums <- function(m) {
   m %*% Diagonal(x = 1 / colSums(m))
 }
@@ -115,6 +116,7 @@ get_runs_pval <- function(df) {
 runs_df <- scores %>%
   left_join(newspaper, by = "page") %>%
   left_join(rename(bible_verses, bible_tokens = tokens), by = "reference") %>%
+  select(-text) %>%
   rowwise() %>%
   do(runs_pval = get_runs_pval(.))
 
@@ -122,18 +124,23 @@ scores <- scores %>%
   mutate(runs_pval = unlist(runs_df$runs_pval))
 
 # Make the predictions
-log_info("Predicting matches from scores")
 log_debug("Making predictions")
-predictions <- predict(model, newdata = select(scores, -match))
+predictions <- predict(model, newdata = select(scores, -reference, -page),
+                       type = "raw")
+probabilities <- predict(model, newdata = select(scores, -reference, -page),
+                       type = "prob")$quotation
 
 log_debug("Getting just the matches")
 output <- scores %>%
-  mutate(prediction = predictions)
+  mutate(prediction = predictions,
+         probability = probabilities) %>%
+  filter(probability >= args$threshold)
 
-log_info(~ "Model predicted ${nrow(output)} matches")
+log_debug(~ "Model predicted ${nrow(output)} matches")
 
 # Write to disk
 log_debug("Writing the matches to disk")
 write_feather(output, args$output)
 
+log_info(~ "For ${nrow(newspaper)} pages, found ${nrow(scores)} possible matches and kept ${nrow(output)} with probability >= ${args$threshold}")
 log_debug("Finished")

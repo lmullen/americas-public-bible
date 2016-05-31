@@ -10,6 +10,7 @@ library(caretEnsemble)
 library(randomForest)
 library(kernlab)
 library(nnet)
+library(parallel)
 
 relabel_matches <- function(x) {
   stopifnot(is.logical(x))
@@ -38,6 +39,9 @@ tr_ctrl <- trainControl(method = "repeatedcv",
                         classProbs = TRUE,
                         index = createResample(training$match, 5),
                         summaryFunction = twoClassSummary)
+
+registerDoParallel(8, cores = 8)
+getDoParWorkers()
 
 set.seed(7347)
 model_list <- caretList(
@@ -143,6 +147,6 @@ res <- lapply(model_list_test, predict, newdata = sample_predictors) %>%
 
 bind_cols(all_features, res) %>% str
 
-saveRDS(model_list$nnet$finalModel, file = "bin/prediction-model.rds",
+saveRDS(model_list$nnet, file = "bin/prediction-model.rds",
         compress = FALSE)
 

@@ -160,6 +160,9 @@ download :
 # Tasks to send files to VRC
 # -----------------------------------------------------------------------------
 transfer-vrc :
-	rsync --archive -P bin/* vrc:/data/chronicling-america/scripts
+	rsync --archive -P --exclude '*.log' bin/* vrc:/data/chronicling-america/scripts
+
+vrc-results :
+	rsync --archive -P vrc:/data/chronicling-america/out/* results/
 
 .PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download
