@@ -33,6 +33,17 @@ parser <- OptionParser(
              action = "store_true", help = "Turn on debugging")
 args <- parse_args(parser)
 
+# For debugging
+# args <- list(
+#   input = "/media/lmullen/data/chronicling-america/df/2011260133-1915.rds",
+#   output = "/media/lmullen/data/chronicling-america/out/2011260133-1915.feather",
+#   quotation = "./bin/bible.rda",
+#   model = "./bin/prediction-model.rds",
+#   threshold = 0.2,
+#   debug = TRUE,
+#   log = "console"
+# )
+
 stopifnot(file.exists(args$input))
 stopifnot(file.exists(args$model))
 stopifnot(file.exists(args$quotation))
@@ -101,6 +112,16 @@ scores <- token_count %>%
          page = as.character(page)) %>%
   tbl_df()
 log_debug(~ "There are ${nrow(scores)} potential matches")
+
+if (nrow(scores) == 0) {
+  log_info("No potential matches: writing empty data frame and quitting early")
+  output <- scores %>%
+    mutate(runs_pval = numeric(0),
+           prediction = factor(x = character(0), levels = c("quotation", "noise")),
+           probabilites = numeric(0))
+  write_feather(output, args$output)
+  quit(save = "no", status = 0)
+}
 
 # Get the runs testing p-value
 log_debug("Getting the p-value for randomness in runs testing")
