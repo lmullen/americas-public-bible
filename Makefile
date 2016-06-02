@@ -110,8 +110,9 @@ clobber-features :
 PUBLICATION_MONTHS := $(shell find $(chronicling_ocr) -mindepth 3 -maxdepth 3 -type d)
 WORDCOUNTS := $(addsuffix /wordcounts.csv, $(PUBLICATION_MONTHS))
 
-data/newspaper-wordcounts.csv : $(WORDCOUNTS)
-	./scripts/gather-wordcounts.R
+data/newspaper-wordcounts.csv : # $(WORDCOUNTS)
+	echo "wordcount,page" > $@
+	find $(chronicling_ocr) -iname *wordcounts.csv -type f -exec cat {} >> $@ \;
 
 %/wordcounts.csv : %
 	./scripts/wordcounter.sh $^
