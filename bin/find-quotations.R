@@ -43,7 +43,7 @@ if (args$debug) {
 } else {
   log_level <- c("INFO", "WARN", "ERROR", "CRITICAL")
 }
-log_id <- str_replace(args$output, "\\.feather", "")
+log_id <- args$output %>% basename() %>% str_replace("\\.feather", "")
 log_formatter <- function(event) {
   paste(c(format(event$time, "%Y-%m-%d %H:%M:%OS3"), event$level, log_id,
           event$message), collapse = " - ")
@@ -142,5 +142,5 @@ log_debug(~ "Model predicted ${nrow(output)} matches")
 log_debug("Writing the matches to disk")
 write_feather(output, args$output)
 
-log_info(~ "For ${nrow(newspaper)} pages, found ${nrow(scores)} possible matches and kept ${nrow(output)} with probability >= ${args$threshold}")
+log_info(~ "For ${nrow(newspaper)} pages, kept ${nrow(output)} out of ${nrow(scores)} possible")
 log_debug("Finished")

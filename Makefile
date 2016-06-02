@@ -34,7 +34,7 @@ chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task: runs scripts and generates notebooks
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv
+all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv bin/prediction-model.rds
 
 # Also tasks to clean and clobber
 clean :
@@ -82,10 +82,10 @@ clobber-metadata :
 PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
 
-data/bible.rda :
+bin/bible.rda :
 	Rscript --vanilla ./scripts/create-bible-dtm.R
 
-data/sample/%.feather : data/bible.rda
+data/sample/%.feather : bin/bible.rda
 	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
 
 data/all-features.feather : $(FEATURES)
@@ -97,13 +97,17 @@ data/matches-for-model-training.csv : data/all-features.feather
 data/labeled-features.feather : data/matches-for-model-training.csv
 	./scripts/download-labeled-data.R
 
+bin/prediction-model.rds : bin/bible.rda data/labeled-features.feather
+	./scripts/train-model.R
+
 clobber-features :
 	rm -rf $(FEATURES)
 	rm -rf data/all-features.feather
 	rm -rf data/labeled-data.csv
-	rm -rf data/bible.rda
+	rm -rf bin/bible.rda
 	rm -rf data/labeled-features.feather
 	rm -rf data/matches-for-model-training.csv
+	rm -rf bin/prediction-model.rds
 
 # Tasks to create word counts of each page
 # ----------------------------------------------------------------------------

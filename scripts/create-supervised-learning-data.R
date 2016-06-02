@@ -13,7 +13,7 @@ suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(Matrix))
 
 scores <- read_feather("data/all-features.feather")
-load("data/bible.rda")
+load("bin/bible.rda")
 
 set.seed(3442)
 
