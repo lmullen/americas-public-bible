@@ -1,0 +1,15 @@
+name: "americas-public-bible"
+navbar:
+  title: "America's Public Bible"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: includes/footer.html
+    css: includes/styles.css
