@@ -35,8 +35,8 @@ args <- parse_args(parser)
 
 # For debugging
 # args <- list(
-#   input = "/media/lmullen/data/chronicling-america/df/2011260133-1915.rds",
-#   output = "/media/lmullen/data/chronicling-america/out/2011260133-1915.feather",
+#   input = "/media/lmullen/data/chronicling-america/df/sn83045462-1914.rds",
+#   output = "/media/lmullen/data/chronicling-america/out/sn83045462-1914.feather",
 #   quotation = "./bin/bible.rda",
 #   model = "./bin/prediction-model.rds",
 #   threshold = 0.2,
@@ -118,7 +118,7 @@ if (nrow(scores) == 0) {
   output <- scores %>%
     mutate(runs_pval = numeric(0),
            prediction = factor(x = character(0), levels = c("quotation", "noise")),
-           probabilites = numeric(0))
+           probability = numeric(0))
   write_feather(output, args$output)
   quit(save = "no", status = 0)
 }
