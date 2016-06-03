@@ -7,6 +7,8 @@ library(dplyr)
 library(feather)
 library(readr)
 library(purrr)
+library(lubridate)
+library(stringr)
 
 paths <- Sys.glob("/media/lmullen/data/chronicling-america/out/*.feather")
 
@@ -57,7 +59,36 @@ quotations <- quotations %>%
   left_join(verses, by = "reference") %>%
   select(page, reference, everything())
 
+lccn <- function(x) { str_extract(x, "\\w+") }
+get_date <- function(x) { str_extract(x, "\\d{4}-\\d{2}-\\d{2}") %>% as.Date() }
+
+quotations <- quotations %>%
+  mutate(lccn = lccn(page),
+         date = get_date(page),
+         year = year(date),
+         month = month(date))
+
+metadata <- read_csv("data/all-newspapers.csv")  %>%
+  select(-url) %>%
+  mutate(title = str_replace_all(title, "\\.\\svolume", "") %>%
+           str_replace_all("\\.$", "")  %>%
+           str_to_title())
+
+quotations <- quotations %>%
+  left_join(metadata, by = "lccn")
+
+chronam_url <- function(page, words) {
+  base <- "http://chroniclingamerica.loc.gov/lccn/"
+  str_c(base, page, "#words=", words, collapse = TRUE)
+}
+
+urls <- map2_chr(quotations$page, quotations$url_words, chronam_url)
+
+quotations <- quotations %>%
+  mutate(url = urls)  %>%
+  select(-url_words)
+
 write_feather(quotations, "data/quotations.feather")
+write_csv(quotations, "data/quotations.csv")
 write_feather(noise, "data/noise.feather")
-write_csv(quotations, 'data/quotations.csv')
-write_csv(noise, 'data/noise.csv')
+write_csv(noise, "data/noise.csv")
