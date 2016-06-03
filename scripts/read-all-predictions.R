@@ -10,8 +10,21 @@ library(purrr)
 
 paths <- Sys.glob("/media/lmullen/data/chronicling-america/out/*.feather")
 
+maybe_gc <- local({
+  i <- 1
+  function(every = 1000) {
+    if (i %% every == 0) {
+      message("GC")
+      gc()
+    }
+    i <<- i + 1
+  }
+})
+
+
 read_df <- failwith(NA, function(x) {
   message(x)
+  maybe_gc()
   read_feather(x)
 })
 
@@ -37,6 +50,12 @@ quotations <- all_matches %>%
 
 noise <- all_matches %>%
   filter(prediction == "noise")
+
+verses <- read_feather("data/bible-verses.feather")
+
+quotations <- quotations %>%
+  left_join(verses, by = "reference") %>%
+  select(page, reference, everything())
 
 write_feather(quotations, "data/quotations.feather")
 write_feather(noise, "data/noise.feather")
