@@ -47,3 +47,7 @@ footer {
   padding: 2rem;
   border-top: 1px solid gray;
 }
+
+blockquote {
+  font-size: 100%;
+}
