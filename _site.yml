@@ -1,15 +1,21 @@
 name: "americas-public-bible"
+exclude: ["quotations.csv", "Makefile"]
 navbar:
-  title: "America's Public Bible"
-  left:
-    - text: "Home"
+  title: "America’s Public Bible"
+  right:
+    - text: "Introduction"
       href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Explore the Quotations"
+      href: exploration.html
+    - text: "Topics & Verses"
+      href: verses.html
+    - text: "Sources & Methods"
+      href: methods.html
 output:
   html_document:
-    theme: cosmo
-    highlight: textmate
+    theme: lumen
+    highlight: null
     include:
-      after_body: includes/footer.html
-    css: includes/styles.css
+      in_header: _includes/in-header.html
+      after_body: _includes/footer.html
+    css: styles.css

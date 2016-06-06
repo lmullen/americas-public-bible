@@ -1,0 +1,12 @@
+---
+title: "Sources and Methods"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Primary sources
+
+All of the newspapers used in this project 
+

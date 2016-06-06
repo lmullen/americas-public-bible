@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'league-gothic';
+  src:
+    url('fonts/LeagueGothic-Regular.otf')
+  	format('opentype');
+
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'league-gothic', serif;
+}
+
+#site-title {
+  font-size: 8rem;
+  margin-bottom: 0;
+}
+
+#site-subtitle {
+  font-size: 4rem;
+  margin-top: 0;
+}
+
+.navbar-brand {
+  font-size: 2.0rem;
+  font-weight: normal;
+}
+
+.main-container {
+  margin-top: 30px;
+}
+
+#splash-image img {
+  max-height: 500px;
+  display: block;
+  margin: auto;
+}
+
+.caption {
+  text-align: center;
+  max-width: 85%;
+  display: block;
+  margin: auto;
+}
+
+footer {
+  margin: 2rem;
+  padding: 2rem;
+  border-top: 1px solid gray;
+}
