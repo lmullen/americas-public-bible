@@ -3,7 +3,8 @@ suppressPackageStartupMessages(library(readr))
 
 message("Reading data")
 
-quotations <- read_csv("quotations-clean.csv", col_types = "ccnnnncnciicccDiiccc")
+quotations <- read_csv("_data/quotations-clean.csv",
+                       col_types = "ccnnnncnciicccDiiccc")
 
 message("Writing export")
 

@@ -3,20 +3,23 @@ build : data
 	Rscript -e "rmarkdown::render_site()"
 
 deploy : build
-	rsync --progress --archive _site/* reclaim:~/public_html/americaspublicbible.org/
+	rsync --progress --archive --checksum _site/* reclaim:~/public_html/americaspublicbible.org/
 
 # Data
-data : quotations-clean.csv public-bible-quotations.csv.gz
+data : _data/quotations-clean.csv public-bible-quotations.csv.gz _data/labeled-features.feather
 
-quotations-raw.csv :
-	cp ../public-bible/data/quotations.csv quotations-raw.csv
+_data/quotations-raw.csv :
+	cp ../public-bible/data/quotations.csv $@
 
-quotations-clean.csv : quotations-raw.csv
+_data/quotations-clean.csv : _data/quotations-raw.csv
 	cp $^ $@
 
-public-bible-quotations.csv.gz : quotations-clean.csv
+public-bible-quotations.csv.gz : _data/quotations-clean.csv
 	Rscript _scripts/data-export.R
 	gzip public-bible-quotations.csv
+
+_data/labeled-features.feather :
+	cp ../public-bible/data/labeled-features.feather $@
 
 # Cleaning
 clean :

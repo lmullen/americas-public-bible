@@ -3,10 +3,111 @@ title: "Sources and Methods"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = NA)
 ```
 
 ## Primary sources
 
-All of the newspapers used in this project 
+All of the newspapers used in this project come the Library of Congress, *[Chronicling America: Historic American Newspapers](http://chroniclingamerica.loc.gov/)*. The data for this project was accessed through the *Chronicling America* [API](http://chroniclingamerica.loc.gov/about/api/). The newspaper metadata comes from [the newspaper metadata API](http://chroniclingamerica.loc.gov/newspapers.json). The OCR plain text of the newspaper pages was downloaded via the [OCR Bulk Data API](http://chroniclingamerica.loc.gov/about/api/#bulk-data). As of June 2016, *America's Public Bible* uses every newspaper page available through that API, which is about 10.7 million pages.
+
+## How the quotations were identified
+
+This project uses a technique called [machine learning](https://en.wikipedia.org/wiki/Machine_learning) to identify the quotations or verbal allusions in the newspaper pages. 
+
+### Extracting features
+
+To begin, each verse in the Bible is turned into tokens, or n-grams. Take for instance, the first verse of the Bible, "In the beginning, God created the heave and the earth" (Genesis 1:1 KJV). This verse would be turned into a tokens ranging from three to six words long, skipping stop words which convey little meaning (such as *an*, *of*, *the*). So Genesis 1:1 is turned into these tokens.
+
+- `"god created heaven"`
+- `"beginning god created heaven earth"`
+- `"beginning god created"`
+- `"created heaven earth"`
+- `"beginning god created heaven"`
+- `"god created heaven earth"`
+
+These tokens then are used to create a document-term matrix, where the rows are the Bible verses, the columns are the tokens, and the cells indicate how many times that token appears in that verse. For instance, a subset of the Bible matrix looks like this.
+
+```{r}
+options(width = 120)
+library(Matrix)
+library(methods)
+bible_m <- new("dgCMatrix"
+    , i = c(0L, 0L, 1L)
+    , p = 0:3
+    , Dim = c(3L, 3L)
+    , Dimnames = list(c("Genesis 1:1 (KJV)", "Genesis 1:2 (KJV)", "Genesis 1:3 (KJV)"
+), c("beginning god created", "god created heaven", "without form void"
+))
+    , x = c(1, 1, 1)
+    , factors = list()
+)
+bible_m <- as.matrix(bible_m)
+bible_m
+```
+
+Using the exact same method of tokenizing text, each newspaper page is turned into tokens. Although the newspapers include vastly more possible tokens than are found in just the Bible, this method restricts the number of columns in the newspaper document-term matrix to the same as in the Bible matrix.
+
+```{r}
+newspaper_m <- matrix(c(1, 0, 0, 1, 0, 0, 0, 1, 0), nrow = 3)
+rownames(newspaper_m) <- c("page_A", "page_B", "page_C")
+colnames(newspaper_m) <- colnames(bible_m)
+newspaper_m
+```
+
+As a consequence, the Bible matrix can be multipled by the transpose of the newspaper matrix. The result is a matrix with Bible verses in the rows and newspaper pages in the columns. The numbers in the cells of the matrix indicate how many tokens from that verse were found on that newspaper page. So in the sample matrix below, `pageA` shares two tokens with Genesis 1:1 and `pageB` shares one token with Genesis 1:2, indicating that those verses might appear on those pages. Of course the vast majority of cells in the resulting matrix are zeros.
+
+```{r}
+tcrossprod(bible_m, newspaper_m)
+```
+
+The multiplication of document-term matrices is the primary means I have used to find matches, but the token count is only one of the features about potential matches that I measure. These are the other features (or predictors) that I use.
+
+- Token count: the number of tokens from a particular verse that appear on a particular newspaper page.
+- TF-IDF: Not every token contains the same amount of information about whether a newspaper page contains a particular biblical verse. For instance, the phrase "went into the city" could be a quotation from a dozen or more Bible verses, but it might just as well be any English sentence. But the phrase "through a glass, darkly" is obviously a reference to [1 Corinthians 13:12](https://www.biblegateway.com/passage/?search=1+Corinthians+13%3A12&version=KJV), as these [search results](http://chroniclingamerica.loc.gov/search/pages/results/?dateFilterType=yearRange&date1=1836&date2=1922&language=&ortext=&andtext=&phrasetext=through+a+glass+darkly&proxtext=&proxdistance=5&rows=20&searchType=advanced) demonstrate. By weighting the matching tokens according to their [term frequency-inverse document frequency](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) more significant terms count for more in determining a match.
+- Proportion: Bible verses can vary in length, from just two words ("Jesus wept" [John 11:35] and "Rejoice evermore" [1 Thessalonians 5:16]) to the longest, Esther 8:9, which has ninety words in the Authorized Version. (In fact, Esther 8:9 appears in several *Chronicling America* newspapers as the [punchline of a joke](http://chroniclingamerica.loc.gov/lccn/sn97071038/1912-07-11/ed-1/seq-3/#words=king's+scribes+called+third+month+month+sivan+three+twentieth+day+thereof+written+according+mordecai+commanded+unto+jews+lieutenants+deputies+rulers+provinces+india+unto+ethiopia+hundred+twenty+seven+provinces+unto+every+province+according+writing+thereof+unto+every+people+after+language+jews+according+writing+according+language) about a "boy who boasted of his wonderful memory."^[*The Gazette-Times* (Heppner, Or.), [11 July 1912](http://chroniclingamerica.loc.gov/lccn/sn97071038/1912-07-11/ed-1/seq-3/). I have found nine instances of the verse used in a similar joke. For instance, *Daily Tobacco Leaf-Chronicle* (Clarksville, Tenn.), [12 June 1890](http://chroniclingamerica.loc.gov/lccn/sn88061072/1890-06-12/ed-1/seq-3/#words=king's+scribes+called+third+month+month+sivan+three+twentieth+day+thereof+written+according+mordecai+commanded+unto+jews+lieutenants+deputies+rulers+provinces+india+unto+ethiopia+hundred+twenty+seven+provinces+unto+every+province+according+writing+thereof+unto+every+people+after+language+jews+according+writing+according+language).]) This feature measures what proportion of the entire verse is found on the page.
+- Runs test: Where the matching tokens appear on the page is as important as how many matches there are. If the tokens appear widely scattered across the page, then they are likely to be just random matches to unimportant phrases. If the tokens are all clustered right next to each other (perhaps with a few gaps for incorrect OCR), then they are likely to be a quotation from the verse. This feature uses a [statistical test](https://en.wikipedia.org/wiki/Wald%E2%80%93Wolfowitz_runs_test) to determine whether the sequence of matches (called a "run") is random or not. 
+
+### Labeling data and training the model
+
+After measuring the potential matches, we need a means of distinguishing between accurate matches and false positives. This is a difficult problem because of the way that the Bible was quoted in newspapers (or indeed, used more generally). If we were looking for complete quotations, then we would look for candidates where there were many matching tokens, or where a high proportion of the matching verse is present on the page. But often quotations can be highly compressed. A single unusual phrase ("Quench not the Spirit" or "Remember Lot's wife" or "The Lord called Samuel") may be enough to identify one quotation, where even a half dozen commonplace matching phrases might not actually be a quotation. Then too, sometimes allusions function by changing the actual words while retaining the syntax or cadence, as in [this joke](http://chroniclingamerica.loc.gov/lccn/sn87065532/1899-11-10/ed-1/seq-1/#date1=1836&index=2&rows=20&words=Jug+Jugged+lest+ye&searchType=basic&sequence=0&state=&date2=1922&proxtext=%22jug+not+lest+ye+be+jugged%22&y=0&x=0&dateFilterType=yearRange&page=1).^[
+*The Pascagoula Democrat-Star* (Pascagoula, Miss.), [10 Nov. 1899](http://chroniclingamerica.loc.gov/lccn/sn87065532/1899-11-10/ed-1/seq-1/).]
+
+<div style="max-width:75%;margin:auto;">
+!["Jug not, lest ye be jugged," alluding to the verse "Judge not, that ye be not judged" (Matthew 7:1).](img/jug-not.png)
+</div>
+
+Rather than specify arbitrary thresholds, a more accurate approach is to teach an algorithm what genuine matches and false positives look like. After taking a sample of potential matches, I identified some 1,700 possible matches as either genuine or not.   (You can see the [labeled data here](https://docs.google.com/spreadsheets/d/1_hcNdWPMSaQvLlfLZH2UEk5gMI9qkVJaATU5d79QAEM/edit#gid=1028340440).) This makes it possible to observe patterns in the features that have been measured. In the charts below, a clear distinction can be seen between genuine matches and false positives, but there are many case where a simple division is inadequate.
+
+<div class="row">
+<div class="col-sm-6 col-xs-12">
+
+```{r}
+library(feather)
+library(ggplot2)
+labeled <- read_feather("_data/labeled-features.feather")
+
+ggplot(labeled, aes(token_count, proportion, color = match)) +
+  geom_jitter(shape = 1) + theme_minimal(base_size = 14) +
+  labs(title = "Number of tokens versus proportion",
+       x = "Tokens",
+       y = "Proportion of verse",
+       color = "Match")
+```
+
+</div>
+<div class="col-sm-6 col-xs-12">
+
+```{r}
+ggplot(labeled, aes(token_count, runs_pval, color = match)) +
+  geom_jitter(shape = 1) + theme_minimal(base_size = 14) +
+  labs(title = "Number of tokens versus runs test",
+       x = "Tokens",
+       y = "Runs test",
+       color = "Match")
+```
+
+</div>
+</div>
+
+I then used that data to train and test a machine learning model. This model takes the predictors mentioned above, and assigns it a class ("quotation" or not) and a probability that that classification is correct. While I evaluated a number of models (including random forests, support vector machines, and ensembles of other models) a neural network classifier had the best performance. I measured accuracy using the [area under the receiver operating characteristic curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic). The idea there is simple: the best classifier is the one that maximizes the number of genuine matches while minimizing the number of false positives. 
 
