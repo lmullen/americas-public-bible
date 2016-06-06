@@ -2,6 +2,9 @@
 build : data
 	Rscript -e "rmarkdown::render_site()"
 
+deploy : build
+	rsync --progress --archive _site/* reclaim:~/public_html/americaspublicbible.org/
+
 # Data
 data : quotations-clean.csv public-bible-quotations.csv.gz
 
@@ -23,3 +26,6 @@ clobber : clean
 	rm -rf quotations-clean.csv
 	rm -rf quotations-raw.csv
 	rm -rf public-bible-quotations.csv.gz
+
+.PHONY : build deploy data clean clobber
+

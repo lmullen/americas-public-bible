@@ -1,5 +1,5 @@
 name: "americas-public-bible"
-exclude: ["quotations.csv", "Makefile"]
+exclude: ["quotations-raw.csv", "quotations-clean.csv", "Makefile"]
 navbar:
   title: "America’s Public Bible"
   right:
