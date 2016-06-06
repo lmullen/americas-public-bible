@@ -17,16 +17,21 @@ knitr::opts_chunk$set(echo = TRUE)
   <div class="col-sm-4 col-xs-12">
   
   <div id="splash-image">
-  ![An advertisement in the *The Brattleboro Daily Reformer* (Brattleboro, Vt.), [15 Nov. 1916](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/). *Chronicling America: Historic American Newspapers*. Library of Congress.](img/bible-hand.png)
+  ![An advertisement in the *The Brattleboro Daily Reformer* (Brattleboro, Vt.), [15 Nov. 1916](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/).](img/bible-hand.png)
 </div>
 
   </div>
 </div>
 
 
-### How to cite
+### Code, data, and suggested citation
 
 If you use this project for academic work, here is a suggested citation.
 
 > Lincoln Mullen, *America's Public Bible: Biblical Quotations in U.S. Newspapers*, website, code, and datasets (2016): <http://americaspublicbible.org>.
 
+The following code and data is available:
+
+- <a href="public-bible-quotations.csv.gz" onclick="ga('send', 'event', 'data', 'download', 'public-bible-quotations.csv.gz');"><code>public-bible-quotations.csv.gz</code></a> (47 MB gzipped): all of the quotations found in this project with associated metadata.
+- <a onclick="ga('send', 'event', 'data', 'download', 'matches-for-model-training.csv');" href="https://goo.gl/65yo6v"><code>matches-for-mode-training.csv</code></a> (840 KB): the labeled data used for training the model.
+- GitHub repository with the [code for training the model and finding the quotations](https://github.com/lmullen/public-bible).
