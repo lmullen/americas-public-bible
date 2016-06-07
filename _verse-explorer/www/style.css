@@ -1,0 +1,16 @@
+.selectize-input {
+  /* border: 1px solid #dce4ec; */
+  overflow: visible;
+}
+
+#verse-ts-labels {
+  padding-top: 35px!important;
+}
+
+.shiny-input-container {
+  width: 100%!important;
+}
+
+.dygraph-title {
+  font-weight: normal;
+}

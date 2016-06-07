@@ -6,3 +6,8 @@ title: "Verses"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+
+```{r}
+knitr::include_app("http://127.0.0.1:3838/", height = 900)
+```
+

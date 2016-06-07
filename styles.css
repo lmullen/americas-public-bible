@@ -77,3 +77,11 @@ blockquote {
 .bibliography {
   margin-left: 50px;
 }
+
+iframe {
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+    width: 100%;
+}
