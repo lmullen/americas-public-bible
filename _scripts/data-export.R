@@ -1,12 +1,7 @@
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(readr))
 
-message("Reading data")
-
-quotations <- read_csv("_data/quotations-clean.csv",
-                       col_types = "ccnnnncnciicccDiicccl")
-
-message("Writing export")
+quotations <- readRDS("_data/quotations-clean.rds")
 
 quotations %>%
   select(-token_count, -tfidf, -proportion, -runs_pval) %>%

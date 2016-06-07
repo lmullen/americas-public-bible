@@ -3,6 +3,8 @@ suppressPackageStartupMessages(library(dplyr))
 
 quotations <- read_csv("_data/quotations.csv",
                        col_types = "ccnnnncnciicccDiiccc")
+quotations <- quotations %>% mutate(multiple_references = NA_character_)
+
 verses <- read_csv("_data/bible-verses.csv")
 
 combine_verses <- function(.data, references) {
@@ -10,7 +12,9 @@ combine_verses <- function(.data, references) {
   new_ref <- paste0(references[1])
   .data %>%
     mutate(reference = ifelse(reference %in% references, new_ref, reference),
-           multiple_references = ifelse(reference %in% references, TRUE, FALSE)) %>%
+           multiple_references = ifelse(reference %in% references,
+                                        paste(references, collapse = ", "),
+                                        multiple_references)) %>%
     distinct(page, reference)
 }
 
@@ -48,4 +52,4 @@ combined_quotations <- quotations %>%
   filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
   filter(reference != "Acts 19:7 (KJV)") # And all the men were about twelve
 
-write_csv(combined_quotations, "_data/quotations-clean.csv")
+saveRDS(combined_quotations, "_data/quotations-clean.rds")
