@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   font-family: 'league-gothic', serif;
 }
 
+.section {
+  margin-top: 2.5rem;
+}
+
 #site-title {
   font-size: 8rem;
   margin-bottom: 0;
@@ -68,4 +72,8 @@ footer {
 
 blockquote {
   font-size: 100%;
+}
+
+.bibliography {
+  margin-left: 50px;
 }
