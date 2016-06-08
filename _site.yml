@@ -7,10 +7,8 @@ navbar:
       href: index.html
     - text: "Explore the Quotations"
       href: exploration.html
-    - text: "Topics"
+    - text: "Topics & Verses"
       href: topics.html
-    - text: "Verses"
-      href: verses.html
     - text: "Sources & Methods"
       href: methods.html
 output:
