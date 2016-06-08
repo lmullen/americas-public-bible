@@ -2,7 +2,7 @@
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 
@@ -19,7 +19,7 @@ For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from 
   <div class="col-sm-4 col-xs-12">
   
   <div id="splash-image">
-  ![An advertisement in the *The Brattleboro Daily Reformer* (Brattleboro, Vt.), [15 Nov. 1916](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/).](img/bible-hand.png)
+  ![An advertisement in the *Brattleboro Daily Reformer* (Brattleboro, Vt.), [15 Nov. 1916](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/).](img/bible-hand.png)
 </div>
 
   </div>
@@ -28,21 +28,25 @@ For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from 
 
 That the Bible was ubiquitous in the nineteenth-century United States is a commonplace claim, but this project aims to provide far more specificity about how the Bible was used in American politics. While it is true that the Bible as a whole was nearly everywhere, what matters more are the ways that the Bible was put to use. The Bible offered thousands of texts, each of which could be interpreted in countless ways. For each verse that was quoted, this site offers [a way to explore](exploration.html) both the trend in how frequently that verse was used, and a link to each instance in which it was quoted at *Chronicling America* so that the context of the quotation is available. In this was, the many specifics of how the Bible was used can be understood.
 
+The general trend is that the frequency of quotations declined over time among the newspapers in *Chronicling America*, which are not papers published by religious denominations or benevolence organizations.^[I have normalized the number of quotations per year by the number of pages in *Chronicling America* for that year. In examining these charts of general trends a few factors should be kept in mind. First, there are many the number of pages in *Chronicling America* grows over time. Thus, the uncertainty in the trend is greater for the 1840s and 1850s, while it is more certain by the 1910s and 1920s. That said, the peak of quotations in the 1840s makes sense given the widespread expansion of evangelical Protestantism in the 1830s and 1840s. Second, the quality of the optical character recognition (i.e., the process by which the page images of the newspapers are turned into plain text) in the dataset is very uneven: some pages have nearly perfect transcriptions, while others have no usable text. It is of course much more difficult to find quotations, especially brief quotations, in poor OCR. So I cannot claim that I have found every quotation or allusion. Third, a classification problem like this one is always a tradeoff between finding every possible genuine match while avoiding false positives. I have prefered to avoid false positives as much as possible, even at the cost of missing genuine matches that would otherwise have been detected. For more details on how the quotations were found, see the [sources and methods section](methods.html).] ] The period of the 1830s and 1840s saw the expansion of evangelical Protestantism, so that peak represents a time when the Bible was likely to be quoted more frequently. While the Bible was quoted less frequently over time, there were notable resurgences in its use in the 1870s and the 1890s. The Old Testament and the New Testament followed more or less the same pattern, though the New Testament was always quoted more often than the Old Testament. (Keep in mind, though, that the Old Testament is over three times as long as the New Testament.) 
+
 ```{r trends-for-whole-bible}
-library(dygraphs)
-library(RColorBrewer)
+source("helpers.R")
+library(dplyr)
+
 bible_by_year <- readRDS("_data/bible-by-year.rds")
 
-dygraph(bible_by_year,
-        main = "Quotations from the Bible in Chronicling America") %>%
-  dyAxis("y", "quotations per 10K pages") %>%
-  dyAxis("x", valueRange = c(1836, 1922)) %>%
-  dyRoller(rollPeriod = 5, showRoller = FALSE) %>%
-  dyOptions(drawGrid = TRUE,
-            colors = brewer.pal(8, "Dark2")) %>%
-  dyHighlight(highlightCircleSize = 3,
-              highlightSeriesBackgroundAlpha = 0.2) 
+bible_by_year %>% 
+  plot_ref_ts(title = "Quotations from the Bible in Chronicling America")
 ```
+
+```{r}
+verses_by_year <- readRDS("_data/verses-by-year.rds")
+verses_by_year %>% 
+  references_to_ts(c("1 Samuel 3:4", "Luke 18:16", "Proverbs 14:34")) %>% 
+  plot_ref_ts(title = "Trends for selected verses", roll = 3)
+```
+
 
 ### Code and data
 

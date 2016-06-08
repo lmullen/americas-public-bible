@@ -6,6 +6,20 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(DT))
 
+year_to_date <- function(y) { as.Date(paste0(y, "-01-01")) }
+
+plot_bible_ts <- function(ts) {
+  dygraph(ts, main = NULL) %>%
+    dyAxis("y", "quotations per 10K pages") %>%
+    dyAxis("x", valueRange = c(1836, 1922)) %>%
+    dyRoller(rollPeriod = 5, showRoller = TRUE) %>%
+    dyOptions(drawGrid = TRUE,
+              colors = brewer.pal(8, "Dark2")) %>%
+    dyHighlight(highlightCircleSize = 3,
+                highlightSeriesBackgroundAlpha = 0.2) %>%
+    dyLegend(labelsDiv = "verse-ts-labels", labelsSeparateLines = TRUE)
+}
+
 shinyServer(function(input, output, session) {
 
   verses_ts <- reactive({
@@ -182,6 +196,15 @@ shinyServer(function(input, output, session) {
                                    "Luke 6:31"
                                    ))
   })
+
+  observeEvent(input$collection_deafness, {
+    updateSelectInput(session, "references",
+                      selected = c("Mark 7:32",
+                                   "Mark 7:37",
+                                   "Luke 7:22",
+                                   "Isaiah 35:5"))
+  })
+
 
   observeEvent(input$collection_entire_bible, {
     updateSelectInput(session, "references",

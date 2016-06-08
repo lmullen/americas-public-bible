@@ -24,6 +24,7 @@ shinyUI(fluidPage(
            actionLink("collection_proverbs", "Proverbs (most quoted)"),
            actionLink("collection_psalms", "Psalms (most quoted)"),
            actionLink("collection_goldrenrule", "Golden rule"),
+           actionLink("collection_deafness", "Deafness"),
            actionLink("collection_genesis1", "Genesis 1")
            )),
   fluidRow(selectizeInput("references", "References", references,

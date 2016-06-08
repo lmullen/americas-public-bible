@@ -12,12 +12,14 @@ load("_data/bible.rda")
 quotations <- quotations %>%
   mutate(reference = str_replace(reference, " \\(KJV\\)", ""))
 
-keepers <- c("John 3:16", "John 1:1", "Genesis 1:1", "2 Chronicles 7:14")
+keepers <- c("John 3:16", "John 1:1", "Genesis 1:1", "2 Chronicles 7:14",
+             "1 Samuel 3:4", "Mark 7:37", "Luke 7:22", "Isaiah 35:5", "Mark 7:32")
 
 top <- quotations %>%
   group_by(reference) %>%
   summarize(total_uses = n()) %>%
   arrange(desc(total_uses)) %>%
+  # filter(total_uses >= 100)
   filter(total_uses >= 100 | reference %in% keepers)
 
 verses_by_year <- quotations %>%
