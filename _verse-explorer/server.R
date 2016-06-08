@@ -120,7 +120,8 @@ shinyServer(function(input, output, session) {
   observeEvent(input$collection_nationalistic, {
     updateSelectInput(session, "references",
                       selected = c("2 Chronicles 7:14",
-                                   "Proverbs 14:34"))
+                                   "Proverbs 14:34",
+                                   "Psalm 33:12"))
   })
 
   observeEvent(input$collection_missions, {

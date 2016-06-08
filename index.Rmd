@@ -2,7 +2,7 @@
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
   <h1 id="site-title">America's Public Bible</h1>
   <h2 id="site-subtitle">Biblical Quotations in U.S. Newspapers</h2>
   
- For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from Benjamin Franklin prominently on its front page. "A Bible and a newspaper in every house," the quotation proclaimed, "are the principal support of virtue, morality, and civil liberty."^[*Ellensburg Dawn* (Ellensburg, Wash.), [18 Jan. 1902](http://chroniclingamerica.loc.gov/lccn/sn88085012/1902-01-18/ed-1/seq-1/). Also quoted in the *Liberty Advocate* (Liberty, Miss.), [18 Oct. 1845](http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/>http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/#date1=1836&index=0&rows=20&words=Bible+Franklin+newspaper&searchType=basic&sequence=0&state=&date2=1922&proxtext=bible+newspaper+franklin&y=0&x=0&dateFilterType=yearRange&page=1).] Though the quotation from Franklin was doubtless spurious, the pairing of newspapers with the Bible was common. Throughout the nineteenth century and into the twentieth century, newspapers in the United States---even those newspaper which were not published by a religious denomination or organization---had frequent recourse to the Bible. Newspapers printed sermons and Sunday school lessons, and ministers offered lessons through newspaper Bible clubs.^[*Perrysburg Journal* (Perrysburg, Ohio), [18 Sept. 1919](http://chroniclingamerica.loc.gov/lccn/sn87076843/1919-09-18/ed-1/seq-3/); *Amador Ledger* (Jackson, Amador County, Calif.), [19 Feb. 1909](http://chroniclingamerica.loc.gov/lccn/sn93052980/1909-02-19/ed-1/seq-3/).] They featured jokes whose punchlines required biblical literacy. They printed political commentary that cited the Bible.  They made money off of [advertisements](http://chroniclingamerica.loc.gov/lccn/sn83045433/1918-02-10/ed-1/seq-18/) for Bibles of every kind. Some newspapers even sold Bibles as a way of raising revenue, as when the *[Brattleboro Daily Reformer](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/)* and other papers sold an *Illimunated Holy Bible*. But most of all, newspapers quoted the Bible.
+For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from Benjamin Franklin prominently on its front page. "A Bible and a newspaper in every house," the quotation proclaimed, "are the principal support of virtue, morality, and civil liberty."^[*Ellensburg Dawn* (Ellensburg, Wash.), [18 Jan. 1902](http://chroniclingamerica.loc.gov/lccn/sn88085012/1902-01-18/ed-1/seq-1/). Also quoted in the *Liberty Advocate* (Liberty, Miss.), [18 Oct. 1845](http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/>http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/#date1=1836&index=0&rows=20&words=Bible+Franklin+newspaper&searchType=basic&sequence=0&state=&date2=1922&proxtext=bible+newspaper+franklin&y=0&x=0&dateFilterType=yearRange&page=1).] Though the quotation from Franklin was doubtless spurious, the pairing of newspapers with the Bible was common. Throughout the nineteenth century and into the twentieth century, newspapers in the United States---even those newspaper which were not published by a religious denomination or organization---had frequent recourse to the Bible. Newspapers printed sermons and Sunday school lessons, and ministers offered lessons through newspaper Bible clubs.^[*Perrysburg Journal* (Perrysburg, Ohio), [18 Sept. 1919](http://chroniclingamerica.loc.gov/lccn/sn87076843/1919-09-18/ed-1/seq-3/); *Amador Ledger* (Jackson, Amador County, Calif.), [19 Feb. 1909](http://chroniclingamerica.loc.gov/lccn/sn93052980/1909-02-19/ed-1/seq-3/).] They featured jokes whose punchlines required biblical literacy. They printed political commentary that cited the Bible on all sides of a given issue.  They made money off of [advertisements](http://chroniclingamerica.loc.gov/lccn/sn83045433/1918-02-10/ed-1/seq-18/) for Bibles of every kind. Some newspapers even sold Bibles as a way of raising revenue, as when the *[Brattleboro Daily Reformer](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/)* and other papers sold an *Illimunated Holy Bible*. But most of all, newspapers quoted the Bible.
+
+*America's Public Bible* uncovers the presence of biblical quotations in the nearly 11 million newspaper pages in the Library of Congress's *[Chronicling America](http://chroniclingamerica.loc.gov/)* collection. Using the [techniques of machine learning](methods.html) I have identified over 872,000 quotations of or verbal allusions to specific biblical verses on those newspaper pages. For now, the project has looked only for quotations to the [King James Version](https://en.wikipedia.org/wiki/King_James_Version) (or Authorized Version) of the English Bible, by far the most commonly used Bible during the nineteenth-century among American Protestants.^[The American Standard Version of the Bible (the American version of the British Revised Version) was published in 1900. See Peter J. Thuesen, *In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible* (New York: Oxford University Press, 1999).] However, the method that I have developed can be applied to other versions, such as the American Standard Version (a revision of the King James Version), the Douay-Rheims Bible (used by American Catholics), the German Luther Bible, and even the Book of Mormon.
 
   </div>
   <div class="col-sm-4 col-xs-12">
@@ -21,7 +23,26 @@ knitr::opts_chunk$set(echo = TRUE)
 </div>
 
   </div>
+  
 </div>
+
+That the Bible was ubiquitous in the nineteenth-century United States is a commonplace claim, but this project aims to provide far more specificity about how the Bible was used in American politics. While it is true that the Bible as a whole was nearly everywhere, what matters more are the ways that the Bible was put to use. The Bible offered thousands of texts, each of which could be interpreted in countless ways. For each verse that was quoted, this site offers [a way to explore](exploration.html) both the trend in how frequently that verse was used, and a link to each instance in which it was quoted at *Chronicling America* so that the context of the quotation is available. In this was, the many specifics of how the Bible was used can be understood.
+
+```{r trends-for-whole-bible}
+library(dygraphs)
+library(RColorBrewer)
+bible_by_year <- readRDS("_data/bible-by-year.rds")
+
+dygraph(bible_by_year,
+        main = "Quotations from the Bible in Chronicling America") %>%
+  dyAxis("y", "quotations per 10K pages") %>%
+  dyAxis("x", valueRange = c(1836, 1922)) %>%
+  dyRoller(rollPeriod = 5, showRoller = FALSE) %>%
+  dyOptions(drawGrid = TRUE,
+            colors = brewer.pal(8, "Dark2")) %>%
+  dyHighlight(highlightCircleSize = 3,
+              highlightSeriesBackgroundAlpha = 0.2) 
+```
 
 ### Code and data
 
@@ -30,6 +51,7 @@ The following code and data are available:
 - <a href="public-bible-quotations.csv.gz" onclick="ga('send', 'event', 'data', 'download', 'public-bible-quotations.csv.gz');"><code>public-bible-quotations.csv.gz</code></a> (46 MB gzipped): all of the quotations found in this project with associated metadata.
 - <a onclick="ga('send', 'event', 'data', 'download', 'matches-for-model-training.csv');" href="https://goo.gl/65yo6v"><code>matches-for-mode-training.csv</code></a> (840 KB): the labeled data used for training the model.
 - GitHub repository with the [code for training the model and finding the quotations](https://github.com/lmullen/public-bible). The [`bin/`](https://github.com/lmullen/public-bible/tree/master/bin) directory contains the [script](https://github.com/lmullen/public-bible/blob/master/bin/find-quotations.R) that finds the quotations, as well as the trained machine learning model ([`prediction-model.rds`](https://github.com/lmullen/public-bible/blob/master/bin/prediction-model.rds), 7.8 MB) and a payload containing a document-term matrix of the Bible and functions for tokenizing the newspaper pages ([`bible.rda`](https://github.com/lmullen/public-bible/blob/master/bin/bible.rda), 119 MB).
+
 
 ### Suggested citation
 

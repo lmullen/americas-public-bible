@@ -117,9 +117,9 @@ The following is a brief list of secondary sources on the history of the Bible i
 
 <div class="bibliography">
 
-Allen Dwight Callahan. *The Talking Book African Americans and the Bible*. New Haven: Yale University Press, 2006.
-
 Byrd, James P. *Sacred Scripture, Sacred War: The Bible and the American Revolution*. New York: Oxford University Press, 2013.
+
+Callahan, Allen Dwight. *The Talking Book African Americans and the Bible*. New Haven: Yale University Press, 2006.
 
 Gutjahr, Paul C. *An American Bible: A History of the Good Book in the United States, 1777-1880*. Stanford, CA: Stanford University Press, 1999.
 
@@ -133,7 +133,9 @@ Nord, David Paul. *Faith in Reading: Religious Publishing and the Birth of Mass 
 
 Sarna, Jonathan D., and Nahum M. Sarna. “Jewish Bible Scholarship and Translations in the United States.” In *The Bible and Bibles in America*, edited by Ernest S. Frerichs, 83–116. Atlanta: Scholars Press, 1988.
 
-Stephen J. Stein, “America’s Bibles: Canon, Commentary, and Community,” *Church History* 64, no. 2 (June 1, 1995): 169–84, doi:10.2307/3167903.
+Stein, Stephen J. “America’s Bibles: Canon, Commentary, and Community,” *Church History* 64, no. 2 (June 1, 1995): 169–84, doi:10.2307/3167903.
+
+Thuesen, Peter J. *In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible*. New York: Oxford University Press, 1999.
 
 </div>
 
