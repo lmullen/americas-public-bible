@@ -1,13 +1,17 @@
 ---
-title: "Verses"
+title: "Explore Biblical Quotations in Newspapers"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+This interactive graphic lets you see the trend for how specific biblical verses quoted, normalized by the number of pages in the *Chronicling America* collection for that year. This graphic includes the top 1,500 most quoted verses.^[Some verses appear verbatim, or nearly so, in other places in the Bible. For instance, Psalm 107:8, 107:15, 107:21, and 107:31 are all the same refrain. In such cases, I have combined all of those references into one, counting it as occuring no more than one time per page.] (If you wish to investigate all the quotations, see the [data export](index.html#code-and-data).)
+
+**How to explore the quotations:** Enter several references into the select box below to see the trends for those verses and to find specific instances of quotations in *Chronicling America*. Removing all references will show the trend for the Old and New Testaments. Or, click one of the links below to see the trend for those collections of verses. Below is a table of all the quotations for the selected verses. Follow the links to see the quotation highlighed on the page image at *Chronicling America*.
 
 ```{r}
-knitr::include_app("http://127.0.0.1:3838/", height = 900)
+knitr::include_app("http://apps.lincolnmullen.com/_verse-explorer/", height = 400)
+# knitr::include_app("http://127.0.0.1:3838/", height = 400)
 ```
 

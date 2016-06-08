@@ -11,7 +11,7 @@ plot_bible_ts <- function(ts) {
   dygraph(ts, main = NULL) %>%
     dyAxis("y", "quotations per 10K pages") %>%
     dyAxis("x", valueRange = c(1836, 1922)) %>%
-    dyRoller(rollPeriod = 4, showRoller = FALSE) %>%
+    dyRoller(rollPeriod = 5, showRoller = FALSE) %>%
     dyOptions(drawGrid = TRUE,
               colors = brewer.pal(8, "Dark2")) %>%
     dyHighlight(highlightCircleSize = 3,

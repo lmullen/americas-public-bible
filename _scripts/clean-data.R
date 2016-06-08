@@ -49,7 +49,14 @@ combined_quotations <- quotations %>%
   combine_verses(c("Psalm 107:1 (KJV)",
                    "Psalm 118:29 (KJV)",
                    "Psalm 136:1 (KJV)")) %>%
+  combine_verses(c("Matthew 16:26 (KJV)",
+                   "Mark 8:36 (KJV)")) %>%
+  combine_verses(c("Matthew 19:6 (KJV)",
+                   "Mark 10:9 (KJV)")) %>%
+  combine_verses(c("John 3:16 (KJV)",
+                   "John 3:15 (KJV)")) %>%
   filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
-  filter(reference != "Acts 19:7 (KJV)") # And all the men were about twelve
+  filter(reference != "Acts 19:7 (KJV)") %>% # And all the men were about twelve
+  filter(reference != "1 Chronicles 9:24 (KJV)") # East west north south
 
 saveRDS(combined_quotations, "_data/quotations-clean.rds")

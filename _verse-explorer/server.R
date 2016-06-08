@@ -6,7 +6,7 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(DT))
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
 
   verses_ts <- reactive({
     if (length(input$references) > 0) {
@@ -65,5 +65,126 @@ shinyServer(function(input, output) {
   rownames = FALSE,
   options = list(pageLength = 20, scrollCollapse = TRUE, serverSide = FALSE,
                  select = list(style = "single")))
+
+  observeEvent(input$collection_top_ten, {
+    updateSelectInput(session, "references",
+                      selected = c("Luke 18:16",
+                                   "Exodus 20:15",
+                                   "Matthew 7:20",
+                                   "Matthew 25:21",
+                                   "Exodus 20:13",
+                                   "Acts 20:35",
+                                   "Matthew 6:11",
+                                   "Luke 2:14",
+                                   "Matthew 25:23",
+                                   "1 Thessalonians 5:21"))
+  })
+
+  observeEvent(input$collection_ten_commandments, {
+    updateSelectInput(session, "references",
+                      selected = c("Exodus 20:3",
+                                   "Exodus 20:4",
+                                   "Exodus 20:7",
+                                   "Exodus 20:8",
+                                   "Exodus 20:10",
+                                   "Exodus 20:11",
+                                   "Exodus 20:12",
+                                   "Exodus 20:13",
+                                   "Exodus 20:14",
+                                   "Exodus 20:15",
+                                   "Exodus 20:16",
+                                   "Exodus 20:17"))
+  })
+
+  observeEvent(input$collection_lords_prayer, {
+    updateSelectInput(session, "references",
+                      selected = c("Matthew 6:9",
+                                   "Matthew 6:10",
+                                   "Matthew 6:11",
+                                   "Matthew 6:12",
+                                   "Matthew 6:13"))
+  })
+
+  observeEvent(input$collection_genesis1, {
+    updateSelectInput(session, "references",
+                      selected = c("Genesis 1:1",
+                                   "Genesis 1:2",
+                                   "Genesis 1:3",
+                                   "Genesis 1:11",
+                                   "Genesis 1:26",
+                                   "Genesis 1:27",
+                                   "Genesis 1:28",
+                                   "Genesis 1:31"))
+  })
+
+  observeEvent(input$collection_nationalistic, {
+    updateSelectInput(session, "references",
+                      selected = c("2 Chronicles 7:14",
+                                   "Proverbs 14:34"))
+  })
+
+  observeEvent(input$collection_missions, {
+    updateSelectInput(session, "references",
+                      selected = c("Matthew 28:18",
+                                   "Matthew 28:19",
+                                   "Matthew 28:20",
+                                   "Mark 16:15"))
+  })
+
+  observeEvent(input$collection_proverbs, {
+    updateSelectInput(session, "references",
+                      selected = c("Proverbs 22:6",
+                                   "Proverbs 15:1",
+                                   "Proverbs 28:1",
+                                   "Proverbs 25:11",
+                                   "Proverbs 23:32",
+                                   "Proverbs 22:1",
+                                   "Proverbs 20:1"))
+  })
+
+  observeEvent(input$collection_psalms, {
+    updateSelectInput(session, "references",
+                      selected = c("Psalm 107:23",
+                                   "Psalm 133:1",
+                                   "Psalm 23:4",
+                                   "Psalm 122:1",
+                                   "Psalm 22:1",
+                                   "Psalm 23:1",
+                                   "Psalm 123:3",
+                                   "Psalm 46:1"))
+  })
+
+  observeEvent(input$collection_wealth, {
+    updateSelectInput(session, "references",
+                      selected = c("Acts 20:35",
+                                   "Mark 8:36"
+                                   ))
+  })
+
+  observeEvent(input$collection_children, {
+    updateSelectInput(session, "references",
+                      selected = c("Luke 18:16",
+                                   "Provebs 22:6"
+                                   ))
+  })
+
+  observeEvent(input$collection_marriage, {
+    updateSelectInput(session, "references",
+                      selected = c("Mark 10:9",
+                                   "Matthew 19:6"
+                                   ))
+  })
+
+  observeEvent(input$collection_goldrenrule, {
+    updateSelectInput(session, "references",
+                      selected = c("Matthew 7:12",
+                                   "Luke 6:31"
+                                   ))
+  })
+
+  observeEvent(input$collection_entire_bible, {
+    updateSelectInput(session, "references",
+                      selected = "")
+  })
 
 })

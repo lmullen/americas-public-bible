@@ -2,12 +2,12 @@
 build : data
 	Rscript -e "rmarkdown::render_site()"
 
-deploy : deploy-static deploy-shiny
+deploy : deploy-static deploy-shiny 
 
-deploy-static :
+deploy-static : build
 	rsync --progress --archive --checksum _site/* reclaim:~/public_html/americaspublicbible.org/
 
-deploy-shiny :
+deploy-shiny : 
 	rsync --progress --archive _verse-explorer anselm:/home/shinyapps/
 	rsync --progress --archive _data anselm:/home/shinyapps/
 
@@ -31,7 +31,7 @@ _data/quotations-clean.rds : _data/quotations.csv
 
 public-bible-quotations.csv.gz : _data/quotations-clean.rds
 	Rscript _scripts/data-export.R
-	gzip public-bible-quotations.csv
+	gzip -f public-bible-quotations.csv
 
 _data/labeled-features.feather :
 	cp ../public-bible/data/$(@F) $@
