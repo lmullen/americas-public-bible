@@ -17,7 +17,8 @@ plot_bible_ts <- function(ts) {
               colors = brewer.pal(8, "Dark2")) %>%
     dyHighlight(highlightCircleSize = 3,
                 highlightSeriesBackgroundAlpha = 0.2) %>%
-    dyLegend(labelsDiv = "verse-ts-labels", labelsSeparateLines = TRUE)
+    dyLegend(labelsDiv = "verse-ts-labels", labelsSeparateLines = TRUE) %>%
+    dyRangeSelector()
 }
 
 shinyServer(function(input, output, session) {
@@ -65,8 +66,14 @@ shinyServer(function(input, output, session) {
 
   output$quotations_table <- renderDataTable({
     if (length(input$references) > 0) {
-      quotations_df %>%
+      filtered_quotations <- quotations_df %>%
         filter(Reference %in% input$references)
+      if (!is.null(input$verse_ts_chart_date_window)) {
+        filtered_quotations <- filtered_quotations %>%
+          filter(Date >= as.Date(input$verse_ts_chart_date_window[1]),
+                 Date <= as.Date(input$verse_ts_chart_date_window[2]))
+      }
+      filtered_quotations %>% arrange(Date)
     } else {
       data_frame(Newspaper = character(),
                  State = character(),
