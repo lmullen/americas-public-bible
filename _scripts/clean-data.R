@@ -57,6 +57,7 @@ combined_quotations <- quotations %>%
                    "John 3:15 (KJV)")) %>%
   filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
   filter(reference != "Acts 19:7 (KJV)") %>% # And all the men were about twelve
-  filter(reference != "1 Chronicles 9:24 (KJV)") # East west north south
+  filter(reference != "1 Chronicles 9:24 (KJV)") %>%  # East west north south
+  filter(reference != "Ezekiel 44:25 (KJV)") # Father mother brother sister
 
 saveRDS(combined_quotations, "_data/quotations-clean.rds")

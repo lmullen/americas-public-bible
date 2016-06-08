@@ -186,7 +186,8 @@ shinyServer(function(input, output, session) {
   observeEvent(input$collection_marriage, {
     updateSelectInput(session, "references",
                       selected = c("Mark 10:9",
-                                   "Matthew 19:6"
+                                   "Matthew 19:6",
+                                   "Proverbs 31:12"
                                    ))
   })
 

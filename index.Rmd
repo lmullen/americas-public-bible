@@ -40,12 +40,31 @@ bible_by_year %>%
   plot_ref_ts(title = "Quotations from the Bible in Chronicling America")
 ```
 
+The general trends, however, tell us much less than the patterns for individual verses. Consider each of the following verses, each of which has a different pattern than the general trend. (See below the visualization for the text of these verses.) By  
+
 ```{r}
 verses_by_year <- readRDS("_data/verses-by-year.rds")
 verses_by_year %>% 
-  references_to_ts(c("1 Samuel 3:4", "Luke 18:16", "Proverbs 14:34")) %>% 
+  references_to_ts(c("1 Samuel 3:4", "Luke 18:16", "Proverbs 14:34",
+                     "Acts 17:26", "Proverbs 31:12", "John 3:16")) %>% 
   plot_ref_ts(title = "Trends for selected verses", roll = 3)
 ```
+
+##### Selected verses
+<dl class="dl-horizontal">
+  <dt>1 Samuel 3:4</dt>
+  <dd>That the LORD called Samuel: and he answered, Here am I.</dd>
+  <dt>Luke 18:16</dt>
+  <dd>But Jesus called them unto him, and said, Suffer little children to come unto me, and forbid them not: for of such is the kingdom of God.</dd>
+  <dt>Proverbs 14:34</dt>
+  <dd>Righteousness exalteth a nation: but sin is a reproach to any people.</dd>
+  <dt>Acts 17:26</dt>
+  <dd>And hath made of one blood all nations of men for to dwell on all the face of the earth, and hath determined the times before appointed, and the bounds of their habitation;</dd>
+  <dt>Proverbs 31:12</dt>
+  <dd>She will do him good and not evil all the days of her life.</dd>
+  <dt>John 3:16</dt>
+  <dd>For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.</dd>
+</dl>
 
 
 ### Code and data
