@@ -13,7 +13,8 @@ shinyUI(fluidPage(
   fluidRow(
     column(12,
       selectizeInput("references", "References", references,
-                     selected = c("Luke 18:16", "John 3:16"),
+                     selected = c("Acts 17:26", "John 3:16"),
                      multiple = TRUE))
-  )
+  ),
+  fluidRow(column(12, htmlOutput("verse_text")))
 ))

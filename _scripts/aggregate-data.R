@@ -6,6 +6,7 @@ suppressPackageStartupMessages(library(xts))
 
 quotations <- readRDS("_data/quotations-clean.rds")
 wordcounts <- read_csv("_data/wordcounts-by-year.csv")
+load("_data/bible.rda")
 
 quotations <- quotations %>%
   mutate(reference = str_replace(reference, " \\(KJV\\)", ""))
@@ -38,5 +39,10 @@ aggregates <- quotations %>%
 year_to_date <- function(y) { as.Date(paste0(y, "-01-01")) }
 aggregates_ts <- xts(aggregates[ , -1], order.by = year_to_date(aggregates$year))
 
+verses <- bible_verses %>%
+  mutate(reference = str_replace(reference, " \\(KJV\\)", "")) %>%
+  select(reference, text = verse)
+
 saveRDS(verses_by_year, file = "_data/verses-by-year.rds")
 saveRDS(aggregates_ts, file = "_data/bible-by-year.rds")
+saveRDS(verses, file = "_data/bible-verses.rds")

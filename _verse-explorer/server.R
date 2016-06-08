@@ -12,7 +12,6 @@ shinyServer(function(input, output) {
       verses_df <- verses_by_year %>%
         filter(reference %in% input$references) %>%
         mutate(uses = n / pages * 10e3) %>%
-        # filter(year != 1836) %>%
         select(year, uses, reference) %>%
         spread(reference, uses)
 
@@ -29,6 +28,25 @@ shinyServer(function(input, output) {
     }
     else {
       plot_bible_ts(ts)
+    }
+  })
+
+  output$verse_text <- renderUI({
+    if (length(input$references) > 0) {
+      outlist <- vector("list", 2 * length(input$references))
+      for (i in seq_along(input$references)) {
+        outlist[[2 * i - 1]] <- tags$dt(input$references[i])
+        text <- bible_verses$text[bible_verses$reference == input$references[i]]
+        outlist[[2 * i]] <- tags$dd(text)
+      }
+      tagList(
+        tags$dl(tags$dt("Text of selected verses"),
+                tags$dd(""),
+                class = "dl-horizontal"),
+        tags$dl(tagList(outlist), class = "dl-horizontal")
+      )
+    } else {
+      NULL
     }
   })
 

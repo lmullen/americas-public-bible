@@ -6,7 +6,7 @@ deploy : build
 	rsync --progress --archive --checksum _site/* reclaim:~/public_html/americaspublicbible.org/
 
 # Data
-data : _data/quotations-clean.rds public-bible-quotations.csv.gz _data/labeled-features.feather _data/bible-verses.csv _data/wordcounts-by-year.csv _data/verses-by-year.rds
+data : _data/quotations-clean.rds _data/bible.rda public-bible-quotations.csv.gz _data/labeled-features.feather _data/bible-verses.csv _data/wordcounts-by-year.csv _data/verses-by-year.rds
 
 _data/wordcounts-by-year.csv :
 	cp ../public-bible/data/$(@F) $@
@@ -16,6 +16,9 @@ _data/bible-verses.csv :
 
 _data/quotations.csv :
 	cp ../public-bible/data/$(@F) $@
+
+_data/bible.rda :
+	cp ../public-bible/bin/$(@F) $@
 
 _data/quotations-clean.rds : _data/quotations.csv
 	Rscript _scripts/clean-data.R
