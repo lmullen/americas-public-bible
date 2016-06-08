@@ -14,3 +14,11 @@
 .dygraph-title {
   font-weight: normal;
 }
+
+tr.selected.even {
+  background-color: transparent !important;
+}
+
+tr.selected.odd {
+  background-color: #f9f9f9 !important;
+}

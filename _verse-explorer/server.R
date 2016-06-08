@@ -4,6 +4,7 @@ suppressPackageStartupMessages(library(xts))
 suppressPackageStartupMessages(library(RColorBrewer))
 suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(DT))
 
 shinyServer(function(input, output) {
 
@@ -40,14 +41,29 @@ shinyServer(function(input, output) {
         outlist[[2 * i]] <- tags$dd(text)
       }
       tagList(
-        tags$dl(tags$dt("Text of selected verses"),
-                tags$dd(""),
-                class = "dl-horizontal"),
+        tags$h3("Text of selected verses"),
         tags$dl(tagList(outlist), class = "dl-horizontal")
       )
     } else {
       NULL
     }
   })
+
+  output$quotations_table <- renderDataTable({
+    if (length(input$references) > 0) {
+      quotations_df %>%
+        filter(Reference %in% input$references)
+    } else {
+      data_frame(Newspaper = character(),
+                 State = character(),
+                 Date = character(),
+                 Reference = character(),
+                 link = character())
+    }
+  },
+  escape = 1:4,
+  rownames = FALSE,
+  options = list(pageLength = 20, scrollCollapse = TRUE, serverSide = FALSE,
+                 select = list(style = "single")))
 
 })

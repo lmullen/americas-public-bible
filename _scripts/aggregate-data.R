@@ -3,6 +3,7 @@ suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(xts))
+suppressPackageStartupMessages(library(purrr))
 
 quotations <- readRDS("_data/quotations-clean.rds")
 wordcounts <- read_csv("_data/wordcounts-by-year.csv")
@@ -43,6 +44,19 @@ verses <- bible_verses %>%
   mutate(reference = str_replace(reference, " \\(KJV\\)", "")) %>%
   select(reference, text = verse)
 
+see_links <- map_chr(quotations$url, function(x) {
+  str_c("<a target='_blank' href='", x, "'>See at ChronAm</a>", collapse = "")
+})
+
+quotations_for_shiny <- quotations %>%
+  mutate(reference = str_replace(reference, " \\(KJV\\)", "")) %>%
+  mutate(link = see_links) %>%
+  mutate(title = str_replace(title, "^The ", "")) %>%
+  arrange(reference, desc(probability)) %>%
+  semi_join(top, by = "reference") %>%
+  select(Newspaper = title, State = state, Date = date, Reference = reference, link)
+
 saveRDS(verses_by_year, file = "_data/verses-by-year.rds")
 saveRDS(aggregates_ts, file = "_data/bible-by-year.rds")
 saveRDS(verses, file = "_data/bible-verses.rds")
+saveRDS(quotations_for_shiny, file = "_data/quotations-for-shiny.rds")

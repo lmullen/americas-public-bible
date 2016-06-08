@@ -2,8 +2,14 @@
 build : data
 	Rscript -e "rmarkdown::render_site()"
 
-deploy : build
+deploy : deploy-static deploy-shiny
+
+deploy-static :
 	rsync --progress --archive --checksum _site/* reclaim:~/public_html/americaspublicbible.org/
+
+deploy-shiny :
+	rsync --progress --archive _verse-explorer anselm:/home/shinyapps/
+	rsync --progress --archive _data anselm:/home/shinyapps/
 
 # Data
 data : _data/quotations-clean.rds _data/bible.rda public-bible-quotations.csv.gz _data/labeled-features.feather _data/bible-verses.csv _data/wordcounts-by-year.csv _data/verses-by-year.rds
@@ -41,4 +47,5 @@ clobber : clean
 	rm -rf _data/*
 	rm -rf public-bible-quotations.csv.gz
 
-.PHONY : build deploy data clean clobber
+.PHONY : build deploy data clean clobber deploy-static deploy-shiny
+

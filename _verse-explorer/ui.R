@@ -1,6 +1,7 @@
-library(shiny)
-library(shinythemes)
-library(dygraphs)
+suppressPackageStartupMessages(library(shiny))
+suppressPackageStartupMessages(library(shinythemes))
+suppressPackageStartupMessages(library(dygraphs))
+suppressPackageStartupMessages(library(DT))
 
 shinyUI(fluidPage(
   theme = "bootstrap.min.css",
@@ -16,5 +17,9 @@ shinyUI(fluidPage(
                      selected = c("Acts 17:26", "John 3:16"),
                      multiple = TRUE))
   ),
-  fluidRow(column(12, htmlOutput("verse_text")))
+  fluidRow(column(12, htmlOutput("verse_text"))),
+  fluidRow(column(12,
+                  tags$h3("Pages with selected verses"),
+                  dataTableOutput("quotations_table")))
+
 ))
