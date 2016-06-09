@@ -111,6 +111,16 @@ ggplot(labeled, aes(token_count, runs_pval, color = match)) +
 
 I then used that data to train and test a machine learning model. This model takes the predictors mentioned above, and assigns it a class ("quotation" or not) and a probability that that classification is correct. While I evaluated a number of models (including random forests, support vector machines, and ensembles of other models) a neural network classifier had the best performance. I measured accuracy using the [area under the receiver operating characteristic curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic). The idea there is simple: the best classifier is the one that maximizes the number of genuine matches while minimizing the number of false positives. 
 
+## Code and data
+
+The following code and data are available:
+
+- <a href="public-bible-quotations.csv.gz" onclick="ga('send', 'event', 'data', 'download', 'public-bible-quotations.csv.gz');"><code>public-bible-quotations.csv.gz</code></a> (46 MB gzipped): all of the quotations found in this project with associated metadata.
+- <a onclick="ga('send', 'event', 'data', 'download', 'matches-for-model-training.csv');" href="https://goo.gl/65yo6v"><code>matches-for-mode-training.csv</code></a> (840 KB): the labeled data used for training the model.
+- GitHub repository with the [code for training the model and finding the quotations](https://github.com/lmullen/public-bible). The [`bin/`](https://github.com/lmullen/public-bible/tree/master/bin) directory contains the [script](https://github.com/lmullen/public-bible/blob/master/bin/find-quotations.R) that finds the quotations, as well as the trained machine learning model ([`prediction-model.rds`](https://github.com/lmullen/public-bible/blob/master/bin/prediction-model.rds), 7.8 MB) and a payload containing a document-term matrix of the Bible and functions for tokenizing the newspaper pages ([`bible.rda`](https://github.com/lmullen/public-bible/blob/master/bin/bible.rda), 119 MB).
+
+
+
 ## Secondary sources
 
 The following is a brief list of secondary sources on the history of the Bible in America:

@@ -55,6 +55,9 @@ combined_quotations <- quotations %>%
                    "Mark 10:9 (KJV)")) %>%
   combine_verses(c("John 3:16 (KJV)",
                    "John 3:15 (KJV)")) %>%
+  combine_verses(c("Matthew 12:25 (KJV)", # House divided
+                   "Mark 3:25 (KJV)",
+                   "Luke 11:17 (KJV)")) %>%
   filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
   filter(reference != "Acts 19:7 (KJV)") %>% # And all the men were about twelve
   filter(reference != "1 Chronicles 9:24 (KJV)") %>%  # East west north south

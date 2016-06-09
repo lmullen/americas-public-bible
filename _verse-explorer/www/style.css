@@ -28,11 +28,10 @@ tr.selected.odd {
 }
 
 .action-button {
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 #verse_ts_chart {
   margin-top: 20px;
   margin-bottom: 20px;
-
 }

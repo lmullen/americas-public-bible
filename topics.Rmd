@@ -8,3 +8,21 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## Most quoted verses by decade
+
+## Heatmap of the Biblical usage
+
+## Wars
+
+Greater Love Hath No Man Than This
+
+WWI
+
+http://chroniclingamerica.loc.gov/lccn/sn86063579/1919-12-09/ed-1/seq-8/#words=greater+love+hath+man+man+lay+down+life+friends
+
+http://chroniclingamerica.loc.gov/lccn/sn92053934/1919-11-14/ed-1/seq-7/#words=greater+love+hath+man+man+lay+down+life+friends
+
+http://chroniclingamerica.loc.gov/lccn/sn85042414/1919-10-08/ed-1/seq-10/#words=greater+love+hath+man+man+lay+down+life+friends
+
+Yellow fever in Memphis
+
+http://chroniclingamerica.loc.gov/lccn/sn88064492/1879-11-29/ed-2/seq-2/#words=greater+love+hath+man+man+lay+down+life+friends

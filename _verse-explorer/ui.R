@@ -20,6 +20,7 @@ shinyUI(fluidPage(
            actionLink("collection_wealth", "Wealth and poverty"),
            actionLink("collection_children", "Children"),
            actionLink("collection_marriage", "Marriage and divorce"),
+           actionLink("collection_women", "Women"),
            actionLink("collection_missions", "Missions (Great Commission)"),
            actionLink("collection_proverbs", "Proverbs (most quoted)"),
            actionLink("collection_psalms", "Psalms (most quoted)"),

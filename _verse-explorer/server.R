@@ -142,7 +142,8 @@ shinyServer(function(input, output, session) {
     updateSelectInput(session, "references",
                       selected = c("2 Chronicles 7:14",
                                    "Proverbs 14:34",
-                                   "Psalm 33:12"))
+                                   "Psalm 33:12",
+                                   "Matthew 12:25"))
   })
 
   observeEvent(input$collection_missions, {
@@ -194,8 +195,8 @@ shinyServer(function(input, output, session) {
     updateSelectInput(session, "references",
                       selected = c("Mark 10:9",
                                    "Matthew 19:6",
-                                   "Proverbs 31:12"
-                                   ))
+                                   "Ephesians 5:21",
+                                   "Ephesians 5:22"))
   })
 
   observeEvent(input$collection_goldrenrule, {
@@ -213,6 +214,15 @@ shinyServer(function(input, output, session) {
                                    "Isaiah 35:5"))
   })
 
+  observeEvent(input$collection_women, {
+    updateSelectInput(session, "references",
+                      selected = c("1 Corinthians 14:34",
+                                   "Ephesians 5:22",
+                                   "1 Peter 3:4",
+                                   "Genesis 3:16",
+                                   "Galatians 3:28"
+                      ))
+  })
 
   observeEvent(input$collection_entire_bible, {
     updateSelectInput(session, "references",
