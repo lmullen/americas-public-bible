@@ -78,6 +78,16 @@ If you use this project for academic work, here is a suggested citation.
 
 > Lincoln Mullen, *America's Public Bible: Biblical Quotations in U.S. Newspapers*, website, code, and datasets (2016): &lt;<http://americaspublicbible.org>&gt;.
 
-### Roadmap
 
-However, the method that I have developed can be applied to other versions, such as the American Standard Version (a revision of the King James Version), the Douay-Rheims Bible (used by American Catholics), the German Luther Bible, and even the Book of Mormon.
+### Project news and roadmap
+
+June 15, 2016
+
+:   Initial release of the website and data
+
+These are the goals for the project's future.
+
+- Extend the model to other English language versions of the Bible (American Standard Version, Douay-Rheims version, Apocrypha)
+- Extent the model to non-English language versions of the Bible (German Luther Bible)
+- Extend the model to the Book of Mormon
+- Improve model accuracy with additional training data from users of this website
