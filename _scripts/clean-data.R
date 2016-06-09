@@ -55,12 +55,23 @@ combined_quotations <- quotations %>%
                    "Mark 10:9 (KJV)")) %>%
   combine_verses(c("John 3:16 (KJV)",
                    "John 3:15 (KJV)")) %>%
+  combine_verses(c("Matthew 25:21 (KJV)", # Well done, good and faithful servant
+                   "Matthew 25:23 (KJV)")) %>%
+  combine_verses(c("Matthew 22:37 (KJV)", # Thou shalt love the Lord thy God
+                   "Mark 12:30 (KJV)",
+                   "Luke 10:27 (KJV)")) %>%
   combine_verses(c("Matthew 12:25 (KJV)", # House divided
                    "Mark 3:25 (KJV)",
                    "Luke 11:17 (KJV)")) %>%
+  combine_verses(c("Matthew 10:25 (KJV)", # Camel eye of a needle
+                   "Mark 19:24 (KJV)",
+                   "Luke 18:25 (KJV)")) %>%
+  combine_verses(c("Matthew 16:23 (KJV)", # Get behind me, Satan
+                   "Mark 8:33 (KJV)")) %>%
   filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
   filter(reference != "Acts 19:7 (KJV)") %>% # And all the men were about twelve
   filter(reference != "1 Chronicles 9:24 (KJV)") %>%  # East west north south
+  filter(reference != "Luke 13:29 (KJV)") %>% # East west north south
   filter(reference != "Ezekiel 44:25 (KJV)") # Father mother brother sister
 
 saveRDS(combined_quotations, "_data/quotations-clean.rds")

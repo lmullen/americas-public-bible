@@ -23,6 +23,10 @@ plot_bible_ts <- function(ts) {
 
 shinyServer(function(input, output, session) {
 
+  observe({
+    message(session$clientData$url_search)
+  })
+
   verses_ts <- reactive({
     if (length(input$references) > 0) {
       verses_df <- verses_by_year %>%
@@ -97,8 +101,7 @@ shinyServer(function(input, output, session) {
                                    "Acts 20:35",
                                    "Matthew 6:11",
                                    "Luke 2:14",
-                                   "Matthew 25:23",
-                                   "1 Thessalonians 5:21"))
+                                   "John 3:16"))
   })
 
   observeEvent(input$collection_ten_commandments, {
@@ -180,7 +183,12 @@ shinyServer(function(input, output, session) {
   observeEvent(input$collection_wealth, {
     updateSelectInput(session, "references",
                       selected = c("Acts 20:35",
-                                   "Mark 8:36"
+                                   "Mark 8:36",
+                                   "Mark 10:25",
+                                   "Genesis 3:19",
+                                   "1 Timothy 6:10",
+                                   "Proverbs 22:1",
+                                   "Matthew 6:12"
                                    ))
   })
 
@@ -221,6 +229,69 @@ shinyServer(function(input, output, session) {
                                    "1 Peter 3:4",
                                    "Genesis 3:16",
                                    "Galatians 3:28"
+                      ))
+  })
+
+  observeEvent(input$collection_words_of_jesus, {
+    updateSelectInput(session, "references",
+                      selected = c(
+                        "Luke 18:16",
+                        "Matthew 7:20",
+                        "Matthew 25:21",
+                        "John 3:16",
+                        "Matthew 25:40",
+                        "Matthew 11:28",
+                        "Matthew 12:25",
+                        "Mark 16:15"
+                      ))
+  })
+
+  observeEvent(input$collection_death, {
+    updateSelectInput(session, "references",
+                      selected = c(
+                        "1 Corinthians 15:55",
+                        "2 Corinthians 5:1",
+                        "Job 14:14",
+                        "Revelation 14:13",
+                        "John 11:25",
+                        "Job 1:21"
+                      ))
+  })
+
+  observeEvent(input$collection_revelation, {
+    updateSelectInput(session, "references",
+                      selected = c(
+                        "Revelation 21:4",
+                        "Revelation 7:16",
+                        "Revelation 7:17",
+                        "Revelation 14:13",
+                        "Revelation 19:16"
+                      ))
+  })
+
+  observeEvent(input$collection_temperance, {
+    updateSelectInput(session, "references",
+                      selected = c(
+                        "Proverbs 20:1",
+                        "1 Timothy 5:23",
+                        "Romans 14:21",
+                        "Habakkuk 2:15",
+                        "Proverbs 31:6",
+                        "Daniel 1:8",
+                        "Proverbs 23:1",
+                        "Proverbs 23:21",
+                        "Proverbs 23:30",
+                        "Ephesians 5:18"
+                      ))
+  })
+
+  observeEvent(input$collection_prophets, {
+    updateSelectInput(session, "references",
+                      selected = c(
+                        "Isaiah 11:6",
+                        "Micah 4:3",
+                        "Isaiah 2:4",
+                        "Isaiah 1:18"
                       ))
   })
 

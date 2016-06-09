@@ -7,6 +7,7 @@ shinyUI(fluidPage(
   theme = "bootstrap.min.css",
   tags$head(includeCSS("www/style.css")),
   tags$head(includeScript("www/iframeResizer.contentWindow.min.js")),
+  tags$head(includeScript("www/query-string.js")),
   fluidRow(
     column(9, dygraphOutput("verse_ts_chart")),
     column(3, div(id = "verse-ts-labels"))
@@ -24,8 +25,11 @@ shinyUI(fluidPage(
            actionLink("collection_missions", "Missions (Great Commission)"),
            actionLink("collection_proverbs", "Proverbs (most quoted)"),
            actionLink("collection_psalms", "Psalms (most quoted)"),
+           actionLink("collection_revelation", "Book of Revelation (most quoted)"),
+           actionLink("collection_words_of_jesus", "Words of Jesus (most quoted)"),
            actionLink("collection_goldrenrule", "Golden rule"),
            actionLink("collection_deafness", "Deafness"),
+           actionLink("collection_death", "Death and resurrection"),
            actionLink("collection_genesis1", "Genesis 1")
            )),
   fluidRow(selectizeInput("references", "References", references,
