@@ -39,7 +39,7 @@ bible_by_year %>%
   plot_ref_ts(title = "Quotations from the Bible in Chronicling America")
 ```
 
-The general trends, however, tell us much less than the patterns for individual verses. Consider each of the following verses, each of which has a pattern which is strinkingly different than the general trend.
+The general trends, however, tell us much less than the patterns for individual verses. Consider each of the following verses, each of which has a pattern which is strinkingly different than the general trend.^[The trends for individual verses sometimes reflect the reprinting of texts. On reprinting of texts, see See Ryan Cordell, David Smith, et al., *[Viral Texts Mapping Networks of Reprinting in 19th-Century Newspapers and Magazines](http://viraltexts.org/)* (2012--16).]
 
 ```{r trends-for-selected-verses}
 verses_by_year <- readRDS("_data/verses-by-year.rds")
