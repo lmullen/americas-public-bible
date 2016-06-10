@@ -31,15 +31,14 @@ For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from 
 </div>
 
 <div class="row">
-
   
-  <div class="col-sm-12 col-xs-12">
+  <div class="col-sm-4 col-xs-12">
 
-  <div class="pull-left">
-  
   ![This article retells the parable of the good Samaritan (Luke 10:30--36), reinterpreting it with the Populist movement as the Samaritan. From the *Owingsville Outlook* (Owingsville, Ky.), [2 March 1899](http://chroniclingamerica.loc.gov/lccn/sn86069620/1899-03-02/ed-1/seq-4/#words=chance+came+certain+priest+way+saw+side).](img/good-samaritan.png)
   
   </div>
+  
+  <div class="col-sm-8 col-xs-12">
   
 That the Bible was ubiquitous in the nineteenth-century United States is a commonplace claim, but this project aims to provide far more specificity about how the Bible was used in American newspapers. While it is true that the Bible as a whole was nearly everywhere, what matters more are the ways that the Bible was put to use. The Bible offered thousands of texts, each of which could be interpreted in countless ways. For each verse that was quoted, this site offers [a way to explore](exploration.html) both the trend in how frequently that verse was used, and a link to each instance in which it was quoted at *Chronicling America* so that the context of the quotation is available. In this was, the many specifics of how the Bible was used can be understood. The assumption of this project is that the Bible as a text was not the same thing as the Bible as it was put to use by Americans. That is why I have called this America's *public* Bible. By looking at uses of the Bible in newspapers, we can see which parts of the Bible were available to Americans.  Verses that could be cited without a reference could indicate a kind of literacy. This is particularly the case with jokes. Verses that could be cited without explanation indicate a shared assumption or interpretation. Verses that were used constantly speak to a kind of a shared cultural touchstone, while verses that were used episodically reveal the tensions in a particular political or social situation. By looking at how the verses were actually used, we can see how the Bible was a contested yet common text.
 
