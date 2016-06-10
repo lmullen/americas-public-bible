@@ -119,6 +119,7 @@ The following code and data are available:
 - <a href="public-bible-quotations.csv.gz" onclick="ga('send', 'event', 'data', 'download', 'public-bible-quotations.csv.gz');"><code>public-bible-quotations.csv.gz</code></a> (46 MB gzipped): all of the quotations found in this project with associated metadata.
 - <a onclick="ga('send', 'event', 'data', 'download', 'matches-for-model-training.csv');" href="https://goo.gl/65yo6v"><code>matches-for-mode-training.csv</code></a> (840 KB): the labeled data used for training the model.
 - GitHub repository with the [code for training the model and finding the quotations](https://github.com/lmullen/public-bible). The [`bin/`](https://github.com/lmullen/public-bible/tree/master/bin) directory contains the [script](https://github.com/lmullen/public-bible/blob/master/bin/find-quotations.R) that finds the quotations, as well as the trained machine learning model ([`prediction-model.rds`](https://github.com/lmullen/public-bible/blob/master/bin/prediction-model.rds), 7.8 MB) and a payload containing a document-term matrix of the Bible and functions for tokenizing the newspaper pages ([`bible.rda`](https://github.com/lmullen/public-bible/blob/master/bin/bible.rda), 119 MB).
+- GitHub repository with [the code for the visualizations on this website](https://github.com/lmullen/public-bible-website).
 
 
 
