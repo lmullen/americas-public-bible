@@ -16,6 +16,7 @@ output:
   html_document:
     theme: lumen
     highlight: null
+    mathjax: null
     include:
       in_header: _includes/in-header.html
       after_body: _includes/footer.html
