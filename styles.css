@@ -95,3 +95,19 @@ iframe {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+table caption {
+  font-family: 'league-gothic', serif;
+  color: black;
+  font-size: 24px;
+}
+
+.thumbnail-caption {
+  text-align: center;
+  margin: auto;
+}
+
+.thumbnail-caption h4 {
+  font-size: 24px;
+}
+
