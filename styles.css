@@ -114,3 +114,10 @@ table caption {
 .thumbnail img {
   max-height: 225px;
 }
+
+.pull-left {
+  float: left;
+  margin-right: 2rem;
+  max-width: 33%;
+  min-width: 150px;
+}

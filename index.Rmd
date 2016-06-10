@@ -30,9 +30,24 @@ For most of its issues in 1902, the *Ellensburg Dawn* featured a quotation from 
   
 </div>
 
+<div class="row">
+
+  
+  <div class="col-sm-12 col-xs-12">
+
+  <div class="pull-left">
+  
+  ![This article retells the parable of the good Samaritan (Luke 10:30--36), reinterpreting it with the Populist movement as the Samaritan. From the *Owingsville Outlook* (Owingsville, Ky.), [2 March 1899](http://chroniclingamerica.loc.gov/lccn/sn86069620/1899-03-02/ed-1/seq-4/#words=chance+came+certain+priest+way+saw+side).](img/good-samaritan.png)
+  
+  </div>
+  
 That the Bible was ubiquitous in the nineteenth-century United States is a commonplace claim, but this project aims to provide far more specificity about how the Bible was used in American newspapers. While it is true that the Bible as a whole was nearly everywhere, what matters more are the ways that the Bible was put to use. The Bible offered thousands of texts, each of which could be interpreted in countless ways. For each verse that was quoted, this site offers [a way to explore](exploration.html) both the trend in how frequently that verse was used, and a link to each instance in which it was quoted at *Chronicling America* so that the context of the quotation is available. In this was, the many specifics of how the Bible was used can be understood. The assumption of this project is that the Bible as a text was not the same thing as the Bible as it was put to use by Americans. That is why I have called this America's *public* Bible. By looking at uses of the Bible in newspapers, we can see which parts of the Bible were available to Americans.  Verses that could be cited without a reference could indicate a kind of literacy. This is particularly the case with jokes. Verses that could be cited without explanation indicate a shared assumption or interpretation. Verses that were used constantly speak to a kind of a shared cultural touchstone, while verses that were used episodically reveal the tensions in a particular political or social situation. By looking at how the verses were actually used, we can see how the Bible was a contested yet common text.
 
 The general trend is that the frequency of quotations declined over time among the newspapers in *Chronicling America*, which are not papers published by religious denominations or benevolence organizations.^[I have normalized the number of quotations per year by the number of pages in *Chronicling America* for that year. In examining these charts of general trends a few factors should be kept in mind. First, there are many the number of pages in *Chronicling America* grows over time. Thus, the uncertainty in the trend is greater for the 1840s and 1850s, while it is more certain by the 1910s and 1920s. That said, the peak of quotations in the 1840s makes sense given the widespread expansion of evangelical Protestantism in the 1830s and 1840s. Second, the quality of the optical character recognition (i.e., the process by which the page images of the newspapers are turned into plain text) in the dataset is very uneven: some pages have nearly perfect transcriptions, while others have no usable text. It is of course much more difficult to find quotations, especially brief quotations, in poor OCR. So I cannot claim that I have found every quotation or allusion. Third, a classification problem like this one is always a tradeoff between finding every possible genuine match while avoiding false positives. I have prefered to avoid false positives as much as possible, even at the cost of missing genuine matches that would otherwise have been detected. For more details on how the quotations were found, see the [sources and methods section](methods.html).] ] The period of the 1830s and 1840s saw the expansion of evangelical Protestantism, so that peak represents a time when the Bible was likely to be quoted more frequently. While the Bible was quoted less frequently over time, there were notable resurgences in its use in the 1870s and the 1890s. Quotations of the Bible were never so high that one could find a quotation on every page or every issue, but  The Old Testament and the New Testament followed more or less the same pattern, though the New Testament was always quoted more often than the Old Testament. (Keep in mind, though, that the Old Testament is over three times as long as the New Testament.) 
+
+  </div>
+  
+</div>
 
 ```{r trends-for-whole-bible}
 source("helpers.R")
