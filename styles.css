@@ -121,3 +121,8 @@ table caption {
   max-width: 33%;
   min-width: 150px;
 }
+
+.dygraph-title {
+  font-family: 'league-gothic', serif;
+  text-align: left;
+}
