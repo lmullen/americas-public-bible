@@ -15,6 +15,7 @@ quotations <- readRDS("_data/quotations-clean.rds") %>%
 verses <- readRDS("_data/bible-verses.rds")
 ```
 
+Below are charts of the top ten most frequently quoted verses in *Chronicling America* by decade.
 
 ```{r, results='asis'}
 topten <- quotations %>% 

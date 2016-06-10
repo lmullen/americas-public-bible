@@ -111,3 +111,6 @@ table caption {
   font-size: 24px;
 }
 
+.thumbnail img {
+  max-height: 225px;
+}

@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
 This page contains a series of mini-essays and visualizations about aspects of how the Bible was used in U.S. newspapers.
 
 <div class="row">
+
 <div class="col-sm-4">
 <a href="most-quoted-by-decade.html">
 <div class="thumbnail">
@@ -22,5 +23,19 @@ This page contains a series of mini-essays and visualizations about aspects of h
 </a>
 </div>
 </div>
+
+<div class="col-sm-4">
+<a href="quoted-together.html">
+<div class="thumbnail">
+<img src="img/quoted-network.png">
+</div>
+</a>
+<div class="thumbnail-caption">
+<a href="quoted-together.html">
+<h4>Passages frequently quoted together</h4>
+</a>
+</div>
+</div>
+
 </div>
 

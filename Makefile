@@ -12,7 +12,7 @@ deploy-shiny : data
 	rsync --progress --archive _data --checksum anselm:/home/shinyapps/
 
 # Data
-data : _data/quotations-clean.rds _data/bible.rda public-bible-quotations.csv.gz _data/labeled-features.feather _data/bible-verses.csv _data/wordcounts-by-year.csv _data/verses-by-year.rds
+data : _data/quotations-clean.rds _data/bible.rda public-bible-quotations.csv.gz _data/labeled-features.feather _data/bible-verses.csv _data/wordcounts-by-year.csv _data/verses-by-year.rds _data/books-of-bible.csv
 
 _data/wordcounts-by-year.csv :
 	cp ../public-bible/data/$(@F) $@
@@ -25,6 +25,9 @@ _data/quotations.csv :
 
 _data/bible.rda :
 	cp ../public-bible/bin/$(@F) $@
+
+_data/books-of-bible.csv :
+	cp _raw/$(@F) $@
 
 _data/quotations-clean.rds : _data/quotations.csv
 	Rscript _scripts/clean-data.R
@@ -46,6 +49,8 @@ clean :
 clobber : clean
 	rm -rf _data/*
 	rm -rf public-bible-quotations.csv.gz
+	rm -rf *_files/*
+	rm -rf *_cache/*
 
 .PHONY : build deploy data clean clobber deploy-static deploy-shiny
 
