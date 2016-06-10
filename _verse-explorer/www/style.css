@@ -29,6 +29,7 @@ tr.selected.odd {
 
 .action-button {
   padding-right: 15px;
+  white-space: nowrap;
 }
 
 #verse_ts_chart {

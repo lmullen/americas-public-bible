@@ -94,13 +94,14 @@ shinyServer(function(input, output, session) {
   observeEvent(input$collection_top_ten, {
     updateSelectInput(session, "references",
                       selected = c("Luke 18:16",
+                                   "Matthew 25:21",
                                    "Exodus 20:15",
                                    "Matthew 7:20",
-                                   "Matthew 25:21",
                                    "Exodus 20:13",
                                    "Acts 20:35",
                                    "Matthew 6:11",
                                    "Luke 2:14",
+                                   "1 Thessalonians 5:21",
                                    "John 3:16"))
   })
 
@@ -149,6 +150,13 @@ shinyServer(function(input, output, session) {
                                    "Matthew 12:25"))
   })
 
+  observeEvent(input$collection_civilwar, {
+    updateSelectInput(session, "references",
+                      selected = c("Matthew 12:25",
+                                   "Acts 17:26",
+                                   "Proverbs 14:34"))
+  })
+
   observeEvent(input$collection_missions, {
     updateSelectInput(session, "references",
                       selected = c("Matthew 28:18",
@@ -163,6 +171,7 @@ shinyServer(function(input, output, session) {
                                    "Proverbs 15:1",
                                    "Proverbs 28:1",
                                    "Proverbs 25:11",
+                                   "Proverbs 23:31",
                                    "Proverbs 23:32",
                                    "Proverbs 22:1",
                                    "Proverbs 20:1"))
@@ -195,7 +204,7 @@ shinyServer(function(input, output, session) {
   observeEvent(input$collection_children, {
     updateSelectInput(session, "references",
                       selected = c("Luke 18:16",
-                                   "Provebs 22:6"
+                                   "Proverbs 22:6"
                                    ))
   })
 

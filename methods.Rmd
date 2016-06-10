@@ -3,7 +3,8 @@ title: "Sources and Methods"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      comment = NA)
 ```
 
 ## Primary sources

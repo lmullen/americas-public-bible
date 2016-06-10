@@ -17,6 +17,7 @@ shinyUI(fluidPage(
            actionLink("collection_ten_commandments", "Ten Commandments"),
            actionLink("collection_lords_prayer", "Lord's Prayer"),
            actionLink("collection_nationalistic", "Christian nationalism"),
+           actionLink("collection_civilwar", "Civil War and sectional crisis"),
            actionLink("collection_wealth", "Wealth and poverty"),
            actionLink("collection_children", "Children"),
            actionLink("collection_marriage", "Marriage and divorce"),
@@ -37,7 +38,7 @@ shinyUI(fluidPage(
                           selected = c("Acts 17:26", "John 3:16"),
                           multiple = TRUE,
                           options = list(
-                            maxItems = 10,
+                            maxItems = 15,
                             maxOptions = 3
                           ))),
   fluidRow(htmlOutput("verse_text")),
