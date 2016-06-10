@@ -1,5 +1,6 @@
 name: "americas-public-bible"
 exclude: ["Makefile"]
+include: [".htaccess"]
 navbar:
   title: "America’s Public Bible"
   right:

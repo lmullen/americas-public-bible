@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.americaspublicbible\.org [OR]
+RewriteCond %{REQUEST_URI} /index\.html$
+RewriteRule (.*?)(index\.html)?$ http://americaspublicbible.org$1 [NE,R=301,L]
+

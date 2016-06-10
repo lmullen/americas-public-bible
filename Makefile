@@ -5,7 +5,7 @@ build : data
 deploy : deploy-static deploy-shiny
 
 deploy-static : build data
-	rsync --progress --archive --checksum _site/* reclaim:~/public_html/americaspublicbible.org/
+	rsync --progress --archive --checksum _site/ reclaim:~/public_html/americaspublicbible.org/
 
 deploy-shiny : data
 	rsync --progress --archive _verse-explorer --checksum anselm:/home/shinyapps/
