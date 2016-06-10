@@ -1,0 +1,42 @@
+---
+title: "Most Quoted Verses by Decade"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      comment = NA)
+
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+quotations <- readRDS("_data/quotations-clean.rds") %>% 
+  mutate(reference = str_replace(reference, " \\(KJV\\)", ""))
+verses <- readRDS("_data/bible-verses.rds")
+```
+
+
+```{r, results='asis'}
+topten <- quotations %>% 
+  mutate(decade = mullenMisc::round_year(year, "decade")) %>% 
+  count(reference, decade) %>% 
+  group_by(decade) %>% 
+  mutate(rank = row_number(-n)) %>% 
+  filter(decade >= 1840) %>% 
+  group_by(reference) %>% 
+  # filter(min(rank) <= 10) %>% 
+  filter(rank <= 10) %>%
+  ungroup() %>% 
+  left_join(verses, by = "reference") %>% 
+  select(-n) 
+
+walk(seq(1840, 1920, by = 10), function(x) {
+  topten %>% 
+    filter(decade == x) %>% 
+    arrange(rank) %>% 
+    mutate(reference = str_replace_all(reference, "\\s", "&nbsp;")) %>% 
+    select(Rank = rank, Reference = reference, Text = text) %>% 
+    knitr::kable(caption = paste0("Most quoted verses in the ", x, "s")) %>% 
+    print()
+})
+```
