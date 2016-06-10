@@ -1,5 +1,10 @@
 ---
+title: "America's Public Bible: Biblical Quotations in U.S. Newspapers"
 ---
+
+<style>
+  .toc-ignore { display: none;}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
