@@ -110,3 +110,4 @@ These are the goals for the project's future.
 - Extent the model to non-English language versions of the Bible (German Luther Bible)
 - Extend the model to the Book of Mormon
 - Improve model accuracy with additional training data from users of this website
+- Time series analysis on the trends for verses, including seasonality and clustering
