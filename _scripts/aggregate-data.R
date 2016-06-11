@@ -32,7 +32,7 @@ aggregates <- quotations %>%
   group_by(testament, year) %>%
   summarize(total_uses = n()) %>%
   left_join(wordcounts, by = "year") %>%
-  mutate(uses = total_uses / wordcount * 10e6) %>%
+  mutate(uses = total_uses / wordcount * 100e6) %>%
   select(year, testament, uses) %>%
   spread(testament, uses) %>%
   mutate(Bible = OT + NT) %>%
