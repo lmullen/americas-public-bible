@@ -10,7 +10,7 @@ year_to_date <- function(y) { as.Date(paste0(y, "-01-01")) }
 
 plot_bible_ts <- function(ts) {
   dygraph(ts, main = NULL) %>%
-    dyAxis("y", "quotations per 10K pages") %>%
+    dyAxis("y", "quotations per 100M words") %>%
     dyAxis("x", valueRange = c(1836, 1922)) %>%
     dyRoller(rollPeriod = 5, showRoller = TRUE) %>%
     dyOptions(drawGrid = TRUE,
@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
     if (length(input$references) > 0) {
       verses_df <- verses_by_year %>%
         filter(reference %in% input$references) %>%
-        mutate(uses = n / pages * 10e3) %>%
+        mutate(uses = n / wordcount * 100e6) %>%
         select(year, uses, reference) %>%
         spread(reference, uses)
 

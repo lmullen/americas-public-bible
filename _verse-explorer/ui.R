@@ -7,6 +7,7 @@ shinyUI(fluidPage(
   theme = "bootstrap.min.css",
   tags$head(includeCSS("www/style.css")),
   tags$head(includeScript("www/iframeResizer.contentWindow.min.js")),
+  tags$head(includeScript("www/dygraph-resize.js")),
   fluidRow(
     column(9, dygraphOutput("verse_ts_chart")),
     column(3, div(id = "verse-ts-labels"))
