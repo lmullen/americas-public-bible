@@ -23,8 +23,8 @@ ExpiresByType image/png "access 1 week"
 ExpiresByType text/css "access 1 day"
 ExpiresByType text/html "access 1 day"
 ExpiresByType application/pdf "access 1 day"
-ExpiresByType text/x-javascript "access 1 week"
+ExpiresByType text/x-javascript "access 1 day"
 ExpiresByType image/x-icon "access 1 week"
-ExpiresDefault "access 1 week"
+ExpiresDefault "access 1 day"
 </IfModule>
 
