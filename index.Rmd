@@ -105,7 +105,7 @@ If you use this project for academic work, here is a suggested citation.
 
 **June 13, 2016**: Initial release of the website and data.
 
-These are the goals for the project's future:
+These are the plans for the project's future development:
 
 - Add feature to let users classify matches as accurate or inaccurate, so that this labeled data can be used to improve the model results.
 - Extend the model to other English language versions of the Bible (American Standard Version, Douay-Rheims version, Apocrypha)

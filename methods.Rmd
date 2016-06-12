@@ -165,14 +165,45 @@ All of the code for this project was written in [R](https://www.r-project.org/),
 
 <div class="bibliography">
 
-R Core Team. "R: A language and environment for statistical computing." R Foundation for Statistical Computing, Vienna, Austria. 2016. https://www.R-project.org/.
+Bates, Douglas, and Martin Maechler. "Matrix: Sparse and Dense Matrix Classes and Methods." R package version 1.2-6. 2016. https://CRAN.R-project.org/package=Matrix
 
-Trapletti, Adrian, and Kurt Hornik. "tseries: Time Series Analysis and Computational Finance." R package version 0.10-35. 2016. https://CRAN.R-project.org/package=tseries
+Chang, Winston, Joe Cheng , JJ Allaire, Yihui Xie, Jonathan McPherson, et al. "shiny: Web Application Framework for R." R package version 0.13.2.9004. http://shiny.rstudio.com
+
+Grolemund, Garrett, Vitalie Spinu, Hadley Wickham, et al. "lubridate: Make Dealing with Dates a Little Easier." R package version 1.5.6. 2016. https://CRAN.R-project.org/package=lubridate  
 
 Kuhn, Max, et al. "caret: Classification and Regression Training." R package version 6.0-68. 2016 https://CRAN.R-project.org/package=caret
 
-Venables, W. N. and Ripley, B. D. *Modern Applied Statistics with S*.
-Fourth Edition. New York, Springer, 2002.
+Mullen, Lincoln. "tokenizers: Tokenize Text." R package version 0.1.2. https://CRAN.R-project.org/package=tokenizers
+
+R Core Team. "R: A language and environment for statistical computing." R Foundation for Statistical Computing, Vienna, Austria. 2016. https://www.R-project.org/.
+
+Ripley, Brian, and William Venables. "nnet: Feed-Forward Neural Networks and Multinomial Log-Linear Models." R package version 7.3-12. 2016. https://CRAN.R-project.org/package=nnet   
+
+Robinson, David, et al. "broom: Convert Statistical Analysis Objects into Tidy Data Frames." R package version 0.4.0. 2016. https://CRAN.R-project.org/package=broom
+
+Ryan, Jeffrey A., and Joshua M. Ulrich. "xts: eXtensible Time Series." R package version 0.9-7. 2014. https://CRAN.R-project.org/package=xts
+
+Selivanov, Dmitriy. "text2vec: Fast Text Mining Framework for Vectorization and Word Embeddings."" R package version 0.3.0. 2016. https://CRAN.R-project.org/package=text2vec
+
+Trapletti, Adrian, and Kurt Hornik. "tseries: Time Series Analysis and Computational Finance." R package version 0.10-35. 2016. https://CRAN.R-project.org/package=tseries
+
+Vanderkam, Dan, JJ Allaire, et al. "dygraphs: Interface to 'Dygraphs' Interactive Time Series Charting Library." R package version 0.9. 2016. https://CRAN.R-project.org/package=dygraphs  
+
+Wickham, Hadley, and Romain Francois. "dplyr: A Grammar of Data Manipulation." R package version 0.4.3. 2016. https://CRAN.R-project.org/package=dplyr
+
+Wickham, Hadley, and Romain Francois. "dplyr: A Grammar of Data Manipulation." R package version 0.4.3. 2016. https://CRAN.R-project.org/package=dplyr
+
+Wickham, Hadley, and Winston Chang. "ggplot2: An Implementation of the Grammar of Graphics." R package version 2.1.0. 2016. https://CRAN.R-project.org/package=ggplot2
+
+Wickham, Hadley, et al. "purrr: Functional Programming Tools." R package version 0.2.1. 2016. https://CRAN.R-project.org/package=purrr
+
+Wickham, Hadley. "stringr: Simple, Consistent Wrappers for Common String Operations." R package version 1.0.0. 2016. https://CRAN.R-project.org/package=stringr
+
+Wickham, Hadley. "tidyr: Easily Tidy Data" R package version 0.4.1. 2016. https://CRAN.R-project.org/package=tidyr
+
+Xie, Yihui, Joe Cheng, et al. "DT: A Wrapper of the JavaScript Library 'DataTables.'" R package version 0.1. 2015. https://CRAN.R-project.org/package=DT
+
+Xie, Yihui, Joe Cheng, et al. "DT: A Wrapper of the JavaScript Library 'DataTables.'" R package version 0.1. 2015. https://CRAN.R-project.org/package=DT
 
 </div>
 
