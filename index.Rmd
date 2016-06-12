@@ -101,10 +101,9 @@ If you use this project for academic work, here is a suggested citation.
 
 > Lincoln Mullen, *America's Public Bible: Biblical Quotations in U.S. Newspapers*, website, code, and datasets (2016): &lt;<http://americaspublicbible.org>&gt;.
 
-
 ### Project news and road map
 
-**June 15, 2016**: Initial release of the website and data.
+**June 13, 2016**: Initial release of the website and data.
 
 These are the goals for the project's future:
 
