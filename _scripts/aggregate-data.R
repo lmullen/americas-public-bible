@@ -56,7 +56,8 @@ quotations_for_shiny <- quotations %>%
   mutate(title = str_replace(title, "^The ", "")) %>%
   arrange(reference, desc(probability)) %>%
   semi_join(top, by = "reference") %>%
-  select(Newspaper = title, State = state, Date = date, Reference = reference, link)
+  select(Newspaper = title, State = state, Date = date, Reference = reference,
+         `ChronAm Link` = link)
 
 saveRDS(verses_by_year, file = "_data/verses-by-year.rds")
 saveRDS(aggregates_ts, file = "_data/bible-by-year.rds")

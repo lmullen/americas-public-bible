@@ -15,7 +15,7 @@ quotations <- readRDS("_data/quotations-clean.rds") %>%
 verses <- readRDS("_data/bible-verses.rds")
 ```
 
-Below are charts of the top ten most frequently quoted verses in *Chronicling America* by decade.
+Below are charts of the top ten most frequently quoted verses in *Chronicling America* by decade. (Keep in mind that the 1840s and 1920s have many fewer pages than the other decades.)
 
 ```{r, results='asis'}
 topten <- quotations %>% 
@@ -28,15 +28,14 @@ topten <- quotations %>%
   # filter(min(rank) <= 10) %>% 
   filter(rank <= 10) %>%
   ungroup() %>% 
-  left_join(verses, by = "reference") %>% 
-  select(-n) 
-
+  left_join(verses, by = "reference") 
+  
 walk(seq(1840, 1920, by = 10), function(x) {
   topten %>% 
     filter(decade == x) %>% 
     arrange(rank) %>% 
     mutate(reference = str_replace_all(reference, "\\s", "&nbsp;")) %>% 
-    select(Rank = rank, Reference = reference, Text = text) %>% 
+    select(Rank = rank, Count = n, Reference = reference, Text = text) %>% 
     knitr::kable(caption = paste0("Most quoted verses in the ", x, "s")) %>% 
     print()
 })
