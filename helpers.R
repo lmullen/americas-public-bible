@@ -16,7 +16,7 @@ references_to_ts <- function(.data, references) {
 
 }
 
-plot_ref_ts <- function(.data, title = NULL, roll = 5) {
+plot_ref_ts <- function(.data, title = NULL, roll = 3) {
   require(dygraphs)
   require(RColorBrewer)
   dygraph(.data, main = title) %>%
