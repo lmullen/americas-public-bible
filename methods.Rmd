@@ -191,8 +191,6 @@ Vanderkam, Dan, JJ Allaire, et al. "dygraphs: Interface to 'Dygraphs' Interactiv
 
 Wickham, Hadley, and Romain Francois. "dplyr: A Grammar of Data Manipulation." R package version 0.4.3. 2016. https://CRAN.R-project.org/package=dplyr
 
-Wickham, Hadley, and Romain Francois. "dplyr: A Grammar of Data Manipulation." R package version 0.4.3. 2016. https://CRAN.R-project.org/package=dplyr
-
 Wickham, Hadley, and Winston Chang. "ggplot2: An Implementation of the Grammar of Graphics." R package version 2.1.0. 2016. https://CRAN.R-project.org/package=ggplot2
 
 Wickham, Hadley, et al. "purrr: Functional Programming Tools." R package version 0.2.1. 2016. https://CRAN.R-project.org/package=purrr
@@ -200,8 +198,6 @@ Wickham, Hadley, et al. "purrr: Functional Programming Tools." R package version
 Wickham, Hadley. "stringr: Simple, Consistent Wrappers for Common String Operations." R package version 1.0.0. 2016. https://CRAN.R-project.org/package=stringr
 
 Wickham, Hadley. "tidyr: Easily Tidy Data" R package version 0.4.1. 2016. https://CRAN.R-project.org/package=tidyr
-
-Xie, Yihui, Joe Cheng, et al. "DT: A Wrapper of the JavaScript Library 'DataTables.'" R package version 0.1. 2015. https://CRAN.R-project.org/package=DT
 
 Xie, Yihui, Joe Cheng, et al. "DT: A Wrapper of the JavaScript Library 'DataTables.'" R package version 0.1. 2015. https://CRAN.R-project.org/package=DT
 
