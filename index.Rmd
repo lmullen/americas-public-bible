@@ -101,6 +101,10 @@ If you use this project for academic work, here is a suggested citation.
 
 ### Project news and road map
 
+**February 27, 2017**: A much expanded version of this site will be published as a digital monograph by Stanford University Press.
+
+**July 25, 2016**: This project won [first place](https://www.neh.gov/news/press-release/2016-07-25) in the National Endowment for the Humanities' Chronicling America Data Challenge.
+
 **June 13, 2016**: Initial release of the website and data.
 
 These are the plans for the project's future development:
