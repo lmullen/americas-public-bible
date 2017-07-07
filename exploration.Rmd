@@ -11,7 +11,7 @@ This interactive graphic lets you see the trend for how specific biblical verses
 **How to explore the quotations:** Enter verse references into the box below. For example, enter `John 3:16` or `Genesis 1:1`. Or you can click the links below to get a selection of verses. The text of the selected verses will be displayed below. For each verse you have selected, a smoothed trend line will be displayed in the chart, and citations to each instance of a quotation will appear in the table below. Each instance of a quotation has a link to that page on *Chronicling America*, where the words that appear in the verse will be highlighted so you can find it on the page. Removing all references will show the trend for the Old and New Testaments, as well as the entire Bible. Use the sliders on the chart to select a date range for the table of quotations. Use the search box immediately above the table to filter by state, newspaper title, reference, or date.
 
 ```{r}
-knitr::include_app("http://apps.lincolnmullen.com/_verse-explorer/", height = 400)
+knitr::include_app("http://shiny.chnm.org/public-bible-verse-explorer/", height = 400)
 # knitr::include_app("http://127.0.0.1:3838/", height = 400)
 ```
 
