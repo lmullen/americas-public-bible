@@ -14,3 +14,10 @@ logs/
 nohup.out
 
 results
+data/bible-verses.csv
+data/bible-verses.feather
+data/noise.csv
+data/noise.feather
+data/quotations.csv
+data/quotations.feather
+data/wordcounts-by-year.csv
