@@ -25,7 +25,7 @@ NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
 NOTEBOOK_DIR := ~/acad/notebook2
 
 # Variables for downloading Chronicling America
-chronicling_dir := /media/lmullen/data/chronicling-america
+chronicling_dir := /media/data/chronicling-america
 chronicling_ocr := $(chronicling_dir)/ocr
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
