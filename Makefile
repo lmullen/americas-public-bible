@@ -143,7 +143,8 @@ extract : $(chronicling_untars)
 
 download :
 	wget --continue --progress=bar --mirror --no-parent \
-		--directory-prefix=$(chronicling_dir) $(chronicling_url)
+		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
+		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
 # Tasks to send files to VRC
 # -----------------------------------------------------------------------------
