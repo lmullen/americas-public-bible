@@ -1,11 +1,11 @@
-# This Makefile builds the project from almost scratch. The main aims of this 
-# repository are to reproducibly create the model files for running on the 
-# Argo cluster, and to reproducibly create the data files that will be shared 
-# with the website repository. There are also notebooks to experiment with the 
+# This Makefile builds the project from almost scratch. The main aims of this
+# repository are to reproducibly create the model files for running on the
+# Argo cluster, and to reproducibly create the data files that will be shared
+# with the website repository. There are also notebooks to experiment with the
 # analysis.
 #
-# Tasks that involve downloading large amounts of data from Chronicling 
-# America have to be run deliberately. In general, these are the order that 
+# Tasks that involve downloading large amounts of data from Chronicling
+# America have to be run deliberately. In general, these are the order that
 # steps should be taken. Most of these will be run by creating the `all` task.
 #
 # 1. Download data from Chronicling America (not part of `make all`)
@@ -20,8 +20,8 @@
 # 10. Download the newspaper metadata
 # 11. Count the words in the newspaper pages
 #
-# Most of these pieces are run from scripts as detailed below. R Markdown 
-# notebooks are not recompiled by this Makefile, because they are a snapshot 
+# Most of these pieces are run from scripts as detailed below. R Markdown
+# notebooks are not recompiled by this Makefile, because they are a snapshot
 # of the project at a given moment, and not part of the reproducible workflow.
 
 # Define variables
@@ -142,7 +142,7 @@ extract : $(chronicling_untars)
 		&& touch $@
 
 download :
-	wget --continue --progress=bar --mirror --no-parent \
+	wget --continue --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 

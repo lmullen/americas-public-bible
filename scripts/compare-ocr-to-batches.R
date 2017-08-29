@@ -1,14 +1,13 @@
-# Compare all batches to OCR bulk data
+# Compare the llisting of all batches to the listings of OCR bulk data
 
 library(jsonlite)
-library(dplyr)
-library(purrr)
+library(tidyverse)
 library(stringr)
-library(mullenMisc)
-library(clipr)
-library(rvest)
+# library(mullenMisc)
+# library(clipr)
+# library(rvest)
 
-num_pages <- 57
+num_pages <- 64
 batches_l <- vector(mode = "list", length = num_pages)
 
 get_batch_json <- function(i) {
@@ -34,19 +33,22 @@ ocr <- ocr$ocr %>%
   tbl_df() %>%
   mutate(batch_id = str_replace(name, "\\.tar.bz2", ""))
 
-ocr_downloads <- read_html("http://chroniclingamerica.loc.gov/data/ocr/") %>%
-  html_table()
-ocr_downloads <- ocr_downloads[[1]]
-ocr_downloads <- ocr_downloads[-c(1, 2, 1402), 2:4] %>%
-  mutate(batch_id = str_replace(Name, "\\.tar.bz2", ""))
+# ocr_downloads <- read_html("http://chroniclingamerica.loc.gov/data/ocr/") %>%
+#   html_table()
+# ocr_downloads <- ocr_downloads[[1]]
+# ocr_downloads <- ocr_downloads[-c(1, 2, 1402), 2:4] %>%
+#   mutate(batch_id = str_replace(Name, "\\.tar.bz2", ""))
 
 
-missing_from_ocr <- anti_join(batches, ocr, by = c("name" = "batch_id"))
-missing_from_ocr_dir <- anti_join(batches, ocr_downloads, by = c("name" = "batch_id"))
+missing_from_ocr <- anti_join(batches, ocr, by = c("name" = "batch_id")) %>%
+  arrange(desc(ingested))
+# missing_from_ocr_dir <- anti_join(batches, ocr_downloads, by = c("name" = "batch_id"))
+
+readr::write_csv(missing_from_ocr, "temp/missing-from-ocr.csv")
 
 batches$name %>% length()
 ocr$batch_id %>% length()
-ocr_dir$batch_id %>% length()
+# ocr_dir$batch_id %>% length()
 
 setdiff(batches$name, ocr$batch_id)
 setdiff(batches$name, ocr_dir$batch_id)
