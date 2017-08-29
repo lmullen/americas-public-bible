@@ -1,29 +1,31 @@
-# This Makefile builds the project from almost scratch. Tasks that involve
-# downloading large amounts of data from Chronicling America have to be run
-# deliberately. In general, these are the order that steps should be taken.
-# Most of these will be run by creating the `all` task.
+# This Makefile builds the project from almost scratch. The main aims of this 
+# repository are to reproducibly create the model files for running on the 
+# Argo cluster, and to reproducibly create the data files that will be shared 
+# with the website repository. There are also notebooks to experiment with the 
+# analysis.
+#
+# Tasks that involve downloading large amounts of data from Chronicling 
+# America have to be run deliberately. In general, these are the order that 
+# steps should be taken. Most of these will be run by creating the `all` task.
 #
 # 1. Download data from Chronicling America (not part of `make all`)
 # 2. Extract data
 # 3. Generate sample from the data and copy to local directory
 # 4. Create Bible DTM and other objects necessary for feature extraction
 # 5. Run feature extraction on sample data
-# 6. Sample the potential matches for labelling
+# 6. Sample the potential matches for labeling
 # 7. Label the sample data in Google Sheets
 # 8. Download labeled data and create the version for model training
 # 9. Train the model
 # 10. Download the newspaper metadata
 # 11. Count the words in the newspaper pages
 #
-# Most of these pieces are run from scripts as detailed below. The rest are run
-# Rmd notebook files.
+# Most of these pieces are run from scripts as detailed below. R Markdown 
+# notebooks are not recompiled by this Makefile, because they are a snapshot 
+# of the project at a given moment, and not part of the reproducible workflow.
 
 # Define variables
 # -----------------------------------------------------------------------------
-# Variables for notebooks
-NOTEBOOKS := $(patsubst %.Rmd, %.md, $(wildcard *.Rmd))
-NOTEBOOK_DIR := ~/acad/notebook2
-
 # Variables for downloading Chronicling America
 chronicling_dir := /media/data/chronicling-america
 chronicling_ocr := $(chronicling_dir)/ocr
@@ -32,30 +34,12 @@ chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data
 chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 
-# Define `all` task: runs scripts and generates notebooks
+# Define `all` task
 # -----------------------------------------------------------------------------
-all : $(NOTEBOOKS) data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv bin/prediction-model.rds
+all : data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv bin/prediction-model.rds
 
 # Also tasks to clean and clobber
-clean :
-	rm -rf $(NOTEBOOKS)
-	rm -rf *_files
-	temp/pub-years.txt
-
 clobber-all : clobber-metadata clobber-features clobber-wordcounts
-
-# Tasks to build notebooks
-# -----------------------------------------------------------------------------
-%.md : %.Rmd $(INCLUDES)
-	R --slave -e "set.seed(100); rmarkdown::render('$(<F)')"
-
-public-bible-004-modeling.md : data/labeled-features.feather
-
-# Copy notebooks to wiki
-wiki : $(NOTEBOOKS)
-	cp $(NOTEBOOKS) $(NOTEBOOK_DIR)/_note/
-	mkdir -p $(NOTEBOOK_DIR)/figures/$*/
-	cp -r *_files $(NOTEBOOK_DIR)/figures/
 
 # Tasks to download newspaper metadata
 # -----------------------------------------------------------------------------
@@ -137,7 +121,6 @@ df : $(TEXT_DF)
 
 $(chronicling_dir)/df/%.rds :
 	Rscript --vanilla ./scripts/textdir2dataframe.R $@ $(chronicling_ocr) $(chronicling_dir)/df
-
 
 # Tasks to create a sample dataset
 # ----------------------------------------------------------------------------
