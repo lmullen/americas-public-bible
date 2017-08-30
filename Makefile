@@ -27,11 +27,12 @@
 # Define variables
 # -----------------------------------------------------------------------------
 # Variables for downloading Chronicling America
-chronicling_dir := /media/data/chronicling-america
-chronicling_ocr := $(chronicling_dir)/ocr
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
-chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
-chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
+chronicling_dir := /media/data/chronicling-america
+chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
+# chronicling_ocr := $(chronicling_dir)/ocr
+# chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
+# chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 
 # Define `all` task
@@ -148,10 +149,10 @@ download :
 
 # Tasks to send files to VRC
 # -----------------------------------------------------------------------------
-transfer-vrc :
-	rsync --archive -P --exclude '*.log' bin/* vrc:/data/chronicling-america/scripts
+argo-put-data :
+	rsync --archive -vv --delete $(chronicling_batches)/ argo:~/chronam-batches 2>&1 > logs/argo-put-$(shell date --iso-8601=seconds).log &
 
-vrc-results :
-	rsync --archive -P --ignore-exisiting vrc:/data/chronicling-america/out/* /media/lmullen/data/chronicling-america/out
+# get-argo :
+# 	rsync --archive -P --ignore-exisiting vrc:/data/chronicling-america/out/* /media/lmullen/data/chronicling-america/out
 
-.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download
+.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download argo-put-data argo-get-results
