@@ -110,19 +110,6 @@ clobber-wordcounts :
 	rm -rf data/newspaper-wordcounts.csv
 	rm -rf $(WORDCOUNTS)
 
-# Tasks to create data frames of the text
-# ----------------------------------------------------------------------------
-PUBLICATION_YEARS := $(shell find $(chronicling_ocr) -mindepth 2 -maxdepth 2 -type d)
-TEXT_DF := $(subst $(chronicling_ocr)/,, $(PUBLICATION_YEARS))
-TEXT_DF := $(subst /,-,$(TEXT_DF))
-TEXT_DF := $(addsuffix .rds, $(TEXT_DF))
-TEXT_DF := $(addprefix $(chronicling_dir)/df/, $(TEXT_DF))
-
-df : $(TEXT_DF)
-
-$(chronicling_dir)/df/%.rds :
-	Rscript --vanilla ./scripts/textdir2dataframe.R $@ $(chronicling_ocr) $(chronicling_dir)/df
-
 # Tasks to create a sample dataset
 # ----------------------------------------------------------------------------
 sample-data : temp/sample-files.txt
@@ -134,20 +121,14 @@ temp/sample-files.txt : temp/pub-years.txt
 temp/pub-years.txt :
 	./scripts/generate-publication-years.sh > $@
 
-# Tasks to download and extract Chronicling America data
+# Download Chronicling America data
 # -----------------------------------------------------------------------------
-extract : $(chronicling_untars)
-
-%.tar.bz2.EXTRACTED : %.tar.bz2
-	tar --overwrite -xf $^ -C $(chronicling_ocr) --wildcards '*.txt' \
-		&& touch $@
-
 download :
 	wget --continue --mirror --no-parent \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
-# Tasks to send files to VRC
+# Tasks to send files to Argo cluster
 # -----------------------------------------------------------------------------
 argo-put-data :
 	rsync --archive -vv --delete $(chronicling_batches)/ argo:~/chronam-batches 2>&1 > logs/argo-put-$(shell date --iso-8601=seconds).log &
