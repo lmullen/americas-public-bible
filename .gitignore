@@ -12,7 +12,6 @@ data/newspaper-wordcounts.csv
 scratch
 logs/
 nohup.out
-
 results
 data/bible-verses.csv
 data/bible-verses.feather
@@ -22,3 +21,4 @@ data/quotations.csv
 data/quotations.feather
 data/wordcounts-by-year.csv
 temp
+argo-out

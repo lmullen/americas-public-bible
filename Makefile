@@ -142,8 +142,8 @@ argo-put-bin :
 	argo:~/public-bible/bin \
 	2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
 
-# get-argo :
-# 	rsync --archive -P --ignore-exisiting vrc:/data/chronicling-america/out/* /media/lmullen/data/chronicling-america/out
-
-.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download argo-put-data argo-put-bin argo-get-results
-
+argo-get-results :
+	rsync --archive -vv \
+	argo:~/public-bible/argo-out \
+	./ \
+	2>&1 | tee logs/argo-get-results-$(shell date --iso-8601=seconds).log
