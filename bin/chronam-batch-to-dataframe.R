@@ -1,12 +1,6 @@
 #!/usr/bin/env Rscript
 
 suppressPackageStartupMessages(library(docopt))
-suppressPackageStartupMessages(library(stringr))
-suppressPackageStartupMessages(library(futile.logger))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(readr))
-suppressPackageStartupMessages(library(purrr))
-suppressPackageStartupMessages(library(feather))
 
 "Take a bzipped batch of Chronicling America OCR text files and turn it into
 a serialized data frame for future use.
@@ -24,6 +18,13 @@ opt <- docopt(doc)
 # For testing
 # opt <- docopt(doc, args = "--debug --log logs/script-debugging.log temp/batch_az_elephanttree_ver01.tar.bz2 -o temp/test-batch.feather")
 # opt <- docopt(doc, args = "--debug temp/batch_az_elephanttree_ver01.tar.bz2 -o temp/test-batch.feather")
+
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(futile.logger))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(purrr))
+suppressPackageStartupMessages(library(feather))
 
 # Setup debugging
 if (!is.null(opt$log)) {
@@ -49,7 +50,21 @@ outputdir <- dirname(opt$output)
 flog.debug("%s: Creating output directory at %s", batch_id, outputdir)
 dir.create(outputdir, showWarnings = FALSE, recursive = TRUE)
 
-temppath <- file.path(tempdir(), batch_id)
+# Use scratch on slurm, otherwise use /tmp
+scratchdir <- "/data/scratch/lmullen"
+if (dir.exists(scratchdir)) {
+  temppath <- file.path(scratchdir, batch_id)
+  if (dir.exists(temppath)) {
+    flog.warn("%s: temp directory already exists in scratch directory", batch_id)
+  }
+  # If we use scratch, we have to clean up our temporary files. Do that on exit.
+  .Last <- function() {
+    unlink(temppath, recursive = TRUE)
+    flog.debug("%s: Deleted temporary files in scratch directory", batch_id)
+  }
+} else {
+  temppath <- file.path(tempdir(), batch_id)
+}
 flog.debug("%s: Temp directory for unzipping OCR files is %s", batch_id, temppath)
 dir.create(temppath, showWarnings = TRUE, recursive = TRUE)
 
@@ -60,7 +75,7 @@ ftry(system2("tar", tar_args),
      error = function(c) {
        flog.error("%s: Unzipping failed for this batch", batch_id)
        flog.trace(c)
-       quit("no", status = 1, runLast = FALSE)
+       quit("no", status = 10, runLast = TRUE)
      })
 flog.debug("%s: Done unzipping the batch", batch_id)
 

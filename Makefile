@@ -131,9 +131,19 @@ download :
 # Tasks to send files to Argo cluster
 # -----------------------------------------------------------------------------
 argo-put-data :
-	rsync --archive -vv --delete $(chronicling_batches)/ argo:~/chronam-batches 2>&1 > logs/argo-put-$(shell date --iso-8601=seconds).log &
+	rsync --archive -vv --delete \
+	$(chronicling_batches)/ \
+	argo:~/public-bible/chronam-batches \
+	2>&1 | tee logs/argo-put-data-$(shell date --iso-8601=seconds).log
+
+argo-put-bin :
+	rsync --archive -vv --delete \
+	./bin/ \
+	argo:~/public-bible/bin \
+	2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
 
 # get-argo :
 # 	rsync --archive -P --ignore-exisiting vrc:/data/chronicling-america/out/* /media/lmullen/data/chronicling-america/out
 
-.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download argo-put-data argo-get-results
+.PHONY : clean clobber-metadata clobber-features clobber-wordcounts clobber-all extract download argo-put-data argo-put-bin argo-get-results
+
