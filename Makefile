@@ -137,6 +137,8 @@ argo-put-data :
 	2>&1 | tee logs/argo-put-data-$(shell date --iso-8601=seconds).log
 
 argo-put-bin :
+	# Make sure the list of batches is up to date
+	ls $(chronicling_batches)/*.tar.bz2 -1 | xargs -n 1 basename > bin/chronam-batch-list.txt
 	rsync --archive -vv --delete \
 	./bin/ \
 	argo:~/public-bible/bin \

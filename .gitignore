@@ -22,3 +22,4 @@ data/quotations.feather
 data/wordcounts-by-year.csv
 temp
 argo-out
+bin/chronam-batch-list.txt
