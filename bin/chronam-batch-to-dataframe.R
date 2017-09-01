@@ -51,20 +51,21 @@ flog.debug("%s: Creating output directory at %s", batch_id, outputdir)
 dir.create(outputdir, showWarnings = FALSE, recursive = TRUE)
 
 # Use scratch on slurm, otherwise use /tmp
-scratchdir <- "/data/scratch/lmullen"
-if (dir.exists(scratchdir)) {
-  temppath <- file.path(scratchdir, batch_id)
-  if (dir.exists(temppath)) {
-    flog.warn("%s: temp directory already exists in scratch directory", batch_id)
-  }
-  # If we use scratch, we have to clean up our temporary files. Do that on exit.
-  .Last <- function() {
-    unlink(temppath, recursive = TRUE)
-    flog.debug("%s: Deleted temporary files in scratch directory", batch_id)
-  }
-} else {
-  temppath <- file.path(tempdir(), batch_id)
-}
+# Getting tar errors on scratch, so going back to /tmp
+# scratchdir <- "/data/scratch/lmullen"
+# if (dir.exists(scratchdir)) {
+#   temppath <- file.path(scratchdir, batch_id)
+#   if (dir.exists(temppath)) {
+#     flog.warn("%s: temp directory already exists in scratch directory", batch_id)
+#   }
+#   # If we use scratch, we have to clean up our temporary files. Do that on exit.
+#   .Last <- function() {
+#     unlink(temppath, recursive = TRUE)
+#     flog.debug("%s: Deleted temporary files in scratch directory", batch_id)
+#   }
+# } else {
+temppath <- file.path(tempdir(), batch_id)
+# }
 flog.debug("%s: Temp directory for unzipping OCR files is %s", batch_id, temppath)
 dir.create(temppath, showWarnings = TRUE, recursive = TRUE)
 

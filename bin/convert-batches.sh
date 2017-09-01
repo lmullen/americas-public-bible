@@ -1,13 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=convert-batches
+#SBATCH --job-name=batch2df
 #SBATCH --output="argo-out/logs/argo_%A-%a.out"
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=lmullen@gmu.edu
 #SBATCH --partition=all-HiPri
 #SBATCH --export=NONE
-
-#SBATCH --array=1-1498
-#SBATCH --ntasks=24
+#SBATCH --array=1-1498%12
 
 ## Load modules since we are not exporting our environment
 module load R/3.4.1
