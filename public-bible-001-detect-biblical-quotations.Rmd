@@ -1,11 +1,6 @@
 ---
 title: "America's Public Bible 001: Detecting biblical quotations in an OCRed page"
-project: "public-bible"
-tags:
-- computation
-- text-analysis
-- Bible
-- Chronicling America
+output: html_notebook
 ---
 
 ```{r setup, include=FALSE}
@@ -79,7 +74,7 @@ newspaper_id <- newspaper_pages %>%
   str_replace("(\\d{4})/(\\d{2})/(\\d{2})", "\\1-\\2-\\3")
 ```
 
-There are `r length(newspaper_pages) %>% prettyNum(big.mark = ",")` pages in the test data. We will time how long it takes to make the DTM. 
+There are `prettyNum(length(newspaper_pages), big.mark = ",")` pages in the test data. We will time how long it takes to make the DTM. 
 
 ```{r}
 system.time({

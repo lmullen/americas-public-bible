@@ -1,11 +1,6 @@
 ---
 title: "Create predictive model from labeled data"
-project: "public-bible"
-tags:
-- computation
-- text-analysis
-- Bible
-- Chronicling America
+output: html_notebook
 ---
 
 ```{r setup, include=FALSE}
