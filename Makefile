@@ -28,7 +28,7 @@
 # -----------------------------------------------------------------------------
 # Variables for downloading Chronicling America
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
-chronicling_dir := /media/data/chronicling-america
+chronicling_dir := /media/data/public-bible/chronicling-america
 chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 # chronicling_ocr := $(chronicling_dir)/ocr
 # chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
@@ -147,5 +147,5 @@ argo-put-bin :
 argo-get-results :
 	rsync --archive -vv \
 	argo:~/public-bible/argo-out \
-	./ \
+	/media/data/public-bible/ \
 	2>&1 | tee logs/argo-get-results-$(shell date --iso-8601=seconds).log
