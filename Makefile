@@ -77,7 +77,7 @@ clobber-features :
 # Download Chronicling America data
 # -----------------------------------------------------------------------------
 download :
-	wget --continue --mirror --no-parent -nv \
+	wget --continue --mirror --no-parent -nv -b \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
