@@ -1,0 +1,66 @@
+---
+title: "Check conversions of batchs to data frames"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(stringr)
+library(feather)
+```
+
+I've converted the Chronicling America `*.tar.bz2* bulk OCR data batches to data frames. The goal is to check how successful that conversion was.
+
+## Check completeness of batches
+
+First check if we are missing any batches.
+
+```{r}
+get_batch_id <- function(path) {
+  path %>% basename() %>% str_replace("\\.tar\\.bz2(\\.feather)?$", "")
+}
+
+batches_zip <- Sys.glob("/media/data/public-bible/chronicling-america/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2") %>% 
+  get_batch_id()
+# batches_dfs <- Sys.glob("/media/data/public-bible/argo-out/chronam-df/*.feather") %>% 
+#   get_batch_id()
+batches_dfs <- readr::read_lines("/media/data/public-bible/argo-out/logs/dfs-created-from-batches.txt") %>% 
+  get_batch_id()
+
+not_converted <- setdiff(batches_zip, batches_dfs)
+not_converted
+```
+
+Figure out the numeric id of the jobs that failed.
+
+```{r}
+jobs <- readr::read_lines("bin/chronam-batch-list.txt") %>% 
+  get_batch_id()
+failed_ids <- which(jobs %in% not_converted)
+failed_ids
+jobs[failed_ids]
+```
+
+Looking for those job IDs in the Argo logs show that both jobs segfaulted, which was probably not our fault. The batch `"batch_iune_foxtrot_ver01"` continues to segfault, but `"batch_oru_longspur_ver01"` was succesfully completed. So I deleted the failed batch and will re-download it and try again with all the new batches.
+
+## Check completeness of data within batches
+
+Now we are going to check for errors in the data frames we created. We will do this by loading in the metadata columns but not the text column.
+
+```{r}
+converted <- Sys.glob("/media/data/public-bible/argo-out/chronam-df/*.feather")
+metadata_columns <- c("pageid", "batch_id", "publication", "date",
+                      "edition", "page")
+page_metadata <- map_df(converted, read_feather, columns = metadata_columns)
+```
+
+We can do counts of how many NAs there are in each column.
+
+```{r}
+count_na <- function(x) sum(is.na(x))
+page_metadata %>% 
+  sample_n(100) %>% 
+  # group_by(batch_id) %>% 
+  summarize_all(count_na)
+```
+
