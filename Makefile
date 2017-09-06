@@ -34,32 +34,12 @@ chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 # chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
 # chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
-
 # Define `all` task
 # -----------------------------------------------------------------------------
-all : data/labeled-features.feather data/newspaper-metadata.rda data/newspaper-wordcounts.csv bin/prediction-model.rds
+all : data/labeled-features.feather data/newspaper-metadata.rda bin/prediction-model.rds
 
 # Also tasks to clean and clobber
-clobber-all : clobber-metadata clobber-features clobber-wordcounts
-
-# Tasks to download newspaper metadata
-# -----------------------------------------------------------------------------
-LCCN := $(shell cat data/all-lccn.txt)
-LCCN := $(addsuffix .json, $(LCCN))
-LCCN := $(addprefix data/newspapers/, $(LCCN))
-
-data/newspaper-metadata.rda : data/all-lccn.txt $(LCCN)
-	./scripts/gather-newspaper-metadata.R
-
-data/all-lccn.txt :
-	./scripts/download-newspaper-list.R
-
-data/newspapers/%.json : data/all-lccn.txt
-	curl http://chroniclingamerica.loc.gov/lccn/$*.json > $@ && sleep 0.5
-
-clobber-metadata :
-	rm -rf data/newspaper-metadata.rda
-	rm -rf data/all-lccn.txt
+clobber-all : clobber-metadata clobber-features
 
 # Tasks related to feature extraction
 # -----------------------------------------------------------------------------
@@ -93,33 +73,6 @@ clobber-features :
 	rm -rf data/labeled-features.feather
 	rm -rf data/matches-for-model-training.csv
 	rm -rf bin/prediction-model.rds
-
-# Tasks to create word counts of each page
-# ----------------------------------------------------------------------------
-PUBLICATION_MONTHS := $(shell find $(chronicling_ocr) -mindepth 3 -maxdepth 3 -type d)
-WORDCOUNTS := $(addsuffix /wordcounts.csv, $(PUBLICATION_MONTHS))
-
-data/newspaper-wordcounts.csv : # $(WORDCOUNTS)
-	echo "wordcount,page" > $@
-	find $(chronicling_ocr) -iname *wordcounts.csv -type f -exec cat {} >> $@ \;
-
-%/wordcounts.csv : %
-	./scripts/wordcounter.sh $^
-
-clobber-wordcounts :
-	rm -rf data/newspaper-wordcounts.csv
-	rm -rf $(WORDCOUNTS)
-
-# Tasks to create a sample dataset
-# ----------------------------------------------------------------------------
-sample-data : temp/sample-files.txt
-	./scripts/copy-sample-files.sh
-
-temp/sample-files.txt : temp/pub-years.txt
-	Rscript --vanilla ./scripts/generate-sample-pages.R
-
-temp/pub-years.txt :
-	./scripts/generate-publication-years.sh > $@
 
 # Download Chronicling America data
 # -----------------------------------------------------------------------------
