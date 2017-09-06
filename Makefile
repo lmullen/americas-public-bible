@@ -124,7 +124,7 @@ temp/pub-years.txt :
 # Download Chronicling America data
 # -----------------------------------------------------------------------------
 download :
-	wget --continue --mirror --no-parent \
+	wget --continue --mirror --no-parent -nv \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
