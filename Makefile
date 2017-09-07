@@ -8,24 +8,31 @@
 # America have to be run deliberately. In general, these are the order that
 # steps should be taken. Most of these will be run by creating the `all` task.
 #
-# 1. Download data from Chronicling America (not part of `make all`)
-# 2. Extract data
-# 3. Generate sample from the data and copy to local directory
-# 4. Create Bible DTM and other objects necessary for feature extraction
-# 5. Run feature extraction on sample data
-# 6. Sample the potential matches for labeling
-# 7. Label the sample data in Google Sheets
-# 8. Download labeled data and create the version for model training
-# 9. Train the model
-# 10. Download the newspaper metadata
-# 11. Count the words in the newspaper pages
+# Data download and extraction
+# ----------------------------------------------------------------------
+# 1. Download data from Chronicling America: run with `make download`
+# 2. Transfer the data to Argo: run with `make argo-put-data`
+# 3. Sync the Argo-specific scripts and jobs: `make argo-put-bin`
+# 4. Run the `bin/convert-batches.sh` array job on Argo.
+# 5. Move the results back from Argo with `make argo-get-results`
+#
+# Creating the predictive model
+# ----------------------------------------------------------------------
+# n. Create Bible DTM and other objects necessary for feature extraction
+# n. Run feature extraction on sample data
+# n. Sample the potential matches for labeling
+# n. Label the sample data in Google Sheets
+# n. Download labeled data and create the version for model training
+# n. Train the model
+# n. Download the newspaper metadata
+# n. Count the words in the newspaper pages
 #
 # Most of these pieces are run from scripts as detailed below. R Markdown
 # notebooks are not recompiled by this Makefile, because they are a snapshot
 # of the project at a given moment, and not part of the reproducible workflow.
 
 # Define variables
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # Variables for downloading Chronicling America
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_dir := /media/data/public-bible/chronicling-america
@@ -35,14 +42,14 @@ chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 # chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 all : data/labeled-features.feather data/newspaper-metadata.rda bin/prediction-model.rds
 
 # Also tasks to clean and clobber
 clobber-all : clobber-metadata clobber-features
 
 # Tasks related to feature extraction
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # Run the feature extraction script on each publication in the sample
 PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
 FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
@@ -75,7 +82,7 @@ clobber-features :
 	rm -rf bin/prediction-model.rds
 
 # Download Chronicling America data
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 download :
 	wget --continue --mirror --no-parent -nv -b \
 		--accept="*.tar.bz2" \
@@ -83,7 +90,7 @@ download :
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
 # Tasks to send files to Argo cluster
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 argo-put-data :
 	rsync --archive -vv --delete \
 	$(chronicling_batches)/ \
