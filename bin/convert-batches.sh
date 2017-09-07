@@ -1,13 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=redo-batch2df
-#SBATCH --output="argo-out/logs/argo_%A-%a.out"
+#SBATCH --job-name=convert-batches
+#SBATCH --output="argo-out/logs/argo-%A_%a.out"
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=lmullen@gmu.edu
 #SBATCH --partition=all-HiPri
 #SBATCH --export=NONE
-#SBATCH --array=1-1498%12
-## For cleanup of jobs that failed
-##SBATCH --array=442,1069
+#SBATCH --array=1-1600%80
 
 ## Load modules since we are not exporting our environment
 module load R/3.4.1
@@ -19,10 +17,12 @@ OUTPUT=argo-out/chronam-df/$BATCH.feather
 
 ## Run the executable only if output does not exist
 if [ -f "$OUTPUT" ]; then
-  echo "Not running task because $OUTPUT already exists."
+  echo "SKIPPED: Not running task because $OUTPUT already exists."
 else
+  echo "RUNNING: Starting script to create $OUTPUT."
   Rscript ./bin/chronam-batch-to-dataframe.R \
     --log argo-out/logs/convert-chronam-batches.log \
     chronam-batches/$BATCH \
-    -o $OUTPUT
+    -o $OUTPUT && \
+  echo "FINISHED: Finished script to create $OUTPUT."
 fi
