@@ -78,6 +78,7 @@ clobber-features :
 # -----------------------------------------------------------------------------
 download :
 	wget --continue --mirror --no-parent -nv -b \
+		--accept="*.tar.bz2" \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
 
