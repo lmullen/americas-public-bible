@@ -5,7 +5,7 @@ suppressPackageStartupMessages(library(docopt))
 "Take a bzipped batch of Chronicling America OCR text files and turn it into
 a serialized data frame for future use.
 
-Usage: chronam-batch-to-dataframe.R [--debug --log <log>] <input> -o <output>
+Usage: convert-batches.R [--debug --log <log>] <input> -o <output>
 
 Options:
   <input>                 Path to the bzip file containing a ChronAm batch.
