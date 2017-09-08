@@ -15,6 +15,8 @@
 # 3. Sync the Argo-specific scripts and jobs: `make argo-put-bin`
 # 4. Run the `bin/convert-batches.sh` array job on Argo.
 # 5. Move the results back from Argo with `make argo-get-results`
+# 6. Run the `bin/wordcount-batches.sh` array job on Argo
+# 7. Aggregate the word counts with `make data/chronam-wordcounts.feather`
 #
 # Creating the predictive model
 # ----------------------------------------------------------------------
@@ -40,43 +42,18 @@ chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 
 # Define `all` task
 # ----------------------------------------------------------------------
-all : data/labeled-features.feather data/newspaper-metadata.rda bin/prediction-model.rds
+all : data/chronam-wordcounts.feather
 
 # Also tasks to clean and clobber
-clobber-all : clobber-metadata clobber-features
+clean :
+	rm -f data/chronam-wordcounts.feather
 
-# Tasks related to feature extraction
+clobber : clean
+
+# Tasks relating to calculations on the data
 # ----------------------------------------------------------------------
-# Run the feature extraction script on each publication in the sample
-PUBLICATIONS := $(shell find ./data/sample -mindepth 1 -maxdepth 1 -type d)
-FEATURES := $(addsuffix /features.feather, $(PUBLICATIONS))
-
-bin/bible.rda :
-	Rscript --vanilla ./scripts/create-bible-dtm.R
-
-data/sample/%.feather : bin/bible.rda
-	./scripts/extract-features.R $(patsubst %/features.feather,%, $@) $@
-
-data/all-features.feather : $(FEATURES)
-	./scripts/collect-features.R
-
-data/matches-for-model-training.csv : data/all-features.feather
-	./scripts/create-supervised-learning-data.R
-
-data/labeled-features.feather : data/matches-for-model-training.csv
-	./scripts/download-labeled-data.R
-
-bin/prediction-model.rds : bin/bible.rda data/labeled-features.feather
-	./scripts/train-model.R
-
-clobber-features :
-	rm -rf $(FEATURES)
-	rm -rf data/all-features.feather
-	rm -rf data/labeled-data.csv
-	rm -rf bin/bible.rda
-	rm -rf data/labeled-features.feather
-	rm -rf data/matches-for-model-training.csv
-	rm -rf bin/prediction-model.rds
+data/chronam-wordcounts.feather : $(wildcard /media/data/public-bible/argo-out/chronam-wordcounts/*.feather)
+	Rscript --vanilla ./scripts/aggregate-wordcounts.R
 
 # Download Chronicling America data
 # ----------------------------------------------------------------------
@@ -110,7 +87,7 @@ argo-put-bin :
 	2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
 
 argo-get-results :
-	rsync --archive -vv --delete \
+	rsync --archive -vv --exclude 'logs' --delete \
 	argo:~/public-bible/argo-out \
 	/media/data/public-bible/ \
 	2>&1 | tee logs/argo-get-results-$(shell date --iso-8601=seconds).log
