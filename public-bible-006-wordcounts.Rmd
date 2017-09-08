@@ -1,0 +1,39 @@
+---
+title: "Word counts over time"
+output: html_notebook
+---
+
+Having aggregated the word counts, we can get a sense of the scope and change over time.
+
+```{r setup}
+library(tidyverse)
+library(feather)
+wordcount <- read_feather("data/chronam-wordcounts.feather")
+```
+
+How many words and pages do we have in Chronicling America?
+
+```{r}
+words <- sum(wordcount$wordcount) %>% prettyNum(big.mark = ",")
+paste(words, "words")
+pages <- sum(wordcount$pages) %>% prettyNum(big.mark = ",")
+paste(pages, "pages")
+```
+
+How do the words and pages change over time?
+
+```{r, fig.height=6}
+wordcount %>% 
+  mutate(words_per_page = wordcount / pages) %>% 
+  select(-batches) %>% 
+  gather(type, val, -year) %>% 
+ggplot(aes(x = year, y = val)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~type, ncol = 1, scales = "free_y") + 
+  theme_bw() +
+  scale_x_continuous(breaks = seq(1790, 1910, 10)) +
+  labs(title = "Word counts in Chronicling America")
+```
+
+As we might expect, the number of pages and number of words is strongly correlated, and they increase over time. There is also a big gap from 1810 to 1827 with no data available. The trend for words per page is surprising, though we observed it when working with this data earlier. It does imply that smoothing quotations per page and per word are not equivalent. Perhaps this is because there is a change in publishing. The spike in 1834 for words per page is probably since there are only a handful of pages for that year. 
