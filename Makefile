@@ -37,9 +37,6 @@
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_dir := /media/data/public-bible/chronicling-america
 chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
-# chronicling_ocr := $(chronicling_dir)/ocr
-# chronicling_tars = $(wildcard $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr/*.tar.bz2)
-# chronicling_untars = $(addsuffix .EXTRACTED, $(chronicling_tars))
 
 # Define `all` task
 # ----------------------------------------------------------------------
@@ -91,6 +88,10 @@ download :
 
 # Tasks to send files to Argo cluster
 # ----------------------------------------------------------------------
+argo-put : argo-put-data argo-put-bin
+
+argo-get : argo-get-results
+
 argo-put-data :
 	rsync --archive -vv --delete \
 	$(chronicling_batches)/ \
@@ -99,7 +100,10 @@ argo-put-data :
 
 argo-put-bin :
 	# Make sure the list of batches is up to date
-	ls $(chronicling_batches)/*.tar.bz2 -1 | xargs -n 1 basename > bin/chronam-batch-list.txt
+	ls $(chronicling_batches)/*.tar.bz2 -1 | \
+		xargs -n 1 basename | \
+		sed -e 's/.tar.bz2//' > \
+		bin/chronam-batch-list.txt
 	rsync --archive -vv --delete \
 	./bin/ \
 	argo:~/public-bible/bin \
