@@ -17,13 +17,15 @@ $INPUT=chronam-batches/$BATCH.tar.bz2
 $OUTPUT=argo-out/chronam-df/$BATCH.tar.bz2.feather
 
 ## Run the executable only if output does not exist
+echo "Job details: BATCH=$BATCH TASKID: $SLURM_ARRAY_TASK_ID"
+echo "Input files is $INPUT"
 if [ -f "$OUTPUT" ]; then
-  echo "SKIPPED: Not running task because $OUTPUT already exists."
+  echo "SKIPPED: Not running task because $OUTPUT already exists"
 else
-  echo "RUNNING: Starting script to create $OUTPUT."
+  echo "RUNNING: Starting script to create $OUTPUT"
   Rscript ./bin/convert-batches.R \
     --log argo-out/logs/convert-chronam-batches.log \
     $INPUT \
     -o $OUTPUT && \
-  echo "FINISHED: Finished script to create $OUTPUT."
+  echo "FINISHED: Finished script to create $OUTPUT"
 fi
