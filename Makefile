@@ -17,6 +17,7 @@
 # 5. Move the results back from Argo with `make argo-get-results`
 # 6. Run the `bin/wordcount-batches.sh` array job on Argo
 # 7. Aggregate the word counts with `make data/chronam-wordcounts.feather`
+# 8. Download the ChronAm metadata with `make
 #
 # Creating the predictive model
 # ----------------------------------------------------------------------
@@ -42,13 +43,14 @@ chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 
 # Define `all` task
 # ----------------------------------------------------------------------
-all : data/chronam-wordcounts.feather
+all : data/chronam-wordcounts.feather data/chronam-metadata.rds
 
 # Also tasks to clean and clobber
 clean :
 	rm -f data/chronam-wordcounts.feather
 
 clobber : clean
+	rm -f data/chronam-metadata.rds
 
 # Tasks relating to calculations on the data
 # ----------------------------------------------------------------------
@@ -62,6 +64,9 @@ download :
 		--accept="*.tar.bz2" \
 		--directory-prefix=$(chronicling_dir) $(chronicling_url) \
 		--output-file=logs/download-chronam-batches-$(shell date --iso-8601=seconds).log
+
+data/chronam-metadata.rds :
+	Rscript --vanilla scripts/download-chronam-metadata.R
 
 # Tasks to send files to Argo cluster
 # ----------------------------------------------------------------------
