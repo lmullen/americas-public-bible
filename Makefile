@@ -41,6 +41,7 @@ chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_dir := /media/data/public-bible/chronicling-america
 chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
 news19c_issues := /media/data/newspapers-19c/NCNP
+makefile_dir := $(shell pwd)
 
 # Define `all` task
 # ----------------------------------------------------------------------
@@ -88,15 +89,18 @@ argo-put-news19c-data :
 	2>&1 | tee logs/argo-put-news19c-data-$(shell date --iso-8601=seconds).log
 
 argo-put-bin :
-	# Make sure the list of batches is up to date
+	# Make sure the list of ChronAm batches is up to date
 	ls $(chronicling_batches)/*.tar.bz2 -1 | \
 		xargs -n 1 basename | \
 		sed -e 's/.tar.bz2//' > \
 		bin/chronam-batch-list.txt
+	# Make sure the list of 19th Century Newspapers issues is up to date
+	cd $(news19c_issues) && find . -type f -iname *.xml | sed -e "s/.\///" > \
+		$(makefile_dir)/bin/news19c-issue-list.txt
 	rsync --archive -vv --delete \
-	./bin/ \
-	argo:~/public-bible/bin \
-	2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
+		./bin/ \
+		argo:~/public-bible/bin \
+		2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
 
 argo-get-results :
 	rsync --archive -vv --exclude 'logs' --delete \
