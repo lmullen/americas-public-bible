@@ -40,6 +40,7 @@
 chronicling_url := http://chroniclingamerica.loc.gov/data/ocr/
 chronicling_dir := /media/data/public-bible/chronicling-america
 chronicling_batches := $(chronicling_dir)/chroniclingamerica.loc.gov/data/ocr
+news19c_issues := /media/data/newspapers-19c/NCNP
 
 # Define `all` task
 # ----------------------------------------------------------------------
@@ -70,15 +71,21 @@ data/chronam-metadata.rds :
 
 # Tasks to send files to Argo cluster
 # ----------------------------------------------------------------------
-argo-put : argo-put-data argo-put-bin
+argo-put : argo-put-chronam-data argo-put-news19c-data argo-put-bin
 
 argo-get : argo-get-results
 
-argo-put-data :
+argo-put-chronam-data :
 	rsync --archive -vv --delete \
 	$(chronicling_batches)/ \
 	argo:~/public-bible/chronam-batches \
-	2>&1 | tee logs/argo-put-data-$(shell date --iso-8601=seconds).log
+	2>&1 | tee logs/argo-put-chronam-data-$(shell date --iso-8601=seconds).log
+
+argo-put-news19c-data :
+	rsync --archive -vv --delete \
+	$(news19c_issues)/ \
+	argo:~/public-bible/news19c-issues \
+	2>&1 | tee logs/argo-put-news19c-data-$(shell date --iso-8601=seconds).log
 
 argo-put-bin :
 	# Make sure the list of batches is up to date
