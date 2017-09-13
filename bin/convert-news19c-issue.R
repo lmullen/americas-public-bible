@@ -7,6 +7,9 @@ suppressPackageStartupMessages(library(xml2))
 suppressPackageStartupMessages(library(lubridate))
 suppressPackageStartupMessages(library(feather))
 suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(purrr))
+suppressPackageStartupMessages(library(stringi))
 
 option_list <- OptionParser(
   usage = "usage: %prog [options] INPUT --metadata=METADATAPATH --texts=TEXTSPATH",
@@ -23,14 +26,14 @@ option_list <- OptionParser(
 opts <- parse_args(option_list, positional_arguments = 1)
 
 # For development
-opts <- list(
-  args = "/media/data/newspapers-19c/NCNP/NCNP_02/NCNP_XML_03/5AJQ-1845-JUL30.xml",
-  options = list(
-    debug = TRUE,
-    metadata = "temp/test-news19c-metadata.csv",
-    texts = "temp/test-news19c-texts.feather"
-  )
-)
+# opts <- list(
+#   args = "/media/data/newspapers-19c/NCNP/NCNP_02/NCNP_XML_03/5AJQ-1845-JUL30.xml",
+#   options = list(
+#     debug = TRUE,
+#     metadata = "temp/test-news19c-metadata.csv",
+#     texts = "temp/test-news19c-texts.feather"
+#   )
+# )
 
 # Check that we were passed output file paths
 stopifnot(!is.null(opts$options$metadata))
@@ -82,8 +85,72 @@ issue <- data_frame(
 )
 if (nrow(issue) > 1) flog.warn("More than one row in the issue metadata")
 
+flog.info("Gathering the article metadata and text")
+articles_xml <- xml %>% xml_find_all("article")
+
+article_id <- articles_xml %>%
+  xml_find_first("id") %>%
+  xml_text()
+article_ocr <- articles_xml %>%
+  xml_find_first("ocr") %>%
+  xml_text() %>%
+  as.numeric()
+article_title <- articles_xml %>%
+  xml_find_first("ti") %>%
+  xml_text()
+article_page <- articles_xml %>%
+  xml_find_first("pi") %>%
+  xml_attr("pgref") %>%
+  as.numeric()
+article_category <- articles_xml %>%
+  xml_find_first("ct") %>%
+  xml_text()
+
+get_words <- function(para) {
+  para %>%
+    xml_find_all("wd") %>%
+    xml_text() %>%
+    str_c(collapse = " ")
+}
+
+get_text <- function(node) {
+  node %>%
+    xml_find_all(".//p") %>%
+    map_chr(get_words) %>%
+    str_c(collapse = "\n\n")
+}
+
+text <- articles_xml %>% map_chr(get_text)
+article_wordcount <- stri_count_words(text)
+
+articles <- data_frame(
+  issue_id,
+  article_id,
+  article_page,
+  article_ocr,
+  article_wordcount,
+  article_category,
+  article_title,
+  text
+)
+
+flog.info("There are %s articles with %s total words",
+          nrow(articles),
+          articles$article_wordcount %>%
+            sum(na.rm = TRUE) %>%
+            prettyNum(big.mark = ","))
+
 # Write issue as a CSV without any header so they can be concatenated in bash
 flog.debug("Creating the metadata output directory")
-dir.create(dirname(opts$options$metadata), recursive = TRUE, showWarnings = FALSE)
+dir.create(dirname(opts$options$metadata),
+           recursive = TRUE, showWarnings = FALSE)
 flog.info("Writing the metadata to %s", opts$options$metadata)
 write_csv(issue, opts$options$metadata, col_names = FALSE)
+
+flog.debug("Creating the texts output directory")
+dir.create(dirname(opts$options$texts),
+           recursive = TRUE, showWarnings = FALSE)
+flog.info("Writing the texts to %s", opts$options$texts)
+write_feather(articles, opts$options$texts)
+
+flog.info("Successfully finished processing %s", input_path)
