@@ -27,7 +27,7 @@ opts <- parse_args(option_list, positional_arguments = 1)
 
 # For development
 # opts <- list(
-#   args = "/media/data/newspapers-19c/NCNP/NCNP_02/NCNP_XML_03/5AJQ-1845-JUL30.xml",
+#   args = "/media/data/newspapers-19c/NCNP/NCNP_02/NCNP_XML_04/5AJW-1857-OCT24.xml",
 #   options = list(
 #     debug = TRUE,
 #     metadata = "temp/test-news19c-metadata.csv",
@@ -107,15 +107,19 @@ article_category <- articles_xml %>%
   xml_text()
 
 get_words <- function(para) {
-  para %>%
+  out <- para %>%
     xml_find_all("wd") %>%
     xml_text() %>%
     str_c(collapse = " ")
+  if (length(out) == 0) return("")
+  out
 }
 
 get_text <- function(node) {
-  node %>%
-    xml_find_all(".//p") %>%
+  paras <- node %>%
+    xml_find_all(".//p")
+  if (length(paras) == 0) return("")
+  paras %>%
     map_chr(get_words) %>%
     str_c(collapse = "\n\n")
 }
