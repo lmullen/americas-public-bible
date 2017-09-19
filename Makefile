@@ -103,7 +103,7 @@ argo-put-bin :
 		2>&1 | tee logs/argo-put-bin-$(shell date --iso-8601=seconds).log
 
 argo-get-results :
-	rsync --archive -vv --exclude 'logs' --delete \
+	rsync --archive -vv --exclude 'logs' --exclude 'news19c-metadata' --delete \
 	argo:~/public-bible/argo-out \
 	/media/data/public-bible/ \
 	2>&1 | tee logs/argo-get-results-$(shell date --iso-8601=seconds).log
