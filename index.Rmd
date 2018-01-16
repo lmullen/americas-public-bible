@@ -11,6 +11,14 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 <div class="row">
+<div class="col-sm-12">
+<div class="well">
+*America's Public Bible* is under contract with Stanford University Press to be published in their [digital projects series](http://www.sup.org/digital/). This version of the site is a prototype created as the first-prize winner of the [Chronicling America Data Challenge](https://www.neh.gov/news/press-release/2016-07-25), sponsored by the National Endowment for the Humanities. The version in preparation for Stanford University Press will include a larger newspaper corpus and take into account more versions of the Bible, as well as the Book of Mormon. Most important, the expanded version will include a peer-reviewed digital monograph interpreting the role of the Bible in American public life through prose and visualizations. 
+</div>
+</div>
+</div>
+
+<div class="row">
   <div class="col-sm-8 col-xs-12">
   <h1 id="site-title">America's Public Bible</h1>
   <h2 id="site-subtitle">Biblical Quotations in U.S. Newspapers</h2>
@@ -100,6 +108,8 @@ If you use this project for academic work, here is a suggested citation.
 > Lincoln Mullen, *America's Public Bible: Biblical Quotations in U.S. Newspapers*, website, code, and datasets (2016): &lt;<http://americaspublicbible.org>&gt;.
 
 ### Project news and road map
+
+**January 4, 2018**: This site was presented in a paper titled "How 19th-Century Americans Quoted Their Bibles" for the panel "[The Digital History of 19th-Century U.S. Religion](https://aha.confex.com/aha/2018/webprogram/Session16441.html)," co-sponsored by the American Society of Church History and the American Historical Association.
 
 **February 27, 2017**: A much expanded version of this site will be published as a digital monograph by Stanford University Press.
 
