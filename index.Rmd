@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 <div class="row">
 <div class="col-sm-12">
 <div class="well">
-*America's Public Bible* is under contract with Stanford University Press to be published in their [digital projects series](http://www.sup.org/digital/). This version of the site is a prototype created as the first-prize winner of the [Chronicling America Data Challenge](https://www.neh.gov/news/press-release/2016-07-25), sponsored by the National Endowment for the Humanities. The version in preparation for Stanford University Press will include a larger newspaper corpus and take into account more versions of the Bible, as well as the Book of Mormon. Most important, the expanded version will include a peer-reviewed digital monograph interpreting the role of the Bible in American public life through prose and visualizations. 
+*America's Public Bible* is under contract with Stanford University Press to be published in their [digital publishing program](http://www.sup.org/digital/). This version of the site is a prototype created as the first-prize winner of the [Chronicling America Data Challenge](https://www.neh.gov/news/press-release/2016-07-25), sponsored by the National Endowment for the Humanities. The version in preparation for Stanford University Press will include a larger newspaper corpus and take into account more versions of the Bible, as well as the Book of Mormon. Most important, the expanded version will include a peer-reviewed digital monograph interpreting the role of the Bible in American public life through prose and visualizations. 
 </div>
 </div>
 </div>
