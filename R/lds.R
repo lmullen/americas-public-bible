@@ -21,5 +21,7 @@ process_lds <- function(raw) {
            verse = verse_number,
            text = scripture_text)
 
+  test_version(cleaned)
+
   return(cleaned)
 }

@@ -38,6 +38,8 @@ process_kjv <- function() {
     mutate(doc_id = str_c(book, " ", chapter, ":", verse, " (", version, ")")) %>%
   select(doc_id, version, part, book, chapter, verse, text)
 
+  test_version(kjv)
+
   kjv
 
 }

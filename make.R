@@ -6,11 +6,12 @@ library(fs)
 library(readxl)
 
 pkgconfig::set_config("drake::strings_in_dots" = "literals",
-                      "drake::verbose" = 1)
+                      "drake::verbose" = 2)
 
 source("R/lds.R")
 source("R/kjv.R")
 source("R/assorted.R")
+source("R/test.R")
 
 # Read in and clean the LDS CSV file then write it to a CSV
 lds_plan <- drake_plan(
@@ -37,13 +38,19 @@ assorted_plan <- drake_plan(
   write_csv(rv, file_out("data/rv.csv"))
 )
 
+combine_plan <- drake_plan(
+  scriptures = bind_rows(kjv, asv, dr, rv, lds),
+  write_csv(scriptures, file_out("data/scriptures.csv"))
+)
+
 master_plan <- bind_plans(
   lds_plan,
   kjv_plan,
-  assorted_plan
+  assorted_plan,
+  combine_plan
 )
 
 config <- drake_config(master_plan)
 vis_drake_graph(config, targets_only = TRUE)
 
-make(master_plan, jobs  = 4)
+make(master_plan, jobs = 4, parallelism = "future")
