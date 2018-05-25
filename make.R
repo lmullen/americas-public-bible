@@ -4,6 +4,7 @@ library(tidyverse)
 library(drake)
 library(fs)
 library(readxl)
+library(jsonlite)
 
 pkgconfig::set_config("drake::strings_in_dots" = "literals",
                       "drake::verbose" = 2)
@@ -11,6 +12,7 @@ pkgconfig::set_config("drake::strings_in_dots" = "literals",
 source("R/lds.R")
 source("R/kjv.R")
 source("R/assorted.R")
+source("R/jps.R")
 source("R/test.R")
 
 # Read in and clean the LDS CSV file then write it to a CSV
@@ -38,8 +40,13 @@ assorted_plan <- drake_plan(
   write_csv(rv, file_out("data/rv.csv"))
 )
 
+# Jewish Publication Society
+jps_plan <- drake_plan(
+  jps = process_jps()
+)
+
 combine_plan <- drake_plan(
-  scriptures = bind_rows(kjv, asv, dr, rv, lds),
+  scriptures = bind_rows(kjv, asv, dr, rv, lds, jps),
   write_csv(scriptures, file_out("data/scriptures.csv"))
 )
 
@@ -47,10 +54,11 @@ master_plan <- bind_plans(
   lds_plan,
   kjv_plan,
   assorted_plan,
+  jps_plan,
   combine_plan
 )
 
 config <- drake_config(master_plan)
 vis_drake_graph(config, targets_only = TRUE)
 
-make(master_plan, jobs = 4, parallelism = "future")
+make(master_plan, jobs = 1, parallelism = "future")

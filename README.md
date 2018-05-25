@@ -13,3 +13,4 @@ Run the `make.R` script, which uses [drake](https://ropensci.github.io/drake/) t
 - **LDS scriptures.** The scriptures from the Latter-day Saints include *The Book of Mormon* (1830), the *Doctrine and Covenants* (1835), and the *Pearl of Great Price* (compiled 1851, canonized 1880). Note that the LDS church has its own version of the King James Version of the Bible, but that edition is not included in this dataset. Source: Steve Dibb, "[Mormon Documentation Project: The Scriptures](http://scriptures.nephi.org)."
 - **Revised Version** (1885). Source: [Bible Hub](http://biblehub.net/).
 -	**American Standard Version** (1901). Source: [Bible Hub](http://biblehub.net/). 
+- **Jewish Publication Society version** (1917). Source: [Sefaria](https://github.com/Sefaria/Sefaria-Export).

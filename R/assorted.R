@@ -3,7 +3,7 @@
 process_assorted <- function(raw) {
   require(dplyr)
   cleaned <- raw %>%
-    gather(-Verse, -Testament, key = "version", value = "text") %>%
+    tidyr::gather(-Verse, -Testament, key = "version", value = "text") %>%
     mutate(text = text %>%
              str_remove("<i>") %>%
              str_remove("</i>")) %>%
