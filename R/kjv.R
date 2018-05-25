@@ -1,4 +1,4 @@
-parse_kjv <- function(out_csv) {
+process_kjv <- function() {
 
   # Load the Bible text files
   ot_files <- dir_ls("raw/kjv/OldTestament", glob = "*.txt", recursive = TRUE)
@@ -20,7 +20,7 @@ parse_kjv <- function(out_csv) {
   verse_texts <- chapter_files %>%
     map(read_lines)
 
-  texts <- data_frame(
+  kjv <- data_frame(
     version = "KJV",
     part = c(rep("Old Testament", length(ot_files)),
              rep("Apocrypha", length(ap_files)),
@@ -38,5 +38,6 @@ parse_kjv <- function(out_csv) {
     mutate(doc_id = str_c(book, " ", chapter, ":", verse, " (", version, ")")) %>%
   select(doc_id, version, part, book, chapter, verse, text)
 
-  write_csv(texts, out_csv)
+  kjv
+
 }

@@ -7,8 +7,8 @@ download_lds <- function() {
   unzip("raw/lds/lds-scriptures.csv.zip", exdir = "raw")
 }
 
-process_lds <- function(data, out_csv) {
-  cleaned <- data %>%
+process_lds <- function(raw) {
+  cleaned <- raw %>%
     filter(volume_title != "Old Testament",
            volume_title != "New Testament") %>%
     mutate(part = volume_title) %>%
@@ -20,6 +20,5 @@ process_lds <- function(data, out_csv) {
            verse = verse_number,
            text = scripture_text)
 
-  dir.create(dirname(out_csv), showWarnings = FALSE)
-  write_csv(cleaned, out_csv)
+  return(cleaned)
 }
