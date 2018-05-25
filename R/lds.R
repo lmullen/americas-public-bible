@@ -8,6 +8,7 @@ download_lds <- function() {
 }
 
 process_lds <- function(raw) {
+  require(dplyr)
   cleaned <- raw %>%
     filter(volume_title != "Old Testament",
            volume_title != "New Testament") %>%
