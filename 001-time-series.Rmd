@@ -188,6 +188,8 @@ quotations_per_year %>%
   scale_color_manual(values = col_pal) +
   labs(title = "Rates of quotation for popular verses, 1839–1921",
        subtitle = "Top 24 most quoted verses from the KJV in Chronicling America")
+
+ggsave("tsclusters/top-24-verses.png")
 ```
 
 Now can we cluster the time series? The choice of the variable for clustering is important. If we pick `smoothed_rate` we are looking for verses which had the same popularity at the same time. If we pick `smoothed_change` we are clustering by the change over time, and so are looking for verses with the same shape to their line.
