@@ -1,0 +1,112 @@
+---
+title: "001 Time series"
+output: html_notebook
+---
+
+The purpose of this notebook is to evaluate the time series of quotations from the prototype version of America's Public Bible and create some visualizations of them.
+
+```{r setup}
+library(tidyverse)
+library(odbc)
+library(TSclust)
+library(stringr)
+library(RcppRoll)
+library(viridis)
+library(broman)
+
+con <- dbConnect(odbc::odbc(), "Research DB")
+quotations <- tbl(con, "apb_proto_quotations") %>% collect()
+verses_by_year <- tbl(con, "apb_proto_verses_by_year") %>%  collect() 
+wordcounts <- tbl(con, "apb_proto_wordcounts") %>% collect()
+```
+
+What is the difference between the full `quotations` table and the `verses_by_year` table?
+
+```{r}
+quotations_count <- quotations %>% 
+  group_by(year, reference) %>% 
+  summarize(full_count = n()) %>% 
+  mutate(reference = str_remove(reference, " \\(KJV\\)")) %>% 
+  left_join(verses_by_year, by = c("reference", "year")) %>% 
+  arrange(reference, year)
+```
+
+By joining them it becomes apparent that the verses by year is a subset of the data. How small a subset?
+
+```{r}
+quotations_count_totals <- quotations_count %>% 
+  group_by(reference) %>% 
+  summarize(n = sum(n, na.rm = TRUE),
+            full_count = sum(full_count, na.rm = TRUE)) %>% 
+  arrange(desc(n))
+quotations_count_totals %>% head(10)
+```
+
+The verses by year have the cleaned data, for example, Luke 18:16 includes the other verses in the Synoptics. But it also has fewer quotations in places, probably because it uses higher probability verses.
+
+```{r}
+range(quotations_count_totals %>% filter(n > 0) %>% pull(n))
+range(quotations_count_totals$full_count)
+range(quotations$year)
+range(verses_by_year$year)
+range(quotations$probability)
+```
+
+We are going to use the direct quotations table.
+
+Now we are going to aggregate the verse counts by year and get the word and page counts as well.
+
+```{r}
+quotations_per_year <- quotations %>% 
+  mutate(reference = str_remove(reference, "\\s\\(KJV\\)")) %>% 
+  count(reference, year, testament) %>% 
+  group_by(reference) %>% 
+  mutate(n_all = sum(n)) %>% 
+  left_join(wordcounts, by = "year") %>% 
+  mutate(n_per_100mil = n / wordcount * 1e8) %>% 
+  arrange(desc(n_all), reference, year) 
+quotations_per_year %>% head(10) 
+```
+
+Now we can try to plot the time series for the most frequently quoted verses.
+
+```{r}
+top_verses <- quotations_per_year %>% 
+  ungroup() %>% 
+  distinct(reference, n_all) %>% 
+  top_n(24, n_all)
+
+verse_order <- top_verses %>% pull(reference) 
+
+# See broman::plot_crayons()
+set.seed(97)
+col_pal <- brocolors("crayons")[c("Orange Red", "Outrageous Orange", "Brown",
+                                  "Beaver", "Raw Sienna", "Raw Umber", "Sunglow",
+                                  "Goldenrod", "Asparagus", "Fern", "Green", 
+                                  "Pine Green", "Teal Blue", "Pacific Blue", 
+                                  "Cerulean", "Green Blue", "Purple Heart", 
+                                  "Vivid Violet", "Hot Magenta", "Maroon",
+                                  "Scarlet", "Olive Green", "Blush", "Plum")] %>% 
+  sample()
+names(col_pal) <- verse_order
+
+# Smooth the charts by taking the mean
+quotations_per_year %>% 
+  ungroup() %>% 
+  inner_join(select(top_verses, reference), by = "reference") %>% 
+  mutate(reference = ordered(reference, verse_order)) %>% 
+  group_by(reference) %>% 
+  arrange(reference, year) %>% 
+  mutate(smoothed_rate = roll_mean(n_per_100mil, n = 3, fill = NA_real_)) %>% 
+  filter(!is.na(smoothed_rate)) %>% 
+  ggplot(aes(x = year, y = smoothed_rate, color = reference)) +
+  geom_line() + 
+  facet_wrap(~reference, ncol = 6) + 
+  coord_cartesian(ylim = c(0, 20)) +
+  guides(color = FALSE) +
+  theme_void() +
+  scale_color_manual(values = col_pal) +
+  labs(title = "Rates of quotation for popular verses, 1837–1921",
+       subtitle = "Top 24 most quoted verses from the KJV in Chronicling America")
+```
+
