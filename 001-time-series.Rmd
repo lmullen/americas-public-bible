@@ -13,6 +13,8 @@ library(stringr)
 library(RcppRoll)
 library(viridis)
 library(broman)
+library(xts)
+library(broom)
 
 con <- dbConnect(odbc::odbc(), "Research DB")
 quotations <- tbl(con, "apb_proto_quotations") %>% collect()
@@ -54,6 +56,80 @@ range(quotations$probability)
 
 We are going to use the direct quotations table.
 
+We need to combine some quotations:
+
+```{r}
+combine_verses <- function(.data, references) {
+  stopifnot(is.character(references))
+  new_ref <- paste0(references[1])
+  .data %>%
+    mutate(reference = ifelse(reference %in% references, new_ref, reference),
+           multiple_references = ifelse(reference %in% references,
+                                        paste(references, collapse = ", "),
+                                        multiple_references)) %>%
+    distinct(page, reference, .keep_all = TRUE)
+}
+
+# Taken from _scripts/_clean-data.R in public-bible-website
+quotations <- quotations %>%
+  mutate(multiple_references = NA_character_) %>% 
+  combine_verses(c("Luke 18:16 (KJV)",
+                   "Mark 10:14 (KJV)",
+                   "Matthew 19:14 (KJV)")) %>%  # Suffer the little children
+  combine_verses(c("Exodus 20:13 (KJV)",
+                   "Deuteronomy 5:17 (KJV)")) %>% # Thou shalt not kill
+  combine_verses(c("Matthew 20:28 (KJV)",
+                   "Mark 10:45 (KJV)")) %>% # Not to be ministered unto
+  combine_verses(c("Jeremiah 8:11 (KJV)",
+                 "Jeremiah 6:14 (KJV)")) %>% # Peace, peace, there is no peace
+  combine_verses(c("Matthew 24:35 (KJV)",
+                 "Mark 13:31 (KJV)",
+                 "Luke 21:33 (KJV)")) %>% # My words shall not pass away
+  combine_verses(c("Matthew 22:21 (KJV)",
+                 "Luke 20:25 (KJV)")) %>% # Render unto Ceasar
+  combine_verses(c("Mark 9:44 (KJV)",
+                   "Mark 9:46 (KJV)",
+                   "Mark 9:48 (KJV)")) %>% # Worm dieth not
+  combine_verses(c("Luke 13:3 (KJV)",
+                   "Luke 13:5 (KJV)")) %>% # Except yet repent
+  combine_verses(c("Psalm 107:8 (KJV)",
+                   "Psalm 107:15 (KJV)",
+                   "Psalm 107:21 (KJV)",
+                   "Psalm 107:31 (KJV)")) %>%
+  combine_verses(c("Psalm 46:7 (KJV)",
+                   "Psalm 46:11 (KJV)")) %>%
+  combine_verses(c("Psalm 67:3 (KJV)",
+                   "Psalm 67:5 (KJV)")) %>%
+  combine_verses(c("Psalm 107:1 (KJV)",
+                   "Psalm 118:29 (KJV)",
+                   "Psalm 136:1 (KJV)")) %>%
+  combine_verses(c("Matthew 16:26 (KJV)",
+                   "Mark 8:36 (KJV)")) %>%
+  combine_verses(c("Matthew 19:6 (KJV)",
+                   "Mark 10:9 (KJV)")) %>%
+  combine_verses(c("John 3:16 (KJV)",
+                   "John 3:15 (KJV)")) %>%
+  combine_verses(c("Matthew 25:21 (KJV)", # Well done, good and faithful servant
+                   "Matthew 25:23 (KJV)")) %>%
+  combine_verses(c("Matthew 22:37 (KJV)", # Thou shalt love the Lord thy God
+                   "Mark 12:30 (KJV)",
+                   "Luke 10:27 (KJV)")) %>%
+  combine_verses(c("Matthew 12:25 (KJV)", # House divided
+                   "Mark 3:25 (KJV)",
+                   "Luke 11:17 (KJV)")) %>%
+  combine_verses(c("Matthew 10:25 (KJV)", # Camel eye of a needle
+                   "Mark 19:24 (KJV)",
+                   "Luke 18:25 (KJV)")) %>%
+  combine_verses(c("Matthew 16:23 (KJV)", # Get behind me, Satan
+                   "Mark 8:33 (KJV)")) %>%
+  filter(reference != "Psalm 107:3 (KJV)") %>% # East, west, north, south
+  filter(reference != "Acts 19:7 (KJV)") %>% # And all the men were about twelve
+  filter(reference != "1 Chronicles 9:24 (KJV)") %>%  # East west north south
+  filter(reference != "Luke 13:29 (KJV)") %>% # East west north south
+  filter(reference != "Ezekiel 44:25 (KJV)") # Father mother brother sister
+```
+
+
 Now we are going to aggregate the verse counts by year and get the word and page counts as well.
 
 ```{r}
@@ -64,7 +140,13 @@ quotations_per_year <- quotations %>%
   mutate(n_all = sum(n)) %>% 
   left_join(wordcounts, by = "year") %>% 
   mutate(n_per_100mil = n / wordcount * 1e8) %>% 
-  arrange(desc(n_all), reference, year) 
+  mutate(smoothed_rate3 = roll_mean(n_per_100mil, n = 3, fill = NA_real_)) %>%
+  mutate(smoothed_rate5 = roll_mean(n_per_100mil, n = 5, fill = NA_real_)) %>%
+  mutate(change = (smoothed_rate3 - lag(smoothed_rate3)) / smoothed_rate3) %>% 
+  mutate(smoothed_change3 = roll_mean(change, n = 7, fill = NA_real_)) %>%
+  mutate(smoothed_change7 = roll_mean(change, n = 7, fill = NA_real_)) %>%
+  arrange(desc(n_all), reference, year) %>% 
+  filter(year >= 1838) # Cut off some outliers
 quotations_per_year %>% head(10) 
 ```
 
@@ -95,18 +177,106 @@ quotations_per_year %>%
   ungroup() %>% 
   inner_join(select(top_verses, reference), by = "reference") %>% 
   mutate(reference = ordered(reference, verse_order)) %>% 
-  group_by(reference) %>% 
   arrange(reference, year) %>% 
-  mutate(smoothed_rate = roll_mean(n_per_100mil, n = 3, fill = NA_real_)) %>% 
-  filter(!is.na(smoothed_rate)) %>% 
-  ggplot(aes(x = year, y = smoothed_rate, color = reference)) +
-  geom_line() + 
+  filter(!is.na(smoothed_rate3)) %>% 
+  ggplot(aes(x = year, y = smoothed_rate3, color = reference)) +
+  geom_line(size = 0.8) + 
   facet_wrap(~reference, ncol = 6) + 
   coord_cartesian(ylim = c(0, 20)) +
   guides(color = FALSE) +
   theme_void() +
   scale_color_manual(values = col_pal) +
-  labs(title = "Rates of quotation for popular verses, 1837–1921",
+  labs(title = "Rates of quotation for popular verses, 1839–1921",
        subtitle = "Top 24 most quoted verses from the KJV in Chronicling America")
+```
+
+Now can we cluster the time series? The choice of the variable for clustering is important. If we pick `smoothed_rate` we are looking for verses which had the same popularity at the same time. If we pick `smoothed_change` we are clustering by the change over time, and so are looking for verses with the same shape to their line.
+
+```{r}
+top_100_verses <- quotations_per_year %>% 
+  ungroup() %>% 
+  distinct(reference, n_all) %>% 
+  top_n(100, n_all)
+
+year_to_date <- function(y) { as.Date(paste0(y, "-01-01")) }
+  
+ts_df <- quotations_per_year %>% 
+  ungroup() %>% 
+  inner_join(select(top_100_verses, reference), by = "reference") %>% 
+  mutate(date = year_to_date(year)) %>% 
+  group_by(reference) 
+
+ts_df_rate <- ts_df %>% 
+  select(date, reference, cluster_variable = smoothed_rate5) %>% 
+  spread(reference, cluster_variable, fill = 0) # Pick the variable for clustering
+
+ts_df_change <- ts_df %>% 
+  select(date, reference, cluster_variable = smoothed_change7) %>% 
+  spread(reference, cluster_variable, fill = 0) # Pick the variable for clustering
+```
+
+Now we can try to cluster them. We will cluster by both rate and change, though
+obviously this puts verses in multiple clusters.
+
+```{r}
+create_clusters <- function(ts_df_in, k, prefix) {
+  ts <- xts(ts_df_in[, -1], order.by = ts_df_in$date)
+  ts_dist <- diss(t(ts), "ACF", p = 0.05)
+  names(ts_dist) <- colnames(ts)
+  hc <- hclust(ts_dist)
+  # plot(hc)
+  cluster_groups <- cutree(hc, k = k) %>% tidy() 
+  cluster_groups %>% 
+    select(reference = names, cluster = x) %>% 
+    mutate(cluster = str_c(prefix, str_pad(cluster, 2, "left", "0")))
+}
+clusters <- bind_rows(
+  create_clusters(ts_df_rate, k = 8, prefix = "rate8-"),
+  create_clusters(ts_df_change, k = 8, prefix = "change8-")
+)
+```
+
+Helper functions to plot the clusters.
+
+```{r}
+get_quotes_from_group <- function(.data, groups, group_num) {
+  group <- groups %>% filter(cluster == group_num)
+  .data %>% 
+    inner_join(select(group, reference), by = "reference")
+}
+
+plot_ts_group <- function(.data, top = 10, title) {
+  keepers <- .data %>% 
+    group_by(reference) %>% 
+    summarize(n = sum(n)) %>% 
+    arrange(desc(n)) %>% 
+    top_n(top, n)
+  verses <- keepers %>% pull(reference) %>% unique()
+  selected <- .data %>% 
+    inner_join(select(keepers, reference), by = "reference") %>% 
+    filter(!is.na(smoothed_rate5))
+  years <- range(selected$year) %>% str_c(collapse = "–")
+  ggplot(selected, aes(x = year, y = smoothed_rate5, color = reference)) +
+    geom_line() +
+    scale_color_viridis(discrete = TRUE) +
+    theme_minimal() +
+    theme(legend.position = "bottom") +
+    labs(title = title,
+         subtitle = str_glue("Select verses from the KJV in Chronicling America, {years}"),
+         color = NULL, x = NULL,
+         y = "Quotations per 100 million words")
+}
+```
+
+Keep certain charts.
+
+```{r}
+selector <- "rate8-08"
+title <- "Peaks of popularity"
+plot <- quotations_per_year %>% 
+  get_quotes_from_group(clusters, selector) %>% 
+  plot_ts_group(top = 20, title = title)
+plot
+# ggsave(str_glue("tsclusters/{selector}.png"), plot)
 ```
 
