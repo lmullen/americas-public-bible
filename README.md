@@ -9,4 +9,4 @@ This repository contains the code that extracts the features, trains the models,
 
 ## Repository history
 
-This repository has undergone a number of changes. The initial code for the prototype version of the site was created in 2016. That code can be found in [this tag](https://github.com/public-bible/quotation-finder/releases/tag/initial-doi-version) on the repository. Much of that code has been superseded. 
+This repository has undergone a number of changes. The initial code for the prototype version of the site was created in 2016. That code can be found in [this tag](https://github.com/public-bible/quotation-finder/releases/tag/initial-doi-version) on the repository. Much of that code has been superseded, and what remains in the `master` branch is located in the `prototype/` directory. 
