@@ -4,7 +4,7 @@
 
 # Define variables
 # ----------------------------------------------------------------------
-newspaper_batches := /media/data/newspaper-batches/
+newspaper_batches := /media/data/newspaper-batches
 
 # Tasks to move files back and forth to the Argo cluster
 # ----------------------------------------------------------------------
