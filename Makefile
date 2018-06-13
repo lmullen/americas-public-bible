@@ -7,6 +7,20 @@
 # ----------------------------------------------------------------------
 newspaper_batches := /media/data/newspaper-batches
 
+# Local tasks
+# ----------------------------------------------------------------------
+all : bin/bible-payload.rda
+
+# The vectorizer and Bible document-term matrix used for finding quotations
+bin/bible-payload.rda :
+	Rscript --vanilla ./scripts/bible-payload.R
+
+# Cleaning
+# ----------------------------------------------------------------------
+
+clobber :
+	rm -f bin/bible-payload.rda
+
 # Tasks to move files back and forth to the Argo cluster
 # ----------------------------------------------------------------------
 argo-put : argo-put-data argo-put-bin

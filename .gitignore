@@ -23,3 +23,4 @@ data/wordcounts-by-year.csv
 temp
 argo-out
 bin/chronam-batch-list.txt
+bin/bible-payload.rda
