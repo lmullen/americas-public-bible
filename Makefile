@@ -1,6 +1,7 @@
 # Quotation finder | America's Public Bibleo
-#
-# This Makefile defines how to create the various pieces that go into the quotation finder.
+
+# This Makefile defines how to create the various pieces that go into the
+# quotation finder.
 
 # Define variables
 # ----------------------------------------------------------------------
