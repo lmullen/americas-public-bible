@@ -38,6 +38,6 @@ token_it <- itoken(scriptures$text, ids = scriptures$doc_id,
                    tokenizer = bible_tokenizer)
 bible_vocab <- create_vocabulary(token_it)
 bible_vectorizer <- vocab_vectorizer(bible_vocab)
-bible_dtm = create_dtm(token_it, bible_vectorizer)
+bible_dtm <- create_dtm(token_it, bible_vectorizer)
 
-save(bible_tokenizer, bible_dtm, file = "bin/bible-payload.rda")
+save(bible_tokenizer, bible_vectorizer, bible_dtm, file = "bin/bible-payload.rda")
