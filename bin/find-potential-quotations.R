@@ -96,14 +96,23 @@ texts <- read_fst(batch_path, columns = c("doc_id", "text"),
                   as.data.table = FALSE) %>% as_tibble()
 flog.debug("Memory used: %s.", mem_used())
 
-flog.info("Creating the document-term matrix for the batch.")
-token_it <- itoken(texts$text, ids = texts$doc_id,
-                   tokenizer = bible$bible_tokenizer,
-                   n_chunks = 20) # Chunks of 1000 documents each
-docs_dtm <- create_dtm(token_it, bible$bible_vectorizer)
+flog.info("Creating n-gram and word tokens from the batch.")
+texts <- texts %>%
+  mutate(tokens_ngrams = bible_ngram_tokenizer(text),
+         tokens_words = bible_word_tokenizer(text)) %>%
+  select(-text) # Don't store the text once we don't need it any longer
 flog.debug("Memory used: %s.", mem_used())
 
-flog.info("Getting the token count.")
+
+flog.info("Creating the document-term matrix for the batch.")
+token_it <- itoken(texts$tokens_ngrams,
+                   ids = texts$doc_id,
+                   progressbar = FALSE, n_chunks = 20)
+docs_dtm <- create_dtm(token_it, bible$bible_vectorizer)
+texts <- texts %>% select(-tokens_ngrams) # Don't store the n-gram tokens any more
+flog.debug("Memory used: %s.", mem_used())
+
+flog.info("Getting the count of matching tokens.")
 token_count <- tcrossprod(bible$bible_dtm, docs_dtm) %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, tokens = value)
