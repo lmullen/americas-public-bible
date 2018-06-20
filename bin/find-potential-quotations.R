@@ -35,13 +35,19 @@ parser <- OptionParser(
   add_option(c("-v", "--verbose"),
              action = "store", type = "integer", default = 1,
              help = "Verbosity: 0 = errors and warnings; 1 = information; 2 = debugging.")
-args <- parse_args(parser, positional_arguments = 1)
-# args <- parse_args(parser,
-#                    args = c("./data/sample/ncnp-batch-00650.fst",
-#                             "--out=temp/ncnp-potential-matches.fst",
-#                             "--bible=bin/bible-payload.rda",
-#                             "--verbose=2"),
-#                    positional_arguments = 1)
+if (!interactive()) {
+  # Command line usage
+  args <- parse_args(parser, positional_arguments = 1)
+} else {
+  # For testing
+  flog.warn("Using the testing command line arguments since session is interactive.")
+  args <- parse_args(parser,
+                     args = c("./data/sample/ncnp-batch-00650.fst",
+                              "--out=temp/ncnp-potential-matches.fst",
+                              "--bible=bin/bible-payload.rda",
+                              "--verbose=2"),
+                     positional_arguments = 1)
+}
 
 # Easier references to outputs
 batch_path <- args$args[1]
@@ -98,11 +104,10 @@ flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Creating n-gram and word tokens from the batch.")
 texts <- texts %>%
-  mutate(tokens_ngrams = bible_ngram_tokenizer(text),
-         tokens_words = bible_word_tokenizer(text)) %>%
+  mutate(tokens_ngrams = bible$bible_tokenizer(text, type = "ngrams"),
+         tokens_words = bible$bible_tokenizer(text, type = "words")) %>%
   select(-text) # Don't store the text once we don't need it any longer
 flog.debug("Memory used: %s.", mem_used())
-
 
 flog.info("Creating the document-term matrix for the batch.")
 token_it <- itoken(texts$tokens_ngrams,
@@ -154,7 +159,7 @@ flog.info("Kept %s potential matches out of %s total (%s%%).",
           pnum(n_keepers), pnum(n_potential), round(prop_keepers * 100, 1))
 flog.debug("Memory used: %s.", mem_used())
 
-# TODO Runs p-val here.
+
 
 flog.info("Writing the potential matches: %s.", out_path)
 write_fst(potential_matches, out_path)

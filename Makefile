@@ -17,8 +17,11 @@ bin/bible-payload.rda :
 
 # Cleaning
 # ----------------------------------------------------------------------
+clean :
+	rm -f temp/*
+	rm -f logs/*
 
-clobber :
+clobber : clean
 	rm -f bin/bible-payload.rda
 
 # Tasks to move files back and forth to the Argo cluster
@@ -48,3 +51,10 @@ argo-get-results :
 	argo:/scratch/lmullen/argo-out \
 	/media/data/ \
 	2>&1 | tee logs/argo-get-results-$(shell date --iso-8601=seconds).log
+
+# Tasks to test various scripts
+# ----------------------------------------------------------------------
+test-quotation-finder :
+	time Rscript bin/find-potential-quotations.R \
+		--tokens=2 --tfidf=0.25 --verbose=2 --bible=bin/bible-payload.rda \
+		data/sample/ncnp-batch-00650.fst -o temp/test-ncnp-quotations.fst

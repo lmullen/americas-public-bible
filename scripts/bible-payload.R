@@ -19,35 +19,38 @@ suppressPackageStartupMessages(library(stopwords))
 db <- dbConnect(odbc::odbc(), "Research DB")
 scriptures <- tbl(db, "scriptures") %>% collect()
 
-# Some custom stop words combined with standard English stopwords
-custom_stops <- c("a", "an", "at", "and", "are", "as", "at", "be", "but", "by",
-                  "do", "for", "from", "he",  "her", "his", "i", "in", "into",
-                  "is", "it",  "my", "of", "on", "or",  "say", "she", "that",
-                  "the", "their", "there", "these", "they", "this",  "to",
-                  "was", "what", "will", "with", "you", "two", "four", "five",
-                  "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
-                  "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
-                  "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty",
-                  "sixty", "seventy", "eighty", "ninety", "hundred")
-en_stops <- stopwords("en", source = "snowball")
-bible_stops <- c(custom_stops, en_stops, letters) %>% sort() %>% unique()
+bible_tokenizer <- function(x, type = c("ngrams", "words")) {
+  if (missing(type)) {
+    stop("You must specify the type of tokens you want: ngrams, words")
+  }
+  type <- match.arg(type)
 
-# Used for finding matches
-bible_ngram_tokenizer <- function(x) {
-  # More skips (k), more robust to bad OCR, at the cost of many more tokens
-  tokenizers::tokenize_skip_ngrams(x, n = 4, n_min = 3, k = 1,
-                                   stopwords = bible_stops)
-}
+  # some custom stop words combined with standard english stopwords
+  custom_stops <- c("a", "an", "at", "and", "are", "as", "at", "be", "but", "by",
+                    "do", "for", "from", "he",  "her", "his", "i", "in", "into",
+                    "is", "it",  "my", "of", "on", "or",  "say", "she", "that",
+                    "the", "their", "there", "these", "they", "this",  "to",
+                    "was", "what", "will", "with", "you", "two", "four", "five",
+                    "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+                    "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+                    "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty",
+                    "sixty", "seventy", "eighty", "ninety", "hundred")
+  en_stops <- stopwords::stopwords("en", source = "snowball")
+  bible_stops <- c(custom_stops, en_stops, letters) %>% sort() %>% unique()
 
-# Used for computing runs p-val and other tasks where word order is important
-bible_word_tokenizer <- function(x) {
-  tokenizers::tokenize_words(x, stopwords = bible_stops, strip_numeric = TRUE)
+  if (type == "ngrams") {
+    # More skips (k), more robust to bad OCR, at the cost of many more tokens
+    tokenizers::tokenize_skip_ngrams(x, n = 4, n_min = 3, k = 1,
+                                     stopwords = bible_stops)
+  } else if (type == "words") {
+    tokenizers::tokenize_words(x, stopwords = bible_stops, strip_numeric = TRUE)
+  }
 }
 
 # Tokenize the scriptures so that we can use the tokens later
 scriptures <- scriptures %>%
-  mutate(tokens_ngrams = bible_ngram_tokenizer(text),
-         tokens_words = bible_word_tokenizer(text))
+  mutate(tokens_ngrams = bible_tokenizer(text, type = "ngrams"),
+         tokens_words = bible_tokenizer(text, type = "words"))
 
 # Create the document-term matrix and vectorizer
 token_it <- itoken(scriptures$tokens_ngrams,
@@ -61,9 +64,5 @@ bible_dtm <- create_dtm(token_it, bible_vectorizer)
 bible_tokens <- scriptures %>%
   select(doc_id, tokens_words)
 
-save(bible_ngram_tokenizer,
-     bible_word_tokenizer,
-     bible_vectorizer,
-     bible_dtm,
-     bible_tokens,
+save(bible_tokenizer,  bible_vectorizer, bible_dtm, bible_tokens,
      file = "bin/bible-payload.rda")
