@@ -27,7 +27,7 @@ else
   Rscript /home/lmullen/public-bible/bin/find-potential-quotations.R \
     $INPUT \
     --bible=/home/lmullen/public-bible/bin/bible-payload.rda \
-    --tokens=3 --tfidf=1.5 \
+    --tokens=2 --tfidf=1.0 \
     -o $OUTPUT && \
   echo "FINISHED: Finished script to create $OUTPUT"
 fi
