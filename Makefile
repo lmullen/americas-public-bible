@@ -54,7 +54,14 @@ argo-get-results :
 
 # Tasks to test various scripts
 # ----------------------------------------------------------------------
-test-quotation-finder :
+test-quotation-finder : temp/test-ncnp-quotations.fst temp/test-chronam-quotations.fst
+
+temp/test-ncnp-quotations.fst : data/sample/ncnp-batch-00650.fst
 	time Rscript bin/find-potential-quotations.R \
-		--tokens=2 --tfidf=0.25 --verbose=2 --bible=bin/bible-payload.rda \
-		data/sample/ncnp-batch-00650.fst -o temp/test-ncnp-quotations.fst
+		--tokens=2 --tfidf=0.5 --verbose=2 --bible=bin/bible-payload.rda \
+		$^ -o $@
+
+temp/test-chronam-quotations.fst : data/sample/chronam-batch-000023.fst
+	time Rscript bin/find-potential-quotations.R \
+		--tokens=5 --tfidf=0.5 --verbose=2 --bible=bin/bible-payload.rda \
+		$^ -o $@
