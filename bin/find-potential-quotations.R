@@ -12,7 +12,7 @@ suppressPackageStartupMessages(library(tokenizers))
 suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(Matrix))
 suppressPackageStartupMessages(library(broom))
-suppressPackageStartupMessages(library(tseries))
+suppressPackageStartupMessages(library(randtests))
 
 parser <- OptionParser(
   description = "Find potential quotations in a batch of texts.",
@@ -43,10 +43,12 @@ if (!interactive()) {
   # For testing
   flog.warn("Using the testing command line arguments since session is interactive.")
   args <- parse_args(parser,
-                     args = c("./data/sample/ncnp-batch-00650.fst",
-                              "--out=temp/ncnp-potential-matches.fst",
+                     args = c("./data/sample/chronam-batch-000023.fst",
+                              "--out=temp/test-chronam-quotations.fst",
                               "--bible=bin/bible-payload.rda",
-                              "--verbose=2"),
+                              "--verbose=2",
+                              "--tokens=5",
+                              "--tfidf=0.5"),
                      positional_arguments = 1)
 }
 
@@ -174,7 +176,7 @@ runs_pval <- function(doc_id, ref, token_count) {
   if (token_count <= 0) return(NA_real_) # Don't compute for a single token
   matches <- doc_tokens(doc_id) %in% verse_tokens(ref)
   if (sum(matches) == 0) return(NA_real_) # If no matches return NA
-  runs.test(as.factor(matches))$p.value
+  runs.test(as.numeric(matches), threshold = 0.5)$p.value
 }
 potential_matches <- potential_matches %>%
   rowwise() %>% # runs_pval function is not vectorized
