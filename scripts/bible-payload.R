@@ -14,7 +14,6 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(tokenizers))
 suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(odbc))
-suppressPackageStartupMessages(library(stopwords))
 
 db <- dbConnect(odbc::odbc(), "Research DB")
 scriptures <- tbl(db, "scriptures") %>% collect()
@@ -25,18 +24,18 @@ bible_tokenizer <- function(x, type = c("ngrams", "words")) {
   }
   type <- match.arg(type)
 
-  # some custom stop words combined with standard english stopwords
+  # some custom stop words combined with letters and numbers
   custom_stops <- c("a", "an", "at", "and", "are", "as", "at", "be", "but", "by",
                     "do", "for", "from", "he",  "her", "his", "i", "in", "into",
                     "is", "it",  "my", "of", "on", "or",  "say", "she", "that",
-                    "the", "their", "there", "these", "they", "this",  "to",
+                    "the", "their", "there", "these", "they", "this",  "to", "us",
                     "was", "what", "will", "with", "you", "two", "four", "five",
                     "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
                     "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
                     "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty",
                     "sixty", "seventy", "eighty", "ninety", "hundred")
-  en_stops <- stopwords::stopwords("en", source = "snowball")
-  bible_stops <- c(custom_stops, en_stops, letters) %>% sort() %>% unique()
+  numbers <- as.character(1:100)
+  bible_stops <- c(custom_stops, letters, numbers) %>% sort() %>% unique()
 
   if (type == "ngrams") {
     # More skips (k), more robust to bad OCR, at the cost of many more tokens
