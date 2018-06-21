@@ -121,7 +121,8 @@ texts <- texts %>% select(-tokens_ngrams) # Don't store the n-gram tokens any mo
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Getting the count of matching tokens.")
-token_count <- tcrossprod(bible$bible_dtm, docs_dtm) %>%
+token_count_m <- tcrossprod(bible$bible_dtm, docs_dtm)
+token_count <- token_count_m %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, tokens = value)
 flog.debug("Memory used: %s.", mem_used())
@@ -137,10 +138,9 @@ tfidf_score <- tcrossprod(bible$bible_tfidf, docs_dtm) %>%
   rename(verse_id = row, doc_id = column, tfidf = value)
 flog.debug("Memory used: %s.", mem_used())
 
-flog.info("Getting the proportion of matches.")
-transform_colsums <- function(m) { m %*% Diagonal(x = 1 / colSums(m)) }
-proportion <- tcrossprod(normalize(bible$bible_dtm),
-                         transform_colsums(docs_dtm)) %>%
+flog.info("Getting the proportion of the matched verses.")
+proportion_m <- (1 / rowSums(bible$bible_dtm)) * token_count_m
+proportion <- proportion_m %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, proportion = value)
 flog.debug("Memory used: %s.", mem_used())
