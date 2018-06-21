@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
-# Dump the batches from the database as .fst files. Use the batches containing 20K pages or articles
+# Dump the batches from the database as .fst files. Use the batches containing
+# 10K articles from NCNP or 3K pages from ChronAm.
 
 library(odbc)
 library(tidyverse)
@@ -13,11 +14,11 @@ dir_create(out_dir)
 db <- dbConnect(odbc::odbc(), "Research DB")
 
 chronam_range <- tbl(db, "chronam_processing") %>%
-  pull(batch_20k) %>%
+  pull(batch_3k) %>%
   unique() %>%
   sort()
 ncnp_range <- tbl(db, "ncnp_processing") %>%
-  pull(batch_20k) %>%
+  pull(batch_10k) %>%
   unique() %>%
   sort()
 
@@ -27,7 +28,7 @@ batches <- bind_rows(
 )
 
 dump_batch <- function(corpus, batch) {
-  out_name <- str_glue("{out_dir}/{corpus}-batch-{str_pad(batch, 5, 'left', '0')}.fst")
+  out_name <- str_glue("{out_dir}/{corpus}-batch-{str_pad(batch, 6, 'left', '0')}.fst")
   if (file_exists(out_name)) {
     message(str_glue("Skipping {out_name}: file already exists."))
     return(NULL)
@@ -35,8 +36,12 @@ dump_batch <- function(corpus, batch) {
   message(str_glue("Processing {out_name}"))
   batch_tbl <- tbl(db, str_glue("{corpus}_processing"))
   text_tbl <- tbl(db, str_glue("{corpus}_texts"))
-  texts <- batch_tbl %>%
-    filter(batch_20k == batch) %>%
+  if (corpus == "chronam") {
+    texts <- batch_tbl %>% filter(batch_3k == batch)
+  } else if (corpus == "ncnp") {
+    texts <- batch_tbl %>% filter(batch_10k == batch)
+  }
+  texts %>%
     left_join(text_tbl, by = "doc_id") %>%
     select(doc_id, text) %>%
     collect()
