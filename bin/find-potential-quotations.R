@@ -12,6 +12,7 @@ suppressPackageStartupMessages(library(tokenizers))
 suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(Matrix))
 suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(tseries))
 
 parser <- OptionParser(
   description = "Find potential quotations in a batch of texts.",
@@ -30,8 +31,8 @@ parser <- OptionParser(
              action = "store", type = "integer", default = 2,
              help = "Minimum number of matching tokens (default: 2).") %>%
   add_option(c("--tfidf"),
-             action = "store", type = "double", default = 0.25,
-             help = "Minimum TF-IDF score to keep a potential match (default: 0.25).") %>%
+             action = "store", type = "double", default = 0.5,
+             help = "Minimum TF-IDF score to keep a potential match (default: 0.5).") %>%
   add_option(c("-v", "--verbose"),
              action = "store", type = "integer", default = 1,
              help = "Verbosity: 0 = errors and warnings; 1 = information; 2 = debugging.")
@@ -159,7 +160,27 @@ flog.info("Kept %s potential matches out of %s total (%s%%).",
           pnum(n_keepers), pnum(n_potential), round(prop_keepers * 100, 1))
 flog.debug("Memory used: %s.", mem_used())
 
-
+flog.info("Calculating the runs p-values.")
+# Get the vectors of tokens from a Bible verse and a document
+verse_tokens <- function(ref) {
+  bible$bible_tokens[bible$bible_tokens$doc_id == ref, "tokens_words",
+                     drop = TRUE][[1]]
+}
+doc_tokens <- function(doc_id) {
+  texts[texts$doc_id == doc_id, "tokens_words", drop = TRUE][[1]]
+}
+# Calculate the runs p-value for a text and a Bible verse
+runs_pval <- function(doc_id, ref, token_count) {
+  if (token_count <= 0) return(NA_real_) # Don't compute for a single token
+  matches <- doc_tokens(doc_id) %in% verse_tokens(ref)
+  if (sum(matches) == 0) return(NA_real_) # If no matches return NA
+  runs.test(as.factor(matches))$p.value
+}
+potential_matches <- potential_matches %>%
+  rowwise() %>% # runs_pval function is not vectorized
+  mutate(runs_pval = runs_pval(doc_id, verse_id, tokens)) %>%
+  ungroup()
+flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Writing the potential matches: %s.", out_path)
 write_fst(potential_matches, out_path)
