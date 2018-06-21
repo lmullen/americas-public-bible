@@ -41,7 +41,7 @@ dump_batch <- function(corpus, batch) {
   } else if (corpus == "ncnp") {
     texts <- batch_tbl %>% filter(batch_10k == batch)
   }
-  texts %>%
+  texts <- texts %>%
     left_join(text_tbl, by = "doc_id") %>%
     select(doc_id, text) %>%
     collect()
