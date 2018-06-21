@@ -6,8 +6,7 @@
 #SBATCH --partition=all-HiPri
 #SBATCH --mem-per-cpu=12G
 #SBATCH --export=NONE
-##SBATCH --array=1-1586%20
-#SBATCH --array=1-5%5
+##SBATCH --array=1-5989%60
 
 ## Load modules since we are not exporting our environment
 module load R/3.4.4
@@ -19,8 +18,8 @@ INPUT=/scratch/lmullen/newspaper-batches/$BATCH.fst
 OUTPUT=/scratch/lmullen/argo-out/quotations/$BATCH-quotations.fst
 
 ## Run the executable only if output does not exist
-echo "Job details: BATCH=$BATCH TASKID: $SLURM_ARRAY_TASK_ID"
-echo "Input files is $INPUT"
+echo "Job details: BATCH=$BATCH TASKID=$SLURM_ARRAY_TASK_ID"
+echo "Input file: $INPUT"
 if [ -f "$OUTPUT" ]; then
   echo "SKIPPED: Not running task because $OUTPUT already exists"
 else
