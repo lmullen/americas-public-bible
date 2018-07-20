@@ -27,24 +27,30 @@ quotations_with_texts <- quotations_with_texts %>% collect()
 # Load the Bible payload for the tokenizers
 load("bin/bible-payload.rda")
 
-preserve_string <- function(x) {
-  stopifnot(is.character(x))
-  if (length(x) == 0) {
-    return("")
-  } else{
-    return(x)
+find_matches <- function(bible_text, doc_text) {
+  tokenizer <- function(x) {
+    tokenizers::tokenize_words(x, strip_numeric = TRUE, simplify = TRUE,
+                               stopwords = stopwords::stopwords())
   }
+  bible_tokens <- tokenizer(bible_text)
+  doc_tokens <- tokenizer(doc_text)
+  out <- doc_tokens[doc_tokens %in% bible_tokens] %>% str_c(collapse = " ")
+  if (length(out) == 0) return("") else return(out)
 }
 
-quotations_with_texts %>%
-  head(1) %>%
+cleaned_up <- quotations_with_texts %>%
+  arrange(desc(tokens)) %>%
   mutate(article_text = if_else(is.na(chronam_text), ncnp_text, chronam_text)) %>%
   mutate(corpus = if_else(is.na(chronam_text), "ncnp", "chronam")) %>%
   select(-chronam_text, -ncnp_text) %>%
   rowwise() %>%
-  mutate(article_tokens = bible_tokenizer(article_text, "words"),
-         bible_tokens = bible_tokenizer(verse_text, "words")) -> temp
-  mutate(matching_words = article_tokens[article_tokens %in% bible_tokenizer(verse_text, "words")] %>%
-           str_c(collapse = " ")) %>%
-  View()
+  mutate(matching_words = find_matches(verse_text, article_text)) %>%
+  mutate(tfidf = round(tfidf, 3),
+         proportion = round(proportion, 3),
+         runs_pval = round(runs_pval, 3)) %>%
+  mutate(match = "", version = "") %>%
+  select(verse_text, matching_words, match, version,
+         verse_id, doc_id, tokens, tfidf, proportion, runs_pval, corpus)
+
+write_csv(cleaned_up, "data/2018-07-18-matches-for-training.csv")
 
