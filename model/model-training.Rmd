@@ -1,0 +1,142 @@
+---
+title: "Model training"
+output: html_notebook
+---
+
+This notebook trains a classification model which distinguishes between actual quotations to the biblical text and mere noise. It does not attempt to distinguish between versions of a biblical text: that kind of cleaning will happen later.
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(broom)
+library(rsample)
+library(parsnip)
+library(recipes)
+library(yardstick)
+```
+
+The training data is located in the database. It is stored as a table of labels and a table of measurements of the features of the potential quotation. We will join them and split the data into training and testing sets. But to make sure the data is available for inspection later, we will only do that if the data has not been written to disk; otherwise, we will load the data from disk.
+
+```{r}
+# Check if we have already commited the training and validation data
+if (!file.exists("apb-training.csv") |
+    !file.exists("apb-testing.csv") |
+    !file.exists("apb-labeled-quotations.csv")) {
+  message("Reading the labels from the database and creating train/test split.\n")
+  library(odbc)
+  db <- dbConnect(odbc::odbc(), "Research DB")
+  apb_labeled <- tbl(db, "apb_labeled")
+  apb_potential_quotations <- tbl(db, "apb_potential_quotations")
+  labeled_quotations <- left_join(apb_labeled, apb_potential_quotations,
+                                  by = c("verse_id", "doc_id")) %>% 
+    collect() %>% 
+    filter(!is.na(tokens)) %>% 
+    mutate(match = if_else(match == "1", "quotation", "noise"))
+  # Split the labeled data into training and validation sets
+  set.seed(1989)
+  data_split <- initial_split(labeled_quotations, strata = "match", p = 0.85)
+  training <- training(data_split)
+  testing  <- testing(data_split)
+  write_csv(labeled_quotations, "apb-labeled-quotations.csv")
+  write_csv(training, "apb-training.csv")
+  write_csv(testing, "apb-testing.csv")
+  # Cleanup
+  dbDisconnect(db)
+  rm(data_split)
+  rm(apb_labeled)
+  rm(apb_potential_quotations)
+  rm(db)
+} else {
+  message("The training or testing data already exists. Loading from disk.\n")
+  spec <- cols(verse_id = col_character(), doc_id = col_character(),
+               match = col_character(), tokens = col_integer(),
+               tfidf = col_double(), proportion = col_double(),
+               runs_pval = col_double())
+  labeled_quotations <- read_csv("apb-labeled-quotations.csv", col_types = spec)
+  training <- read_csv("apb-training.csv", col_types = spec)
+  testing <- read_csv("apb-testing.csv", col_types = spec)
+  rm(spec)
+}
+```
+
+We also have to turn the `match` column into a factor. And we are going to remove the `verse_id` and `doc_id` columns because they are not predictor or response variables.
+
+```{r}
+labeled_quotations <- labeled_quotations %>% 
+  mutate(match = factor(match, levels = c("quotation", "noise"))) %>% 
+  select(-verse_id, -doc_id)
+training <- training %>% 
+  mutate(match = factor(match, levels = c("quotation", "noise"))) %>% 
+  select(-verse_id, -doc_id)
+testing <- testing %>% 
+  mutate(match = factor(match, levels = c("quotation", "noise"))) %>% 
+  select(-verse_id, -doc_id)
+```
+
+Some brief exploration of the data confirms that there is a clear separation in the data.
+
+```{r}
+labeled_quotations %>% 
+  group_by(match) %>% 
+  summarize(n(), mean(tokens), mean(tfidf), mean(proportion), mean(runs_pval)) %>% 
+  gather("measurement", "value", -match) %>% 
+  mutate(value = round(value, 2)) %>% 
+  spread(match, value)
+```
+
+```{r}
+ggplot(labeled_quotations, aes(tokens, tfidf, color = match)) +
+  geom_jitter(shape = 1) +
+  theme_classic() +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 12)) +
+  labs(title = "Comparison of genuine quotations versus noise")
+```
+
+We are going to pre-process the data to center and scale the predictors.
+
+```{r}
+data_recipe <- recipe(match ~ ., data = training) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors()) %>%
+  prep(training = training, retain = TRUE)
+
+training_normalized = bake(data_recipe, newdata = training)
+testing_normalized = bake(data_recipe, newdata = testing)
+```
+
+We will begin by training a logistic regression model to classify the quotations.
+
+```{r}
+set.seed(7260)
+model_spec <- logistic_reg(mode = "classification")
+
+model_fit <- model_spec %>% 
+  parsnip::fit(match ~ .,
+               data = training_normalized, 
+               engine = "glm",
+               control = fit_control(verbosity = 1))
+```
+
+We can then evaluate the accuracy of the model on the training dataset. (Later we will evaluate against the testing dataset.)
+
+```{r}
+training_results <- training_normalized %>% 
+  select(match) %>%
+  mutate(pred_class = model_fit %>% 
+           predict_class(training_normalized),
+         pred_probs = model_fit %>% 
+           predict_classprob(training_normalized) %>% 
+           pull(quotation))
+training_results %>% accuracy(truth = match, estimate = pred_class)
+training_results %>% roc_auc(truth = match, estimate = pred_probs)
+training_results %>% pr_auc(truth = match, estimate = pred_probs)
+training_results %>% conf_mat(truth = match, estimate = pred_class)
+training_results %>% conf_mat(truth = match, estimate = pred_class) %>% summary()
+training_results %>% roc_curve(match, pred_probs) %>% 
+  ggplot(aes(x = 1 - specificity, y = sensitivity)) +
+  geom_path() +
+  geom_abline(lty = 3) +
+  coord_equal() +
+  theme_bw() +
+  labs(title = "ROC curve")
+```
+
