@@ -52,5 +52,5 @@ cleaned_up <- quotations_with_texts %>%
   select(verse_text, matching_words, match, version,
          verse_id, doc_id, tokens, tfidf, proportion, runs_pval, corpus)
 
-write_csv(cleaned_up, "data/2018-07-18-matches-for-training.csv")
+write_csv(cleaned_up, "data/2018-08-10-matches-for-training.csv")
 
