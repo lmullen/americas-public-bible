@@ -1,0 +1,246 @@
+---
+title: "Public Bible: Scriptural Similarity"
+output: html_notebook
+---
+
+How similar is the Bible to itself?
+
+The Bible quotes itself, which is an internal kind of similarity. This includes quotations of the Old Testament in the New Testament. It also includes similarities in the synoptic Gospels. And there are similarities of language ("Thou shalt", "Thus says the Lord" and so on). Different versions of the Bible are similar to one another. And the Book of Mormon and other LDS scriptures are verbally similar to the Bible, and borrow whole passages from it. So using the database of scripture verses, we are going to calculate the similarities of the verses to one another from different versions. We can then use this dataset of similarity scores to find which verses are most likely to be similar to other verses.
+
+```{r, message=FALSE}
+library(tidyverse)
+library(odbc)
+library(textreuse)
+library(tokenizers)
+```
+
+Get the scriptures as a table from the database.
+
+```{r}
+db <- dbConnect(odbc::odbc(), "Research DB")
+scriptures <- tbl(db, "scriptures") %>% collect()
+```
+
+We are going to use the textreuse package to compute the similarities. Someday I will rewrite that package in the style of the tidyverse. But for now we have to get the corpus in a named character vector. 
+
+```{r}
+corpus_char <- scriptures$text
+names(corpus_char) <- scriptures$doc_id
+```
+
+We are going to use LSH to compute the similarities. We set the number of hashes and bands at a reasonable threshold.
+
+```{r}
+hashes <- 32
+bands  <- 16
+lsh_threshold(hashes, bands)
+```
+
+We need to create a minhashing function. We are going to use skip n-grams as our tokenizer.
+
+```{r}
+minhash <- minhash_generator(n = hashes, seed = 38477)
+scripture_tokenizer <- function(x) {
+  tokenizers::tokenize_skip_ngrams(x, n_min = 2, n = 3, k = 1, simplify = TRUE)
+}
+```
+
+Now we can create the corpus object.
+
+```{r, message=FALSE}
+if (!file.exists("../data/scripture-lsh-corpus.rds")) {
+  corpus <- suppressMessages(
+    TextReuseCorpus(text = corpus_char,
+                    tokenizer = scripture_tokenizer,
+                    minhash_func = minhash, 
+                    keep_tokens = FALSE,
+                    keep_text = FALSE,
+                    progress = FALSE)
+  )
+  saveRDS(corpus, "../data/scripture-lsh-corpus.rds")
+} else {
+  corpus <- readRDS("../data/scripture-lsh-corpus.rds")
+}
+```
+
+Write the list of short verses to the model directory so that we can use it later.
+
+```{r}
+write_lines(skipped(corpus), "../model/short-verses.txt")
+```
+
+Now we compute the buckets and find the candidates, then compute their actual similarities.
+
+```{r}
+if (!file.exists("../data/scripture-candidates.csv")){
+  buckets <- lsh(corpus, bands = bands, progress = TRUE)
+  candidates <- lsh_candidates(buckets)
+  write_csv(candidates, "../data/scripture-candidates.csv")
+} else {
+  candidates <- read_csv("../data/scripture-candidates.csv",
+                         col_types = "ccn")
+}
+```
+
+We don't right away want to compute the similarities if it is the same verse in a different version, because we can safely assume that those will bear a similarity to one another. It might be interesting to ask *how* similar another time. So we only keep candidates if they are from the same version.
+
+```{r}
+intraversion_candidates <- candidates %>% 
+  left_join(select(scriptures, a = doc_id, a_version = version), by = "a") %>% 
+  left_join(select(scriptures, b = doc_id, b_version = version), by = "b") %>% 
+  filter(a_version == b_version) %>% 
+  rename(version = a_version) %>% 
+  select(-b_version)
+```
+
+That reduces the percentage of matches to find similarities for quite a bit.
+
+```{r}
+nrow(intraversion_candidates) / nrow(candidates)
+```
+
+Now we can compute the intraversion similarities for these verses. We will write them to disk too.
+
+```{r}
+if (!file.exists("../data/scripture-intraversion-similarities.csv")) {
+  intraversion_similarities <- lsh_compare(intraversion_candidates, corpus, jaccard_similarity,
+                              progress = TRUE)
+  write_csv(intraversion_similarities,
+            "../data/scripture-intraversion-similarities.csv")
+} else {
+  intraversion_similarities <- 
+    read_csv("../data/scripture-intraversion-similarities.csv",
+             col_types = "ccnc")
+}
+```
+
+We are going to write the similarities to the database for use later.
+
+```{r}
+dbWriteTable(db, "scriptures_intraversion_pairs", intraversion_similarities)
+```
+
+Now we can examine the similarities. First some work to get us just the KJV.
+
+```{r}
+get_chapter <- function(x) str_remove(x, ":.+$")
+kjv <- intraversion_similarities %>% 
+  filter(version == "KJV") %>% 
+  mutate(x = if_else(a < b, a, b),
+         y = if_else(a < b, b, a)) %>% 
+  select(-a, -b) %>% 
+  mutate(x_ch = get_chapter(x),
+         y_ch = get_chapter(y))
+```
+
+Then we can aggregate that to get the chapter to chapter relationships.
+
+```{r}
+ch2ch <- kjv %>% 
+  filter(score > 0.5) %>% # filtering this to keep it reasonable
+  group_by(x_ch, y_ch) %>% 
+  summarize(n = n(),
+            mean_jaccard = mean(score),
+            weighted = sum(score)) %>% 
+  arrange(desc(weighted)) %>% 
+  filter(x_ch != y_ch)
+```
+
+And finally we can make a plot of this borrowing.
+
+```{r}
+library(ggraph)
+library(igraph)
+g <- graph_from_data_frame(ch2ch, directed = FALSE)
+ggraph(g, "igraph", algorithm = "nicely") +
+  geom_edge_fan() +
+  geom_node_point() +
+  ggforce::theme_no_axes() +
+  labs(title = "Borrowings among chapters of the KJV")
+```
+
+The most important thing for training the model is to get a sense of how unique each verse is. The list of similarities that we have is like a sparse matrix, and can be easily converted to one. Because a verse can appear in either a "row" or a "column," we need to make the matrix symmetrical at first then drop the lower triangle. And to get the indices, we need to assign numeric indices to each possible verse.
+
+We are also going to filter the intraversion similarities to get only matches that are greater that a Jaccard score of 0.25. The reason is that that was the threshold we set when picking the number of hashes and bands. We can expect a great deal of noise below that threshold, and we are really interested primarily in verses which are more or less duplicates, not verses which have a some degree of verbal similarity.
+
+```{r}
+library(Matrix)
+
+index <- scriptures %>% 
+  select(doc_id) %>% 
+  mutate(index = seq_len(nrow(scriptures)))
+sims_with_index <- intraversion_similarities %>% 
+  filter(score > 0.25) %>% 
+  left_join(select(index, a = doc_id, a_i = index), by = "a") %>% 
+  left_join(select(index, b = doc_id, b_i = index), by = "b")
+sim_matrix <- sparseMatrix(i = c(sims_with_index$a_i, sims_with_index$b_i),
+                           j = c(sims_with_index$b_i, sims_with_index$a_i),
+                           x = c(sims_with_index$score, sims_with_index$score),
+                           symmetric = FALSE,
+                           dims = c(nrow(index), nrow(index)),
+                           dimnames = list(index$doc_id, index$doc_id),)
+
+# As a sanity check, make sure that it is symmetric and that there are no values
+# in the diagonal.
+stopifnot(isSymmetric(sim_matrix))
+stopifnot(all(diag(sim_matrix) == 0))
+```
+
+We can compute the total of the similarities. In other words, if a verse is perfectly similar to five other verses, we'd expect it to have a score of 5. 
+
+```{r}
+verse_total_scores <- rowSums(sim_matrix) %>% 
+  broom::tidy() %>% 
+  rename(verse_id = names, sim_total = x)
+```
+
+The range there is quite large.
+
+```{r}
+range(verse_total_scores$sim_total)
+```
+
+
+It might actually be more useful to compute the mean of the non-zero scores. In other words, we would expect a verse to have a range from 0 to 1. 
+
+```{r}
+verse_mean_scores_vector <- numeric(nrow(sim_matrix))
+names(verse_mean_scores_vector) <- rownames(sim_matrix)
+
+for(row in seq_len(nrow(sim_matrix))) {
+  x <- sim_matrix[row, , drop = TRUE]
+  x <- x[x > 0]
+  mean_x <- if (length(x) > 0) { mean(x) } else { 0 }
+  verse_mean_scores_vector[row] <- mean_x
+}
+
+verse_mean_scores <- verse_mean_scores_vector %>% 
+  broom::tidy() %>% 
+  rename(verse_id = names, sim_mean = x)
+```
+The range on this should be from 0 to 1.
+
+```{r}
+range(verse_mean_scores$sim_mean)
+```
+
+We can get a sense of the different distributions for the non-zero similarity scores.
+
+```{r}
+verse_mean_scores %>% 
+  filter(sim_mean > 0) %>% 
+  ggplot(aes(x = sim_mean)) + geom_histogram(bins = 100) +
+  labs(title = "Mean similarity scores for verses")
+verse_total_scores %>% 
+  filter(sim_total > 0) %>% 
+  ggplot(aes(x = sim_total)) + geom_histogram(bins = 100) +
+  labs(title = "Total similarity scores for verses")
+```
+
+We are going to join those two together and write them to the database for later use.
+
+```{r}
+left_join(verse_total_scores, verse_mean_scores, by = "verse_id") %>% 
+  dbWriteTable(db, "scriptures_intraversion_similarity", .)
+```
+
