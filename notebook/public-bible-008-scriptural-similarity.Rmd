@@ -143,7 +143,19 @@ ch2ch <- kjv %>%
             mean_jaccard = mean(score),
             weighted = sum(score)) %>% 
   arrange(desc(weighted)) %>% 
-  filter(x_ch != y_ch)
+  filter(x_ch != y_ch) 
+
+chs <- data_frame(chapter = c(ch2ch$x_ch, ch2ch$y_ch)) %>% 
+  distinct(chapter) %>% 
+  mutate(book = str_remove_all(chapter, " \\d+")) %>%
+  mutate(book = if_else(book == "Psalm", "Psalms", book)) %>% 
+  left_join(scriptures %>%
+              filter(version == "KJV") %>% 
+              select(book, part) %>% 
+              distinct(book, part), by = "book") %>% 
+  mutate(part = if_else(book == "Psalms", "Psalms", part),
+         part = if_else(book %in% c("Matthew", "Mark", "Luke", "John"), 
+                        "Gospels", part))
 ```
 
 And finally we can make a plot of this borrowing.
@@ -151,11 +163,11 @@ And finally we can make a plot of this borrowing.
 ```{r}
 library(ggraph)
 library(igraph)
-g <- graph_from_data_frame(ch2ch, directed = FALSE)
+g <- graph_from_data_frame(ch2ch, directed = FALSE, chs)
 ggraph(g, "igraph", algorithm = "nicely") +
   geom_edge_fan() +
-  geom_node_point() +
-  ggforce::theme_no_axes() +
+  geom_node_point(size = 3,  aes(color = part)) +
+  ggforce::theme_no_axes(theme_bw(base_size = 18)) +
   labs(title = "Borrowings among chapters of the KJV")
 ```
 
