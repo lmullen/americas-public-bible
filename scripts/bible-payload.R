@@ -16,7 +16,13 @@ suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(odbc))
 
 db <- dbConnect(odbc::odbc(), "Research DB")
-scriptures <- tbl(db, "scriptures") %>% collect()
+
+# Exclude the LDS scriptures because they are mostly causing noise
+scriptures <- tbl(db, "scriptures") %>%
+  filter(version != "Book of Mormon",
+         version != "Doctrine and Covenants",
+         version != "Pearl of Great Price") %>%
+  collect()
 
 bible_tokenizer <- function(x, type = c("ngrams", "words")) {
   if (missing(type)) {

@@ -38,13 +38,12 @@ if (!file.exists("apb-training.csv") |
     left_join(scriptures, by = c("verse_id")) %>% 
     left_join(scripture_sim, by = c("verse_id")) %>% 
     collect() %>% 
-    filter(!is.na(tokens)) %>% 
+    filter(!is.na(tokens),
+           version != "Book of Mormon",
+           version != "Pearl of Great Price",
+           version != "Doctrine and Covenants") %>% 
     mutate(match = if_else(match, "quotation", "noise"),
-           match = factor(match, levels = c("quotation", "noise")),
-           lds = if_else(version %in% c("Book of Mormon", 
-                                        "Doctrine and Covenants",
-                                        "Pearl of Great Price"),
-                         "lds", "not-lds") %>% as.factor()) %>% 
+           match = factor(match, levels = c("quotation", "noise"))) %>% 
     mutate(runs_pval = if_else(is.na(runs_pval), 1, runs_pval)) %>% 
     select(-version)
   
@@ -77,8 +76,7 @@ if (!file.exists("apb-training.csv") |
                proportion = col_double(),
                runs_pval = col_double(), 
                sim_total = col_double(), 
-               sim_mean = col_double(), 
-               lds = readr::col_factor(levels = c("lds", "not-lds")))
+               sim_mean = col_double())
   labeled_quotations <- read_csv("apb-labeled-quotations.csv", col_types = spec)
   training <- read_csv("apb-training.csv", col_types = spec)
   testing <- read_csv("apb-testing.csv", col_types = spec)
