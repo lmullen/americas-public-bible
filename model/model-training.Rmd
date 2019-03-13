@@ -13,7 +13,8 @@ library(tidymodels)
 library(parsnip)
 library(dials)
 library(keras)
-library(furrr)
+library(probably)
+library(ggrepel)
 ```
 
 The training data is located in the database. It is stored as a table contained document (i.e., newspaper) and verse IDs, with a boolean labeling them as a genuine or false match. That match indicates whether the verse was indeed quoted, but not whether that specific version was quoted. Another table contains measurements of the features of the potential quotation. We join the labeled data to those measurements. But it might also be useful to know certain information about the version of the verse. For instance, the Book of Mormon reproduces a number of verses or phrases from the KJV and so it has a much higher rate of potential matches that measure highly but aren't actually matches. So we pull in some version information that we will manipulate. This includes a table measuring how similar verses are to one another within the same version, which is a way of knowing whether a verse is unique or not. Finally we split the data into training and testing sets. The testing set is inviolable, and will be used for model validation later. To make sure the data is available for inspection later, we will only do that if the data has not been written to disk; otherwise, we will load the data from disk.
@@ -118,14 +119,13 @@ ggplot(labeled_quotations, aes(tokens, tfidf, color = match)) +
 We are going to pre-process the data to center and scale the predictors.
 
 ```{r}
-data_recipe <- recipe(match ~ ., data = training) %>%
+data_recipe <- recipe(match ~ ., data = training) %>% 
   step_center(all_numeric()) %>%
   step_scale(all_numeric()) %>%
-  step_dummy(all_nominal(), -match) %>% 
   prep(training = training, retain = TRUE)
 
-training_normalized = bake(data_recipe, newdata = training)
-testing_normalized = bake(data_recipe, newdata = testing)
+training_normalized = bake(data_recipe, new_data = training)
+testing_normalized = bake(data_recipe, new_data = testing)
 ```
 
 We aren't entirely sure which predictors would be best. So we want to define different formulas for different sets of predictors, along with a dials parameter to generated the tuning grid.
@@ -138,18 +138,12 @@ predictors_formulas <- list(
   core = match ~ tokens + tfidf + proportion,
   # The core numeric predictors plus runs_pval
   numeric = match ~ tokens + tfidf + proportion + runs_pval,
-  # The core numeric predictors plus runs_pval with log of tokens
-  numeric_log = match ~ log(tokens) + tfidf + proportion + runs_pval,
   # The core numeric predictors with interaction between tokens and tfidf
   interaction = match ~ tokens * tfidf + proportion + runs_pval,
-  # The numeric predictors plus sim_total and lds
-  sim1 = match ~ tokens + tfidf + proportion + runs_pval + sim_total + lds_not.lds,
-  # The numeric predictors plus sim_mean and lds
-  sim2 = match ~ tokens + tfidf + proportion + runs_pval + sim_mean + lds_not.lds,
-  # The numeric predictors plus sim_total but not lds
-  sim3 = match ~ tokens + tfidf + proportion + runs_pval + sim_total,
-  # The numeric predictors plus sim_total but not lds
-  sim4 = match ~ tokens + tfidf + proportion + runs_pval + sim_mean
+  # The numeric predictors plus sim_total
+  sim_t = match ~ tokens + tfidf + proportion + runs_pval + sim_total,
+  # The numeric predictors plus sim_mean 
+  sim_m = match ~ tokens + tfidf + proportion + runs_pval + sim_mean
 )
 
 # A dials object for setting the predictors parameter
@@ -158,30 +152,10 @@ predictors <- new_qual_param("character",
                              label = c(predictors = "Predictors"))
 ```
 
-We will begin by training a logistic regression model to classify the quotations. We will create a tuning grid with the different predictors, parameters specific to the logistic regression model. We will then train the models on those parameters, and measure the accuracy according to various metrics that use the confusion matrix. The goal is to end up with a data frame with the parameters, models, and accuracy measures.
 
-```{r, warning=FALSE}
-set.seed(7260)
-logistic_spec <- logistic_reg(mode = "classification", 
-                              regularization = varying(),
-                              mixture = varying())
+Some helper functions for running the predictions and computing the accuracy measures.
 
-logistic_params <- grid_regular(regularization,
-                                mixture,
-                                predictors,
-                                levels = 5)
-logistic_params$model_type <- "logistic regression"
-logistic_params$accuracy <- vector("list", nrow(logistic_params))
-logistic_models <- vector("list", nrow(logistic_params))
-
-for (i in 1:nrow(logistic_params)) {
-  logistic_models[[i]] <- logistic_spec %>% 
-    merge(logistic_params[i, ]) %>% 
-    parsnip::fit(predictors_formulas[[logistic_params[[i, "predictors"]]]],
-                 data = training_normalized,
-                 engine = "glm")
-}
-
+```{r}
 # Calculate the confusion matrix and the resulting accuracy measures
 predictions <- function(model, type = c("training", "testing")) {
   type <- match.arg(type)
@@ -196,158 +170,240 @@ predictions <- function(model, type = c("training", "testing")) {
              predict_classprob(df) %>% 
              pull(quotation))
 }
+
 accuracy_measures <- function(model, type = c("training", "testing")) {
   type <- match.arg(type)
-  model %>% 
-    predictions(type = type) %>%
-    conf_mat(truth = match, estimate = pred_class) %>%
-    summary()
+  preds <- model %>%  predictions(type = type)
+  bind_rows(
+    preds %>% conf_mat(truth = match, estimate = pred_class) %>% summary(),
+    preds %>% roc_auc(match, pred_probs)
+  )
+}
+```
+
+We will begin by training a logistic regression model to classify the quotations. We will create a tuning grid with the different predictors, parameters specific to the logistic regression model. We will then train the models on those parameters, and measure the accuracy according to various metrics that use the confusion matrix. The goal is to end up with a data frame with the parameters, models, and accuracy measures.
+
+```{r, warning=FALSE}
+set.seed(7260)
+logistic_spec <- logistic_reg(mode = "classification", 
+                              penalty = varying(),
+                              mixture = varying()) %>% 
+  set_engine("glm")
+
+logistic_params <- grid_regular(penalty,
+                                mixture,
+                                predictors,
+                                levels = 6)
+logistic_params$model_type <- "logistic regression"
+logistic_params$id <- seq_len(nrow(logistic_params))
+logistic_params$accuracy <- vector("list", nrow(logistic_params))
+logistic_params <- logistic_params %>% select(id, everything())
+logistic_definitions <- logistic_spec %>% merge(logistic_params)
+logistic_models <- vector("list", length(logistic_definitions))
+
+for (i in seq_along(logistic_definitions)) {
+  logistic_models[[i]] <- parsnip::fit(
+    logistic_definitions[[i]],
+    predictors_formulas[[logistic_params$predictors[i]]],
+    data = training_normalized)
 }
 
 for (i in seq_along(logistic_models)) {
   logistic_params$accuracy[[i]] <- accuracy_measures(logistic_models[[i]])
 }
 
-logistic_params <- logistic_params %>% 
-  unnest(accuracy) %>% 
-  spread(name, value)
-
-logistic_params %>% 
-  arrange(desc(balanced_accuracy)) %>% 
-  select(balanced_accuracy, precision, recall, everything()) %>%
-  head(5) 
+logistic_accuracy <- logistic_params %>%
+  unnest(accuracy) %>%
+  spread(.metric, .estimate)
 ```
 
-Having done that for logistic regression, we can also do it for boosted trees. This is not full done yet. These models drastically overfit.
+We might want to try other models and combine them here.
 
-```{r, warning=FALSE}
-set.seed(275)
-bt_spec <- boost_tree(mode = "classification", 
-                        # mtry = varying(),
-                        trees = varying(),
-                        # min_n = varying(),
-                        tree_depth = varying(),
-                        # learn_rate = varying(),
-                        # loss_reduction = varying(),
-                        # sample_size = varying()
-                      )
-
-bt_params <- grid_random(predictors,
-                         # mtry,
-                         trees,
-                         # min_n,
-                         tree_depth,
-                         # learn_rate,
-                         # loss_reduction,
-                         # sample_size,
-                         size = 30)
-
-bt_params$model_type <- "boosted tree"
-bt_params$accuracy <- vector("list", nrow(bt_params))
-
-train_bt <- function(i) {
-  bt_spec %>% 
-    merge(bt_params[i, ]) %>% 
-    parsnip::fit(predictors_formulas[[bt_params[[i, "predictors"]]]],
-                 data = training_normalized,
-                 engine = "xgboost")
-}
-
-bt_models <- seq_len(nrow(bt_params)) %>% map(train_bt)
-
-for (i in seq_along(bt_models)) {
-  bt_params$accuracy[[i]] <- accuracy_measures(bt_models[[i]])
-}
-
-bt_params <- bt_params %>% 
-  unnest(accuracy) %>% 
-  spread(name, value)
-
-bt_params %>% 
-  arrange(desc(balanced_accuracy)) %>% 
-  select(balanced_accuracy, precision, recall, everything()) %>%
-  head(5) 
+```{r}
+models_accuracy <- bind_rows(logistic_accuracy) %>% 
+  select(model_type, id, predictors, roc_auc, f_meas, j_index, everything()) 
 ```
 
-Having done that for logistic regression and boosted trees, we want to do the same thing for a neural net.
 
-```{r, warning=FALSE}
-set.seed(87026)
-nnet_spec <- mlp(mode = "classification", 
-                 hidden_units = varying(),
-                 regularization = varying(),
-                 dropout = varying(),
-                 activation = varying(),
-                 epochs = 500,
-                 others = list(verbose = 1,
-                               validation_split = 0.2))
+Now that we have trained all the models we can pick the one with the best area under the ROC. We will find the best model for each of the kinds of predictors.
 
-nnet_params <- grid_random(predictors,
-                           hidden_units,
-                           regularization,
-                           dropout,
-                           activation,
-                           size = 2)
-nnet_params$model_type <- "nnet keras"
-nnet_params$accuracy <- vector("list", nrow(nnet_params))
-
-train_nnet <- function(i) {
-  nnet_spec %>% 
-    merge(nnet_params[i, ]) %>% 
-    parsnip::fit(predictors_formulas[[nnet_params[[i, "predictors"]]]],
-                 data = training_normalized,
-                 engine = "keras")
-}
-
-nnet_models <- seq_len(nrow(nnet_params)) %>% map(train_nnet)
-
-for (i in seq_along(nnet_models)) {
-  nnet_params$accuracy[[i]] <- accuracy_measures(nnet_models[[i]])
-}
-
-nnet_params <- nnet_params %>% 
-  unnest(accuracy) %>% 
-  spread(name, value)
-
-nnet_params %>% 
-  arrange(desc(balanced_accuracy)) %>% 
-  select(balanced_accuracy, precision, recall, everything()) %>%
-  head(5) 
+```{r}
+models_accuracy %>% 
+  group_by(predictors) %>% 
+  arrange(desc(roc_auc), desc(j_index), desc(f_meas)) %>% 
+  slice(1) 
 ```
 
-Now we can select the best model from the several types we have created.
+We can ask this question a different way by asking what the best model is for certain metrics.
+
+For the ROC AUC.
+```{r}
+models_accuracy %>% 
+  arrange(desc(roc_auc)) %>% 
+  top_n(1, roc_auc)
+```
+
+For the F1 score.
+
+```{r}
+models_accuracy %>% 
+  arrange(desc(f_meas)) %>% 
+  top_n(1, f_meas)
+```
+
+For the J index.
+
+```{r}
+models_accuracy %>% 
+  arrange(desc(j_index)) %>% 
+  top_n(1, j_index)
+```
+
+It appears that the model 1, using all the predictors is slightly better in terms of the ROC AUC measure, but that model 37 which uses only the three core numeric predictors is very close in terms of the ROC AUC and slightly better in terms of the F1 and J index metrics. The core metrics are much quicker to computer than the runs p value, so we will just use model 37.
+
+```{r}
+model <- logistic_models[[37]]
+```
+
+Let's test the predictions on the testing data set on that selected model.
+
+```{r}
+predictions <- function(model, type = c("training", "testing")) {
+  type <- match.arg(type)
+  data <- switch(type,
+             training = training_normalized,
+             testing = testing_normalized)
+  
+  bind_cols(
+    data %>% select(truth = match),
+    model %>% predict(data, type = "class"),
+    model %>% predict(data, type = "prob")
+  )
+}
+    
+model %>% predictions()
+```
+
+Then we can get the confusion matrix.
+
+```{r}
+model %>% predictions() %>% conf_mat(truth = truth, estimate = .pred_class)
+```
+
+And the summary statistics for estimating the model performance.
 
 ```{r}
 bind_rows(
-  nnet_params,
-  logistic_params
-) %>% 
-  select(model_type, balanced_accuracy, precision, recall, sens, spec, predictors, everything()) %>% 
-  arrange(desc(precision)) %>% 
-  head(10)
+  model %>% predictions() %>% conf_mat(truth, .pred_class) %>% summary(),
+  model %>% predictions() %>% roc_auc(truth, .pred_quotation)
+)
 ```
 
-<!-- We can then evaluate the accuracy of the model on the training dataset. (Later we will evaluate against the testing dataset.) -->
+Now we want to see the ROC curve itself. We will also plot a few different thresholds on the curve.
+https://tidymodels.github.io/probably/articles/where-to-use.html
 
 ```{r}
-# training_results <- training_normalized %>%
-#   select(match) %>%
-#   mutate(pred_class = model_fit %>%
-#            predict_class(training_normalized),
-#          pred_probs = model_fit %>%
-#            predict_classprob(training_normalized) %>%
-#            pull(quotation))
-# training_results %>% accuracy(truth = match, estimate = pred_class)
-# training_results %>% roc_auc(truth = match, estimate = pred_probs)
-# training_results %>% pr_auc(truth = match, estimate = pred_probs)
-# training_results %>% conf_mat(truth = match, estimate = pred_class)
-# training_results %>% conf_mat(truth = match, estimate = pred_class) %>% summary()
-# training_results %>% roc_curve(match, pred_probs) %>%
-#   ggplot(aes(x = 1 - specificity, y = sensitivity)) +
-#   geom_path() +
-#   geom_abline(lty = 3) +
-#   coord_equal() +
-#   theme_classic() +
-#   labs(title = "ROC curve")
+curve <- model %>% predictions() %>% roc_curve(truth, .pred_quotation)
+
+curve_points <- curve %>% 
+  filter(.threshold > 0.5) %>% 
+  mutate(.threshold = round(.threshold, 2)) %>% 
+  group_by(.threshold) %>% 
+  slice(1) %>% 
+  filter(.threshold %in% c(0.5, 0.58, 0.7, 0.8, 0.9))
+
+curve %>% 
+  autoplot() + 
+  labs(title = "ROC curve",
+       subtitle = "Select thresholds labeled") +
+  geom_point(data = curve_points,
+             aes(x = 1- specificity, y = sensitivity),
+             color = "red") +
+  geom_text(data = curve_points,
+            aes(x = 1- specificity, y = sensitivity, label = round(.threshold, 3)),
+            color = "red", nudge_x = 0.1)
+```
+
+We want to determine a threshold based on the ROC curve. 
+
+```{r}
+thresholds <- model %>% predictions() %>% 
+  threshold_perf(truth, .pred_quotation, thresholds = seq(0.5, 1, by = 0.01)) %>% 
+  filter(.metric != "distance")
+```
+
+We can see what the j-index, sensitivity, and specificity are at the various thresholds.
+
+```{r}
+thresholds %>% 
+  select(-.estimator) %>% 
+  mutate(.estimate = round(.estimate, 3)) %>% 
+  spread(.metric, .estimate)
+```
+
+Or we can look for the maximum j-index.
+
+```{r}
+thresholds %>% 
+  filter(.metric == "j_index") %>% 
+  top_n(1, .estimate)
+```
+
+We can also plot the changes in model performance based on varying the threshold.
+
+```{r}
+max_j_index_threshold <- thresholds %>%
+  filter(.metric == "j_index") %>%
+  filter(.estimate == max(.estimate)) %>%
+  pull(.threshold)
+
+ggplot(thresholds, aes(x = .threshold, y = .estimate, color = .metric)) +
+  geom_line() +
+  theme_minimal() +
+  geom_vline(xintercept = max_j_index_threshold, alpha = .6, color = "grey30") +
+  annotate("text", x = max_j_index_threshold + 0.01, y = 0.54,
+           label = str_glue("Line is maximum j-index: {max_j_index_threshold}"),
+           hjust = 0) +
+  labs(
+    x = "Probability threshold for identifying as a quotation",
+    y = "Metric estimate",
+    title = "Model performance varying by threshold",
+    color = "Metric"
+  )
+```
+
+So we can check the confusion matrix at that threshold.
+
+First the confusion matrix at a threshold of 0.5.
+
+```{r}
+model %>% predictions() %>% conf_mat(truth = truth, estimate = .pred_class)
+```
+
+Now the new confusion matrix.
+
+```{r}
+model %>% predictions() %>% 
+  mutate(prediction = if_else(.pred_quotation >= max_j_index_threshold,
+                              "quotation", "noise"),
+         prediction = factor(prediction, levels = c("quotation", "noise"))) %>% 
+  conf_mat(truth, prediction)
+```
+
+And we can do this on the testing data.
+
+```{r}
+confm_test <- model %>% predictions("testing") %>% 
+  mutate(prediction = if_else(.pred_quotation >= max_j_index_threshold,
+                              "quotation", "noise"),
+         prediction = factor(prediction, levels = c("quotation", "noise"))) %>% 
+  conf_mat(truth, prediction)
+confm_test
+```
+
+And we can compute the model statistics.
+
+```{r}
+summary(confm_test)
 ```
 
