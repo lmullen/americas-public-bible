@@ -5,15 +5,14 @@
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(fs))
 suppressPackageStartupMessages(library(futile.logger))
-suppressPackageStartupMessages(library(fst))
 suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(tokenizers))
 
 parser <- OptionParser(
   description = "Count the words in a batch of texts.",
   usage = "Usage: %prog [options] BATCH --out=OUTPUT",
-  epilogue = "Input and output files are assumed to be stored as .fst files."
+  epilogue = "Input and output files are assumed to be stored as .csv files."
 ) %>%
   add_option(c("-o", "--out"),
              action = "store", type = "character", default = NULL,
@@ -23,8 +22,8 @@ parser <- OptionParser(
              help = "Run quietly.")
 args <- parse_args(parser, positional_arguments = 1)
 # args <- parse_args(parser,
-#                    args = c("./data/sample/ncnp-batch-00650.fst",
-#                             "--out=temp/test.fst"),
+#                    args = c("./data/az_falcon_ver01.csv",
+#                             "--out=temp/word-count-test.csv"),
 #                    positional_arguments = 1)
 
 # Easier references to outputs
@@ -55,16 +54,18 @@ if (file_exists(out_path)) {
 flog.info("Beginning processing: %s.", batch_id)
 
 flog.info("Reading batch of texts: %s.", batch_path)
-texts <- read_fst(batch_path, columns = c("doc_id", "text"),
-                  as.data.table = FALSE) %>% as_tibble()
+texts <- read_csv(batch_path,
+                  col_names = c("batch_id", "doc_id", "text"),
+                  col_types = "ccc")
+
 flog.info("Read in %s texts.", nrow(texts))
 
 flog.info("Counting the words.")
 wordcounts <- texts %>%
   mutate(wc = count_words(text)) %>%
-  select(doc_id, wc)
+  select(-text)
 
 flog.info("Writing the word counts: %s.", out_path)
-write_fst(wordcounts, out_path)
+write_csv(wordcounts, out_path, col_names = FALSE)
 
 flog.info("Finished processing: %s.", batch_id)
