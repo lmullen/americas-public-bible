@@ -5,7 +5,7 @@
 
 # Define variables
 # ----------------------------------------------------------------------
-chronam_batches := /media/data/chronam/chroniclingamerica.loc.gov/data/ocr
+newspaper_batches := /media/data/chronam/chroniclingamerica.loc.gov/data/ocr
 
 # Local tasks
 # ----------------------------------------------------------------------
@@ -33,7 +33,7 @@ argo-get : argo-get-results
 argo-put-data :
 	rsync --archive -vv --delete \
 	$(newspaper_batches)/*.csv \
-	argo:/scratch/lmullen/chronam-batches \
+	argo:/scratch/lmullen/newspaper-batches \
 	2>&1 | tee logs/argo-put-data-$(shell date --iso-8601=seconds).log
 
 argo-put-bin :
