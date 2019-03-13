@@ -9,13 +9,13 @@
 #SBATCH --array=1-5989
 
 ## Load modules since we are not exporting our environment
-module load R/3.4.4
+module load R/3.5.2
 
 ## Get the file name associated with that line of the list of files
 BATCH_LIST=/home/lmullen/public-bible/bin/newspaper-batches.txt
 BATCH=$(sed -n "${SLURM_ARRAY_TASK_ID}p" $BATCH_LIST)
-INPUT=/scratch/lmullen/newspaper-batches/$BATCH.fst
-OUTPUT=/scratch/lmullen/argo-out/quotations/$BATCH-quotations.fst
+INPUT=/scratch/lmullen/newspaper-batches/$BATCH.csv
+OUTPUT=/scratch/lmullen/argo-out/quotations/$BATCH-quotations.csv
 
 ## Run the executable only if output does not exist
 echo "Job details: BATCH=$BATCH TASKID=$SLURM_ARRAY_TASK_ID"

@@ -5,19 +5,17 @@
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(fs))
 suppressPackageStartupMessages(library(futile.logger))
-suppressPackageStartupMessages(library(fst))
 suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(tokenizers))
 suppressPackageStartupMessages(library(text2vec))
 suppressPackageStartupMessages(library(Matrix))
 suppressPackageStartupMessages(library(broom))
-suppressPackageStartupMessages(library(randtests))
 
 parser <- OptionParser(
   description = "Find potential quotations in a batch of texts.",
   usage = "Usage: %prog [options] BATCH --out=OUTPUT",
-  epilogue = paste("Input and output files are assumed to be stored as .fst files.",
+  epilogue = paste("Input and output files are assumed to be stored as .csv files.",
                    "Bible vectorizer and DTM should be a .rda file. Potential",
                    "matches that have a token count OR a TF-IDF score higher than",
                    "the thresholds will be kept. Others will be discarded.")) %>%
@@ -33,6 +31,9 @@ parser <- OptionParser(
   add_option(c("--tfidf"),
              action = "store", type = "double", default = 0.5,
              help = "Minimum TF-IDF score to keep a potential match (default: 0.5).") %>%
+  add_option(c("--runs"),
+             action = "store_true", type = "logical", default = FALSE,
+             help = "Calculate the runs p-value (FALSE by default).") %>%
   add_option(c("-v", "--verbose"),
              action = "store", type = "integer", default = 1,
              help = "Verbosity: 0 = errors and warnings; 1 = information; 2 = debugging.")
@@ -43,8 +44,8 @@ if (!interactive()) {
   # For testing
   flog.warn("Using the testing command line arguments since session is interactive.")
   args <- parse_args(parser,
-                     args = c("./data/sample/chronam-batch-000023.fst",
-                              "--out=temp/test-chronam-quotations.fst",
+                     args = c("./data/az_falcon_ver01.csv",
+                              "--out=temp/chronam-quotations-test.csv",
                               "--bible=bin/bible-payload.rda",
                               "--verbose=2",
                               "--tokens=5",
@@ -101,8 +102,9 @@ load(bible_path, envir = bible)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Reading batch of texts: %s.", batch_path)
-texts <- read_fst(batch_path, columns = c("doc_id", "text"),
-                  as.data.table = FALSE) %>% as_tibble()
+texts <- read_csv(batch_path,
+                  col_names = c("batch_id", "doc_id", "text"),
+                  col_types = "ccc")
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Creating n-gram and word tokens from the batch.")
@@ -122,9 +124,12 @@ flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Getting the count of matching tokens.")
 token_count_m <- tcrossprod(bible$bible_dtm, docs_dtm)
+# tidy() is deprecated for sparse matrices, but suppress that warning
+suppressWarnings(
 token_count <- token_count_m %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, tokens = value)
+)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Computing the TF-IDF matrix for the Bible DTM.")
@@ -133,16 +138,22 @@ bible$bible_tfidf <- tfidf$fit_transform(bible$bible_dtm)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Getting the TF-IDF scores.")
+# tidy() is deprecated for sparse matrices, but suppress that warning
+suppressWarnings(
 tfidf_score <- tcrossprod(bible$bible_tfidf, docs_dtm) %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, tfidf = value)
+)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Getting the proportion of the matched verses.")
 proportion_m <- (1 / rowSums(bible$bible_dtm)) * token_count_m
+# tidy() is deprecated for sparse matrices, but suppress that warning
+suppressWarnings(
 proportion <- proportion_m %>%
   tidy() %>%
   rename(verse_id = row, doc_id = column, proportion = value)
+)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Creating the potential matches data frame.")
@@ -162,30 +173,35 @@ flog.info("Kept %s potential matches out of %s total (%s%%).",
           pnum(n_keepers), pnum(n_potential), round(prop_keepers * 100, 1))
 flog.debug("Memory used: %s.", mem_used())
 
-flog.info("Calculating the runs p-values.")
-# Get the vectors of tokens from a Bible verse and a document
-verse_tokens <- function(ref) {
-  bible$bible_tokens[bible$bible_tokens$doc_id == ref, "tokens_words",
-                     drop = TRUE][[1]]
+# Only calculate the runs p-value if it is specifically asked for,
+# since it is very computationally expensive.
+if (args$options$runs) {
+  flog.info("Calculating the runs p-values.")
+  suppressPackageStartupMessages(library(randtests))
+  # Get the vectors of tokens from a Bible verse and a document
+  verse_tokens <- function(ref) {
+    bible$bible_tokens[bible$bible_tokens$doc_id == ref, "tokens_words",
+                       drop = TRUE][[1]]
+  }
+  doc_tokens <- function(doc_id) {
+    texts[texts$doc_id == doc_id, "tokens_words", drop = TRUE][[1]]
+  }
+  # Calculate the runs p-value for a text and a Bible verse
+  runs_pval <- function(doc_id, ref, token_count) {
+    if (token_count <= 0) return(NA_real_) # Don't compute for a single token
+    matches <- doc_tokens(doc_id) %in% verse_tokens(ref)
+    if (sum(matches) == 0) return(NA_real_) # If no matches return NA
+    runs.test(as.numeric(matches), threshold = 0.5)$p.value
+  }
+  potential_matches <- potential_matches %>%
+    rowwise() %>% # runs_pval function is not vectorized
+    mutate(runs_pval = runs_pval(doc_id, verse_id, tokens)) %>%
+    ungroup()
+  flog.debug("Memory used: %s.", mem_used())
 }
-doc_tokens <- function(doc_id) {
-  texts[texts$doc_id == doc_id, "tokens_words", drop = TRUE][[1]]
-}
-# Calculate the runs p-value for a text and a Bible verse
-runs_pval <- function(doc_id, ref, token_count) {
-  if (token_count <= 0) return(NA_real_) # Don't compute for a single token
-  matches <- doc_tokens(doc_id) %in% verse_tokens(ref)
-  if (sum(matches) == 0) return(NA_real_) # If no matches return NA
-  runs.test(as.numeric(matches), threshold = 0.5)$p.value
-}
-potential_matches <- potential_matches %>%
-  rowwise() %>% # runs_pval function is not vectorized
-  mutate(runs_pval = runs_pval(doc_id, verse_id, tokens)) %>%
-  ungroup()
-flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Writing the potential matches: %s.", out_path)
-write_fst(potential_matches, out_path)
+write_csv(potential_matches, out_path, col_names = FALSE)
 
 flog.info("Finished processing: %s.", batch_id)
 flog.debug("Memory used: %s.", mem_used())
