@@ -5,7 +5,7 @@
 
 # Define variables
 # ----------------------------------------------------------------------
-newspaper_batches := /media/data/chronam/chroniclingamerica.loc.gov/data/ocr
+newspaper_batches := /media/data/newspaper-batches
 
 # Local tasks
 # ----------------------------------------------------------------------

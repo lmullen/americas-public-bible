@@ -5,7 +5,7 @@
 #SBATCH --mail-user=lmullen@gmu.edu
 #SBATCH --partition=all-HiPri
 #SBATCH --export=NONE
-#SBATCH --array=1-1586%120
+#SBATCH --array=1-3825%240
 
 ## Load modules since we are not exporting our environment
 module load R/3.5.2
