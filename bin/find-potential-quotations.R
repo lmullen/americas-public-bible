@@ -105,13 +105,24 @@ flog.info("Reading batch of texts: %s.", batch_path)
 texts <- read_csv(batch_path,
                   col_names = c("batch_id", "doc_id", "text"),
                   col_types = "ccc")
+flog.debug("Number of texts: %s.", nrow(texts))
 flog.debug("Memory used: %s.", mem_used())
 
-flog.info("Creating n-gram and word tokens from the batch.")
+flog.info("Creating n-gram tokens from the texts.")
 texts <- texts %>%
-  mutate(tokens_ngrams = bible$bible_tokenizer(text, type = "ngrams"),
-         tokens_words = bible$bible_tokenizer(text, type = "words")) %>%
-  select(-text) # Don't store the text once we don't need it any longer
+  mutate(tokens_ngrams = bible$bible_tokenizer(text, type = "ngrams"))
+flog.debug("Memory used: %s.", mem_used())
+
+if (args$options$runs) {
+  flog.info("Calculating the word tokens to use for runs p-values.")
+  texts <- texts %>%
+    mutate(tokens_words = bible$bible_tokenizer(text, type = "words"))
+  flog.debug("Memory used: %s.", mem_used())
+}
+
+# Don't store the text once we don't need it any longer
+flog.debug("Freeing the memory from the full texts.")
+texts <- texts %>% select(-text)
 flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Creating the document-term matrix for the batch.")
