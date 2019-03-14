@@ -54,14 +54,22 @@ argo-get-results :
 
 # Tasks to test various scripts
 # ----------------------------------------------------------------------
-test-quotation-finder : temp/test-ncnp-quotations.fst temp/test-chronam-quotations.fst
+test-wordcounts :  temp/test-ncnp-wordcount.csv temp/test-chronam-wordcount.csv
 
-temp/test-ncnp-quotations.fst : data/sample/ncnp-batch-00650.fst
+temp/test-ncnp-wordcount.csv : data/sample/ncnp-00001406.csv
+	Rscript bin/count-words.R $^ --out=$@
+
+temp/test-chronam-wordcount.csv : data/sample/wvu_lewis_ver02.csv
+	Rscript bin/count-words.R $^ --out=$@
+
+test-quotation-finder : temp/test-ncnp-quotations.csv temp/test-chronam-quotations.csv
+
+temp/test-ncnp-quotations.csv : data/sample/ncnp-00001406.csv
 	time Rscript bin/find-potential-quotations.R \
-		--tokens=2 --tfidf=0.5 --verbose=2 --bible=bin/bible-payload.rda \
+		--tokens=3 --tfidf=1 --verbose=2 --bible=bin/bible-payload.rda \
 		$^ -o $@
 
-temp/test-chronam-quotations.fst : data/sample/chronam-batch-000023.fst
+temp/test-chronam-quotations.csv : data/sample/wvu_lewis_ver02.csv
 	time Rscript bin/find-potential-quotations.R \
-		--tokens=5 --tfidf=0.5 --verbose=2 --bible=bin/bible-payload.rda \
+		--tokens=3 --tfidf=1 --verbose=2 --bible=bin/bible-payload.rda \
 		$^ -o $@
