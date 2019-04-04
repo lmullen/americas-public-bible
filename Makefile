@@ -9,11 +9,15 @@ newspaper_batches := /media/data/newspaper-batches
 
 # Local tasks
 # ----------------------------------------------------------------------
-all : bin/bible-payload.rda
+all : bin/bible-payload.rda bin/prediction-payload.rda
 
 # The vectorizer and Bible document-term matrix used for finding quotations
 bin/bible-payload.rda :
 	Rscript --vanilla ./scripts/bible-payload.R
+
+# The model for predicting the quotations
+bin/prediction-payload.rda :
+	Rscript --vanilla -e "rmarkdown::render('model/model-training.Rmd')"
 
 # Cleaning
 # ----------------------------------------------------------------------
