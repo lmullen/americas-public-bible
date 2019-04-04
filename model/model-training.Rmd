@@ -119,13 +119,30 @@ ggplot(labeled_quotations, aes(tokens, tfidf, color = match)) +
 We are going to pre-process the data to center and scale the predictors.
 
 ```{r}
-data_recipe <- recipe(match ~ ., data = training) %>% 
+data_recipe_all <- recipe(match ~ ., data = training) %>% 
   step_center(all_numeric()) %>%
   step_scale(all_numeric()) %>%
   prep(training = training, retain = TRUE)
 
-training_normalized = bake(data_recipe, new_data = training)
-testing_normalized = bake(data_recipe, new_data = testing)
+# We have decided to keep only three predictor columns, so train a data recipe just for those
+data_recipe <- recipe(match ~ ., 
+                      data = training %>% select(match, tokens, tfidf, proportion)) %>% 
+  step_center(all_numeric()) %>%
+  step_scale(all_numeric()) %>%
+  prep(training = training, retain = TRUE)
+                      
+
+training_normalized = bake(data_recipe_all, new_data = training)
+testing_normalized = bake(data_recipe_all, new_data = testing)
+training_normalized_selective <- bake(data_recipe, 
+                                      new_data = training %>% 
+                                        select(match, tokens, tfidf, proportion))
+
+# Double check that the different data recipes produce the same results for the same columns.
+stopifnot(
+  identical(training_normalized %>% select(match, tokens, tfidf, proportion), 
+            training_normalized_selective)
+)
 ```
 
 We aren't entirely sure which predictors would be best. So we want to define different formulas for different sets of predictors, along with a dials parameter to generated the tuning grid.
@@ -164,11 +181,8 @@ predictions <- function(model, type = c("training", "testing")) {
                testing = testing_normalized)
   df %>% 
     select(match) %>% 
-    mutate(pred_class = model %>% 
-             predict_class(df),
-           pred_probs = model %>% 
-             predict_classprob(df) %>% 
-             pull(quotation))
+    mutate(pred_class = predict(model, df, type = "class")$.pred_class,
+           pred_probs = predict(model, df, type = "prob")$.pred_quotation) 
 }
 
 accuracy_measures <- function(model, type = c("training", "testing")) {
@@ -407,3 +421,9 @@ And we can compute the model statistics.
 summary(confm_test)
 ```
 
+We will write our model to disk, along with the other objects we need to make predictions.
+
+```{r}
+save(data_recipe, model,
+     file = "../bin/prediction-payload.rda")
+```
