@@ -3,20 +3,31 @@
 library(tidyverse)
 library(odbc)
 library(fs)
-library(fst)
 
 db <- dbConnect(odbc::odbc(), "Research DB")
 
 wc_dir <- as_fs_path("/media/data/argo-out/wordcounts")
-chronam_fst <- dir_ls(wc_dir, glob = "*chronam*.fst")
-ncnp_fst <- dir_ls(wc_dir, glob = "*ncnp*.fst")
+ncnp_csv <- dir_ls(wc_dir, glob = "*ncnp*.csv")
+# The chronam batches don't have a clear identifier, so easiest to
+# define them as a not looking like the NCNP batches
+chronam_csv <- dir_ls(wc_dir, glob = "*ncnp*.csv", invert = TRUE)
 
-read_wordcounts <- function(paths) { paths %>% map_df(read_fst) %>% as_tibble() }
-chronam_wc <- read_wordcounts(chronam_fst)
-ncnp_wc <- read_wordcounts(ncnp_fst)
+stopifnot(length(chronam_csv) + length(ncnp_csv) == 3825)
 
-chronam_wc <- chronam_wc %>% filter(!is.na(wc))
-ncnp_wc <- ncnp_wc %>% filter(!is.na(wc))
+read_wordcounts <- function(paths) {
+  paths %>%
+    map_df(read_csv,
+           col_names = c("batch_id", "doc_id", "wordcount"),
+           col_types = "cci",
+           progress = FALSE)
+}
+chronam_wc <- read_wordcounts(chronam_csv)
+ncnp_wc <- read_wordcounts(ncnp_csv)
 
-dbWriteTable(db, "chronam_wordcounts", chronam_wc)
-dbWriteTable(db, "ncnp_wordcounts", ncnp_wc)
+# Remove duplicate keys from ChronAm word counts, keeping the highest word count
+chronam_wc <- chronam_wc %>%
+  arrange(desc(wordcount)) %>%
+  distinct(doc_id, .keep_all = TRUE)
+
+dbWriteTable(db, "chronam_wordcounts", chronam_wc, append = TRUE)
+dbWriteTable(db, "ncnp_wordcounts", ncnp_wc, append = TRUE)
