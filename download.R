@@ -3,6 +3,7 @@
 library(tidyverse)
 library(fs)
 library(jsonlite)
+library(odbc)
 
 # Figure out what the maximum batch is.
 MAX_BATCH <- 77
@@ -44,7 +45,7 @@ parse_batch_for_lccns <- function(batch_l) {
   tibble(batch, lccn)
 }
 
-batch_to_lccn <- json %>%
+batch_to_lccn <- batch_json %>%
   map_df(function(x) map_df(x$batches, parse_batch_for_lccns))
 
 stopifnot(batch_to_lccn %>% count(batch, lccn) %>% filter(n > 1) %>% nrow() == 0)
@@ -91,4 +92,8 @@ places <- lccn_data %>% select(lccn, place) %>% unnest() %>%
          county = if_else(dup, NA_character_, county)) %>%
   select(-dup)
 
-# TODO Parse places and dates and so forth
+con <- dbConnect(odbc::odbc(), "ResearchDB", timeout = 10)
+dbWriteTable(con, "chronam_batch_to_lccn", batch_to_lccn)
+dbWriteTable(con, "chronam_batches", chronam_batches)
+dbWriteTable(con, "chronam_newspapers", newspapers)
+dbWriteTable(con, "chronam_newspaper_places", places)
