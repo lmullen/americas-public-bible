@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/lib/pq"
 	"gopkg.in/cheggaaa/pb.v1"
 	"log"
@@ -12,7 +13,7 @@ import (
 )
 
 // WORKERS is how many workers to use at once
-const WORKERS int = 30
+const WORKERS int = 200
 
 // BUFFERSIZE is how many files to keep in the queue at one time
 const BUFFERSIZE int = 100000
@@ -35,15 +36,16 @@ func worker(jobs <-chan string, baseDir string, bar *pb.ProgressBar, db *sql.DB)
 
 		// Check whether this docid exists. If it does skip the rest of the parsing,
 		// especially reading in the file.
-		var exists bool
-		err := db.QueryRow("SELECT EXISTS (SELECT 1 FROM pages_test WHERE doc_id = $1)", docid).Scan(&exists)
-		if err != nil {
-			log.Printf("Failed to check if %s already is in the database.", docid)
-			log.Println(err)
-		}
-		if exists {
-			continue
-		}
+		// var exists bool
+		// err := db.QueryRow("SELECT EXISTS (SELECT 1 FROM chronam_pages WHERE doc_id = $1)", docid).Scan(&exists)
+		// if err != nil {
+		//   log.Printf("Failed to check if %s already is in the database.", docid)
+		//   log.Println(err)
+		// }
+		// if exists {
+		//   continue
+		// }
+
 		lccn, date, page := getMetadata(docid)
 		text, err := getText(path)
 		if err != nil {
@@ -52,7 +54,7 @@ func worker(jobs <-chan string, baseDir string, bar *pb.ProgressBar, db *sql.DB)
 			continue
 		}
 		wordcount := countWords(text)
-		_, err = db.Exec("INSERT INTO pages_test VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING;",
+		_, err = db.Exec("INSERT INTO chronam_pages VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING;",
 			docid, lccn, date, page, wordcount, text)
 		if err != nil {
 			log.Printf("Failed to write %s to database.\n", docid)
@@ -66,11 +68,15 @@ func main() {
 
 	dataDir := os.Args[1]
 
-	db, err := sql.Open("postgres", "user=lmullen dbname=lmullen sslmode=disable")
+	constr := fmt.Sprintf("user=lmullen dbname=lmullen password=%s sslmode=disable", os.Getenv("DBPASS"))
+	db, err := sql.Open("postgres", constr)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
+	if err := db.Ping(); err != nil {
+		log.Fatal(err)
+	}
 
 	// Create the jobs channel which will hold filenames
 	jobs := make(chan string, BUFFERSIZE)
