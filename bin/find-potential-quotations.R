@@ -103,8 +103,8 @@ flog.debug("Memory used: %s.", mem_used())
 
 flog.info("Reading batch of texts: %s.", batch_path)
 texts <- read_csv(batch_path,
-                  col_names = c("batch_id", "doc_id", "text"),
-                  col_types = "ccc")
+                  col_names = c("doc_id", "text"),
+                  col_types = "cc")
 flog.debug("Number of texts: %s.", nrow(texts))
 flog.debug("Memory used: %s.", mem_used())
 
