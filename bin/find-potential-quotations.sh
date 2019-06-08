@@ -6,7 +6,7 @@
 #SBATCH --partition=all-HiPri
 #SBATCH --mem-per-cpu=24G
 #SBATCH --export=NONE
-#SBATCH --array=1-3825
+#SBATCH --array=1-1499
 
 ## Load modules since we are not exporting our environment
 module load R/3.5.2
@@ -14,7 +14,7 @@ module load R/3.5.2
 ## Get the file name associated with that line of the list of files
 BATCH_LIST=/home/lmullen/public-bible/bin/newspaper-batches.txt
 BATCH=$(sed -n "${SLURM_ARRAY_TASK_ID}p" $BATCH_LIST)
-INPUT=/scratch/lmullen/newspaper-batches/$BATCH.csv
+INPUT=/scratch/lmullen/chronam/$BATCH.csv
 OUTPUT=/scratch/lmullen/argo-out/quotations/$BATCH-quotations.csv
 
 ## Run the executable only if output does not exist
