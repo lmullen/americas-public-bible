@@ -1,7 +1,11 @@
 ---
 title: "Identifying quotations to keep"
 output: html_notebook
+editor_options: 
+  chunk_output_type: console
 ---
+
+**NOTE:** Now that this has been run, I have changed the names and schemas of some of the relevant tables.**
 
 ```{r setup}
 library(tidyverse)
@@ -70,6 +74,31 @@ Now we need to do the same thing for Chronicling America.
 
 ```{r}
 apb_quotations_chronam <- tbl(db, "apb_quotations_02_predicted_chronam")
+chronam_pages <- tbl(db, "chronam_pages")
 ```
 
-TODO do this once we have the dates in the Chronicling America pages table.
+Filter the quotations
+
+```{r}
+apb_quotations_chronam %>% 
+  filter(probability >= threshold) %>% 
+  left_join(scriptures %>% select(verse_id, reference_id, version),
+            by = c("verse_id" = "verse_id")) %>% 
+  left_join(chronam_pages %>% select(doc_id, date),
+            by = c("doc_id" = "doc_id")) %>% 
+  select(doc_id, reference_id, version, date, probability, everything()) %>% 
+  filter(!(version == "RV" & date < as.Date("1885-01-01")),
+         !(version == "Doctrine and Covenants" & date < as.Date("1835-01-01")),
+         !(version == "Book of Mormon" & date < as.Date("1830-01-01")),
+         !(version == "ASV" & date < as.Date("1901-01-01")),
+         !(version == "Pearl of Great Price" & date < as.Date("1851-01-01")),
+         !(version == "JPS 1917" & date < as.Date("1917-01-01"))) %>% 
+  mutate(probability_bumped = if_else(version == "KJV",
+                                      probability + kjv_bump,
+                                      probability)) %>% 
+  group_by(doc_id, reference_id) %>% 
+  filter(row_number(desc(probability_bumped)) == 1) %>% 
+  select(doc_id, verse_id, probability) %>% 
+  compute("apb_quotations_chronam", temporary = FALSE, overwrite = TRUE)
+```
+
