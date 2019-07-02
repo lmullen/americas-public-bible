@@ -4,8 +4,9 @@ import (
 	"strings"
 )
 
-func calculateScore(words []string, dict map[string]struct{}) float64 {
+func calculateScore(text string) float64 {
 	var good int
+	words := t.Tokenize(text)
 	for _, word := range words {
 		word = strings.ToLower(word)
 		_, exists := dict[word]
