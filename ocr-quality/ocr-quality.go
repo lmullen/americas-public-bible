@@ -88,7 +88,7 @@ func main() {
 	bar.Start()
 
 	// Query for documents which don't have an OCR score and add them to the jobs channel
-	rows, err := db.Query("SELECT doc_id, text FROM chronam_pages WHERE ocr_sq IS NULL LIMIT 20;")
+	rows, err := db.Query("SELECT doc_id, text FROM chronam_pages WHERE ocr_sq IS NULL;")
 	if err != nil {
 		log.Fatal(err)
 	}
