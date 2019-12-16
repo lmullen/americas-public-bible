@@ -82,10 +82,10 @@ Rather than specify arbitrary thresholds, a more accurate approach is to teach a
 <div class="row">
 <div class="col-sm-6 col-xs-12">
 
-```{r tokens-vs-proportion}
+```{r tokens-vs-proportion, eval=FALSE}
 library(feather)
 library(ggplot2)
-labeled <- read_feather("_data/labeled-features.feather")
+labeled <- read_feather("data/labeled-features.feather")
 
 ggplot(labeled, aes(token_count, proportion, color = match)) +
   geom_jitter(shape = 1) + theme_minimal(base_size = 14) +
@@ -98,7 +98,7 @@ ggplot(labeled, aes(token_count, proportion, color = match)) +
 </div>
 <div class="col-sm-6 col-xs-12">
 
-```{r tokens-vs-runs}
+```{r tokens-vs-runs, eval=FALSE}
 ggplot(labeled, aes(token_count, runs_pval, color = match)) +
   geom_jitter(shape = 1) + theme_minimal(base_size = 14) +
   labs(title = "Number of tokens versus runs test",

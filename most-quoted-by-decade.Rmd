@@ -2,7 +2,7 @@
 title: "Most Quoted Verses by Decade"
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, eval=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
                       comment = NA)
 
@@ -10,14 +10,14 @@ library(dplyr)
 library(tidyr)
 library(purrr)
 library(stringr)
-quotations <- readRDS("_data/quotations-clean.rds") %>% 
+quotations <- readRDS("data/quotations-clean.rds") %>% 
   mutate(reference = str_replace(reference, " \\(KJV\\)", ""))
-verses <- readRDS("_data/bible-verses.rds")
+verses <- readRDS("data/bible-verses.rds")
 ```
 
 Below are charts of the top ten most frequently quoted verses in *Chronicling America* by decade. (Keep in mind that the 1840s and 1920s have many fewer pages than the other decades.)
 
-```{r, results='asis'}
+```{r, results='asis', eval=FALSE}
 topten <- quotations %>% 
   mutate(decade = mullenMisc::round_year(year, "decade")) %>% 
   count(reference, decade) %>% 

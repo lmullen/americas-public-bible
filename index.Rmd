@@ -62,7 +62,7 @@ The general trend is that the rate of biblical quotations declined from a high i
 source("helpers.R")
 library(dplyr)
 
-bible_by_year <- readRDS("_data/bible-by-year.rds")
+bible_by_year <- readRDS("data/bible-by-year.rds")
 
 bible_by_year %>% 
   plot_ref_ts(title = "Quotations from the Bible in Chronicling America")
@@ -71,7 +71,7 @@ bible_by_year %>%
 The general trends, however, tell us much less than the patterns for individual verses. Consider this handful of verses, each of which has a pattern that differs from the general trend.^[The trends for individual verses sometimes reflect the reprinting of texts which contain biblical quotations. On reprinting of texts, see Ryan Cordell, David Smith, et al., *[Viral Texts Mapping Networks of Reprinting in 19th-Century Newspapers and Magazines](http://viraltexts.org/)* (2012--16).]
 
 ```{r trends-for-selected-verses}
-verses_by_year <- readRDS("_data/verses-by-year.rds")
+verses_by_year <- readRDS("data/verses-by-year.rds")
 verses_by_year %>% 
   references_to_ts(c("Luke 18:16", "Proverbs 14:34", "Acts 17:26", "John 15:13")) %>% 
   plot_ref_ts(title = "Trends for selected verses", roll = 3)

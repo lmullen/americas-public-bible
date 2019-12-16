@@ -6,7 +6,7 @@ Often more than one verse appears on a single newspaper page. A sermon, for inst
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
-                      comment = NA)
+                      comment = NA, eval = FALSE)
 
 library(dplyr)
 library(stringr)
@@ -17,47 +17,47 @@ library(ggraph)
 library(RColorBrewer)
 ```
 
-```{r prepare-network-graph, cache=TRUE, include=FALSE}
-quotations <- readRDS("_data/quotations-clean.rds") %>% 
+```{r prepare-network-graph, include=FALSE, eval=FALSE}
+quotations <- readRDS("_data/quotations-clean.rds") %>%
   mutate(reference = str_replace(reference, " \\(KJV\\)", ""))
 
 books_of_bible <- read_csv("_data/books-of-bible.csv")
 
-chapters <- quotations %>% 
-  mutate(reference = str_replace_all(reference, ":.+", "")) 
+chapters <- quotations %>%
+  mutate(reference = str_replace_all(reference, ":.+", ""))
 
-chapter_counts <- chapters %>% 
+chapter_counts <- chapters %>%
   count(reference)
-  
-edges_bi <- chapters %>% 
+
+edges_bi <- chapters %>%
   select(page, reference)
 
 include_min <- 350
 
 bi <- graph_from_data_frame(edges_bi, directed = FALSE)
 V(bi)$type <- bipartite_mapping(bi)$type
-all_verses_g <- bi %>% bipartite.projection(which = "true") 
-all_verses_g <- delete_edges(all_verses_g, 
+all_verses_g <- bi %>% bipartite.projection(which = "true")
+all_verses_g <- delete_edges(all_verses_g,
                              which(E(all_verses_g)$weight <= include_min))
 separate_l <- decompose.graph(all_verses_g, min.vertices = 5)
 big_g <- separate_l[[1]]
 edges <- as_data_frame(big_g, "edges") %>% tbl_df()
 nodes <- as_data_frame(big_g, "vertices") %>% tbl_df()
 
-nodes <- nodes %>% 
-  mutate(book = str_replace(name, "\\s\\d+$", "")) %>% 
-  left_join(books_of_bible, by = "book") %>% 
-  left_join(chapter_counts, by = c("name" = "reference")) 
+nodes <- nodes %>%
+  mutate(book = str_replace(name, "\\s\\d+$", "")) %>%
+  left_join(books_of_bible, by = "book") %>%
+  left_join(chapter_counts, by = c("name" = "reference"))
 
 g <- graph_from_data_frame(edges, directed = FALSE, nodes)
 ```
 
-The visualization below shows the relationship between `r V(g) %>% length()` chapters in the Bible. For a chapter to be included, it had to have been quoted on the same page as another chapter at least `r include_min` times in the *Chronicling America* newspapers.
+The visualization below shows the relationship between r V(g) %>% length() chapters in the Bible. For a chapter to be included, it had to have been quoted on the same page as another chapter at least r include_min times in the *Chronicling America* newspapers.
 
-```{r chapters-network-graph, fig.cap="Chapters in the Bible most frequently quoted together", fig.width=12, fig.height=8}
+```{r chapters-network-graph, fig.cap="Chapters in the Bible most frequently quoted together", fig.width=12, fig.height=8, eval=FALSE}
 set.seed(278)
 ggraph(g, "igraph", algorithm = "nicely") +
-  geom_edge_fan(aes(edge_width = weight, 
+  geom_edge_fan(aes(edge_width = weight,
                     alpha = weight)) +
   geom_node_point(aes(colour = type, size = n)) +
   scale_edge_width("Mutual appearances", range = c(1, 5), guide = "none") +
