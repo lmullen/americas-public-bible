@@ -2,16 +2,12 @@ name: "americas-public-bible"
 exclude: ["Makefile"]
 include: [".htaccess"]
 navbar:
-  title: "America’s Public Bible"
+  title: "America’s Public Bible: A Commentary"
   right:
     - text: "Introduction"
       href: index.html
     - text: "Explore the Quotations"
       href: exploration.html
-    - text: "Topics & Verses"
-      href: topics.html
-    - text: "Sources & Methods"
-      href: methods.html
 output:
   html_document:
     theme: lumen
