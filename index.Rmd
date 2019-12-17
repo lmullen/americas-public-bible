@@ -1,113 +1,19 @@
 ---
-title: "America's Public Bible: Biblical Quotations in U.S. Newspapers"
+title: "America's Public Bible: A Commentary"
 ---
-
-<style>
-  .toc-ignore { display: none;}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-<div class="row">
-<div class="col-sm-12">
-<div class="well">
-*America's Public Bible* is under contract with Stanford University Press to be published in their [digital publishing program](http://www.sup.org/digital/). This version of the site is a prototype created as the first-prize winner of the [Chronicling America Data Challenge](https://www.neh.gov/news/press-release/2016-07-25), sponsored by the National Endowment for the Humanities. The version in preparation for Stanford University Press will include a larger newspaper corpus and take into account more versions of the Bible, as well as the Book of Mormon. Most important, the expanded version will include a peer-reviewed digital monograph interpreting the role of the Bible in American public life through prose and visualizations. 
-</div>
-</div>
-</div>
-
-<div class="row">
-  <div class="col-sm-8 col-xs-12">
-  <h1 id="site-title">America's Public Bible</h1>
-  <h2 id="site-subtitle">Biblical Quotations in U.S. Newspapers</h2>
-  
-For most of its issues in 1902, the *Ellensburg [Washington] Dawn* featured a quotation from Benjamin Franklin prominently on its front page. "A Bible and a newspaper in every house," the masthead proclaimed, "are the principal support of virtue, morality, and civil liberty."^[*Ellensburg Dawn* (Ellensburg, Wash.), [18 Jan. 1902](http://chroniclingamerica.loc.gov/lccn/sn88085012/1902-01-18/ed-1/seq-1/). Also quoted in the *Liberty Advocate* (Liberty, Miss.), [18 Oct. 1845](http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/>http://chroniclingamerica.loc.gov/lccn/sn83016942/1845-10-18/ed-1/seq-1/#date1=1836&index=0&rows=20&words=Bible+Franklin+newspaper&searchType=basic&sequence=0&state=&date2=1922&proxtext=bible+newspaper+franklin&y=0&x=0&dateFilterType=yearRange&page=1).] Though the quotation from Franklin was doubtless spurious, the combination of newspapers and the Bible would have been familiar to readers. Throughout the nineteenth century and into the twentieth century, newspapers in the United States---even newspapers which were not published by a religious denomination or organization---had frequent recourse to the Bible. Newspapers printed sermons and Sunday school lessons, and ministers offered lessons through newspaper Bible clubs.^[*Perrysburg Journal* (Perrysburg, Ohio), [18 Sept. 1919](http://chroniclingamerica.loc.gov/lccn/sn87076843/1919-09-18/ed-1/seq-3/); *Amador Ledger* (Jackson, Amador County, Calif.), [19 Feb. 1909](http://chroniclingamerica.loc.gov/lccn/sn93052980/1909-02-19/ed-1/seq-3/).] Newspapers featured jokes whose punchlines required familiarity with the Bible. They aired political commentary that cited the Bible on all sides of a given issue. They ran features on [Thomas Jefferson's edited Bible](http://chroniclingamerica.loc.gov/lccn/sn84020274/1902-06-01/ed-1/seq-44/) and [Abraham Lincoln's use of the Scripture](http://chroniclingamerica.loc.gov/lccn/sn85042462/1909-02-14/ed-1/seq-53/).^[*St. Louis Republic.* (St. Louis, Mo.), [1 June 1902](http://chroniclingamerica.loc.gov/lccn/sn84020274/1902-06-01/ed-1/seq-44/); *Los Angeles Herald* (Los Angeles, Calif.), [14 Feb. 1909](http://chroniclingamerica.loc.gov/lccn/sn85042462/1909-02-14/ed-1/seq-53/).] On [Good Friday](http://chroniclingamerica.loc.gov/lccn/sn85058397/1913-03-21/ed-1/seq-5/), Easter, and [Christmas](http://chroniclingamerica.loc.gov/lccn/sn83045160/1871-12-25/ed-1/seq-1/) they reprinted long portions of the Scripture.^[*Evening Standard (Ogden City, Utah), [21 March 1913](http://chroniclingamerica.loc.gov/lccn/sn85058397/1913-03-21/ed-1/seq-5/); *Memphis Daily Appeal* (Memphis, Tenn.), [25 Dec. 1871](http://chroniclingamerica.loc.gov/lccn/sn83045160/1871-12-25/ed-1/seq-1/).] They [opined on revisions to the English Bible](http://chroniclingamerica.loc.gov/lccn/sn83030431/1919-08-10/ed-1/seq-25/),  and offered [word-by-word comparisons](http://chroniclingamerica.loc.gov/lccn/sn85042331/1881-05-20/ed-1/seq-6/) of the changes in new translations.^[*The Sun* (New York, N.Y.), [10 Aug. 1919](http://chroniclingamerica.loc.gov/lccn/sn83030431/1919-08-10/ed-1/seq-25/); *Bismarck Tribune* (Bismarck, Dakota Territory), [20 May 1881](http://chroniclingamerica.loc.gov/lccn/sn85042331/1881-05-20/ed-1/seq-6/).] They made money from [advertisements](http://chroniclingamerica.loc.gov/lccn/sn83045433/1918-02-10/ed-1/seq-18/) for Bibles of every kind, and some newspapers even [sold Bibles directly](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/) as a way of raising revenue. But most of all, newspapers quoted the Bible. 
-
-*America's Public Bible* uncovers the presence of biblical quotations in the nearly 11 million newspaper pages in the Library of Congress's *[Chronicling America](http://chroniclingamerica.loc.gov/)* collection. Using the [techniques of machine learning](methods.html) I have identified over 866,000 quotations of the Bible or verbal allusions to specific biblical verses on those newspaper pages. For now, the project has looked only for quotations to the [King James Version](https://en.wikipedia.org/wiki/King_James_Version) (or Authorized Version) of the English Bible, by far the most commonly used Bible among American Protestants during the nineteenth century.^[The American Standard Version of the Bible was published in 1900, following the British Revised Version in 1881 (New Testament) and 1885 (Old Testament). Both of these were revisions of the King James Version. See Peter J. Thuesen, *In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible* (New York: Oxford University Press, 1999).] For over 1,700 of the most frequently quoted verses, this site offers [a way to explore](exploration.html) the trend in how frequently a biblical verse was used, with links to each quotation highlighted in the pages of *Chronicling America*. The site thus uncovers two contexts for each verse: the context of the newspaper article in which it was used, and the broader chronological context of quotations from that verse and the Bible as a whole.
-
-  </div>
-  <div class="col-sm-4 col-xs-12">
-  
-  <div id="splash-image">
-  ![An advertisement for *The Illuminated Holy Bible*, which several newspapers sold directly. From the *Brattleboro Daily Reformer* (Brattleboro, Vt.), [15 Nov. 1916](http://chroniclingamerica.loc.gov/lccn/sn86071593/1916-11-15/ed-1/seq-6/).](img/bible-hand.png)
-</div>
-
-  </div>
-  
-</div>
-
-<div class="row">
-  
-  <div class="col-sm-4 col-xs-12">
-
-  ![This article retells the parable of the good Samaritan (Luke 10:30--36), reinterpreting it with the Populist movement as the Samaritan. From the *Owingsville Outlook* (Owingsville, Ky.), [2 March 1899](http://chroniclingamerica.loc.gov/lccn/sn86069620/1899-03-02/ed-1/seq-4/#words=chance+came+certain+priest+way+saw+side).](img/good-samaritan.png)
-  
-  </div>
-  
-  <div class="col-sm-8 col-xs-12">
-  
-*America's Public Bible* brings together two strands of scholarship. On the one hand, its methodology is drawn from recent digital humanities projects which are concerned with tracking the reuse of texts. On the other hand, it draws on a deep scholarly literature on the Bible as a cultural text in American life. The Bible included tens of thousands of texts, each of which could be interpreted in many ways. The contribution this site makes is to show how thousands of biblical verses were used over nearly a century in some 56 billion words of text, revealing trends that are inaccessible to a single scholar's reading of these documents, yet enabling a close reading of the ways in which verses were put to use. 
-
-For many Americans the Bible was a text whose meaning was self-evident, yet the Bible's role in U.S. history cannot be understood apart from the ways that Americans actually put it to use. That is why I have called this site America's *Public* Bible. By looking at uses of the Bible in newspapers, we can see which parts of the Bible were in common currency among Americans, as well as the range of interpretations that were given to those verses. Verses that could be cited without a reference (or used in jokes) indicated a kind of literacy or familiarity, and possibly a shared assumption about what those verses could be interpreted to mean. Verses that were used constantly were a shared cultural touchstone, while verses that were used only episodically reveal the tensions in a particular political or social situation. By looking at how the verses were actually used, we can see how the Bible was a contested yet common text. 
-
-The general trend is that the rate of biblical quotations declined from a high in the 1840s among newspapers in *Chronicling America*, but saw later resurgences in the 1870s, 1890s, and 1910s. The period of the 1830s and 1840s saw the expansion of evangelical Protestantism, so that peak represents a time when the Bible was likely to be quoted more frequently. Quotations of the Bible were never so high that one could find a quotation on every page or every issue. The Old Testament and the New Testament followed more or less the same pattern, though the New Testament was always quoted more often than the Old Testament. (Keep in mind, though, that the Old Testament is over three times as long as the New Testament.)^[I have normalized the number of quotations per year by the number of words in *Chronicling America* for that year. In examining these charts of general trends a few factors should be kept in mind. First, the number of pages in *Chronicling America* grows over time. Thus, the uncertainty in the trend is greater for the 1840s and 1850s, while it is more certain by the 1910s and 1920s. That said, the peak of quotations in the 1840s makes sense given the widespread expansion of evangelical Protestantism in the 1830s and 1840s. Second, the quality of the optical character recognition (i.e., the process by which the page images of the newspapers are turned into plain text) in the dataset is very uneven: some pages have nearly perfect transcriptions, while others have no usable text. It is of course much more difficult to find quotations, especially brief quotations, in poor OCR. So I cannot claim that I have found every quotation or allusion. Third, a classification problem like this one is always a trade-off between finding as many genuine matches as possible while avoiding as many false positives as possible. I have preferred to avoid false positives, even at the cost of missing genuine matches that would otherwise have been detected. For more details on how the quotations were found, see the [sources and methods section](methods.html).] 
-
-  </div>
-  
-</div>
-
-```{r trends-for-whole-bible}
-source("helpers.R")
-library(dplyr)
-
-bible_by_year <- readRDS("data/bible-by-year.rds")
-
-bible_by_year %>% 
-  plot_ref_ts(title = "Quotations from the Bible in Chronicling America")
-```
-
-The general trends, however, tell us much less than the patterns for individual verses. Consider this handful of verses, each of which has a pattern that differs from the general trend.^[The trends for individual verses sometimes reflect the reprinting of texts which contain biblical quotations. On reprinting of texts, see Ryan Cordell, David Smith, et al., *[Viral Texts Mapping Networks of Reprinting in 19th-Century Newspapers and Magazines](http://viraltexts.org/)* (2012--16).]
-
-```{r trends-for-selected-verses}
-verses_by_year <- readRDS("data/verses-by-year.rds")
-verses_by_year %>% 
-  references_to_ts(c("Luke 18:16", "Proverbs 14:34", "Acts 17:26", "John 15:13")) %>% 
-  plot_ref_ts(title = "Trends for selected verses", roll = 3)
-```
-
-The most popular verse in these newspapers was "Suffer little children to come unto me, and forbid them not: for of such is the kingdom of God" (Luke 18:16; cf. Matthew 19:14, Mark 10:14). The American Sunday school movement made this verse popular, as organizations like the American Sunday School Union and denominational Sunday schools published Sunday school lessons weekly in the newspapers. This verse peaked in the 1850s, during a formative period for the Sunday school movement.^[Anne M. Boylan, *Sunday School: The Formation of an American Institution, 1790-1880* (New Haven: Yale University Press, 1988).] The verse "[God] hath made of one blood all nations of men" (Acts 17:26) was a crucial text with which American Christians thought about race and slavery, especially since it was a proof text for the unity of human beings regardless of race. The verse also spoke to scientific debates about monogenesis versus polygenesis (the question of whether have a single or multiple origin). This verse peaked in the middle of the Civil War.^[On the Bible and the Civil War, see Mark A. Noll, *The Civil War as a Theological Crisis* (Chapel Hill: University of North Carolina Press, 2006).] While scholars have often discussed the origins of Christian nationalism, newspapers quoted verses association with nationalism relatively infrequently compared to other texts. An exception was the text "Righteousness exalteth a nation: but sin is a reproach to any people" (Proverbs 14:34), which was the subject of fast day sermons and other jeremiads during the Civil War.^[Andrew R. Murphy, *Prodigal Nation: Moral Decline and Divine Punishment from New England to 9/11* (New York: Oxford University Press, 2009), 44-76.] While many verses declined in popularity over time, one verse that grew in popularity at the beginning of the twentieth century was John 15:13: "Greater love hath no man than this, that a man lay down his life for his friends." This verse was frequently used to memorialize the dead, especially when they were associated with heroism. While the verse was used after the Civil War and for victims of a yellow fever epidemic in the Mississippi River valley and Memphis in 1879--80, it peaked when memorializing the dead of the Great War.^[Philip Jenkins, *The Great and Holy War: How World War I Became a Religious Crusade* (San Francisco: HarperOne, 2014).] Finally, 1 Samuel 3:4 was scarcely ever quoted in American newspapers, with the exception of 1876, when presidential candidate Samuel Tilden adopted "The Lord called Samuel" as his motto.
-
-<div class="row">
-  <div class="col-sm-4">
-  
-  ![The *New York Tribune* identified itself as Republican and anti-slavery by quoting Acts 17:26. Other newspapers reprinted this notice. From the *Lamoille Newsdealer* (Hyde Park, Vt.), [18 Dec. 1862](http://chroniclingamerica.loc.gov/lccn/sn84023428/1862-12-18/ed-1/seq-3/#words=hath+made+blood+nations+men+dwell+face+earth+hath+determined+times+before+appointed+bounds+habitation).](img/ny-tribune.png)
-  
-  </div>
-  <div class="col-sm-4">
-  
-  ![Democratic newspapers quoted 1 Samuel 3:4 supporting Samuel J. Tilden against Rutherford B. Hayes in the 1876 presidential election. From the *Stark County Democrat* (Canton, Ohio), [09 Nov. 1876](http://chroniclingamerica.loc.gov/lccn/sn84028490/1876-11-09/ed-1/seq-4/#date1=1836&sort=relevance&rows=20&words=called+Lord+Samuel&searchType=basic&sequence=0&index=7&state=&date2=1922&proxtext=%22lord+called+samuel%22&y=0&x=0&dateFilterType=yearRange&page=2).](img/lord-called-samuel.png)
-  
-  </div>
-  <div class="col-sm-4">
-  
-  ![A memorial to an Rock Island, Illinois, soldier who died in World War I after saving other soldiers in a mustard gas attack, quoting John 15:13. From the *Rock Island Argus* (Rock Island, Ill.), [14 Nov. 1919](http://chroniclingamerica.loc.gov/lccn/sn92053934/1919-11-14/ed-1/seq-7/#words=greater+love+hath+man+man+lay+down+life+friends).](img/greater-love.png)
-  
-  </div>
-</div>
-
-### How to use this site
-
-There are three things that you can do on this site. First, you can use the main **[exploratory graphic](exploration.html)** to investigate the trends in how different verses were quoted, and to find links back to *Chronicling America* for each quotation. Second, the **[topics and verses page](topics.html)** offers several visualizations, tables, and brief essays on specific topics or verses. And finally the **[sources and methods section](methods.html)** explains how I found the quotations. There you can also find links to the code I wrote and a [download of all the quotations](methods.html#code-and-data) used in this site.
 
 ### Suggested citation
 
 If you use this project for academic work, here is a suggested citation.
 
-> Lincoln Mullen, *America's Public Bible: Biblical Quotations in U.S. Newspapers*, website, code, and datasets (2016): &lt;<http://americaspublicbible.org>&gt;.
+Lincoln Mullen, *America's Public Bible: A Commentary* (Stanford University Press, 2020): &lt;<http://americaspublicbible.org>&gt;.
 
-### Project news and road map
+### Project news 
 
 **January 4, 2018**: This site was presented in a paper titled "How 19th-Century Americans Quoted Their Bibles" for the panel "[The Digital History of 19th-Century U.S. Religion](https://aha.confex.com/aha/2018/webprogram/Session16441.html)," co-sponsored by the American Society of Church History and the American Historical Association.
 
@@ -116,12 +22,3 @@ If you use this project for academic work, here is a suggested citation.
 **July 25, 2016**: This project won [first place](https://www.neh.gov/news/press-release/2016-07-25) in the National Endowment for the Humanities' Chronicling America Data Challenge.
 
 **June 13, 2016**: Initial release of the website and data.
-
-These are the plans for the project's future development:
-
-- Add feature to let users classify matches as accurate or inaccurate, so that this labeled data can be used to improve the model results.
-- Extend the model to other English language versions of the Bible (American Standard Version, Douay-Rheims version, Apocrypha).
-- Extent the model to non-English language versions of the Bible (German Luther Bible).
-- Extend the model to the Book of Mormon.
-- Improve model accuracy with additional training data from users of this website.
-- Time series analysis on the trends for verses, including seasonality and clustering.
