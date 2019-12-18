@@ -1,22 +1,11 @@
 body {
+  font-family: 'IBM Plex Serif', serif;
   font-size: 16px;
 }
 
-@font-face {
-  font-family: 'league-gothic';
-  src: url('fonts/leaguegothic-regular-webfont.eot');
-  src: url('fonts/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('fonts/leaguegothic-regular-webfont.woff2') format('woff2'),
-       url('fonts/leaguegothic-regular-webfont.woff') format('woff'),
-       url('fonts/leaguegothic-regular-webfont.ttf') format('truetype'),
-       url('fonts/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
-       url('fonts/LeagueGothic-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 h1, h2, h3, h4, h5, h6, .navbar-brand {
-  font-family: 'league-gothic', serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
 }
 
 .section {
@@ -97,7 +86,6 @@ iframe {
 }
 
 table caption {
-  font-family: 'league-gothic', serif;
   color: black;
   font-size: 24px;
 }
@@ -123,6 +111,5 @@ table caption {
 }
 
 .dygraph-title {
-  font-family: 'league-gothic', serif;
   text-align: left;
 }
