@@ -8,7 +8,7 @@ The goal for this notebook is to calculate a defensible threshold for the OCR qu
 ```{r setup}
 library(tidyverse)
 library(DBI)
-db <- dbConnect(odbc::odbc(), "Research DB")
+db <- dbConnect(odbc::odbc(), "ResearchDB")
 chronam_pages <- tbl(db, "chronam_pages")
 chronam_quotations <- tbl(db, "apb_quotations_chronam")
 ```
@@ -88,11 +88,28 @@ pages_by_quotation <- chronam_pages %>%
   collect()
 ```
 
+We can show the mean/median of OCR quality for pages with and without quotations.
+
+```{r}
+ocr_summary <- pages_by_quotation %>% 
+  group_by(has_q) %>% 
+  summarize(mean_ocr = mean(ocr_sq),
+            median_ocr = median(ocr_sq),
+            sd_ocr = sd(ocr_sq)) %>% 
+  mutate(lower = mean_ocr - 2 * sd_ocr)
+ocr_summary
+```
+
 Let's plot the distributions of quality for pages with and without quotations.
 
 ```{r}
 ggplot(pages_by_quotation, aes(x = ocr_sq)) +
   facet_wrap(~has_q, ncol = 1) +
   geom_density(alpha = 0.3, mapping = aes(y = ..scaled..)) +
-  labs(title = "OCR quality for pages with and without quotations")
+  labs(title = "OCR quality for pages with and without quotations") +
+  geom_vline(aes(xintercept = median_ocr), data = ocr_summary, color = "green") +
+  geom_vline(aes(xintercept = lower), data = ocr_summary, color = "red") 
 ```
+
+Keeping an `ocr_sq` threshold of `0.625` keeps about 95% of the quotations and but discards about 20% of the Chronicling American newspaper pages. This seems much more justifiable than keeping known bad OCR, and also more justifiable than setting a very high bar for OCR quality.
+
