@@ -9,5 +9,3 @@ All prose is copyright 2016--2020 Lincoln Mullen and is released under the CC-BY
 All code is copyright 2016-2020 Lincoln Mullen and is released under the MIT license.
 
 All data is copyright 2016-2020 Lincoln Mullen and is released under the CC0 license.
-
-
