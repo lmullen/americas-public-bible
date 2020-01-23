@@ -1,0 +1,19 @@
+name: "americas-public-bible"
+exclude: ["Makefile"]
+include: [".htaccess"]
+navbar:
+  title: "America’s Public Bible"
+  right:
+    - text: "Table of Contents"
+      href: index.html
+    - text: "Explore the Quotations"
+      href: exploration.html
+output:
+  html_document:
+    theme: lumen
+    highlight: null
+    mathjax: null
+    include:
+      in_header: _includes/in-header.html
+      after_body: _includes/footer.html
+    css: styles.css

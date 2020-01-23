@@ -1,0 +1,42 @@
+body {
+  font-family: 'IBM Plex Serif', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.selectize-input {
+  /* border: 1px solid #dce4ec; */
+  overflow: visible;
+}
+
+#verse-ts-labels {
+  padding-top: 35px!important;
+}
+
+.shiny-input-container {
+  width: 100%!important;
+}
+
+.dygraph-title {
+  font-weight: normal;
+}
+
+tr.selected.even {
+  background-color: transparent !important;
+}
+
+tr.selected.odd {
+  background-color: #f9f9f9 !important;
+}
+
+.action-button {
+  padding-right: 15px;
+  white-space: nowrap;
+}
+
+#verse_ts_chart {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

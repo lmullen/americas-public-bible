@@ -1,0 +1,115 @@
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
+#site-title {
+  font-size: 8rem;
+  margin-bottom: 0;
+}
+
+#site-subtitle {
+  font-size: 4rem;
+  margin-top: 0;
+}
+
+.navbar-brand {
+  font-size: 2.0rem;
+  font-weight: normal;
+}
+
+.main-container {
+  margin-top: 30px;
+}
+
+#splash-image img {
+  max-height: 500px;
+  display: block;
+  margin: auto;
+}
+
+.figure img {
+  /* border: 1px solid black; */
+}
+
+.figure {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.caption {
+  text-align: center;
+  max-width: 85%;
+  display: block;
+  margin: auto;
+  font-style: italic;
+}
+
+.caption em {
+  font-style: normal;
+}
+
+footer {
+  margin: 2rem;
+  padding: 2rem;
+  border-top: 1px solid gray;
+}
+
+blockquote {
+  font-size: 100%;
+}
+
+.bibliography {
+  margin-left: 50px;
+}
+
+iframe {
+    background-color: transparent;
+    border: 0 none transparent;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.html-widget {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+table caption {
+  color: black;
+  font-size: 24px;
+}
+
+.thumbnail-caption {
+  text-align: center;
+  margin: auto;
+}
+
+.thumbnail-caption h4 {
+  font-size: 24px;
+}
+
+.thumbnail img {
+  max-height: 225px;
+}
+
+.pull-left {
+  float: left;
+  margin-right: 2rem;
+  max-width: 33%;
+  min-width: 150px;
+}
+
+.dygraph-title {
+  text-align: left;
+}
