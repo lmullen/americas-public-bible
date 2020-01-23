@@ -15,11 +15,12 @@ library(viridis)
 library(broman)
 library(xts)
 library(broom)
+library(dbplyr)
 
-con <- dbConnect(odbc::odbc(), "Research DB")
-quotations <- tbl(con, "apb_proto_quotations") %>% collect()
-verses_by_year <- tbl(con, "apb_proto_verses_by_year") %>%  collect() 
-wordcounts <- tbl(con, "apb_proto_wordcounts") %>% collect()
+con <- dbConnect(odbc::odbc(), "ResearchDB")
+quotations <- tbl(con, in_schema("apb_prototype", "apb_proto_quotations")) %>% collect()
+verses_by_year <- tbl(con, in_schema("apb_prototype", "apb_proto_verses_by_year")) %>%  collect() 
+wordcounts <- tbl(con, in_schema("apb_prototype", "apb_proto_wordcounts")) %>% collect()
 ```
 
 What is the difference between the full `quotations` table and the `verses_by_year` table?
