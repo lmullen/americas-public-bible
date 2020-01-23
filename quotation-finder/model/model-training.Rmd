@@ -1,0 +1,429 @@
+---
+title: "Model training"
+output: html_notebook
+---
+
+This notebook trains a classification model which distinguishes between actual quotations to the biblical text and mere noise. It does not attempt to distinguish between versions of a biblical text: that kind of cleaning will happen later.
+
+We are going to use the parsnip package and its attendants to train and evaluate different models, then pick the best one.
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(parsnip)
+library(dials)
+library(keras)
+library(probably)
+library(ggrepel)
+```
+
+The training data is located in the database. It is stored as a table contained document (i.e., newspaper) and verse IDs, with a boolean labeling them as a genuine or false match. That match indicates whether the verse was indeed quoted, but not whether that specific version was quoted. Another table contains measurements of the features of the potential quotation. We join the labeled data to those measurements. But it might also be useful to know certain information about the version of the verse. For instance, the Book of Mormon reproduces a number of verses or phrases from the KJV and so it has a much higher rate of potential matches that measure highly but aren't actually matches. So we pull in some version information that we will manipulate. This includes a table measuring how similar verses are to one another within the same version, which is a way of knowing whether a verse is unique or not. Finally we split the data into training and testing sets. The testing set is inviolable, and will be used for model validation later. To make sure the data is available for inspection later, we will only do that if the data has not been written to disk; otherwise, we will load the data from disk.
+
+```{r}
+# Check if we have already commited the training and validation data
+if (!file.exists("apb-training.csv") |
+    !file.exists("apb-testing.csv") |
+    !file.exists("apb-labeled-quotations.csv")) {
+  
+  message("Reading the labels from the database and creating train/test split.\n")
+  
+  # Get the data from the database and manipulate it
+  library(odbc)
+  db <- dbConnect(odbc::odbc(), "Research DB")
+  apb_labeled <- tbl(db, "apb_labeled")
+  apb_potential_quotations <- tbl(db, "apb_potential_quotations")
+  scriptures <- tbl(db, "scriptures") %>% select(verse_id = doc_id, version)
+  scripture_sim <- tbl(db, "scriptures_intraversion_similarity") 
+  labeled_quotations <- apb_labeled %>% 
+    left_join(apb_potential_quotations, by = c("verse_id", "doc_id")) %>% 
+    left_join(scriptures, by = c("verse_id")) %>% 
+    left_join(scripture_sim, by = c("verse_id")) %>% 
+    collect() %>% 
+    filter(!is.na(tokens),
+           version != "Book of Mormon",
+           version != "Pearl of Great Price",
+           version != "Doctrine and Covenants") %>% 
+    mutate(match = if_else(match, "quotation", "noise"),
+           match = factor(match, levels = c("quotation", "noise"))) %>% 
+    mutate(runs_pval = if_else(is.na(runs_pval), 1, runs_pval)) %>% 
+    select(-version)
+  
+  # Split the labeled data into training and validation sets
+  set.seed(1989)
+  data_split <- initial_split(labeled_quotations, strata = "match", p = 0.85)
+  training <- training(data_split)
+  testing  <- testing(data_split)
+  write_csv(labeled_quotations, "apb-labeled-quotations.csv")
+  write_csv(training, "apb-training.csv")
+  write_csv(testing, "apb-testing.csv")
+  
+  # Cleanup
+  dbDisconnect(db)
+  rm(data_split)
+  rm(apb_labeled)
+  rm(apb_potential_quotations)
+  rm(scriptures)
+  rm(scripture_sim)
+  rm(db)
+  
+} else {
+  
+  message("The training or testing data already exists. Loading from disk.\n")
+  spec <- cols(verse_id = col_character(),
+               doc_id = col_character(),
+               match = readr::col_factor(levels = c("quotation", "noise")),
+               tokens = col_integer(),
+               tfidf = col_double(),
+               proportion = col_double(),
+               runs_pval = col_double(), 
+               sim_total = col_double(), 
+               sim_mean = col_double())
+  labeled_quotations <- read_csv("apb-labeled-quotations.csv", col_types = spec)
+  training <- read_csv("apb-training.csv", col_types = spec)
+  testing <- read_csv("apb-testing.csv", col_types = spec)
+  rm(spec)
+}
+```
+
+We are going to remove the `verse_id` and `doc_id` columns because they are not predictor or response variables. 
+
+```{r}
+labeled_quotations <- labeled_quotations %>% select(-verse_id, -doc_id)
+training <- training %>% select(-verse_id, -doc_id)
+testing <- testing %>% select(-verse_id, -doc_id)
+```
+
+Some brief exploration of the data confirms that there is a clear separation in the data.
+
+```{r}
+labeled_quotations %>% 
+  group_by(match) %>% 
+  summarize(n(), mean(tokens), mean(tfidf),
+            mean(proportion), mean(runs_pval),
+            mean(sim_total), mean(sim_mean)) %>% 
+  gather("measurement", "value", -match) %>% 
+  mutate(value = round(value, 2)) %>% 
+  spread(match, value)
+```
+
+We can also see the separation in the data, thought it is not as clear as we would like.
+
+```{r}
+ggplot(labeled_quotations, aes(tokens, tfidf, color = match)) +
+  geom_jitter(shape = 1) +
+  theme_classic() +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 12)) +
+  labs(title = "Comparison of genuine quotations versus noise")
+```
+
+We are going to pre-process the data to center and scale the predictors.
+
+```{r}
+data_recipe_all <- recipe(match ~ ., data = training) %>% 
+  step_center(all_numeric()) %>%
+  step_scale(all_numeric()) %>%
+  prep(training = training, retain = TRUE)
+
+# We have decided to keep only three predictor columns, so train a data recipe just for those
+data_recipe <- recipe(match ~ ., 
+                      data = training %>% select(match, tokens, tfidf, proportion)) %>% 
+  step_center(all_numeric()) %>%
+  step_scale(all_numeric()) %>%
+  prep(training = training, retain = TRUE)
+                      
+
+training_normalized = bake(data_recipe_all, new_data = training)
+testing_normalized = bake(data_recipe_all, new_data = testing)
+training_normalized_selective <- bake(data_recipe, 
+                                      new_data = training %>% 
+                                        select(match, tokens, tfidf, proportion))
+
+# Double check that the different data recipes produce the same results for the same columns.
+stopifnot(
+  identical(training_normalized %>% select(match, tokens, tfidf, proportion), 
+            training_normalized_selective)
+)
+```
+
+We aren't entirely sure which predictors would be best. So we want to define different formulas for different sets of predictors, along with a dials parameter to generated the tuning grid.
+
+```{r}
+predictors_formulas <- list(
+  # Throw all the information
+  all = match ~ .,
+  # Just the core numeric predictors
+  core = match ~ tokens + tfidf + proportion,
+  # The core numeric predictors plus runs_pval
+  numeric = match ~ tokens + tfidf + proportion + runs_pval,
+  # The core numeric predictors with interaction between tokens and tfidf
+  interaction = match ~ tokens * tfidf + proportion + runs_pval,
+  # The numeric predictors plus sim_total
+  sim_t = match ~ tokens + tfidf + proportion + runs_pval + sim_total,
+  # The numeric predictors plus sim_mean 
+  sim_m = match ~ tokens + tfidf + proportion + runs_pval + sim_mean
+)
+
+# A dials object for setting the predictors parameter
+predictors <- new_qual_param("character", 
+                             values = names(predictors_formulas),
+                             label = c(predictors = "Predictors"))
+```
+
+
+Some helper functions for running the predictions and computing the accuracy measures.
+
+```{r}
+# Calculate the confusion matrix and the resulting accuracy measures
+predictions <- function(model, type = c("training", "testing")) {
+  type <- match.arg(type)
+  df <- switch(type,
+               training = training_normalized,
+               testing = testing_normalized)
+  df %>% 
+    select(match) %>% 
+    mutate(pred_class = predict(model, df, type = "class")$.pred_class,
+           pred_probs = predict(model, df, type = "prob")$.pred_quotation) 
+}
+
+accuracy_measures <- function(model, type = c("training", "testing")) {
+  type <- match.arg(type)
+  preds <- model %>%  predictions(type = type)
+  bind_rows(
+    preds %>% conf_mat(truth = match, estimate = pred_class) %>% summary(),
+    preds %>% roc_auc(match, pred_probs)
+  )
+}
+```
+
+We will begin by training a logistic regression model to classify the quotations. We will create a tuning grid with the different predictors, parameters specific to the logistic regression model. We will then train the models on those parameters, and measure the accuracy according to various metrics that use the confusion matrix. The goal is to end up with a data frame with the parameters, models, and accuracy measures.
+
+```{r, warning=FALSE}
+set.seed(7260)
+logistic_spec <- logistic_reg(mode = "classification", 
+                              penalty = varying(),
+                              mixture = varying()) %>% 
+  set_engine("glm")
+
+logistic_params <- grid_regular(penalty,
+                                mixture,
+                                predictors,
+                                levels = 6)
+logistic_params$model_type <- "logistic regression"
+logistic_params$id <- seq_len(nrow(logistic_params))
+logistic_params$accuracy <- vector("list", nrow(logistic_params))
+logistic_params <- logistic_params %>% select(id, everything())
+logistic_definitions <- logistic_spec %>% merge(logistic_params)
+logistic_models <- vector("list", length(logistic_definitions))
+
+for (i in seq_along(logistic_definitions)) {
+  logistic_models[[i]] <- parsnip::fit(
+    logistic_definitions[[i]],
+    predictors_formulas[[logistic_params$predictors[i]]],
+    data = training_normalized)
+}
+
+for (i in seq_along(logistic_models)) {
+  logistic_params$accuracy[[i]] <- accuracy_measures(logistic_models[[i]])
+}
+
+logistic_accuracy <- logistic_params %>%
+  unnest(accuracy) %>%
+  spread(.metric, .estimate)
+```
+
+We might want to try other models and combine them here.
+
+```{r}
+models_accuracy <- bind_rows(logistic_accuracy) %>% 
+  select(model_type, id, predictors, roc_auc, f_meas, j_index, everything()) 
+```
+
+
+Now that we have trained all the models we can pick the one with the best area under the ROC. We will find the best model for each of the kinds of predictors.
+
+```{r}
+models_accuracy %>% 
+  group_by(predictors) %>% 
+  arrange(desc(roc_auc), desc(j_index), desc(f_meas)) %>% 
+  slice(1) 
+```
+
+We can ask this question a different way by asking what the best model is for certain metrics.
+
+For the ROC AUC.
+```{r}
+models_accuracy %>% 
+  arrange(desc(roc_auc)) %>% 
+  top_n(1, roc_auc)
+```
+
+For the F1 score.
+
+```{r}
+models_accuracy %>% 
+  arrange(desc(f_meas)) %>% 
+  top_n(1, f_meas)
+```
+
+For the J index.
+
+```{r}
+models_accuracy %>% 
+  arrange(desc(j_index)) %>% 
+  top_n(1, j_index)
+```
+
+It appears that the model 1, using all the predictors is slightly better in terms of the ROC AUC measure, but that model 37 which uses only the three core numeric predictors is very close in terms of the ROC AUC and slightly better in terms of the F1 and J index metrics. The core metrics are much quicker to computer than the runs p value, so we will just use model 37.
+
+```{r}
+model <- logistic_models[[37]]
+```
+
+Let's test the predictions on the testing data set on that selected model.
+
+```{r}
+predictions <- function(model, type = c("training", "testing")) {
+  type <- match.arg(type)
+  data <- switch(type,
+             training = training_normalized,
+             testing = testing_normalized)
+  
+  bind_cols(
+    data %>% select(truth = match),
+    model %>% predict(data, type = "class"),
+    model %>% predict(data, type = "prob")
+  )
+}
+    
+model %>% predictions()
+```
+
+Then we can get the confusion matrix.
+
+```{r}
+model %>% predictions() %>% conf_mat(truth = truth, estimate = .pred_class)
+```
+
+And the summary statistics for estimating the model performance.
+
+```{r}
+bind_rows(
+  model %>% predictions() %>% conf_mat(truth, .pred_class) %>% summary(),
+  model %>% predictions() %>% roc_auc(truth, .pred_quotation)
+)
+```
+
+Now we want to see the ROC curve itself. We will also plot a few different thresholds on the curve.
+https://tidymodels.github.io/probably/articles/where-to-use.html
+
+```{r}
+curve <- model %>% predictions() %>% roc_curve(truth, .pred_quotation)
+
+curve_points <- curve %>% 
+  filter(.threshold > 0.5) %>% 
+  mutate(.threshold = round(.threshold, 2)) %>% 
+  group_by(.threshold) %>% 
+  slice(1) %>% 
+  filter(.threshold %in% c(0.5, 0.58, 0.7, 0.8, 0.9))
+
+curve %>% 
+  autoplot() + 
+  labs(title = "ROC curve",
+       subtitle = "Select thresholds labeled") +
+  geom_point(data = curve_points,
+             aes(x = 1- specificity, y = sensitivity),
+             color = "red") +
+  geom_text(data = curve_points,
+            aes(x = 1- specificity, y = sensitivity, label = round(.threshold, 3)),
+            color = "red", nudge_x = 0.1)
+```
+
+We want to determine a threshold based on the ROC curve. 
+
+```{r}
+thresholds <- model %>% predictions() %>% 
+  threshold_perf(truth, .pred_quotation, thresholds = seq(0.5, 1, by = 0.01)) %>% 
+  filter(.metric != "distance")
+```
+
+We can see what the j-index, sensitivity, and specificity are at the various thresholds.
+
+```{r}
+thresholds %>% 
+  select(-.estimator) %>% 
+  mutate(.estimate = round(.estimate, 3)) %>% 
+  spread(.metric, .estimate)
+```
+
+Or we can look for the maximum j-index.
+
+```{r}
+thresholds %>% 
+  filter(.metric == "j_index") %>% 
+  top_n(1, .estimate)
+```
+
+We can also plot the changes in model performance based on varying the threshold.
+
+```{r}
+max_j_index_threshold <- thresholds %>%
+  filter(.metric == "j_index") %>%
+  filter(.estimate == max(.estimate)) %>%
+  pull(.threshold)
+
+ggplot(thresholds, aes(x = .threshold, y = .estimate, color = .metric)) +
+  geom_line() +
+  theme_minimal() +
+  geom_vline(xintercept = max_j_index_threshold, alpha = .6, color = "grey30") +
+  annotate("text", x = max_j_index_threshold + 0.01, y = 0.54,
+           label = str_glue("Line is maximum j-index: {max_j_index_threshold}"),
+           hjust = 0) +
+  labs(
+    x = "Probability threshold for identifying as a quotation",
+    y = "Metric estimate",
+    title = "Model performance varying by threshold",
+    color = "Metric"
+  )
+```
+
+So we can check the confusion matrix at that threshold.
+
+First the confusion matrix at a threshold of 0.5.
+
+```{r}
+model %>% predictions() %>% conf_mat(truth = truth, estimate = .pred_class)
+```
+
+Now the new confusion matrix.
+
+```{r}
+model %>% predictions() %>% 
+  mutate(prediction = if_else(.pred_quotation >= max_j_index_threshold,
+                              "quotation", "noise"),
+         prediction = factor(prediction, levels = c("quotation", "noise"))) %>% 
+  conf_mat(truth, prediction)
+```
+
+And we can do this on the testing data.
+
+```{r}
+confm_test <- model %>% predictions("testing") %>% 
+  mutate(prediction = if_else(.pred_quotation >= max_j_index_threshold,
+                              "quotation", "noise"),
+         prediction = factor(prediction, levels = c("quotation", "noise"))) %>% 
+  conf_mat(truth, prediction)
+confm_test
+```
+
+And we can compute the model statistics.
+
+```{r}
+summary(confm_test)
+```
+
+We will write our model to disk, along with the other objects we need to make predictions.
+
+```{r}
+save(data_recipe, model,
+     file = "../bin/prediction-payload.rda")
+```

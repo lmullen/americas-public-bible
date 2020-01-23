@@ -1,0 +1,64 @@
+---
+title: "Computing the proportion of a verse"
+output: html_notebook
+---
+
+Let's make sure that we get the proportion of a verse correct.
+
+```{r startup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(text2vec)
+library(Matrix)
+```
+
+Load the necessary stuff.
+
+```{r}
+bible <- new.env()
+load("../bin/bible-payload.rda", envir = bible)
+bible_dtm <- bible$bible_dtm[c("Genesis 1:1 (KJV)", "John 3:16 (KJV)",
+                               "Acts 1:1 (KJV)", "Mark 1:1 (KJV)"), ]
+keepers <- bible_dtm %>% colSums()
+keepers <- keepers[keepers > 0]
+bible_dtm <- bible_dtm[, names(keepers)]
+
+texts <- tibble(
+  doc_id = c("quotesGenesis", "quotesJohn", "quotesBoth", "overQuotes"),
+  text = c("I said to him, In the beginning God created the heaven",
+           "God so loved the world, is a famous verse",
+           "God created the heaven and the earth. But God gave his begotten son.",
+           "In the beginning God created the heaven and the earth. God created the heaven and the earth I said.")
+)
+```
+
+Make the dtm.
+
+```{r}
+texts <- texts %>%
+  mutate(tokens_ngrams = bible$bible_tokenizer(text, type = "ngrams"))
+token_it <- itoken(texts$tokens_ngrams,
+                   ids = texts$doc_id, progressbar = FALSE)
+docs_dtm <- create_dtm(token_it, bible$bible_vectorizer)
+docs_dtm <- docs_dtm[, names(keepers)]
+```
+
+If we multiply them we get what we expected, the count of tokens.
+
+```{r}
+token_count <- tcrossprod(bible_dtm, docs_dtm)
+token_count
+```
+
+We can also compute the number of tokens in each verse.
+
+```{r}
+rowSums(bible_dtm)
+```
+
+Now we want to get the number of tokens in the quotation divided by the number of tokens in the verse.
+
+```{r}
+(1 / rowSums(bible_dtm)) * token_count
+```
+
+So the formula above is what we want.
