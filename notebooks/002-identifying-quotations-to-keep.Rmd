@@ -1,0 +1,104 @@
+---
+title: "Identifying quotations to keep"
+output: html_notebook
+editor_options: 
+  chunk_output_type: console
+---
+
+**NOTE:** Now that this has been run, I have changed the names and schemas of some of the relevant tables.**
+
+```{r setup}
+library(tidyverse)
+library(odbc)
+db <- dbConnect(odbc::odbc(), "Research DB")
+```
+
+The goal of this notebook is to identify which quotations are worth keeping. The problem is that we have all the quotations above 0.5 probability, but we know that a different threshold is better. We also have multiple biblical versions of each quotation. So we want to keep the version with the highest probability. But we also know when each version was published, so we can eliminate any anachronistic matches.
+
+Get the table with quotations from the database. We will just use NCNP. We will also need the scriptures table, and the article and issue tables to get the dates.
+
+```{r}
+scriptures <- tbl(db, "scriptures")
+apb_quotations_ncnp <- tbl(db, "apb_quotations_02_predicted_ncnp")
+ncnp_articles <- tbl(db, "ncnp_articles")
+ncnp_issues <- tbl(db, "ncnp_issues")
+```
+
+We have [previously learned](https://github.com/public-bible/quotation-finder/blob/master/model/model-training.nb.html) that the best threshold to use is 0.58.
+
+```{r}
+threshold <- 0.58
+```
+
+We are going to give a slight preference to the KJV. This will break ties in case all the versions come back with the same probability, which is common. And in a case of a close match, it is almost certainly the KJV.
+
+```{r}
+kjv_bump <- 0.031
+```
+
+Now we can find which quotations we want to keep. The process is this.
+
+1. Keep quotations above the threshold.
+2. Get rid of quotations from versions that would be anachronistic.
+3. Then for each combination of a verse and page, keep only one version.
+
+Then we write this to a table in the database.
+
+
+```{r}
+ncnp_keepers <- apb_quotations_ncnp %>% 
+  filter(probability >= threshold) %>% 
+  left_join(scriptures %>% select(verse_id, reference_id, version),
+            by = c("verse_id" = "verse_id")) %>% 
+  left_join(ncnp_articles %>% select(doc_id, issue_id),
+            by = c("doc_id" = "doc_id")) %>% 
+  left_join(ncnp_issues %>% select(issue_id, date),
+            by = c("issue_id" = "issue_id")) %>% 
+  select(doc_id, reference_id, version, date, probability, everything()) %>% 
+  filter(!(version == "RV" & date < as.Date("1885-01-01")),
+         !(version == "Doctrine and Covenants" & date < as.Date("1835-01-01")),
+         !(version == "Book of Mormon" & date < as.Date("1830-01-01")),
+         !(version == "ASV" & date < as.Date("1901-01-01")),
+         !(version == "Pearl of Great Price" & date < as.Date("1851-01-01")),
+         !(version == "JPS 1917" & date < as.Date("1917-01-01"))) %>% 
+  mutate(probability_bumped = if_else(version == "KJV",
+                                      probability + kjv_bump,
+                                      probability)) %>% 
+  group_by(doc_id, reference_id) %>% 
+  filter(row_number(desc(probability_bumped)) == 1) %>% 
+  select(doc_id, verse_id, probability) %>%
+  compute("apb_quotations_ncnp", temporary = FALSE, overwrite = TRUE)
+```
+
+Now we need to do the same thing for Chronicling America.
+
+```{r}
+apb_quotations_chronam <- tbl(db, "apb_quotations_02_predicted_chronam")
+chronam_pages <- tbl(db, "chronam_pages")
+```
+
+Filter the quotations
+
+```{r}
+apb_quotations_chronam %>% 
+  filter(probability >= threshold) %>% 
+  left_join(scriptures %>% select(verse_id, reference_id, version),
+            by = c("verse_id" = "verse_id")) %>% 
+  left_join(chronam_pages %>% select(doc_id, date),
+            by = c("doc_id" = "doc_id")) %>% 
+  select(doc_id, reference_id, version, date, probability, everything()) %>% 
+  filter(!(version == "RV" & date < as.Date("1885-01-01")),
+         !(version == "Doctrine and Covenants" & date < as.Date("1835-01-01")),
+         !(version == "Book of Mormon" & date < as.Date("1830-01-01")),
+         !(version == "ASV" & date < as.Date("1901-01-01")),
+         !(version == "Pearl of Great Price" & date < as.Date("1851-01-01")),
+         !(version == "JPS 1917" & date < as.Date("1917-01-01"))) %>% 
+  mutate(probability_bumped = if_else(version == "KJV",
+                                      probability + kjv_bump,
+                                      probability)) %>% 
+  group_by(doc_id, reference_id) %>% 
+  filter(row_number(desc(probability_bumped)) == 1) %>% 
+  select(doc_id, verse_id, probability) %>% 
+  compute("apb_quotations_chronam", temporary = FALSE, overwrite = TRUE)
+```
+
