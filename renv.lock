@@ -93,12 +93,33 @@
       "Repository": "CRAN",
       "Hash": "f3ca785924863b0e4c8cb23b6a5c75a1"
     },
+    "RcppArmadillo": {
+      "Package": "RcppArmadillo",
+      "Version": "0.9.800.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0f1dd78cdd147c72d7c8f652391c61b2"
+    },
+    "RcppEigen": {
+      "Package": "RcppEigen",
+      "Version": "0.3.3.7.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c6faf038ba4346b1de19ad7c99b8f94a"
+    },
     "RcppParallel": {
       "Package": "RcppParallel",
       "Version": "4.4.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "12c9e07854eca8814a62ebeabb16e8ef"
+    },
+    "RcppRoll": {
+      "Package": "RcppRoll",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "84a03997fbb5acfb3c9b43bad88fea1f"
     },
     "SQUAREM": {
       "Package": "SQUAREM",
@@ -422,12 +443,33 @@
       "Repository": "CRAN",
       "Hash": "ad68e3263f0bc9269aab8c2039440117"
     },
+    "ggforce": {
+      "Package": "ggforce",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b7132d67f9814af0536cd5761be94314"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9ac60f09a2f437af8df8638ef3da0288"
+    },
+    "ggraph": {
+      "Package": "ggraph",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a68ee7074241eccb40d77ce0a9b995dd"
+    },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.8.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d2d969d2ca127dbb2da60b5a20ee7234"
     },
     "globals": {
       "Package": "globals",
@@ -449,6 +491,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "1e7e711f2f87cc3a326f7f406815d019"
+    },
+    "graphlayouts": {
+      "Package": "graphlayouts",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6791315988972e5c82d470a7b53f6237"
     },
     "gridExtra": {
       "Package": "gridExtra",
@@ -758,6 +807,13 @@
       "Repository": "CRAN",
       "Hash": "3f1b0dbcc503320e6e7aae6c3ff87eaa"
     },
+    "polyclip": {
+      "Package": "polyclip",
+      "Version": "1.10-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cb167f328b3ada4ec5cf67a7df4c900a"
+    },
     "prettyunits": {
       "Package": "prettyunits",
       "Version": "1.1.0",
@@ -1010,6 +1066,13 @@
       "Repository": "CRAN",
       "Hash": "8248ee35d1e15d1e506f05f5a5d46a75"
     },
+    "tidygraph": {
+      "Package": "tidygraph",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2f3f4ff57c91b3f4ef73b96bf7c30fd7"
+    },
     "tidyr": {
       "Package": "tidyr",
       "Version": "1.0.0",
@@ -1052,6 +1115,13 @@
       "Repository": "CRAN",
       "Hash": "a064f646b3a692e62dfb5d9ea690a4ea"
     },
+    "tweenr": {
+      "Package": "tweenr",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fc77eb5297507cccfa3349a606061030"
+    },
     "txtq": {
       "Package": "txtq",
       "Version": "0.2.0",
@@ -1072,6 +1142,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "5c2d0fe441406cba811b46708ea28e41"
+    },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6f6b49e5b3b5ee5a6d0c28bf1b4b9eb3"
     },
     "viridisLite": {
       "Package": "viridisLite",
