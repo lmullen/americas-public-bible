@@ -1,0 +1,98 @@
+---
+title: "Determining OCR quality threshold"
+output: html_notebook
+---
+
+The goal for this notebook is to calculate a defensible threshold for the OCR quality index.
+
+```{r setup}
+library(tidyverse)
+library(DBI)
+db <- dbConnect(odbc::odbc(), "Research DB")
+chronam_pages <- tbl(db, "chronam_pages")
+chronam_quotations <- tbl(db, "apb_quotations_chronam")
+```
+
+What is the distribution of the OCR quality in Chronicling America? This is an important question because we know the OCR quality is very poor in places, but we don't know how that is distributed.
+
+```{r}
+ocr_chronam <- chronam_pages %>% 
+  select(ocr_sq) %>% 
+  collect()
+
+ocr_mean <- ocr_chronam$ocr_sq %>% mean()
+ocr_mean
+ocr_median <- ocr_chronam$ocr_sq %>% median()
+ocr_median
+ocr_sd <- ocr_chronam$ocr_sq %>% sd()
+
+ocr_chronam %>% 
+  sample_frac(0.1) %>% 
+ggplot(aes(x = ocr_sq)) + 
+  geom_histogram(bins = 100) +
+  geom_vline(xintercept = ocr_mean, color = "green") +
+  geom_vline(xintercept = ocr_median, color = "yellow") +
+  geom_vline(xintercept = ocr_mean - 1 * ocr_sd, color = "red") +
+  geom_vline(xintercept = ocr_mean - 2 * ocr_sd, color = "red") +
+  labs(title = "OCR quality in Chronicling America with lines for mean/median and sd")
+```
+
+A lot of the OCR is reasonably good; a lot is really poor. 
+
+The essential question is whether the OCR quality affects the accuracy of the quotation finder. Is there a threshold below which we can't detect anything, so that those pages should be discarded? Let's get the relationship between the OCR quality and the probability of a quotation.
+
+```{r}
+ocr_prob <- chronam_quotations %>% 
+  select(doc_id, probability) %>% 
+  left_join(chronam_pages %>% select(doc_id, ocr_sq),
+            by = "doc_id") %>% 
+  select(-doc_id) %>% 
+  collect()
+```
+
+What does the relationship look like?
+
+```{r}
+ggplot(ocr_prob, aes(x = ocr_sq, y = probability)) +
+  geom_bin2d() +
+  scale_x_continuous(limits = c(0, 1)) +
+  scale_y_continuous(limits = c(0.5, 1)) +
+  scale_fill_viridis_c() +
+  labs(title = "Relationship between OCR quality and probability")
+```
+
+It appears that the relationship is not very strong. Other metrics confirm.
+
+```{r}
+ocr_quality_model <- lm(probability ~ ocr_sq, data=ocr_prob)
+summary(ocr_quality_model)$r.squared 
+```
+
+What is the distributions of OCR quality among known quotations?
+
+```{r}
+ggplot(ocr_prob, aes(x = ocr_sq)) +
+  geom_histogram(bins = 100) +
+  labs(title = "Distribution of OCR quality among known quotations")
+```
+
+Of course, that's the distribution for pages where we know there is a quotation. Let's calculate this for all pages.
+
+```{r}
+pages_by_quotation <- chronam_pages %>% 
+  select(doc_id, ocr_sq) %>% 
+  left_join(chronam_quotations %>% count(doc_id),
+            by = "doc_id") %>% 
+  select(-doc_id) %>% 
+  mutate(has_q = if_else(is.na(n), FALSE, TRUE)) %>% 
+  collect()
+```
+
+Let's plot the distributions of quality for pages with and without quotations.
+
+```{r}
+ggplot(pages_by_quotation, aes(x = ocr_sq)) +
+  facet_wrap(~has_q, ncol = 1) +
+  geom_density(alpha = 0.3, mapping = aes(y = ..scaled..)) +
+  labs(title = "OCR quality for pages with and without quotations")
+```
