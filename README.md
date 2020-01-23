@@ -10,7 +10,7 @@ Lincoln Mullen, *America's Public Bible: A Commentary* (Stanford University Pres
 
 ## Copyright and license
 
-All prose is copyright 2016--2020 Lincoln Mullen and is released under the CC-BY-NC-ND license.
+All prose is copyright 2016-2020 Lincoln Mullen and is released under the CC-BY-NC-ND license.
 
 All code is copyright 2016-2020 Lincoln Mullen and is released under the MIT license.
 
