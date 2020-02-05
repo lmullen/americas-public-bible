@@ -1,0 +1,36 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r, messages = FALSE}
+library(tidyverse)
+library(DBI)
+library(dbplyr)
+db <- dbConnect(odbc::odbc(), "ResearchDB", timeout = 10)
+```
+
+How many items are there in NCNP?
+
+```{r}
+dbGetQuery(db, "SELECT COUNT(*) FROM ncnp.articles;")
+```
+
+How many "articles" are there for each of the different types of item?
+
+```{r}
+ncnp_articles <- tbl(db, in_schema("ncnp", "articles"))
+ncnp_articles %>% 
+  count(category, sort = TRUE)
+```
+
+How many pages are there, for comparison to Chronicling America?
+
+```{r}
+ncnp_articles %>% 
+  group_by(issue_id) %>% 
+  filter(page == max(page)) %>% 
+  ungroup() %>% 
+  summarize(pages = sum(page))
+```
+
