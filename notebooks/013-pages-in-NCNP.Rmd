@@ -3,7 +3,7 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-```{r, messages = FALSE}
+```{r, output = FALSE}
 library(tidyverse)
 library(DBI)
 library(dbplyr)
@@ -27,10 +27,6 @@ ncnp_articles %>%
 How many pages are there, for comparison to Chronicling America?
 
 ```{r}
-ncnp_articles %>% 
-  group_by(issue_id) %>% 
-  filter(page == max(page)) %>% 
-  ungroup() %>% 
-  summarize(pages = sum(page))
+dbGetQuery(db, "SELECT COUNT(*) FROM (SELECT DISTINCT issue_id, page FROM ncnp.articles) AS pages;")
 ```
 
