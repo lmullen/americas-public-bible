@@ -1775,7 +1775,10 @@ db &lt;- dbConnect(odbc::odbc(), &quot;ResearchDB&quot;, timeout = 10)</code></p
 <p>How many items are there in NCNP?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVFTd3JDTUJDZE5rWnB3QStJcDVCMm80Z0hFQThnQ2wyNGlXMnN4WnBJbXFLblY2ZWZnQVkzODNtOG1YbHZkcHQ0d1dJR0FBUkkzd2RDc1FSNjJHL0ROVURQeDhhREhnUjFmaUpwMmdCQVJtM0dNRC9PSENKTkNsNldXRXkrd0NDWFJtUkNyNWJZdk53SnlXL0NuYUNKcXFSeG1JRldqOGl5aDUwSXJ5WDViMmNEUzduaDBWa2ovYy9SZ2JxYlhFbGM1TmV1cURQc2FRY1lWN0krbkliSnBaTFhzUGJCN0JkK3hiakNpQlZHdTFWOUliTmNDbXUwNENkUmRNMElEVGIrb3J2R2wxa25pSmFSVVlaYkhrdFVZWkhHRzd3KzlqUXdRY3dCQUFBPSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGJHZXRRdWVyeShkYiwgXCJTRUxFQ1QgQ09VTlQoKikgRlJPTSBuY25wLmFydGljbGVzO1wiKVxuYGBgIn0= -->
+<pre class="r"><code>dbGetQuery(db, &quot;SELECT COUNT(*) FROM ncnp.articles;&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVFTd3JDTUJDZE5vM1NnbFVRVHlIdHBpSWVRRHlBS0xod0UydlVZazFLbXFLbnIwNC9BUTF1NXZONE0vUGViTmVISkRnRUFFQ0FERndnRkV1Zys5MG1XZ0Y0TGpZT2VPQTMrWVdrYVFzQUNidU1ZWDZjV1VTYTVxd3NzWmg4Z1g0bU5MOXl0VnhnVTlzVGdqMjRQVUZUV1FsdE1YMGxuN0ZoajNvUlRrZHkzOWFHNE13MGl5OEs2WCtPRG1XaE15bHdrZHU0b3Rhd295eGdYSW5tOERsS2I1VzRSMGx6d0h6aFY0d3RqQmhodEY4MTRPS2FDVzZNNXV6RTg3NEowV0RyTHk0VXZzdzRRYlNNdGRUTThJSlU1Z1pwdlVIOUFWbmMyN0xNQVFBQSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["count"],"name":[1],"type":["S3: integer64"],"align":["right"]}],"data":[{"1":"19618837"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
@@ -1792,7 +1795,7 @@ db &lt;- dbConnect(odbc::odbc(), &quot;ResearchDB&quot;, timeout = 10)</code></p
 ncnp_articles %&gt;% 
   count(category, sort = TRUE)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9Qb3N0Z3JlU1FMIiwidGJsX2RiaSIsInRibF9zcWwiLCJ0YmxfbGF6eSIsInRibCJdLCJuY29sIjoyLCJucm93IjpbXX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMlR2Mi9UUUJUSHozWVNha05DcEdaazhOUUJsRWdGaE5pZ0pXV0Jna2hBRkJERHhYNTFUbkh2ckxzem9Wc0hOa2IrQXY0Q3BQNEZMR3hNL0EySUNZbWhlOFA5OEpsZ3NKUjg3cDd2ZmQ4UHY1dU1EMjVFQnhGQ0tFQkJ4MGRCV3kxUis5blQrOFBiQ0xWOHRmRlFDNFdhYjlXaFRiWFF4cjc2RGFvWHJVZXdGTlc2ZHkvSFFwQkRBbW1NVTJmZDJDMEZvU0RjZnJERHBZaTM0ajBxZ1V0TTZCRlFXYjBMOTFJaUdTYzRyd3pkZlNJU3lITk1nWlZPb1R1ZGs2SWdOSXZwbitDRGh5Q1ZZQ3haTE9jUWd4RnlEbVBBY2g1VEpra0NvbzZWUXlJSm84N1EzOGRjaGM2Z2NiRDNYSHNyYVE0RjR5N1Z6bFJ2M0ptTFl5S0tIQit2MVgxNUFqaVBRVWdzWWMxOGFTcFpzb2dsbnVWMWhJM0hNeUpMekkrZDlnVGVFRmk2N0hjSi95ZjdScm0yYitvYjljeTMwYytYVDFjTnQ4NllZZlJqWVhsbnh6QTgvV3JZK2Z6Tjh1VjF3K0RkTlV1eGFlaWYrWlpQUGhoNjN5c3VYaG1pWHk4c1Q5OWJsbGNzaTllVzJVZkxCM2N0MVZEOVBWenRSTTlOTlZqT0dCSTFIeG53V3pmVjVyenBRZkVST0EvZmRURlJuYzVZM1VXUFdpOS8xWkNPVWl6eDZKQXJqWVp1eU5seTVMUzdXdnRFL2ExV3E1Ly9TZUlDSyt6NElGOTNxdDJJNHZHR29WOVNMWjBPazNsSkY4UHRiWjJLYllkNWREenZaRzF0YWpNeEExZEMyMDBJMEV4ZEt0ZU9ITS9BWFptZXFzR1VNQ280cVc5V3BLeGlKSm1zcjFhVXNOeFpUSEhvL0RjWmVDc09FUVFBQUE9PSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9Qb3N0Z3JlU1FMIiwidGJsX2RiaSIsInRibF9zcWwiLCJ0YmxfbGF6eSIsInRibCJdLCJuY29sIjoyLCJucm93IjpbXX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMlR2Mi9UUUJUSHozWVNha1BTU3MzSTRLa0RLQmtBSWJiU2tuYUJna2hBRkJERHhYNTFUbkh2ckxzemFiY09iSXo4QmZ3RlNQMExXTmlZK0JzUUV4SkQ5NGI3NFRQQllNbiszRDNmKzc1Nzc5Nk5SNGUzbzhNSUlSU2dvT09qb0syR3FQMzgyZjdnSGtJdFgwMDgxRUtoNW9sYXRLa0cycmloM243MW8vVVlGcUlhOXg3a1dBaHlSQ0NOY2Vxc2E3dWxJQlNFbS9kM3VCVHhWcnhISlhDSkNUMEdLcXQvNFY1S0pPTUU1NVdoZTBCRUFubU9LYkRTS1hRbk0xSVVoR1l4L1JPOC93aWtFb3dsaStVTVlqQkN6bUVFV001aXlpUkpRTlN4Y2tna1lkUVpOZzR3VjZFemFDenN2ZERlU3BwRHdiamJhbWVpSjI3TjFSRVJSWTVQVi9KZUh3UE9ZeEFTUzFneFg1dElsc3hqaWFkNUhXSHR5WlRJRXZOVHB6Mkd0d1FXYnZlN2hQK3orMGE2dG03cWpIcm1iUFR6NWRNTnc2MExaaGo5bUZ0dTd4aUc1MThOTzUrL1diNjZaUmk4dTJrcE5nMzlDOS95NlFkRDczdkYrV3REOU91bDVmbDd5L0s2WmZIR012dG8rZkMrcFdxcXY1dXJuZWkrcVJyTEdVT2kraU1EZnZlT21sdzJQU2crQnVmaHV5b21xdElacTZ2b1VldmxMeHZTVVlvbEhoNXhwZEhRRFRsYkRKMTJWMnVmcWM5eXVmejVuMDFjWVlWdEgrVHJTclViVVR6ZU1LeVhWRXVuZzJSVzB2bEE1eFhaYXBoSGgvUE9Wc1ltTlJNeWNCbTBYWU1BemRTZGN0WEk4UlRjamVtcEZFd0d3NEtUK21KRnlpcUdrc242WmtVSnk1M0Y1SVl1ZndPYVYwSlZFQVFBQUE9PSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["category"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["S3: integer64"],"align":["right"]}],"data":[{"1":"News","2":"12955434"},{"1":"Classified ads","2":"2552687"},{"1":"Business","2":"714347"},{"1":"Arts & Entertainment","2":"671553"},{"1":"Editorial","2":"635596"},{"1":"Miscellaneous","2":"442578"},{"1":"Shipping news","2":"416306"},{"1":"Letter to the editor","2":"230443"},{"1":"Death notices","2":"226067"},{"1":"Elections","2":"193282"},{"1":"Marriage notices","2":"151955"},{"1":"Weather report","2":"124051"},{"1":"Sports","2":"93019"},{"1":"Display ads","2":"61273"},{"1":"Real estate ads","2":"45707"},{"1":"Stock tables","2":"29980"},{"1":"Obituary","2":"28765"},{"1":"Review","2":"26529"},{"1":"Birth notices","2":"19264"},{"1":"Letter to the Editor","2":"1"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":["NA"]},"pages":{}}}
@@ -1804,22 +1807,13 @@ ncnp_articles %&gt;%
 <p>How many pages are there, for comparison to Chronicling America?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmNucF9hcnRpY2xlcyAlPiUgXG4gIGdyb3VwX2J5KGlzc3VlX2lkKSAlPiUgXG4gIGZpbHRlcihwYWdlID09IG1heChwYWdlKSkgJT4lIFxuICB1bmdyb3VwKCkgJT4lIFxuICBzdW1tYXJpemUocGFnZXMgPSBzdW0ocGFnZSkpXG5gYGAifQ== -->
-<pre class="r"><code>ncnp_articles %&gt;% 
-  group_by(issue_id) %&gt;% 
-  filter(page == max(page)) %&gt;% 
-  ungroup() %&gt;% 
-  summarize(pages = sum(page))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGJHZXRRdWVyeShkYiwgXCJTRUxFQ1QgQ09VTlQoKikgRlJPTSAoU0VMRUNUIERJU1RJTkNUIGlzc3VlX2lkLCBwYWdlIEZST00gbmNucC5hcnRpY2xlcykgQVMgcGFnZXM7XCIpXG5gYGAifQ== -->
+<pre class="r"><code>dbGetQuery(db, &quot;SELECT COUNT(*) FROM (SELECT DISTINCT issue_id, page FROM ncnp.articles) AS pages;&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTWlzc2luZyB2YWx1ZXMgYXJlIGFsd2F5cyByZW1vdmVkIGluIFNRTC5cblVzZSBgU1VNKHgsIG5hLnJtID0gVFJVRSlgIHRvIHNpbGVuY2UgdGhpcyB3YXJuaW5nXG5UaGlzIHdhcm5pbmcgaXMgZGlzcGxheWVkIG9ubHkgb25jZSBwZXIgc2Vzc2lvbi5cbiJ9 -->
-<pre><code>Missing values are always removed in SQL.
-Use `SUM(x, na.rm = TRUE)` to silence this warning
-This warning is displayed only once per session.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9Qb3N0Z3JlU1FMIiwidGJsX2RiaSIsInRibF9zcWwiLCJ0YmxfbGF6eSIsInRibCJdLCJuY29sIjoxLCJucm93IjpbXX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVFVVzdDTUF4MUUxTFVTZ01renRGK01NUjJBTFFEVEV6aU41UlFLcnFrU29QR1o3WEw3aFpsVHR1Z0tzS1NZL3ZsMmM3TDUzYi9HdTlqQUtCQVF3S1VZUXJzYS9lUnZBTk1DQllCVENDeThZYWtaUWNBbmZVUjdlLzN6U095ck9SMWpjbGlCRWFGTkNJWGVyUEdvdlU3SlA4V2ZnZXJlRzVCeXlSMzd6SStjc1BUazhZK2IxYWsxVS9xNXIyZ2t3YVBPOXFUeFZOVm1VSkpwQktyakhsYkF1MEI4NnUwbzQ5SmRyN0tTN0t5TDNuOFJMOHVhRVo1NzNZbGRRcllNQ29VTWkra2NHSkxmaERsVU14UVFxY2dyVFIrbTVPTWFKMGFaYmpqeFprcUhkSnBnL1lmdGwrY25kQUJBQUE9In0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVEyd3JDTUF6TlZxdHM0QlI4RS95RTdVRkYvQUR4QTBSaHIzV3JPcHl0ZEIzNjlkUHNVdEZpWHBJY1RwSnpzdHZFQ3ovMkFZQUE2YnRBS0paQUQvdHR1QWJvdWRnNDBBT3Z6azhrVFJvQVNOQm1qTmw2YWhGcGtyT2l3R0w4QlhxWjBQek0xV3FKVFdWUENIYmo5Z1JOWkNtMHhmU1VmRVNHUGV4RU9DM0pmVmtiL0pScEZwMFUwdjhjSGNpN3pxVEFSVzd0aWxyRGpyS0FVU25xdzJtWVhFcHhEZWYxZ2M4WGZzVFl3b2dSUnJ0VmZTN09tZURHYU02T1BPK2FBQTAyL3FLN3dwY1pKNGdXa1phYUdaNmZ5TndnalRlbzN1L055b0RNQVFBQSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["pages"],"name":[1],"type":["S3: integer64"],"align":["right"]}],"data":[{"1":"15172151"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":["NA"]},"pages":{}}}
+{"columns":[{"label":["count"],"name":[1],"type":["S3: integer64"],"align":["right"]}],"data":[{"1":"1914906"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -1827,7 +1821,7 @@ This warning is displayed only once per session.</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3IsIG1lc3NhZ2VzID0gRkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KERCSSkKbGlicmFyeShkYnBseXIpCmRiIDwtIGRiQ29ubmVjdChvZGJjOjpvZGJjKCksICJSZXNlYXJjaERCIiwgdGltZW91dCA9IDEwKQpgYGAKCkhvdyBtYW55IGl0ZW1zIGFyZSB0aGVyZSBpbiBOQ05QPwoKYGBge3J9CmRiR2V0UXVlcnkoZGIsICJTRUxFQ1QgQ09VTlQoKikgRlJPTSBuY25wLmFydGljbGVzOyIpCmBgYAoKSG93IG1hbnkgImFydGljbGVzIiBhcmUgdGhlcmUgZm9yIGVhY2ggb2YgdGhlIGRpZmZlcmVudCB0eXBlcyBvZiBpdGVtPwoKYGBge3J9Cm5jbnBfYXJ0aWNsZXMgPC0gdGJsKGRiLCBpbl9zY2hlbWEoIm5jbnAiLCAiYXJ0aWNsZXMiKSkKbmNucF9hcnRpY2xlcyAlPiUgCiAgY291bnQoY2F0ZWdvcnksIHNvcnQgPSBUUlVFKQpgYGAKCkhvdyBtYW55IHBhZ2VzIGFyZSB0aGVyZSwgZm9yIGNvbXBhcmlzb24gdG8gQ2hyb25pY2xpbmcgQW1lcmljYT8KCmBgYHtyfQpuY25wX2FydGljbGVzICU+JSAKICBncm91cF9ieShpc3N1ZV9pZCkgJT4lIAogIGZpbHRlcihwYWdlID09IG1heChwYWdlKSkgJT4lIAogIHVuZ3JvdXAoKSAlPiUgCiAgc3VtbWFyaXplKHBhZ2VzID0gc3VtKHBhZ2UpKQpgYGAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3IsIG91dHB1dCA9IEZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShEQkkpCmxpYnJhcnkoZGJwbHlyKQpkYiA8LSBkYkNvbm5lY3Qob2RiYzo6b2RiYygpLCAiUmVzZWFyY2hEQiIsIHRpbWVvdXQgPSAxMCkKYGBgCgpIb3cgbWFueSBpdGVtcyBhcmUgdGhlcmUgaW4gTkNOUD8KCmBgYHtyfQpkYkdldFF1ZXJ5KGRiLCAiU0VMRUNUIENPVU5UKCopIEZST00gbmNucC5hcnRpY2xlczsiKQpgYGAKCkhvdyBtYW55ICJhcnRpY2xlcyIgYXJlIHRoZXJlIGZvciBlYWNoIG9mIHRoZSBkaWZmZXJlbnQgdHlwZXMgb2YgaXRlbT8KCmBgYHtyfQpuY25wX2FydGljbGVzIDwtIHRibChkYiwgaW5fc2NoZW1hKCJuY25wIiwgImFydGljbGVzIikpCm5jbnBfYXJ0aWNsZXMgJT4lIAogIGNvdW50KGNhdGVnb3J5LCBzb3J0ID0gVFJVRSkKYGBgCgpIb3cgbWFueSBwYWdlcyBhcmUgdGhlcmUsIGZvciBjb21wYXJpc29uIHRvIENocm9uaWNsaW5nIEFtZXJpY2E/CgpgYGB7cn0KZGJHZXRRdWVyeShkYiwgIlNFTEVDVCBDT1VOVCgqKSBGUk9NIChTRUxFQ1QgRElTVElOQ1QgaXNzdWVfaWQsIHBhZ2UgRlJPTSBuY25wLmFydGljbGVzKSBBUyBwYWdlczsiKQpgYGAKCg==</div>
 
 
 
