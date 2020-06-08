@@ -79,7 +79,7 @@ shinyServer(function(input, output, session) {
       }
       filtered_quotations %>% arrange(Date)
     } else {
-      data_frame(Newspaper = character(),
+      tibble(Newspaper = character(),
                  State = character(),
                  Date = character(),
                  Reference = character(),
