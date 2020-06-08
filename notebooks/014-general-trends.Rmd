@@ -1,0 +1,65 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+The purpose of this document is to come up with the overall trend lines.
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(dbplyr)
+library(DBI)
+library(RcppRoll)
+
+ROLL_YEARS <- 3
+```
+
+```{r}
+db <- dbConnect(odbc::odbc(), "ResearchDB", timeout = 10)
+```
+
+```{r}
+chronam_bible_data <- tbl(db, in_schema("apb", "rate_quotations_bible")) %>% 
+  #filter(corpus == "chronam") %>% 
+  mutate(n = as.integer(n)) %>% 
+  collect() %>% 
+  arrange(part, corpus, year) %>% 
+  group_by(part, corpus) %>% 
+  mutate(quotations_per_million_words = n / wordcount * 1e6) %>% 
+  mutate(quotations_smoothed = roll_sum(n, ROLL_YEARS, fill = NA) / roll_sum(wordcount, ROLL_YEARS, fill = NA) * 1e6) 
+  #filter(year >= 1835, year <= 1934)
+
+ncnp_bible_data <- tbl(db, in_schema("apb", "rate_quotations_bible")) %>% 
+  filter(corpus == "ncnp") %>% 
+  mutate(n = as.integer(n)) %>% 
+  collect() %>% 
+  arrange(part, corpus, year) %>% 
+  mutate(quotations_per_million_words = n / wordcount * 1e6) %>% 
+  mutate(quotations_smoothed = roll_sum(n, ROLL_YEARS, fill = NA) / roll_sum(wordcount, ROLL_YEARS, fill = NA) * 1e6) %>% 
+  filter(year >= 1835, year <= 1934)
+```
+
+The trend line for Chronicling America and NCNP is substantially the same---at least, with the same interpretative realm.
+
+A good way to visualize this might be a thick line for Chronicling America and a dashed, faint line for NCNP.
+
+```{r}
+ggplot(chronam_bible_data, aes(x = year, y = quotations_smoothed)) +
+  geom_line()
+ggplot(ncnp_bible_data, aes(x = year, y = quotations_smoothed)) +
+  geom_line()
+```
+
+
+That is all well and good, but perhaps we can make a single clean visualization for the front page. To do that, we want to be sure that we get the rolling average correct, which means splitting apart the data to do the rolling average, then joining it back together.
+
+```{r}
+
+```
+
+
+
+```{r}
+dbDisconnect(db)
+```
+
