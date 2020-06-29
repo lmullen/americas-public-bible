@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Typography */
+body {
+  font-family: 'IBM Plex Serif', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: bold;
+}
+
+h1 { font-size: 2.25em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.125em; }
+h4, h5, h6 { font-size: 1em; }
+p  { font-size: 1em; }
+
+/* Layout */
+.grid-container {
+  max-width: 1000px;
+}
