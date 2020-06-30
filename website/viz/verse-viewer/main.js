@@ -1,3 +1,8 @@
-import * as d3 from 'd3';
+// import * as d3 from 'd3';
+import VerseDisplayer from './verse-display';
 
-d3.select('main').append('p').text('D3 is working.');
+const p = new URLSearchParams(window.location.search);
+const ref = p.get('ref');
+
+const verse = new VerseDisplayer('#verse', ref);
+verse.render();
