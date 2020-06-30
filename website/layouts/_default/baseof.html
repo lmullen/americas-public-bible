@@ -20,7 +20,7 @@
   {{ end }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-  {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+  {{ $css := resources.Get "css/main.css" | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
 
 
@@ -28,13 +28,19 @@
 
 <body>
   <div class="grid-container">
-    <div class="grid-x grid-margin-x">
-      <div class="cell medium-12">
-        <h1>{{ .Site.Title }}</h1>
-      </div>
-    </div>
-    {{ block "main" . }}
-    {{ end }}
+
+    <header>
+      <h1>{{ .Site.Title }}</h1>
+    </header>
+
+    <main>
+      {{ block "main" . }}
+      {{ end }}
+    </main>
+
+  </div>
+  {{ block "footer" . }}
+  {{ end}}
 </body>
 
 </html>

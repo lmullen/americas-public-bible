@@ -1,0 +1,20 @@
+{
+  "name": "americas-public-bible-website",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "author": "Lincoln Mullen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lmullen/americas-public-bible.git"
+  },
+  "dependencies": {
+    "d3": "^5.16.0"
+  },
+  "devDependencies": {
+    "css-loader": "^3.6.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

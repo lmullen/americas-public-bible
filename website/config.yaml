@@ -1,7 +1,9 @@
-baseURL: "https://americaspublicbible.org/"
-
 title: "America’s Public Bible: A Commentary"
 params:
   author: "Lincoln A. Mullen"
   description: "How the Bible was used throughout American history."
 
+baseURL: "https://americaspublicbible.org/"
+taxonomies:
+  tag: ""
+  category: ""
