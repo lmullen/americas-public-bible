@@ -11,6 +11,7 @@
 		"files.exclude": {
 			"**/public/**": true,
 			"scriptures/raw": true
-		}
+		},
+		"prettier.singleQuote": true
 	}
 }
