@@ -1,7 +1,7 @@
 preview :
 	@echo "Serving the preview site with webpack and Hugo ..."
 	npx webpack --mode=development --display=errors-only
-	npx webpack --mode=development --display=errors-only --watch &
+	npx webpack --mode=development --watch --display=errors-only &
 	hugo serve --buildDrafts --buildFuture --disableFastRender 
 
 build : visualizations
