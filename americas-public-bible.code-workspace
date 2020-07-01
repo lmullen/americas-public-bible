@@ -1,17 +1,18 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "/Users/lmullen/Library/Mobile Documents/com~apple~CloudDocs/work/research/apb-writing"
-		}
-	],
-	"settings": {
-		"files.exclude": {
-			"**/public/**": true,
-			"scriptures/raw": true
-		},
-		"prettier.singleQuote": true
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/public/**": true,
+      "chronam/**": true,
+      "notebooks/**": true,
+      "prototype-website/**": true,
+      "scriptures/**": true,
+      "scriptures/raw": true
+    },
+    "prettier.singleQuote": true
+  }
 }
