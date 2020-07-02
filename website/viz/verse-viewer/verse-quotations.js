@@ -1,14 +1,16 @@
 import * as d3 from 'd3';
 import config from '../config';
-import { year, day } from '../common/dates';
+import { year, day, probLabel, versionLabel } from '../common/display';
+import { wordsForUrl } from '../common/text';
 
 export default class VerseQuotations {
-  constructor(id, verse) {
+  constructor(id, reference, verseText) {
     this.node = d3.select(id);
     this.data = null;
     this.status = 'loading';
-    const v = encodeURIComponent(verse);
-    this.url = `${config.API_BASE}/apb/verse-quotations?ref=${v}`;
+    const ref = encodeURIComponent(reference);
+    this.url = `${config.API_BASE}/apb/verse-quotations?ref=${ref}`;
+    this.keywords = wordsForUrl(verseText);
   }
 
   async fetch() {
@@ -36,8 +38,13 @@ export default class VerseQuotations {
 
     const t = this.node.append('table').classed('hover', true);
 
-    t.append('thead').html(
-      '<tr><th>Year</th><th>Date</th><th>Newspaper</th><th>Version</th><th>Probability</th></tr>'
+    t.append('thead').append('tr').html(
+      `<th>Year</th>
+      <th>Date</th>
+      <th>Newspaper</th>
+      <th>Version</th>
+      <th>Certainty</th>
+      <th>Context</th>`
     );
 
     // Here this.table is actually the <tbody> node
@@ -45,16 +52,25 @@ export default class VerseQuotations {
 
     this.table
       .selectAll('tr')
-      .data(this.data, (d) => d.document)
+      .data(this.data, (d) => d.doc_id)
       .enter()
       .append('tr')
       .html(
         (d) =>
-          `<td>${year(d.date)}</td><td>${day(d.date)}</td><td>${
-            d.title
-          }</td><td>${d.version}</td><td>${d.probability}</td>`
+          `<td>${year(d.date)}</td>
+          <td>${day(d.date)}</td>
+          <td>${d.title}</td>
+          <td>${versionLabel(d.version)}</td>
+          <td>${probLabel(d.probability)}</td>
+          <td><a href="${this.chronamQuery(
+            d.docID
+          )}">ChronAm&nbsp;&rarr;</a></td>`
       );
 
     return this.status;
+  }
+
+  chronamQuery(docID) {
+    return `${config.CHRONAM_PAGE_BASE}/${docID}#words=${this.keywords}`;
   }
 }

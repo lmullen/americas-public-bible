@@ -1,6 +1,7 @@
 import VerseDisplayer from './verse-display';
 import Alert from '../common/alert';
 import VerseQuotations from './verse-quotations';
+import './style.css';
 
 const p = new URLSearchParams(window.location.search);
 const ref = p.get('ref');
@@ -23,8 +24,8 @@ checker.then((status) => {
       'Sorry, we have a problem on our end.'
     );
     msg.render();
+  } else {
+    const quotations = new VerseQuotations('#quotations', ref, verse.data.text);
+    quotations.render();
   }
 });
-
-const quotations = new VerseQuotations('#quotations', ref);
-quotations.render();
