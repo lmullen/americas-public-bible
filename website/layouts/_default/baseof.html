@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ block "metadata" . }} {{ if .Page.Title }}
+    <title>{{.Page.Title }} | {{ .Site.Title }}</title>
+    {{ else}}
+    <title>{{ .Site.Title }}</title>
+    {{ end }} {{ if .Page.Description }}
+    <meta name="description" content="{{ .Page.Description }}" />
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.Description }}" />
+    {{ end }} {{ end }}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+      crossorigin="anonymous"
+    />
+    {{ $css := resources.Get "css/main.css" | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+  </head>
 
-  {{ block "metadata" . }}
-  {{ if .Page.Title }}
-  <title>{{.Page.Title }} | {{ .Site.Title }}</title>
-  {{ else}}
-  <title>{{ .Site.Title }}</title>
-  {{ end }}
-  {{ if .Page.Description }}
-  <meta name="description" content="{{ .Page.Description }}">
-  {{ else }}
-  <meta name="description" content="{{ .Site.Params.Description }}">
-  {{ end }}
-  {{ end }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-  {{ $css := resources.Get "css/main.css" | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $css.Permalink }}">
+  <body>
+    <div class="grid-container">
+      <header>
+        <h1>{{ .Site.Title }}</h1>
+      </header>
 
-
-</head>
-
-<body>
-  <div class="grid-container">
-
-    <header>
-      <h1>{{ .Site.Title }}</h1>
-    </header>
-
-    <main>
-      {{ block "main" . }}
-      {{ end }}
-    </main>
-
-  </div>
-  {{ block "footer" . }}
-  {{ end}}
-</body>
-
+      <main>
+        {{ block "main" . }} {{ end }}
+      </main>
+    </div>
+    {{ block "footer" . }} {{ end}}
+  </body>
 </html>
