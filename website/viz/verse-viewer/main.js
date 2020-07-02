@@ -10,14 +10,14 @@ const checker = verse.render();
 checker.then((status) => {
   if (status === 'missing') {
     const msg = new Alert(
-      '#verse',
+      'main',
       'warning',
       'Sorry, that is not a valid verse.'
     );
     msg.render();
   } else if (status === 'failed') {
     const msg = new Alert(
-      '#verse',
+      'main',
       'alert',
       'Sorry, we have a problem on our end.'
     );

@@ -16,6 +16,7 @@ export default class VerseDisplayer {
       this.status = 'ok';
     } catch (e) {
       if (e.message === '404 Not Found') {
+        console.log(e);
         this.status = 'missing';
       } else {
         console.log(e);
@@ -26,7 +27,12 @@ export default class VerseDisplayer {
 
   async render() {
     await this.fetch();
-    if (this.status !== 'ok') return this.status;
+
+    if (this.status !== 'ok') {
+      this.node.remove();
+      return this.status;
+    }
+
     this.node
       .append('p')
       .html(`<strong>${this.data.reference}</strong>—${this.data.text}`);
