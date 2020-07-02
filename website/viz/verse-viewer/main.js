@@ -1,5 +1,6 @@
 import VerseDisplayer from './verse-display';
 import Alert from '../common/alert';
+import VerseQuotations from './verse-quotations';
 
 const p = new URLSearchParams(window.location.search);
 const ref = p.get('ref');
@@ -24,3 +25,6 @@ checker.then((status) => {
     msg.render();
   }
 });
+
+const quotations = new VerseQuotations('#quotations', ref);
+quotations.render();
