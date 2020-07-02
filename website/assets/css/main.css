@@ -5,18 +5,40 @@ body {
   font-family: 'IBM Plex Serif', serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'IBM Plex Serif', serif;
   font-weight: bold;
 }
 
-h1 { font-size: 2.25em; }
-h2 { font-size: 1.5em; }
-h3 { font-size: 1.125em; }
-h4, h5, h6 { font-size: 1em; }
-p  { font-size: 1em; }
+h1 {
+  font-size: 2.25em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.125em;
+}
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+p {
+  font-size: 1em;
+}
 
 /* Layout */
+
+html {
+  overflow-y: scroll;
+}
+
 .grid-container {
   max-width: 1000px;
 }
