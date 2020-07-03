@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import config from '../config';
-import { year, day, probLabel, versionLabel } from '../common/display';
+import { year, day, probLabel } from '../common/display';
 import { wordsForUrl } from '../common/text';
 
 export default class VerseQuotations {

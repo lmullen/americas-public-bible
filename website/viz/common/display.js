@@ -30,7 +30,3 @@ export function probLabel(p) {
   if (p < 0.8) type = 'lower';
   return `<span class="label ${type}" title="Model probability estimate: ${p}">${type}</span>`;
 }
-
-export function versionLabel(version) {
-  return version === 'Douay-Rheims' ? '' : version;
-}
