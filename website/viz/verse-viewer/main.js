@@ -2,6 +2,7 @@ import VerseDisplayer from './verse-display';
 import Alert from '../common/alert';
 import VerseQuotations from './verse-quotations';
 import './style.css';
+import VerseTrend from './verse-trend';
 
 const p = new URLSearchParams(window.location.search);
 const ref = p.get('ref');
@@ -25,6 +26,8 @@ checker.then((status) => {
     );
     msg.render();
   } else {
+    const trend = new VerseTrend('#trend', ref);
+    trend.render();
     const quotations = new VerseQuotations('#quotations', ref, verse.data.text);
     quotations.render();
   }
