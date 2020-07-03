@@ -42,7 +42,6 @@ export default class VerseQuotations {
       `<th>Year</th>
       <th>Date</th>
       <th>Newspaper</th>
-      <th>Version</th>
       <th>Certainty</th>
       <th>Context</th>`
     );
@@ -60,7 +59,6 @@ export default class VerseQuotations {
           `<td>${year(d.date)}</td>
           <td>${day(d.date)}</td>
           <td>${d.title}</td>
-          <td>${versionLabel(d.version)}</td>
           <td>${probLabel(d.probability)}</td>
           <td><a href="${this.chronamQuery(
             d.docID

@@ -1,12 +1,18 @@
 .label.higher {
   background-color: #23844376;
   color: black;
+  width: 65px;
+  text-align: center;
 }
 .label.medium {
   background-color: #e8a71a85;
   color: black;
+  width: 65px;
+  text-align: center;
 }
 .label.lower {
   background-color: #fafab7c6;
   color: black;
+  width: 65px;
+  text-align: center;
 }
