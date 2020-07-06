@@ -101,7 +101,7 @@ export default class VerseTrend extends Visualization {
         return this.yScale(val * 1e6);
       });
 
-    this.viz.append('path').datum(data).classed('line', true).attr('d', line);
+    this.viz.append('path').datum(data).classed('trend', true).attr('d', line);
 
     return this.status;
   }
