@@ -37,7 +37,7 @@ export default class VerseTrend extends Visualization {
   }
 
   get chronam() {
-    return this.chronamData.trend.filter((d) => d.year <= 1926);
+    return this.chronamData.trend;
   }
 
   get ncnp() {
@@ -88,10 +88,19 @@ export default class VerseTrend extends Visualization {
       .x((d) => this.xScale(d.year))
       .y((d) => this.yScale(d.smoothed * 100));
 
+    // Draw the lines. NCNP first so that it is on the bottom.
+    this.viz
+      .append('path')
+      .datum(ncnp)
+      .classed('trend', true)
+      .classed('ncnp', true)
+      .attr('d', line);
+
     this.viz
       .append('path')
       .datum(chronam)
       .classed('trend', true)
+      .classed('chronam', true)
       .attr('d', line);
 
     return this.status;

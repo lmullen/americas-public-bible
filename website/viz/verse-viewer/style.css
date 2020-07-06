@@ -19,8 +19,17 @@
 
 path.trend {
   fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.trend.chronam {
+  stroke: rgb(70, 130, 180);
+  stroke-width: 3;
+}
+
+.trend.ncnp {
+  stroke: rgba(70, 130, 180, 0.8);
+  stroke-width: 1.5;
+  stroke-dasharray: 10;
 }
