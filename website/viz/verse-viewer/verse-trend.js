@@ -87,7 +87,18 @@ export default class VerseTrend extends Visualization {
       .curve(d3.curveBasis)
       .x((d) => this.xScale(d.year))
       .y((d, i) => {
-        return this.yScale(d.q_per_word_e6 * 1e6);
+        // Very basic three-year rolling average
+        const curr = d.q_per_word_e6;
+        let prev = curr;
+        if (i > 0) {
+          prev = data[i - 1].q_per_word_e6;
+        }
+        let next = curr;
+        if (i < data.length - 1) {
+          next = data[i + 1].q_per_word_e6;
+        }
+        const val = (prev + curr + next) / 3;
+        return this.yScale(val * 1e6);
       });
 
     this.viz.append('path').datum(data).classed('line', true).attr('d', line);
