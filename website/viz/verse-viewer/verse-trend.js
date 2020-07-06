@@ -18,28 +18,30 @@ export default class VerseTrend extends Visualization {
     super(id, dim, margin);
 
     const v = encodeURIComponent(verse);
-    this.url = `${config.API_BASE}/apb/verse-trend?ref=${v}`;
+    this.chronamURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=chronam`;
+    this.ncnpURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=ncnp`;
   }
 
   async fetch() {
-    try {
-      this.data = await d3.json(this.url);
-      this.status = 'ok';
-    } catch (e) {
-      if (e.message === '404 Not Found') {
-        console.log(e);
-        this.status = 'missing';
-      } else {
+    const dataPromises = [d3.json(this.chronamURL), d3.json(this.ncnpURL)];
+    await Promise.all(dataPromises)
+      .then((data) => {
+        [this.chronamData, this.ncnpData] = data;
+        this.status = 'ok';
+      })
+      .catch((e) => {
         console.log(e);
         this.status = 'failed';
-      }
-    }
+      });
+    return this.status;
   }
 
-  currentData() {
-    return this.data
-      .filter((d) => d.corpus === 'chronam')
-      .filter((d) => d.year <= 1926);
+  get chronam() {
+    return this.chronamData.trend.filter((d) => d.year <= 1926);
+  }
+
+  get ncnp() {
+    return this.ncnpData.trend;
   }
 
   async render() {
@@ -50,20 +52,18 @@ export default class VerseTrend extends Visualization {
       return this.status;
     }
 
-    console.log(this.currentData());
-
-    const data = this.currentData();
+    const [chronam, ncnp] = [this.chronam, this.ncnp];
 
     this.xScale = d3
       .scaleLinear()
-      .domain(d3.extent(data, (d) => d.year))
+      .domain(d3.extent(chronam, (d) => d.year))
       .range([0, this.width]);
 
     this.xAxis = d3.axisBottom().scale(this.xScale).tickFormat(d3.format('d'));
 
     this.yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.q_per_word_e6 * 1e6)])
+      .domain([0, d3.max(chronam, (d) => d.smoothed * 100)])
       .range([this.height, 0])
       .nice();
 
@@ -83,25 +83,16 @@ export default class VerseTrend extends Visualization {
 
     const line = d3
       .line()
-      .defined((d) => !Number.isNaN(d.q_per_word_e6))
+      .defined((d) => !Number.isNaN(d.smoothed))
       .curve(d3.curveBasis)
       .x((d) => this.xScale(d.year))
-      .y((d, i) => {
-        // Very basic three-year rolling average
-        const curr = d.q_per_word_e6;
-        let prev = curr;
-        if (i > 0) {
-          prev = data[i - 1].q_per_word_e6;
-        }
-        let next = curr;
-        if (i < data.length - 1) {
-          next = data[i + 1].q_per_word_e6;
-        }
-        const val = (prev + curr + next) / 3;
-        return this.yScale(val * 1e6);
-      });
+      .y((d) => this.yScale(d.smoothed * 100));
 
-    this.viz.append('path').datum(data).classed('trend', true).attr('d', line);
+    this.viz
+      .append('path')
+      .datum(chronam)
+      .classed('trend', true)
+      .attr('d', line);
 
     return this.status;
   }
