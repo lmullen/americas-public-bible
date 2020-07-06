@@ -16,3 +16,11 @@
   width: 65px;
   text-align: center;
 }
+
+path.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

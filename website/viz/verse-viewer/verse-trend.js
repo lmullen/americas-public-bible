@@ -11,8 +11,8 @@ export default class VerseTrend extends Visualization {
     const margin = {
       top: 10,
       right: 10,
-      bottom: 10,
-      left: 10,
+      bottom: 20,
+      left: 40,
     };
 
     super(id, dim, margin);
@@ -37,7 +37,9 @@ export default class VerseTrend extends Visualization {
   }
 
   currentData() {
-    return this.data.filter((d) => d.corpus === 'chronam');
+    return this.data
+      .filter((d) => d.corpus === 'chronam')
+      .filter((d) => d.year <= 1926);
   }
 
   async render() {
@@ -47,6 +49,48 @@ export default class VerseTrend extends Visualization {
       this.node.remove();
       return this.status;
     }
+
+    console.log(this.currentData());
+
+    const data = this.currentData();
+
+    this.xScale = d3
+      .scaleLinear()
+      .domain(d3.extent(data, (d) => d.year))
+      .range([0, this.width]);
+
+    this.xAxis = d3.axisBottom().scale(this.xScale).tickFormat(d3.format('d'));
+
+    this.yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(data, (d) => d.q_per_word_e6 * 1e6)])
+      .range([this.height, 0])
+      .nice();
+
+    this.yAxis = d3.axisLeft().scale(this.yScale);
+
+    this.viz
+      .append('g')
+      .attr('class', 'x axis')
+      .attr('transform', `translate(0,${this.height})`)
+      .call(this.xAxis);
+
+    this.viz
+      .append('g')
+      .attr('class', 'y axis')
+      .attr('transform', 'translate(0,0)')
+      .call(this.yAxis);
+
+    const line = d3
+      .line()
+      .defined((d) => !Number.isNaN(d.q_per_word_e6))
+      .curve(d3.curveBasis)
+      .x((d) => this.xScale(d.year))
+      .y((d, i) => {
+        return this.yScale(d.q_per_word_e6 * 1e6);
+      });
+
+    this.viz.append('path').datum(data).classed('line', true).attr('d', line);
 
     return this.status;
   }

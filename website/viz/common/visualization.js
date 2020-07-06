@@ -12,7 +12,9 @@ export default class Visualization {
     this.height = dim.height;
     const outerWidth = this.width + this.margin.left + this.margin.right;
     const outerHeight = this.height + this.margin.top + this.margin.bottom;
-    this.svg.attr('viewBox', `0 0 ${outerWidth} ${outerHeight}`);
+    this.svg
+      .attr('viewBox', `0 0 ${outerWidth} ${outerHeight}`)
+      .style('overflow', 'visible');
 
     // The viz is the usable part of the plot, excluding the margins
     this.viz = this.svg
