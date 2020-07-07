@@ -81,7 +81,10 @@ export default class VerseTrend extends Visualization {
     this.svg
       .append('g')
       .attr('class', 'y axis')
-      .attr('transform', `translate(${this.margin.left},${this.margin.top})`)
+      .attr(
+        'transform',
+        `translate(${this.margin.left - 5},${this.margin.top})`
+      )
       .call(this.yAxis);
 
     const line = d3
@@ -134,6 +137,34 @@ export default class VerseTrend extends Visualization {
       .classed('trend', true)
       .classed('ncnp', true);
     legend.append('text').attr('x', 45).attr('y', 30).text('19c Newspapers');
+
+    const marker = this.viz
+      .append('line')
+      .classed('marker', true)
+      .attr('y2', this.height)
+      .attr('x1', this.xScale(1860))
+      .attr('x2', this.xScale(1860));
+
+    const displayer = this.svg
+      .append('text')
+      .attr('x', this.margin.left + 5)
+      .attr('y', this.height);
+
+    const bisect = d3.bisector((d) => d.year);
+
+    this.viz.on('mousemove click touchmove', () => {
+      const x = d3.mouse(this.viz.node())[0];
+      const year = Math.round(this.xScale.invert(x));
+      const i = bisect.left(chronam, year);
+      const d = chronam[i];
+
+      marker.attr('x1', this.xScale(year)).attr('x2', this.xScale(year));
+      displayer.text(
+        `Year: ${d.year}   Quotations: ${d.n}    Rate (per 100M words): ${
+          d.smoothed * config.MILLIONS
+        }`
+      );
+    });
 
     return this.status;
   }

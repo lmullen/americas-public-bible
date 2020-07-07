@@ -37,3 +37,9 @@ path.trend {
 .legend text {
   dominant-baseline: central;
 }
+
+.marker {
+  stroke: rgb(100, 100, 100);
+  stroke-width: 0.5;
+  stroke-dasharray: 5 3;
+}
