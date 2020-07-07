@@ -31,5 +31,9 @@ path.trend {
 .trend.ncnp {
   stroke: rgba(70, 130, 180, 0.8);
   stroke-width: 1.5;
-  stroke-dasharray: 10;
+  stroke-dasharray: 7;
+}
+
+.legend text {
+  dominant-baseline: central;
 }

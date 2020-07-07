@@ -103,6 +103,35 @@ export default class VerseTrend extends Visualization {
       .classed('chronam', true)
       .attr('d', line);
 
+    const legend = this.viz
+      .append('g')
+      .attr('transform', 'translate(10, 20)')
+      .classed('legend', true);
+
+    legend
+      .append('line')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 40)
+      .attr('y2', 0)
+      .classed('trend', true)
+      .classed('chronam', true);
+    legend
+      .append('text')
+      .attr('x', 45)
+      .attr('y', 0)
+      .text('Chronicling America');
+
+    legend
+      .append('line')
+      .attr('x1', 0)
+      .attr('y1', 30)
+      .attr('x2', 40)
+      .attr('y2', 30)
+      .classed('trend', true)
+      .classed('ncnp', true);
+    legend.append('text').attr('x', 45).attr('y', 30).text('19c Newspapers');
+
     return this.status;
   }
 }
