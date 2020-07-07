@@ -63,7 +63,7 @@ export default class VerseTrend extends Visualization {
 
     this.yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(chronam, (d) => d.smoothed * 100)])
+      .domain([0, d3.max(chronam, (d) => d.smoothed * config.MILLIONS)])
       .range([this.height, 0])
       .nice();
 
@@ -86,7 +86,7 @@ export default class VerseTrend extends Visualization {
       .defined((d) => !Number.isNaN(d.smoothed))
       .curve(d3.curveBasis)
       .x((d) => this.xScale(d.year))
-      .y((d) => this.yScale(d.smoothed * 100));
+      .y((d) => this.yScale(d.smoothed * config.MILLIONS));
 
     // Draw the lines. NCNP first so that it is on the bottom.
     this.viz
