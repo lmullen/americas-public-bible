@@ -69,16 +69,19 @@ export default class VerseTrend extends Visualization {
 
     this.yAxis = d3.axisLeft().scale(this.yScale);
 
-    this.viz
+    this.svg
       .append('g')
       .attr('class', 'x axis')
-      .attr('transform', `translate(0,${this.height})`)
+      .attr(
+        'transform',
+        `translate(${this.margin.left},${this.margin.top + this.height})`
+      )
       .call(this.xAxis);
 
-    this.viz
+    this.svg
       .append('g')
       .attr('class', 'y axis')
-      .attr('transform', 'translate(0,0)')
+      .attr('transform', `translate(${this.margin.left},${this.margin.top})`)
       .call(this.yAxis);
 
     const line = d3

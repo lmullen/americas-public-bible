@@ -20,5 +20,16 @@ export default class Visualization {
     this.viz = this.svg
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Capture mouse events on the just the useable part of the plot. We need
+    // an empty rect in order to capture mouse events.
+    this.viz
+      .style('pointer-events', 'all')
+      .append('rect')
+      .style('visibility', 'hidden')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', this.width)
+      .attr('height', this.height);
   }
 }
