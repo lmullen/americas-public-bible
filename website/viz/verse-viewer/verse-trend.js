@@ -7,8 +7,8 @@ import config from '../config';
 export default class VerseTrend extends Visualization {
   constructor(id, ref, title) {
     const dim = {
-      width: 1200,
-      height: 600,
+      width: 1000,
+      height: 500,
     };
     const margin = {
       top: 10,
