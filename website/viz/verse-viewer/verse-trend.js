@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { maxIndex } from 'd3-array';
 import Visualization from '../common/visualization';
+import { commaFormat, decimal1Format } from '../common/display';
 import config from '../config';
 
 export default class VerseTrend extends Visualization {
@@ -12,7 +13,7 @@ export default class VerseTrend extends Visualization {
     const margin = {
       top: 10,
       right: 10,
-      bottom: 10,
+      bottom: 60,
       left: 65,
     };
 
@@ -108,6 +109,116 @@ export default class VerseTrend extends Visualization {
       .style('text-anchor', 'middle')
       .text(`Quotations per ${config.MILLIONS}M words`);
 
+    // Legend and data point information
+    const legend = this.svg
+      .append('g')
+      .classed('legend', true)
+      .attr(
+        'transform',
+        `translate(${this.margin.left}, ${this.margin.top + this.height + 40})`
+      )
+      .classed('legend', true);
+
+    let xOffset = 0;
+    legend
+      .append('line')
+      .attr('x1', xOffset + 0)
+      .attr('y1', 0)
+      .attr('x2', xOffset + 40)
+      .attr('y2', 0)
+      .classed('trend', true)
+      .classed('chronam', true);
+    legend
+      .append('text')
+      .attr('x', xOffset + 45)
+      .attr('y', 0)
+      .text('Chronicling America');
+
+    xOffset += 225;
+    legend
+      .append('line')
+      .attr('x1', xOffset + 0)
+      .attr('y1', 0)
+      .attr('x2', xOffset + 40)
+      .attr('y2', 0)
+      .classed('trend', true)
+      .classed('ncnp', true);
+    legend
+      .append('text')
+      .attr('x', xOffset + 45)
+      .attr('y', 0)
+      .text('19c Newspapers');
+
+    xOffset += 220;
+    legend
+      .append('text')
+      .attr('x', xOffset + 0)
+      .attr('y', 0)
+      .text('Year:');
+    const detailYear = legend
+      .append('text')
+      .attr('x', xOffset + 42)
+      .attr('y', 0);
+
+    xOffset += 95;
+    legend
+      .append('text')
+      .attr('x', xOffset + 0)
+      .attr('y', 0)
+      .text('Quotations:');
+    const detailQuotations = legend
+      .append('text')
+      .attr('x', xOffset + 92)
+      .attr('y', 0);
+
+    xOffset += 130;
+    legend
+      .append('text')
+      .attr('x', xOffset + 0)
+      .attr('y', 0)
+      .text('Rate:');
+    const detailRate = legend
+      .append('text')
+      .attr('x', xOffset + 42)
+      .attr('y', 0);
+
+    // Mouseover to get details from the visualization
+    const maxObs = chronam[maxIndex(chronam, (d) => d.smoothed)];
+    const marker = this.viz
+      .append('line')
+      .classed('marker', true)
+      .attr('y2', this.height)
+      .attr('x1', this.xScale(maxObs.year))
+      .attr('x2', this.xScale(maxObs.year));
+
+    // const highlight = this.viz
+    //   .append('circle')
+    //   .classed('highlight', true)
+    //   .attr('r', 8)
+    //   .attr('fill', 'none')
+    //   .attr('stroke', 'red');
+
+    const bisect = d3.bisector((d) => d.year);
+
+    const updateDetails = (d) => {
+      marker.attr('x1', this.xScale(d.year)).attr('x2', this.xScale(d.year));
+      detailYear.text(d.year);
+      detailQuotations.text(commaFormat(d.n));
+      detailRate.text(decimal1Format(d.smoothed * config.MILLIONS));
+      // highlight
+      //   .attr('cx', this.xScale(d.year))
+      //   .attr('cy', this.yScale(d.smoothed * config.MILLIONS));
+    };
+    updateDetails(maxObs);
+
+    this.viz.on('mousemove click touchmove', () => {
+      const x = d3.mouse(this.viz.node())[0];
+      const year = Math.round(this.xScale.invert(x));
+      const i = bisect.left(chronam, year);
+      const d = chronam[i];
+      updateDetails(d);
+    });
+
     // Draw the lines. NCNP first so that it is on the bottom.
     const line = d3
       .line()
@@ -129,66 +240,6 @@ export default class VerseTrend extends Visualization {
       .classed('trend', true)
       .classed('chronam', true)
       .attr('d', line);
-
-    const legend = this.viz
-      .append('g')
-      .attr('transform', 'translate(10, 20)')
-      .classed('legend', true);
-
-    legend
-      .append('line')
-      .attr('x1', 0)
-      .attr('y1', 0)
-      .attr('x2', 40)
-      .attr('y2', 0)
-      .classed('trend', true)
-      .classed('chronam', true);
-    legend
-      .append('text')
-      .attr('x', 45)
-      .attr('y', 0)
-      .text('Chronicling America');
-
-    legend
-      .append('line')
-      .attr('x1', 0)
-      .attr('y1', 30)
-      .attr('x2', 40)
-      .attr('y2', 30)
-      .classed('trend', true)
-      .classed('ncnp', true);
-    legend.append('text').attr('x', 45).attr('y', 30).text('19c Newspapers');
-
-    // Let the user mouseover to get the values
-    const maxObs = chronam[maxIndex(chronam, (d) => d.smoothed)];
-    const marker = this.viz
-      .append('line')
-      .classed('marker', true)
-      .attr('y2', this.height)
-      .attr('x1', this.xScale(maxObs.year))
-      .attr('x2', this.xScale(maxObs.year));
-
-    const displayer = this.svg
-      .append('text')
-      .attr('x', this.margin.left + 5)
-      .attr('y', this.height)
-      .text(`Year: ${maxObs.year} Quotations: ${maxObs.n}`);
-
-    const bisect = d3.bisector((d) => d.year);
-
-    this.viz.on('mousemove click touchmove', () => {
-      const x = d3.mouse(this.viz.node())[0];
-      const year = Math.round(this.xScale.invert(x));
-      const i = bisect.left(chronam, year);
-      const d = chronam[i];
-
-      marker.attr('x1', this.xScale(year)).attr('x2', this.xScale(year));
-      displayer.text(
-        `Year: ${d.year} Quotations: ${d.n} Rate (per 100M words): ${
-          d.smoothed * config.MILLIONS
-        }`
-      );
-    });
 
     return this.status;
   }

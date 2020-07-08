@@ -1,4 +1,4 @@
-import { timeParse, timeFormat } from 'd3';
+import { timeParse, timeFormat, format } from 'd3';
 
 const dateParse = timeParse('%Y-%m-%d');
 const formatYear = timeFormat('%Y');
@@ -30,3 +30,6 @@ export function probLabel(p) {
   if (p < 0.8) type = 'lower';
   return `<span class="label ${type}" title="Model probability estimate: ${p}">${type}</span>`;
 }
+
+export const commaFormat = format(',');
+export const decimal1Format = format('.1f');
