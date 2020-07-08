@@ -186,7 +186,7 @@ export default class VerseTrend extends Visualization {
     const maxObs = chronam[maxIndex(chronam, (d) => d.smoothed)];
     const marker = this.viz
       .append('line')
-      .classed('marker', true)
+      .classed('detail-marker', true)
       .attr('y2', this.height)
       .attr('x1', this.xScale(maxObs.year))
       .attr('x2', this.xScale(maxObs.year));

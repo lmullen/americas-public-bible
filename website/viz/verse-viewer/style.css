@@ -38,8 +38,8 @@ path.trend {
   dominant-baseline: central;
 }
 
-.marker {
-  stroke: rgb(100, 100, 100);
-  stroke-width: 0.5;
+.detail-marker {
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 0.75;
   stroke-dasharray: 5 3;
 }
