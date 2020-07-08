@@ -26,7 +26,11 @@ checker.then((status) => {
     );
     msg.render();
   } else {
-    const trend = new VerseTrend('#trend', ref);
+    const trend = new VerseTrend(
+      '#trend',
+      ref,
+      'Rate of quotations, 1836&ndash;1922'
+    );
     trend.render();
     const quotations = new VerseQuotations('#quotations', ref, verse.data.text);
     quotations.render();

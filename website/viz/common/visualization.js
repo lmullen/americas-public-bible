@@ -1,15 +1,18 @@
 import * as d3 from 'd3';
 
 export default class Visualization {
-  constructor(id, dim, margin) {
+  constructor(id, dim, margin, title) {
+    this.node = d3.select(id);
+    this.width = dim.width;
+    this.height = dim.height;
     this.margin = margin;
+
+    // Add an HTML title
+    this.title = this.node.append('h3').classed('viz-title', true).html(title);
 
     // Select the SVG, figure out the correct height, and use the
     // viewBox property to make it scale responsively.
-    this.node = d3.select(id);
     this.svg = this.node.append('svg').attr('width', '100%');
-    this.width = dim.width;
-    this.height = dim.height;
     const outerWidth = this.width + this.margin.left + this.margin.right;
     const outerHeight = this.height + this.margin.top + this.margin.bottom;
     this.svg
@@ -26,6 +29,7 @@ export default class Visualization {
     this.viz
       .style('pointer-events', 'all')
       .append('rect')
+      .classed('mousetrap', true)
       .style('visibility', 'hidden')
       .attr('x', 0)
       .attr('y', 0)

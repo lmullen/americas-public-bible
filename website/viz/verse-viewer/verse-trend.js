@@ -4,7 +4,7 @@ import Visualization from '../common/visualization';
 import config from '../config';
 
 export default class VerseTrend extends Visualization {
-  constructor(id, verse) {
+  constructor(id, ref, title) {
     const dim = {
       width: 1200,
       height: 600,
@@ -16,9 +16,9 @@ export default class VerseTrend extends Visualization {
       left: 40,
     };
 
-    super(id, dim, margin);
+    super(id, dim, margin, title);
 
-    const v = encodeURIComponent(verse);
+    const v = encodeURIComponent(ref);
     this.chronamURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=chronam`;
     this.ncnpURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=ncnp`;
   }
