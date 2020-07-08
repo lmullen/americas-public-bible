@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { maxIndex } from 'd3-array';
 import Visualization from '../common/visualization';
 import config from '../config';
 
@@ -59,11 +60,21 @@ export default class VerseTrend extends Visualization {
       .domain(d3.extent(chronam, (d) => d.year))
       .range([0, this.width]);
 
-    this.xAxis = d3.axisBottom().scale(this.xScale).tickFormat(d3.format('d'));
+    this.xAxis = d3
+      .axisBottom()
+      .scale(this.xScale)
+      .tickFormat(d3.format('d'))
+      .ticks(20);
+
+    // The max of the scale needs to be the max of Chronam OR NCNP
+    const max = Math.max(
+      d3.max(chronam, (d) => d.smoothed),
+      d3.max(ncnp, (d) => d.smoothed)
+    );
 
     this.yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(chronam, (d) => d.smoothed * config.MILLIONS)])
+      .domain([0, max * config.MILLIONS])
       .range([this.height, 0])
       .nice();
 
@@ -138,17 +149,20 @@ export default class VerseTrend extends Visualization {
       .classed('ncnp', true);
     legend.append('text').attr('x', 45).attr('y', 30).text('19c Newspapers');
 
+    // Let the user mouseover to get the values
+    const maxObs = chronam[maxIndex(chronam, (d) => d.smoothed)];
     const marker = this.viz
       .append('line')
       .classed('marker', true)
       .attr('y2', this.height)
-      .attr('x1', this.xScale(1860))
-      .attr('x2', this.xScale(1860));
+      .attr('x1', this.xScale(maxObs.year))
+      .attr('x2', this.xScale(maxObs.year));
 
     const displayer = this.svg
       .append('text')
       .attr('x', this.margin.left + 5)
-      .attr('y', this.height);
+      .attr('y', this.height)
+      .text(`Year: ${maxObs.year} Quotations: ${maxObs.n}`);
 
     const bisect = d3.bisector((d) => d.year);
 
@@ -160,7 +174,7 @@ export default class VerseTrend extends Visualization {
 
       marker.attr('x1', this.xScale(year)).attr('x2', this.xScale(year));
       displayer.text(
-        `Year: ${d.year}   Quotations: ${d.n}    Rate (per 100M words): ${
+        `Year: ${d.year} Quotations: ${d.n} Rate (per 100M words): ${
           d.smoothed * config.MILLIONS
         }`
       );
