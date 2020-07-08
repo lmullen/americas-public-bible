@@ -12,8 +12,8 @@ export default class VerseTrend extends Visualization {
     const margin = {
       top: 10,
       right: 10,
-      bottom: 20,
-      left: 40,
+      bottom: 10,
+      left: 65,
     };
 
     super(id, dim, margin, title);
@@ -55,6 +55,7 @@ export default class VerseTrend extends Visualization {
 
     const [chronam, ncnp] = [this.chronam, this.ncnp];
 
+    // Axes and scales
     this.xScale = d3
       .scaleLinear()
       .domain(d3.extent(chronam, (d) => d.year))
@@ -66,7 +67,7 @@ export default class VerseTrend extends Visualization {
       .tickFormat(d3.format('d'))
       .ticks(20);
 
-    // The max of the scale needs to be the max of Chronam OR NCNP
+    // The max of the y-scale needs to be the max of Chronam AND NCNP
     const max = Math.max(
       d3.max(chronam, (d) => d.smoothed),
       d3.max(ncnp, (d) => d.smoothed)
@@ -98,6 +99,16 @@ export default class VerseTrend extends Visualization {
       )
       .call(this.yAxis);
 
+    // Axis labels
+    this.svg
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', this.margin.left / 2 - 10)
+      .attr('x', -(this.height + this.margin.top) / 2)
+      .style('text-anchor', 'middle')
+      .text(`Quotations per ${config.MILLIONS}M words`);
+
+    // Draw the lines. NCNP first so that it is on the bottom.
     const line = d3
       .line()
       .defined((d) => !Number.isNaN(d.smoothed))
@@ -105,7 +116,6 @@ export default class VerseTrend extends Visualization {
       .x((d) => this.xScale(d.year))
       .y((d) => this.yScale(d.smoothed * config.MILLIONS));
 
-    // Draw the lines. NCNP first so that it is on the bottom.
     this.viz
       .append('path')
       .datum(ncnp)
