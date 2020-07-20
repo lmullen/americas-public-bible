@@ -40,8 +40,9 @@ export default class VerseQuotations {
 
     t.append('thead').append('tr').html(
       `<th>Year</th>
-      <th>Date</th>
+      <th style="min-width:8%">Date</th>
       <th>Newspaper</th>
+      <th style="min-width:20%">State</th>
       <th>Certainty</th>
       <th>Context</th>`
     );
@@ -59,6 +60,7 @@ export default class VerseQuotations {
           `<td>${year(d.date)}</td>
           <td>${day(d.date)}</td>
           <td>${d.title}</td>
+          <td>${d.state}</td>
           <td>${probLabel(d.probability)}</td>
           <td><a href="${this.chronamQuery(
             d.docID
