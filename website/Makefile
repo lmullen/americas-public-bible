@@ -1,15 +1,17 @@
 preview :
-	@echo "Serving the preview site with webpack and Hugo ..."
-	npx webpack --mode=development --display=errors-only
-	npx webpack --mode=development --watch --display=errors-only &
+	@echo "Serving the preview site ..."
 	hugo serve --buildDrafts --buildFuture --disableFastRender 
 
-build : visualizations
-	@echo "\nBuilding the site with Hugo ..."
+build : 
+	@echo "\nBuilding the website ..."
 	hugo --cleanDestinationDir --minify
 	@echo "Website finished building."
 
-visualizations : 
-	@echo "\nCompiling the visualizations with webpack ..."
-	npx webpack
-	@echo "Finished compiling the visualizations with webpack."
+deploy : build
+	@echo "\nDeploying the website ..."
+	rsync --delete --omit-dir-times \
+	  --exclude '.well-known/' \
+	  --exclude '.htaccess' \
+		--checksum -avz \
+		--itemize-changes \
+		public/ reclaim:~/dev.americaspublicbible.org/ | egrep -v '^\.'
