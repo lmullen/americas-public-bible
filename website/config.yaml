@@ -7,3 +7,8 @@ baseURL: 'https://dev.americaspublicbible.org/'
 taxonomies:
   tag: ''
   category: ''
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
