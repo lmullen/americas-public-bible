@@ -1,11 +1,3 @@
 {{ define "main" }}
 {{ .Content}}
 {{ end }}
-
-{{ define "footer"}}
-{{ $opts := dict "targetPath" "viz/main.js" "minify" "true"}}
-{{ $script := resources.Get .Params.script | js.Build $opts | resources.Fingerprint }}
-<script type="text/javascript" src="{{ $script.Permalink }}"></script>
-{{ $style := resources.Get .Params.style | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
-{{ end }}
