@@ -40,7 +40,7 @@ export default class VerseQuotations {
 
     t.append('thead').append('tr').html(
       `<th>Year</th>
-      <th style="min-width:8%">Date</th>
+      <th style="min-width:10%">Date</th>
       <th>Newspaper</th>
       <th style="min-width:20%">State</th>
       <th>Certainty</th>
