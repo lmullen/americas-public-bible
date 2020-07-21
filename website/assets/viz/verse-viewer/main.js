@@ -1,7 +1,6 @@
 import VerseDisplayer from './verse-display';
 import Alert from '../common/alert';
 import VerseQuotations from './verse-quotations';
-import './style.css';
 import VerseTrend from './verse-trend';
 
 const p = new URLSearchParams(window.location.search);
