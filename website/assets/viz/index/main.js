@@ -8,7 +8,7 @@ class IndexItem {
     this.text = text;
 
     const r = encodeURIComponent(reference);
-    this.link = `/visualization/verse-viewer?ref=${r}`;
+    this.link = `/verse-viewer?ref=${r}`;
   }
 
   render() {
@@ -20,12 +20,23 @@ class IndexItem {
   }
 }
 
-const dataPromise = d3.json(`${config.API_BASE}/apb/index/featured/`);
+const featuredPromise = d3.json(`${config.API_BASE}/apb/index/featured/`);
 
-dataPromise
+featuredPromise
   .then((data) => {
     data.forEach((d) => {
       const item = new IndexItem('#featured', d.reference, d.text);
+      item.render();
+    });
+  })
+  .catch((e) => console.log(e));
+
+const topPromise = d3.json(`${config.API_BASE}/apb/index/top/`);
+
+topPromise
+  .then((data) => {
+    data.forEach((d) => {
+      const item = new IndexItem('#top', d.reference, d.text);
       item.render();
     });
   })
