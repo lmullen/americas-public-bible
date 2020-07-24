@@ -31,13 +31,13 @@ featuredPromise
   })
   .catch((e) => console.log(e));
 
-const topPromise = d3.json(`${config.API_BASE}/apb/index/top/`);
+// const topPromise = d3.json(`${config.API_BASE}/apb/index/top/`);
 
-topPromise
-  .then((data) => {
-    data.forEach((d) => {
-      const item = new IndexItem('#top', d.reference, d.text);
-      item.render();
-    });
-  })
-  .catch((e) => console.log(e));
+// topPromise
+//   .then((data) => {
+//     data.forEach((d) => {
+//       const item = new IndexItem('#top', d.reference, d.text);
+//       item.render();
+//     });
+//   })
+//   .catch((e) => console.log(e));
