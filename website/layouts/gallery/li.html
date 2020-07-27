@@ -3,7 +3,7 @@
     {{ $img := .Resources.GetMatch "quotation.png"}}
     {{ $thumbnail := $img.Fit "400x800" }}
     <a class="thumbnail" href="{{ $img.Permalink }}">
-      <img src="{{ $thumbnail.Permalink }}" alt="">
+      <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}">
     </a>
   </div>
   <div class="media-object-section main-section">

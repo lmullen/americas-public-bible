@@ -92,3 +92,8 @@ a.permalink {
 #gallery .media-object {
   margin-bottom: 4rem;
 }
+
+#homepage-gallery .callout {
+  /* margin: 0.25rem; */
+  padding: 0.25rem;
+}

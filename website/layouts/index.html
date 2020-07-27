@@ -14,5 +14,24 @@
 {{ end }}
 
 {{ define "main" }}
+
+<div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
+  {{ range where .Site.RegularPages "Type" "gallery" | first 8 }}
+  <div class="cell medium-3 small-4">
+    <div class="callout" data-equalizer-watch>
+      {{ $img := .Resources.GetMatch "quotation.png"}}
+      {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
+      {{ $anchor := replace .Title " " "-" | lower }}
+      <a href="/gallery/#{{ $anchor }}">
+        <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}">
+      </a>
+    </div>
+  </div>
+  {{ end }}
+</div>
+<p class="text-right"><a href="/gallery/">See more quotations in the gallery &rarr;</a></p>
+
+
+
 {{ .Content }}
 {{ end }}
