@@ -29,13 +29,25 @@
 <body>
   <div class="grid-container">
 
+    {{ block "header" . }}
+
     <header>
-      <h1>{{ .Site.Title }}</h1>
+      <nav class="top-bar">
+        <div class="top-bar-left">
+          <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
+        </div>
+        <div class="top-bar-right">
+          <a class="toc-link" href="/">Table of Contents</a>
+        </div>
+      </nav>
     </header>
+
+    {{ end }}
 
     <main>
       {{ block "main" . }} {{ end }}
     </main>
+
   </div>
   {{ block "footer" . }}
 

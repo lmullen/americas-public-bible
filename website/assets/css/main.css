@@ -16,21 +16,21 @@ h6 {
 }
 
 h1 {
-  font-size: 2.25em;
+  font-size: 2.25rem;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 h3 {
-  font-size: 1.125em;
+  font-size: 1.125rem;
 }
 h4,
 h5,
 h6 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 p {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 /* Layout */
@@ -41,4 +41,54 @@ html {
 
 .grid-container {
   max-width: 1000px;
+}
+
+/* Navigation and header */
+header {
+  margin: 2rem 0 2rem 0;
+  padding: 0.5rem 0 0.5rem 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.title h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: -1.2rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.author {
+  font-size: 1rem;
+  font-weight: normal;
+  padding-left: 2rem;
+}
+
+nav.top-bar {
+  background-color: white;
+  padding: 0;
+}
+
+nav h1.nav-title {
+  font-size: 1.25rem;
+}
+
+nav h1.nav-title a {
+  color: black;
+}
+
+article.abstract {
+  margin-bottom: 2rem;
+}
+
+/* Gallery */
+a.permalink {
+  margin-left: 1rem;
+}
+
+#gallery .media-object {
+  margin-bottom: 4rem;
 }
