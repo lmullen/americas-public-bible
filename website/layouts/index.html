@@ -34,6 +34,12 @@
 <h2>About this website</h2>
 {{ .Content }}
 
+<h2>How to use this website</h2>
+{{ with .Site.GetPage "/how-to-use" }}
+{{ .Content }}
+{{ end }}
+
+
 <h2>Featured verses</h2>
 <div id="featured"></div>
 
