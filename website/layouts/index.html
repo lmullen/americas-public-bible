@@ -4,9 +4,7 @@
   <div class="title">
     <h1>America&rsquo;s Public Bible</h1>
   </div>
-  <div class="subtitle">A Commentary
-    <span class="author">
-      by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
+  <div class="subtitle">A Commentary <span class="author">by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
     </span>
   </div>
 </header>
@@ -17,23 +15,20 @@
 
 <section>
   <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
-    {{ range where .Site.RegularPages "Type" "gallery" | first 8 }}
+    {{ range where (where .Site.RegularPages "Type" "gallery") ".Params.featured" true | first 4 }}
     <div class="cell medium-3 small-4">
       <div class="callout" data-equalizer-watch>
         {{ $img := .Resources.GetMatch "quotation.png"}}
         {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
         {{ $anchor := replace .Title " " "-" | lower }}
         <a href="/gallery/#{{ $anchor }}">
-          <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}">
+          <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
         </a>
       </div>
     </div>
     {{ end }}
   </div>
-  <p class="text-right"><a href="/gallery/">See more quotations in the gallery &rarr;</a></p>
 </section>
-
-<hr>
 
 <section>
   {{ .Content }}
@@ -98,6 +93,29 @@
 <section>
   <h2>Featured verses</h2>
   <div id="featured"></div>
+</section>
+
+<hr>
+
+<section>
+  <h2>Quotations gallery</h2>
+  <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
+    {{ range where (where .Site.RegularPages "Type" "gallery") ".Params.featured" nil | first 16 }}
+    <div class="cell medium-3 small-4">
+      <div class="callout" data-equalizer-watch>
+        {{ $img := .Resources.GetMatch "quotation.png"}}
+        {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
+        {{ $anchor := replace .Title " " "-" | lower }}
+        <a href="/gallery/#{{ $anchor }}">
+          <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
+        </a>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  <p class="text-right">
+    <a href="/gallery/">See more quotations in the gallery &rarr;</a>
+  </p>
 </section>
 
 {{ end }}
