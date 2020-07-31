@@ -1,26 +1,28 @@
-<div class="media-object stack-for-small">
-  <div class="media-object-section">
-    {{ $img := .Resources.GetMatch "quotation.png"}}
-    {{ $thumbnail := $img.Fit "400x800" }}
-    <a class="thumbnail" href="{{ $img.Permalink }}">
-      <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}">
-    </a>
-  </div>
-  <div class="media-object-section main-section">
-    {{ $anchor := replace .Page.Title " " "-" | lower }}
-    <h3 id="{{ $anchor }}">{{ .Page.Title }} <a class="permalink" href="/gallery/#{{ $anchor }}">&infin;</a></h3>
+<section>
+  <div class="media-object stack-for-small">
+    <div class="media-object-section">
+      {{ $img := .Resources.GetMatch "quotation.png"}}
+      {{ $thumbnail := $img.Fit "400x800" }}
+      <a class="thumbnail" href="{{ $img.Permalink }}">
+        <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}">
+      </a>
+    </div>
+    <div class="media-object-section main-section">
+      {{ $anchor := replace .Page.Title " " "-" | lower }}
+      <h3 id="{{ $anchor }}">{{ .Page.Title }} <a class="permalink" href="/gallery/#{{ $anchor }}">&infin;</a></h3>
 
-    {{ .Content }}
+      {{ .Content }}
 
-    <p>
-      <strong>Reference: </strong> {{ .Params.Reference }}.<br><a
-        href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'>See trend and related
-        quotations &rarr;</a>
-    </p>
-    <p>
-      <strong>Source:</strong> <em>{{ .Params.Newspaper }}</em> ({{ .Params.City }}, {{ .Params.State }}),
-      {{ .Params.Date.Format "2 January 2006" }}.<br><a href="{{ .Params.Chronam }}">See context at <em>Chronicling
-          America</em> &rarr;</a>
-    </p>
+      <p>
+        <strong>Reference: </strong> {{ .Params.Reference }}.<br><a
+          href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'>See trend and related
+          quotations &rarr;</a>
+      </p>
+      <p>
+        <strong>Source:</strong> <em>{{ .Params.Newspaper }}</em> ({{ .Params.City }}, {{ .Params.State }}),
+        {{ .Params.Date.Format "2 January 2006" }}.<br><a href="{{ .Params.Chronam }}">See context at <em>Chronicling
+            America</em> &rarr;</a>
+      </p>
+    </div>
   </div>
-</div>
+</section>
