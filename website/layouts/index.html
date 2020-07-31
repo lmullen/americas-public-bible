@@ -130,6 +130,15 @@
 <hr>
 
 <section>
+  <h3>Suggested citation</h3>
+  <p>
+    If you use this project, you can cite it using the following suggested format:
+  </p>
+  <blockquote>
+    Lincoln A. Mullen, <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University Press, forthcoming): <a
+      href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>, <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
+  </blockquote>
+
   <h3>Project news and changelog</h3>
   <ul id="news" class="no-bullet">
     {{ range (where .Site.RegularPages "Type" "news").ByDate.Reverse }}

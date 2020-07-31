@@ -37,6 +37,10 @@ ul li {
   list-style-type: square;
 }
 
+blockquote {
+  color: black;
+}
+
 /* Layout */
 html {
   overflow-y: scroll;

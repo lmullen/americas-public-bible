@@ -64,11 +64,12 @@
             Under contract with <a href="http://www.sup.org/digital/">Stanford University Press</a>.
           </p>
           <p>
-            ISBN: XXX-X-XX-XXXXXX-X<br>
-            DOI: https://doi.org/someDOIhere
+            ISBN: {{ .Site.Params.isbn }}<br>
+            DOI: <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>
           </p>
           <p>
-            This project is &copy; 2016&ndash;2020 <a href="https://lincolnmullen.com">Lincoln Mullen</a>.<br>
+            This project is &copy; 2016&ndash;{{ .Site.Params.year }} <a href="https://lincolnmullen.com">Lincoln
+              Mullen</a>.<br>
             All prose is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.<br>
             All code is licensed <a href="https://opensource.org/licenses/MIT">MIT</a>.<br>
             All data is licensed <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
