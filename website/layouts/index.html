@@ -49,12 +49,41 @@
   <h2>Essays</h2>
   <dl>
     {{ range (where .Site.RegularPages "Type" "essay").ByParam "order" }}
-    <dt>
-      <strong><a href="{{ .Permalink }}">{{ .Title }}</a></strong>
-    </dt>
-    <dd>
-      <p class="description">{{ .Description | markdownify }}</p>
-    </dd>
+    <div class="dl-item">
+      <dt>
+        <p>
+          <strong><a href="{{ .Permalink }}">{{ .Title }}</a></strong>
+        </p>
+      </dt>
+      <dd>
+        <p>
+          {{ .Description | markdownify }}
+        </p>
+      </dd>
+    </div>
+    {{ end }}
+  </dl>
+</section>
+
+<section>
+  <h2>Verse histories</h2>
+  <dl>
+    {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
+    <div class="dl-item">
+      <dt>
+        <p>
+          <strong><a href="{{ .Permalink }}">{{ .Title }}</a></strong>
+        </p>
+      </dt>
+      <dd>
+        <p>
+          {{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;
+        </p>
+        <p>
+          {{ .Description | markdownify }}
+        </p>
+      </dd>
+    </div>
     {{ end }}
   </dl>
 </section>
