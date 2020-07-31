@@ -1,13 +1,19 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
 
-<article class="abstract">
-  {{ .Content }}
-</article>
+<main>
 
-<div id="gallery">
-  {{ range .Pages }}
-  {{ .Render "li" }}
-  {{ end }}
-</div>
+  <h1>{{ .Title }}</h1>
+
+  <article class="abstract">
+    {{ .Content }}
+  </article>
+
+  <div id="gallery">
+    {{ range .Pages }}
+    {{ .Render "li" }}
+    {{ end }}
+  </div>
+
+</main>
+
 {{ end }}

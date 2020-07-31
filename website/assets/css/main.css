@@ -117,7 +117,16 @@ a.permalink {
   padding: 0.25rem;
 }
 
-/* News */
+/* Table of contents */
+#home {
+  counter-reset: outline;
+}
+
+#home h2::before {
+  content: counter(outline, upper-roman) '. ';
+  counter-increment: outline;
+}
+
 #news time {
   font-weight: bold;
 }

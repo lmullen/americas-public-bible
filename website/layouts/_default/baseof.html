@@ -44,9 +44,14 @@
 
     {{ end }}
 
+
+    {{ block "main" . }}
+
     <main>
-      {{ block "main" . }} {{ end }}
+
     </main>
+
+    {{ end }}
 
 
     {{ block "footer" . }}
