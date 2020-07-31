@@ -38,7 +38,6 @@ ul li {
 }
 
 /* Layout */
-
 html {
   overflow-y: scroll;
 }
@@ -86,6 +85,18 @@ nav h1.nav-title a {
 
 article.abstract {
   margin-bottom: 2rem;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid lightgray;
+  margin: 2rem 0 2rem 0;
+  padding: 1rem 0 1rem 0;
+}
+
+.logo {
+  width: 365px;
+  margin: 0 0 1rem 0;
 }
 
 /* Gallery */

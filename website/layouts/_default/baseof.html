@@ -48,8 +48,39 @@
       {{ block "main" . }} {{ end }}
     </main>
 
+
+    {{ block "footer" . }}
+
+    <footer>
+      <div class="grid-x grid-margin-x">
+        <div class="cell medium-6">
+          <a href="http://www.sup.org/digital/"><img src="/SUP.png" alt="Stanford University Press logo"
+              class="logo"></a>
+          <a href="https://rrchnm.org/"><img src="/RRCHNM.jpg" alt="RRCHNM logo" class="logo"></a>
+          <p><a href="/acknowledgements/">Acknowledgements</a></p>
+        </div>
+        <div class="cell medium-6">
+          <p>
+            Under contract with <a href="http://www.sup.org/digital/">Stanford University Press</a>.
+          </p>
+          <p>
+            ISBN: XXX-X-XX-XXXXXX-X<br>
+            DOI: https://doi.org/someDOIhere
+          </p>
+          <p>
+            This project is &copy; 2016&ndash;2020 <a href="https://lincolnmullen.com">Lincoln Mullen</a>.<br>
+            All prose is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.<br>
+            All code is licensed <a href="https://opensource.org/licenses/MIT">MIT</a>.<br>
+            All data is licensed <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
+          </p>
+        </div>
+
+      </div>
+    </footer>
+
   </div>
-  {{ block "footer" . }}
+
+  {{ end}}
 
   {{ if isset .Params "script" }}
   {{ $opts := dict "targetPath" "viz/main.js" "minify" "true"}}
@@ -62,7 +93,6 @@
   <link rel="stylesheet" href="{{ $style.Permalink }}">
   {{ end }}
 
-  {{ end}}
 </body>
 
 </html>
