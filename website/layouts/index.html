@@ -33,17 +33,20 @@
   <p class="text-right"><a href="/gallery/">See more quotations in the gallery &rarr;</a></p>
 </section>
 
+<hr>
+
 <section>
-  <h2>About this website</h2>
   {{ .Content }}
 </section>
 
 <section>
-  <h2>How to use this website</h2>
+  <h3>How to use this website</h3>
   {{ with .Site.GetPage "/how-to-use" }}
   {{ .Content }}
   {{ end }}
 </section>
+
+<hr>
 
 <section>
   <h2>Essays</h2>
@@ -64,6 +67,8 @@
     {{ end }}
   </dl>
 </section>
+
+<hr>
 
 <section>
   <h2>Verse histories</h2>
@@ -87,6 +92,8 @@
     {{ end }}
   </dl>
 </section>
+
+<hr>
 
 <section>
   <h2>Featured verses</h2>
