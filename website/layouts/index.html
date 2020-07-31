@@ -118,4 +118,26 @@
   </p>
 </section>
 
+<hr>
+
+<section>
+  <h2>Appendix</h2>
+  {{ with .Site.GetPage "/appendix" }}
+  {{ .Content }}
+  {{ end }}
+</section>
+
+<hr>
+
+<section>
+  <h3>Project news and changelog</h3>
+  <ul id="news" class="no-bullet">
+    {{ range (where .Site.RegularPages "Type" "news").ByDate.Reverse }}
+    <li><time datetime='{{ .Date.Format "2006-01-02" }}'>{{ .Date.Format "2 January 2006" }}</time>.
+      {{.Params.News | markdownify }}</li>
+    {{ end }}
+  </ul>
+
+</section>
+
 {{ end }}

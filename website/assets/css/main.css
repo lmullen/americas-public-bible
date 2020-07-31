@@ -101,3 +101,13 @@ a.permalink {
   /* margin: 0.25rem; */
   padding: 0.25rem;
 }
+
+/* News */
+#news time {
+  font-weight: bold;
+}
+
+#news li {
+  list-style-type: none;
+  margin-bottom: 0.5rem;
+}
