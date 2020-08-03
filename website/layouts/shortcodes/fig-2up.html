@@ -1,0 +1,16 @@
+<!-- Cf. https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/figure.html -->
+<figure class='two-up'>
+  <div class="grid-x grid-margin-x">
+    <div class="cell medium-6">
+      <img src='{{ .Get "left" }}' alt='Left: {{ .Get "caption" | markdownify| plainify }}' />
+    </div>
+    <div class="cell medium-6">
+      <img src='{{ .Get "right" }}' alt='Right: {{ .Get "caption" | markdownify| plainify }}' />
+    </div>
+  </div>
+  <figcaption>
+    <p>
+      {{ .Get "caption" | markdownify }}
+    </p>
+  </figcaption>
+</figure>

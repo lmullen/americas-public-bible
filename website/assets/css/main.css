@@ -18,19 +18,29 @@ h6 {
 h1 {
   font-size: 2.25rem;
 }
+
 h2 {
   font-size: 2.25rem;
 }
+
 h3 {
   font-size: 1.125rem;
 }
+
 h4,
 h5,
 h6 {
   font-size: 1rem;
 }
+
 p {
   font-size: 1rem;
+  /* text-align: justify;
+  text-justify: inter-word;
+  -moz-text-justify: newspaper;
+  -webkit-text-justify: newspaper;
+  -ms-text-justify: newspaper;
+  -o-text-justify: newspaper; */
 }
 
 ul li {
@@ -127,6 +137,10 @@ a.permalink {
   counter-increment: outline;
 }
 
+#homepage-introduction {
+  margin-top: 1rem;
+}
+
 #news time {
   font-weight: bold;
 }
@@ -143,4 +157,47 @@ a.permalink {
 /* Essays and verse histories */
 article.essay header {
   border: none;
+}
+
+/* Figures */
+article {
+  counter-reset: figures;
+}
+
+figure {
+  counter-increment: figures;
+  margin: 2rem 0 2rem 0;
+}
+
+figure img {
+  /* Duplicate the thumbnail styles from Foundation */
+  border: 4px solid #fefefe;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+  line-height: 0;
+}
+
+figure figcaption {
+  display: inline-block;
+  margin: 0.5rem 2rem 0 4rem;
+  line-height: 0.9rem;
+}
+
+figure figcaption p {
+  display: inline;
+  font-size: 0.8rem;
+}
+
+figure figcaption p strong {
+  font-weight: bold;
+  color: rgb(80, 80, 89);
+}
+
+figure figcaption:before {
+  content: 'Figure ' counter(figures) '. ';
+  white-space: nowrap;
+  display: inline;
+  font-weight: bold;
+  color: rgb(80, 80, 80);
+  font-size: 0.8rem;
 }

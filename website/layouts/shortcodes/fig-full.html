@@ -1,0 +1,9 @@
+<!-- Cf. https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/figure.html -->
+<figure class='full'>
+  <img src='{{ .Get "src" }}' alt='{{ .Get "caption" | markdownify| plainify }}' />
+  <figcaption>
+    <p>
+      {{ .Get "caption" | markdownify }}
+    </p>
+  </figcaption>
+</figure>
