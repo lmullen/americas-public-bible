@@ -19,7 +19,7 @@ The base of this project is a [dataset](/#data) of quotations or verbal allusion
 
 For the most significant verses, this site lets you see the trend for how that verse was quoted over time, allowing you to compare the trend for quotations in *Chronicling America* and *Nineteenth-century Newspapers*. For quotations from *Chronicling America*, you can also use a table that will show you the quotation on the newspaper page. The site thus uncovers two contexts for each verse: the context of the newspaper article in which it was used, and the broader chronological trend of quotations from that verse. 
 
-{{% fig-interactive id="bible-trend" script="viz/bible-trend/main.js" %}}
+{{% fig-interactive id="bible-trend" script="viz/bible-trend/main.js" style="viz/verse-viewer/style.css" caption="The trend in the rate of quotations for the Bible overall within the *Chronicling America* newspaper corpus. Note that the trend is not a simple decline over time, but that rates of quotation actually went up over time. The rates of quotations for individual verses show far more variation." %}}
 
 Those trends reveal patterns that that are invisible to a single scholar's reading of these documents, yet they also enable a close reading of the ways in which verses were put to use. As a reader of this site, you can use those quotations and trend lines to undertake your own analysis. But this site also offers essays and histories of verses that advance an interpretative history of the Bible in the United States.
 

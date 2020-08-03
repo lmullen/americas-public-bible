@@ -7,8 +7,8 @@
 </figure>
 
 {{ $path := printf "viz/%s.js" $id }}
-{{ $opts := dict "targetPath" $path "minify" "true"}}
-{{ $script := resources.Get (.Get "script") | js.Build $opts | resources.Fingerprint }}
+{{ $opts := dict "targetPath" $path "minify" "false"}}
+{{ $script := resources.Get (.Get "script") | js.Build $opts  }}
 <script type="text/javascript" src="{{ $script.Permalink }}"></script>
 
 {{ if .Get "style" }}

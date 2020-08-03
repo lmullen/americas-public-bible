@@ -8,7 +8,12 @@ export default class Visualization {
     this.margin = margin;
 
     // Add an HTML title
-    this.title = this.node.append('h3').classed('viz-title', true).html(title);
+    if (title != null) {
+      this.title = this.node
+        .append('h4')
+        .classed('viz-title', true)
+        .html(title);
+    }
 
     // Select the SVG, figure out the correct height, and use the
     // viewBox property to make it scale responsively.
