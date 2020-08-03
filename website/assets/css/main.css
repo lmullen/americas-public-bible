@@ -19,7 +19,7 @@ h1 {
   font-size: 2.25rem;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
 }
 h3 {
   font-size: 1.125rem;
@@ -134,4 +134,9 @@ a.permalink {
 #news li {
   list-style-type: none;
   margin-bottom: 0.5rem;
+}
+
+/* Essays and verse histories */
+article.essay header {
+  border: none;
 }
