@@ -4,7 +4,7 @@ order: 1
 description: "What does it mean to study America's public Bible in newspapers?"
 ---
 
-# Marking up the Bible
+### Marking up the Bible
 
 An 1891 edition of the *Wheeling Sunday Register* published a poem celebrating a mother's Bible, inherited by the wayward son of a sorrowful woman. The well-read Bible's "markings here and there / show where she found its peaceful need; where she lingered in silent prayer." Not just the marks of a pencil, but the stains of her tears wrinkling the Bible's pages were a guide to her son: "where the precious text is blurred the most, we read the sweetest line."[^1]
 
@@ -32,7 +32,7 @@ The point is that "the Bible" is an abstraction which glosses over a world of va
 
 The marked up Bibles of the mother, the pastor, and the psychologist have an appealing fixity against such abstractions. But if we seek to understand how the Bible was used in the national life of the United States, we will need to make use of the abstractions of the Bible and the nation. Can we find an analogue to the annotated scriptures, a way of studying America's public Bible?
 
-# America's public Bible
+### America's public Bible
 
 *America's Public Bible: A Commentary* is a study of how biblical quotations and allusions were used in U.S. newspapers during the nineteenth and early twentieth centuries. Using computational methods, the project detects biblical quotations in the pages of those newspapers. It uncovers trends in how biblical verses were quoted in newspapers, showing how the popularity of various parts of the Bible waxed and waned over time. It also points users to the location of specific quotations on the newspaper page, where they can understand the meaning of the quotation in context. Through a series of visualizations and essays, this website offers a commentary on America's public Bible.
 
@@ -56,7 +56,7 @@ Scholars have brought an enormous range of creativity to the study of the Bible,
 
 This project takes its place among that already large literature. In its unusual configuration of sources and methods, form and interpretation, it offers an approach to studying the history of the Bible that combines a broad overview with attention to small details, thus allowing us to see the shape of the abstraction that is America's public Bible.
 
-# Sources: The Bible in the newspapers
+### Sources: The Bible in the newspapers
 
 For most of its issues in 1902, the *Ellensburg Dawn* of Washington state featured a quotation from Benjamin Franklin prominently on its front page. "A Bible and a newspaper in every house," the masthead proclaimed, "are the principal support of virtue, morality, and civil liberty."[^50] The quotation from Franklin was doubtless spurious, and its use in the newspaper was obviously self-serving. But in yoking the newspaper as a source of information about public affairs and opinion to the Bible as a source of public virtue and morality, the paper expressed the sense that the two kinds of texts were linked. In fact, not only can we find the Bible and the newspaper celebrated together, but we can also find that the Bible was frequently quoted, discussed, advertised, and promoted within the pages of American newspapers.
 
@@ -72,7 +72,7 @@ Throughout the nineteenth century and into the twentieth century, newspapers in 
 
 But most of all, newspapers quoted or alluded to the Bible with great frequency on nearly every topic. For the reasons explained in the chapter on methodology, identifying quotations and then determining the trend in rates of quotation for specific verses is a difficult task. But taking as given that those trends can be established, this project this project has turned up some 2.36 million biblical quotations and established the trends in quotation for some 2,000 (TODO) individual verses from the Bible. These quotations and trends constitute a useful source for understanding how the Bible in public life was ubiquitous.
 
-# Methods: Scale, search, and serendipity
+### Methods: Scale, search, and serendipity
 
 At least, *ubiquitous* is a word that historians of the Bible commonly use to describe its presence in the United States. In a certain sense, that term is correct. While no one quite means that the Bible's presence is literally everywhere, it does turn up in practically every place that one might go looking for it. The sheer mass of primary source material for the history of the Bible is one kind of problem---a problem only exacerbated by identifying millions of quotations. But on the other hand, identifying the Bible as ubiquitous is unsatisfying and insufficient as a historical claim. However extraordinarily common the Bible---again, an abstraction---was in American history, its presence was extraordinarily variegated. So divergent were the uses of the Bible that we need to understand that variation, rather than the ubiquity.
 
@@ -90,7 +90,7 @@ The third level of analysis involves looking at specific instances of quotations
 
 The main part of this site, then, is comprised not of a broad overview of how the Bible is used, nor of close readings of individual instances, but of a middle level of analysis of the trends for specific verses. These verse histories include data analysis of the trends combined with close reading of specific instances of a quotation, along with connections to the broader religious, political, and social histories of the time. In our era of over-enthusiasm about big data and data analytics, this project could easily be seen as a hubristic attempt to solve the history of the Bible. But my hope is that it is much more targeted: a contribution that uses computational history and the affordances of the web and of data visualization, mixed with more traditional methods of reading sources, in order to understand the Bible not as evenly ubiquitous, but as an ever-changing text that was changed to fit the times.
 
-# Interpretations: Factors that influenced the Bible's popularity
+### Interpretations: Factors that influenced the Bible's popularity
 
 If the way that the Bible was quoted changed constantly, then we should ask what reasons explain those changes. The reasons that any particular verse varied will of course be particular to that verse. But it is possible to understand what the key factors were that influenced a quotation's popularity, which in turn gives us an understanding of how the Bible entered American public life.
 
@@ -120,7 +120,7 @@ The Bible appeared in the newspaper, then, for a variety of reasons. The trends 
 
 These trends are therefore in need of further interpretation, to tease out the differences between the secular, the sacred and the vast difference in between; to identify trends driven by events and those driven by much deeper changes, particularly in the mindset and worldview of the people who quoted the Bible and the even larger array of people who read the articles containing those quotations. The trends can be combined with a more traditional reading of the articles and advertisements that contained the quotations, to find out not just what texts were used and when, but in what type of articles and for what purposes, and how the use of the Bible changed over time. What it needs is not just the evidence of America's public Bible, but a commentary on it.
 
-# Form: Commenting on the public Bible
+### Form: Commenting on the public Bible
 
 America's Public Bible is an experiment in the form of historical scholarship. It is likely to be obvious to you upon browsing this site that it is a different kind of history than the typical monograph. The interactive visualizations and the dynamic tables of data at its center are perhaps the most straightforward way in which the form of this work is different from a print monograph. This work relies on computation to identify and find biblical quotations in newspapers and then on data analysis to make sense of the patterns of quotations.
 
@@ -144,7 +144,7 @@ Third, the commentary is accompanied by essays that seek to make argumentative h
 
 In short, *America's Public Bible* is a work of scholarship that has adopted a different form than the monograph, even as it aims to advance some of the goals of interpretative scholarship assumed by the monographic tradition. Like a commentary, it is a mix of reference work and interpretation, a waypoint for other scholars as well as a work of scholarship on its own terms. This difference is made possible by the affordances of the digital, which provide a way to navigate large corpora, a tight integration with primary sources, and visualizations as equal partners with prose. But it also takes up a form which is native to the subject at hand, while completely reconfiguring it for a different purpose.
 
-# The Bible as a medium of discourse
+### The Bible as a medium of discourse
 
 So what does the commentary show? Like any commentary, the usefulness of this site is less in its overarching claims than in the details that it uncovers. And as with any commentary, readers will come to this site seeking to make their own interpretations, and it is quite likely that the reader will be more interested in the materials that this site provides than the arguments that it advances. You are invited to make use of this site as a reference work, a commentary, or an argument as it suits your purposes. You may find many entry points into the project, either through this introduction or the discussion of methodology; through the visualizations; or through any of the thematic essays.
 
