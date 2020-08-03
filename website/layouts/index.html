@@ -40,7 +40,9 @@
 
   </section>
 
-  <section>
+  <hr>
+
+  <section id="how-to-use">
     <h3>How to use this website</h3>
     {{ with .Site.GetPage "/how-to-use" }}
     {{ .Content }}
@@ -49,7 +51,7 @@
 
   <hr>
 
-  <section>
+  <section id="essays">
     <h2>Essays</h2>
     <dl>
       {{ range (where .Site.RegularPages "Type" "essay").ByParam "order" }}
@@ -71,7 +73,7 @@
 
   <hr>
 
-  <section>
+  <section id="verse-histories">
     <h2>Verse histories</h2>
     <dl>
       {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
@@ -96,14 +98,14 @@
 
   <hr>
 
-  <section>
+  <section id="featured-verses">
     <h2>Featured verses</h2>
     <div id="featured"></div>
   </section>
 
   <hr>
 
-  <section>
+  <section id="gallery">
     <h2>Quotations gallery</h2>
     <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
       {{ range where (where .Site.RegularPages "Type" "gallery") ".Params.featured" nil | first 16 }}
@@ -126,7 +128,7 @@
 
   <hr>
 
-  <section>
+  <section id="appendix">
     <h2>Appendix</h2>
     {{ with .Site.GetPage "/appendix" }}
     {{ .Content }}
