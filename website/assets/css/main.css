@@ -136,6 +136,10 @@ a.permalink {
   margin-bottom: 0.5rem;
 }
 
+#suggested-citation {
+  margin-left: 2rem;
+}
+
 /* Essays and verse histories */
 article.essay header {
   border: none;
