@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "d3": "^5.16.0",
-    "d3-array": "^2.4.0"
+    "d3-array": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^7.3.1",
+    "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0"
