@@ -3,9 +3,7 @@
     <div class="media-object-section">
       {{ $img := .Resources.GetMatch "quotation.png"}}
       {{ $thumbnail := $img.Fit "400x800" }}
-      <a class="thumbnail" href="{{ $img.Permalink }}">
-        <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}">
-      </a>
+      <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}" class="thumbnail">
     </div>
     <div class="media-object-section main-section">
       {{ $anchor := replace .Page.Title " " "-" | lower }}
