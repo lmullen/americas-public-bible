@@ -2,7 +2,7 @@
   <div class="media-object stack-for-small">
     <div class="media-object-section">
       {{ $img := .Resources.GetMatch "quotation.png"}}
-      {{ $thumbnail := $img.Fit "400x800" }}
+      {{ $thumbnail := $img.Fit "400x1600" }}
       <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}" class="thumbnail">
     </div>
     <div class="media-object-section main-section">
