@@ -1,0 +1,8 @@
+{{- $ref := .Get 0 -}}
+{{- $text := $ref -}}
+{{- if .Get 1 -}}
+{{- $text = .Get 1 -}}
+{{- end -}}
+{{- $ref = $ref | urlquery -}}
+<a href="{{ .Site.BaseURL }}/verse-viewer/?ref={{ $ref }}">{{ $text }}</a>
+{{- "" -}}
