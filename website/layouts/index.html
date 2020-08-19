@@ -22,7 +22,7 @@
         <div class="callout" data-equalizer-watch>
           {{ $img := .Resources.GetMatch "quotation.png"}}
           {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
-          {{ $anchor := replace .Title " " "-" | lower }}
+          {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
             <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
           </a>
@@ -113,7 +113,7 @@
         <div class="callout" data-equalizer-watch>
           {{ $img := .Resources.GetMatch "quotation.png"}}
           {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
-          {{ $anchor := replace .Title " " "-" | lower }}
+          {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
             <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
           </a>

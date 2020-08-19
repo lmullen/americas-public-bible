@@ -6,7 +6,7 @@
       <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}" class="thumbnail">
     </div>
     <div class="media-object-section main-section">
-      {{ $anchor := replace .Page.Title " " "-" | lower }}
+      {{ $anchor := urlize .Page.Title }}
       <h3 id="{{ $anchor }}">{{ .Page.Title }} <a class="permalink" href="/gallery/#{{ $anchor }}">&infin;</a></h3>
 
       {{ .Content }}
