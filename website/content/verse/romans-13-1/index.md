@@ -6,33 +6,27 @@ snippet: Let every soul be subject unto the higher powers ...
 title: Law and Order
 ---
 
-Are Christians supposed to be "Resistants" to unjust acts of their government, or "Non-Resistants"? Those were the terms under which a spirited debate about Christian's obedience to government were undertaken in the pages of the *Vermont Telegraph* in 1842.[^1] Whenever the government acted or legislated unjustly, that debate was repeated and Romans 13:1
+Are Christians supposed to be "Resistants" to unjust acts of their government, or "Non-Resistants"? Those were the terms under which a spirited debate about Christian's obedience to government were undertaken in the pages of the *Vermont Telegraph* in 1842.[^1] Whenever the government acted or legislated unjustly, that debate was repeated and Romans 13:1 was brought to bear.[^2] "Let every soul be subject unto the higher powers," the verse read, for "the powers that be are ordained of God." The powers that be and their supporters unusually found the verse more congenial to their side of the argument. But "rulers are not a terror to good works, but to the evil," the passage went on to read, which gave critics of unjust power a toehold in the argument.
 
-[^2]
+Romans 13 played a critical role in the American Revolution. Loyalists who favored obedience to King and Parliament quoted Romans 13 on their behalf. Law, order, and loyalty to an imperial government were all bound up in the phrase "the powers that be." But surprisingly, political and religious leaders who favored the American Revolution were just as eager to quote Romans 13. Their reasoning turned on the justification that Paul gave for obeying government. In a study of how the Bible was used in the American Revolution, the historian James Byrd argues that "American patriots" rejected the notion that Romans 13 required unconditional obedience. Instead, he wrote, they preached from the text "to deny that Paul gave kings the right to be tyrants." As the Anglican priest and regimental chaplain David Griffith said in a sermon on Romans 13, Paul "never meant ... to give sanction to the crimes of wicked and despotic men."[^3]
 
-was brought to the fore Part of the debate was whether people had to obey unjust laws to be "Resistants" or "Non-Resistants" in the words of one debate..
+The Protestant clergy who favored the American Revolution were heirs to an interpretation of Romans 13 that went back to the Reformation. Reformation theologians often used Romans 13 to bolster support for law and order, most notoriously when Martin Luther justified the violent suppression of a peasant uprising. But in a long exposition of the passage, John Calvin argued that all the powers that be were ordained by God, including not just the king but also all the lesser magistrates. Those lower ranked officials were expected to resist kings "when they tyrannise and insult over the humbler of the people," and Calvin listed the people in the Bible who had resisted "slavish obedience to the depraved wishes" of lawfully constituted authority.[^4] Where Loyalists invoked the law-and-order interpretation of Romans 13, Patriot clergy argued that only just authorities were to be obeyed.
 
-Whenever questions
+Once those supporters of the Revolution had to turn to governance, though, the law-and-order version of Romans 13 had more appeal. Massachusetts pastor Zabdiel Adams, citing another passage of Scripture to explain why Romans 13 supported rule by Congress, argued that God was a "God of order and not of confusion." Even for proponents of government authority, the text sat uneasily with the American impulse for democracy. Bishop William White of the recently founded Protestant Episcopal Church, preaching on a national fast day, found it prudent to first defend the right to censure the government before he could criticize those who criticized the beleaguered Federalist administration.[^5] White was speaking for the beleaguered federalist administration. The text was generally one used by supporters of the administration.
 
-> Let every soul be subject unto the higher powers. For there is no power but of God: the powers that be are ordained of God. Whosoever therefore resisteth the power, resisteth the ordinance of God: and they that resist shall receive to themselves damnation. For rulers are not a terror to good works, but to the evil.
+By the 1830s, the verse was solidly within the realm of discourse about many political and social issues, especially as evangelicals increasingly managed to bring their moral concerns about Sabbath-keeping, drinking, gambling, and slavery into the public sphere. As Americans figured out a system of government in which the federal government was disestablished, and in which privileged churches like the Church of England and the Congregationalists lost their state support, the verse was a helpful bolster for the idea that both churches and the government had their own separate roles and duties.[^6]
 
-Related verse: Titus 3:1
+A primary fear among American Protestants was Roman Catholics would overstep those bounds of government, drawing on longstanding Protestant conceptions of Catholics as subjects of Pope with absolute authority who were thus unfit for self-government. Catholics and Protestants often engaged in epistolary exchanges of views. But while Protestants might themselves cite Romans 13, when a Catholic cited that verse it raised worries among their Protestant readers. When Pope Gregory XVI wrote against European revolutions, Protestants seized on that as an example of papal authority in the civil state, and believed that Catholics were "instructed to opposed liberty of every kind" and to opposed the separation of church and state.[^7]
 
-OVERVIEW TREND: Predominent around 1840; against around 1850-1855; and then during the CIVIL War.
+Such understandings of Catholic political theology, and thus of their interpretation of Romans 13, were mostly paranoid parodies. Archbishop John Baptist of Cincinnati, for instance, addressed the "grievous and utterly false charge of disloyalty to this free government" by arguing that "the Catholic religions exists and flourishes under all forms of civil government," and that the Catholic church "unceasingly tells all her children to be subject to the higher powers."^[*Democrat and Sentinel* (Ebensburg, PA), [11 July 1855](https://chroniclingamerica.loc.gov/lccn/sn86071378/1855-07-11/ed-1/seq-1/#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).]
 
-Romans 13 is significant to American history because it played a critical role in the American Revolution. Loyalists who favored obedience to King and Parliament quoted Romans 13 for obvious reasons. "Let every soul be subject unto the higher powers," the text read in the language of the time. A phrase later on in the passage has entered the English language: "The powers that be are ordained of God." Law, order, and loyalty to an imperial government were all bound up in that phrase.
+This had particular concern about Catholicism: fear of Catholic power, including if Catholics quoted the verse.
 
-But surprisingly, political and religious leaders who favored the American Revolution were even more eager to quote Romans 13. Their reasoning turned on the justification that Paul gave for obeying government. Sessions said that government was created "for the purpose of order," but Revolutionary clergy quoted Paul directly: "Rulers are not a terror to good works, but to the evil." In a study of how the Bible was used in the American Revolution, the historian James Byrd argues that "American patriots" rejected against the notion that Romans 13 required unconditional obedience. Instead, he wrote, they preached from the text "to deny that Paul gave kings the right to be tyrants." As the Anglican priest and regimental chaplain David Griffith said in a sermon on Romans 13, Paul "never meant ... to give sanction to the crimes of wicked and despotic men."
+But Catholics, dealing with know-nothings, also quoted the verse indicating that they were proponents of obeying the civil magistrates. 
 
-CITE JIMMY BYRD
+Some Catholics were bolder, arguing that the pope had capacity to release people from obedience. Orestes Brownson. "The Pope is the proper authority to decide for me whether the Constitution of this country is or is not repugnant to the laws of God": https://chroniclingamerica.loc.gov/lccn/sn83045450/1855-07-21/ed-1/seq-2/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
 
-The Protestant clergy who favored the American Revolution were heirs to an interpretation of Romans 13 that went back to the Reformation. Reformation theologians often used Romans 13 to bolster support for law and order, most notoriously when Martin Luther justified the violent suppression of a peasant uprising. But in a long exposition of the passage, John Calvin argued that all the powers that be were ordained by God, including not just the king but also all the lesser magistrates. Those lower ranked officials were expected to resist kings "when they tyrannise and insult over the humbler of the people," and Calvin listed the people in the Bible who had resisted "slavish obedience to the depraved wishes" of lawfully constituted authority. Where Loyalists invoked the law-and-order interpretation of Romans 13, Patriot clergy argued that only just authorities were to be obeyed.
-
-Once those supporters of the Revolution had to turn to governance, though, the law-and-order version of Romans 13 had more appeal. Massachusetts pastor Zabdiel Adams, citing another passage of Scripture to explain why Romans 13 supported rule by Congress, argued that God was a "God of order and not of confusion." The text sat uneasily with the American impulse for democracy, however. Bishop \[William?\] White on a national fast day, had to defend the right to censure the government before he could criticize those who criticized the government. White was speaking for the beleaguered federalist administration. https://chroniclingamerica.loc.gov/lccn/sn83025881/1799-05-10/ed-1/seq-2/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god The text was generally one used by supporters of the administration.
-
-Americans cited the verse on both sides of many issues, especially as evangelicals increasingly managed to bring their moral concerns about Sabbath-keeping, drinking, gambling, and slavery into the public sphere.
-
-By the 1830s, the verse was solidly
+Definite figure: Quotation about whether or not you can resist the constitution. https://chroniclingamerica.loc.gov/lccn/sn84038582/1845-10-31/ed-1/seq-1/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
 
 The verse became part of a phalanx of verses cited to defend slavery. It was not key among them, if only because it spoke only obliquely to slavery. But the implication was that denying the Bible's command that slaves should obey masters was tantamount to destroying government altogether.\^\[
 
@@ -40,17 +34,7 @@ The verse became part of a phalanx of verses cited to defend slavery. It was not
 
 \]
 
-But even apologists for slavery, like those at Princeton University, had to explain how the power of the slaveholder over the slave, implied by the verse, "Slaves obey your masters," was not the same despotic power over governemtns implied by Romans 13.[^3]
-
-A common position was that rulers and the church were separate from one another, and that overstepping bounds was not within the spirit of this verse. POTENTIAL IMAGE https://chroniclingamerica.loc.gov/lccn/sn84022687/1839-12-07/ed-1/seq-3/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
-
-This had particular concern about Catholicism: fear of Catholic power, including if Catholics quoted the verse. https://chroniclingamerica.loc.gov/lccn/sn83016475/1840-11-12/ed-1/seq-2/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
-
-But Catholics, dealing with know-nothings, also quoted the verse indicating that they were proponents of obeying the civil magistrates. https://chroniclingamerica.loc.gov/lccn/sn86071378/1855-07-11/ed-1/seq-1/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
-
-Some Catholics were bolder, arguing that the pope had capacity to release people from obedience. Orestes Brownson. "The Pope is the proper authority to decide for me whether the Constitution of this country is or is not repugnant to the laws of God": https://chroniclingamerica.loc.gov/lccn/sn83045450/1855-07-21/ed-1/seq-2/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
-
-Definite figure: Quotation about whether or not you can resist the constitution. https://chroniclingamerica.loc.gov/lccn/sn84038582/1845-10-31/ed-1/seq-1/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
+But even apologists for slavery, like those at Princeton University, had to explain how the power of the slaveholder over the slave, implied by the verse, "Slaves obey your masters," was not the same despotic power over governemtns implied by Romans 13.[^8]
 
 Romans 13 erupted into the public debate in 1850 with the passage of the Fugitive Slave Act. That law gave teeth to a provision in the Constitution by requiring that state officials and even "all good citizens" aid in returning people who had escaped slavery to bondage. Defenders of the slave system dismissed the abolitionist argument that the act was "opposed to the Divine Law." The Richmond Daily Dispatch was sure that there were "hundreds" of "passages from Scripture proving the slavery has the divine sanction," among them Romans 13, which demanded cooperation with the return of fugitive slaves. A North Carolina paper railed that "these Christians in the free States set up their judgments against that of the Almighty, and blindly strike against all law, order, and right!" It bluntly called down Paul's threat of "damnation" as "Divine vengeance upon their evil deeds."
 
@@ -68,8 +52,20 @@ REDO. On Thursday, Attorney General Jeff Sessions defended the Trump administrat
 
 Where does Jeff Sessions fit in this brief history of Romans 13? Sessions, like so many other Americans throughout history, thinks he has the Bible on his side. The verses Sessions chose to cite, and the interpretation that he has given them, is part of the broader Trump administration strategy of playing to the fears and identities of American evangelicals, who have been bringing Romans 13 back into public discourse since the rise of law-and-order politics and the Christian Right. But the Bible is a text less often read than read into. As many of his "church friends" persist in pointing out, Sessions did not cite the verse later in Romans 13 where Paul writes that God's laws "are summed up in this word, 'Love your neighbor as yourself,'" with the word "neighbor" echoing both parable of the Good Samaritan and the countless verses in the Law and the Prophets on treating the stranger and the immigrant with mercy. Sessions may claim the Bible's contested authority, but what the attorney general actually has on his side is the thread of American history that justifies oppression and domination in the name of law and order.
 
-[^1]: https://chroniclingamerica.loc.gov/lccn/sn83025661/1842-06-01/ed-1/seq-2/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
+OVERVIEW TREND: Predominent around 1840; against around 1850-1855; and then during the CIVIL War.
 
-[^2]: A related verse was {{< vv "Titus 3:1" >}}, "Put them in mind to be subject to principalities and powers, to obey magistrates."
+[^1]: *Vermont Telegraph*, [1 June 1842](https://chroniclingamerica.loc.gov/lccn/sn83025661/1842-06-01/ed-1/seq-2/#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).
 
-[^3]: Cheraw gazette. \[volume\] (Cheraw, S.C.), 30 Aug. 1836. https://chroniclingamerica.loc.gov/lccn/sn88084121/1836-08-30/ed-1/seq-1/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
+[^2]: Two related verses were {{< vv "Titus 3:1" >}}, "Put them in mind to be subject to principalities and powers, to obey magistrates," and {{< vv "Matthew 22:21" >}}, "Render to Caesar the things that are Ceasar's."
+
+[^3]: Byrd, *Sacred Scripture, Sacred War*, 123--129.
+
+[^4]: John Calvin, *Institutes of the Christian Religion*, bk. 4, ch. 20, sec. 31--32.
+
+[^5]: *Gazette of the United States*, [10 May 1799](https://chroniclingamerica.loc.gov/lccn/sn83025881/1799-05-10/ed-1/seq-2/#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).
+
+[^6]: *Voice of Freedom* (Montpelier, VT), [7 December 1839](https://chroniclingamerica.loc.gov/lccn/sn84022687/1839-12-07/ed-1/seq-3/#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).
+
+[^7]: *Pilot and Transcript* (Baltimore, MD), [12 November 1840](https://chroniclingamerica.loc.gov/lccn/sn83016475/1840-11-12/ed-1/seq-2/#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).
+
+[^8]: Cheraw gazette. \[volume\] (Cheraw, S.C.), 30 Aug. 1836. https://chroniclingamerica.loc.gov/lccn/sn88084121/1836-08-30/ed-1/seq-1/\#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god
