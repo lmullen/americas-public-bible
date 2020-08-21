@@ -10,6 +10,8 @@ Cooper, Valerie C. Word, Like Fire: Maria Stewart, the Bible, and the Rights of 
 
 Cordell, Ryan. “Reprinting, Circulation, and the Network Author in Antebellum Newspapers.” American Literary History 27, no. 3 (September 1, 2015): 417–45. https://doi.org/10.1093/alh/ajv028.
 
+Glaude, Eddie S. Exodus! Religion, Race, and Nation in Early Nineteenth-Century Black America. Chicago: University of Chicago Press, 2000.
+
 Goff, Philip, Arthur E Farnsley II, and Peter J. Thuesen, eds. The Bible in American Life. New York: Oxford University Press, 2017.
 Gutjahr, Paul, ed. The Oxford Handbook of the Bible in America. New York: Oxford University Press, 2017.
 
@@ -21,6 +23,8 @@ Harrill, J. Albert. “The Use of the New Testament in the American Slave Contro
 Hatch, Nathan O., and Mark A. Noll, eds. The Bible in America: Essays in Cultural History. New York: Oxford University Press, 1982.
 
 Hazard, Sonia. “The Material Turn in the Study of Religion.” Religion and Society 4, no. 1 (December 1, 2013): 58–78. https://doi.org/10.3167/arrs.2013.040104.
+ 
+Hempton, David. Evangelical Disenchantment: Nine Portraits of Faith and Doubt. New Haven: Yale University Press, 2008.
 
 Luhrmann, T. M. When God Talks Back: Understanding the American Evangelical Relationship with God. Knopf, 2012.
 
