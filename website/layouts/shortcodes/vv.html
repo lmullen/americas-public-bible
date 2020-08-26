@@ -3,6 +3,6 @@
 {{- if .Get 1 -}}
 {{- $text = .Get 1 -}}
 {{- end -}}
-{{- $ref = $ref | urlquery -}}
+{{- $ref = $ref | urlquery | safeURL -}}
 <a href="{{ .Site.BaseURL }}/verse-viewer/?ref={{ $ref }}">{{ $text }}</a>
 {{- "" -}}
