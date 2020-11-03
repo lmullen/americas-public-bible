@@ -1,0 +1,18 @@
+title: 'America’s Public Bible: A Commentary'
+params:
+  author: 'Lincoln A. Mullen'
+  description: 'How the Bible was used throughout American history.'
+  doi: https://doi.org/someDOIhere
+  isbn: XXX-X-XX-XXXXXX-X
+  year: 2020
+
+baseURL: 'https://dev.americaspublicbible.org/'
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+disableKinds:
+  - 'taxonomy'
+  - 'taxonomyTerm'

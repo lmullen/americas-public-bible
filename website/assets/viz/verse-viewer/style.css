@@ -1,0 +1,45 @@
+.label.higher {
+  background-color: #23844376;
+  color: black;
+  width: 65px;
+  text-align: center;
+}
+.label.medium {
+  background-color: #e8a71a85;
+  color: black;
+  width: 65px;
+  text-align: center;
+}
+.label.lower {
+  background-color: #fafab7c6;
+  color: black;
+  width: 65px;
+  text-align: center;
+}
+
+path.trend {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trend.chronam {
+  stroke: rgb(70, 130, 180);
+  stroke-width: 3;
+}
+
+.trend.ncnp {
+  stroke: rgba(70, 130, 180, 0.8);
+  stroke-width: 1.5;
+  stroke-dasharray: 7;
+}
+
+.legend text {
+  dominant-baseline: central;
+}
+
+.detail-marker {
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 0.75;
+  stroke-dasharray: 5 3;
+}

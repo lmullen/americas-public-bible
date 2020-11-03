@@ -1,0 +1,39 @@
+---
+title: "Overall trend lines"
+output: html_notebook
+---
+
+```{r, results='hide'}
+library(tidyverse)
+library(DBI)
+db <- dbConnect(odbc::odbc(), "ResearchDB")
+wc <- tbl(db, "apb_wordcounts") %>% collect()
+```
+
+We can start by evaluating how many newspaper pages/words we have for each of the two corpora. These plots come from a materialized view in the database.
+
+```{r}
+ggplot(wc, aes(x = year, y = wordcount, color = corpus)) +
+  geom_line() + geom_point() +
+  scale_x_continuous(breaks = seq(1800, 1950, 20)) +
+  scale_y_log10(label = scales::comma) +
+  labs(title = "Word count for ChronAm and NCNP")
+```
+
+
+```{r}
+ggplot(wc, aes(x = year, y = pages, color = corpus)) +
+  geom_line() + geom_point() +
+  scale_x_continuous(breaks = seq(1800, 1950, 20)) +
+  scale_y_log10(label = scales::comma) +
+  labs(title = "Page count for ChronAm and NCNP")
+```
+
+```{r}
+wc %>% 
+  select(-wordcount) %>% 
+  mutate(pages = as.integer(pages)) %>% 
+  spread(corpus, pages)
+```
+
+Both plots show the same chronological boundaries to the corpus. There is no significant coverage in Chronicling America until 1836 at the earliest, with a serious dropoff after 1922. NCNP as whole cuts off in 1899. It doesn't have serious coverage until the 1820s, with either 1816 or 1828 being a good starting date. These dates can be settled on later, but this shows that if we get some wonkiness in the trends lines, this would be a good place to cut off.

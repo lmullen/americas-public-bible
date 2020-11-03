@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Typography */
+body {
+  font-family: 'IBM Plex Serif', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  /* text-align: justify;
+  text-justify: inter-word;
+  -moz-text-justify: newspaper;
+  -webkit-text-justify: newspaper;
+  -ms-text-justify: newspaper;
+  -o-text-justify: newspaper; */
+}
+
+ul li {
+  list-style-type: square;
+}
+
+blockquote {
+  color: black;
+}
+
+/* Layout */
+html {
+  overflow-y: scroll;
+}
+
+.grid-container {
+  max-width: 1000px;
+}
+
+/* Navigation and header */
+header {
+  margin: 2rem 0 2rem 0;
+  padding: 0.5rem 0 0.5rem 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.title h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: -1.2rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.author {
+  font-size: 1rem;
+  font-weight: normal;
+  padding-left: 2rem;
+}
+
+nav.top-bar {
+  background-color: white;
+  padding: 0;
+}
+
+nav h1.nav-title {
+  font-size: 1.25rem;
+}
+
+nav h1.nav-title a {
+  color: black;
+}
+
+article.abstract {
+  margin-bottom: 2rem;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid lightgray;
+  margin: 2rem 0 2rem 0;
+  padding: 1rem 0 1rem 0;
+}
+
+.logo {
+  width: 365px;
+  margin: 0 0 1rem 0;
+}
+
+/* Gallery */
+a.permalink {
+  margin-left: 1rem;
+}
+
+#gallery .media-object {
+  margin-bottom: 4rem;
+}
+
+#homepage-gallery .callout {
+  /* margin: 0.25rem; */
+  padding: 0.25rem;
+}
+
+/* Table of contents */
+#home {
+  counter-reset: outline;
+}
+
+#home h2::before {
+  content: counter(outline, upper-roman) '. ';
+  counter-increment: outline;
+}
+
+#homepage-introduction {
+  margin-top: 1rem;
+}
+
+#news time {
+  font-weight: bold;
+}
+
+#news li {
+  list-style-type: none;
+  margin-bottom: 0.5rem;
+}
+
+#suggested-citation {
+  margin-left: 2rem;
+}
+
+/* Essays and verse histories */
+article.essay header {
+  border: none;
+}
+
+/* Figures */
+article {
+  counter-reset: figures;
+}
+
+figure {
+  counter-increment: figures;
+  margin: 2rem 0 2rem 0;
+}
+
+figure img {
+  /* Duplicate the thumbnail styles from Foundation */
+  border: 4px solid #fefefe;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+  line-height: 0;
+}
+
+figure figcaption {
+  display: inline-block;
+  margin: 0.5rem 2rem 0 4rem;
+  line-height: 0.9rem;
+}
+
+figure figcaption p {
+  display: inline;
+  font-size: 0.8rem;
+}
+
+figure figcaption p strong {
+  font-weight: bold;
+  color: rgb(80, 80, 89);
+}
+
+figure figcaption:before {
+  content: 'Figure ' counter(figures) '. ';
+  white-space: nowrap;
+  display: inline;
+  font-weight: bold;
+  color: rgb(80, 80, 80);
+  font-size: 0.8rem;
+}

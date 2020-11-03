@@ -1,0 +1,17 @@
+<figure>
+  {{ $id := .Get "id" }}
+  <div id="{{ $id }}"></div>
+  <figcaption>
+    <p>{{ .Get "caption" | markdownify }}</p>
+  </figcaption>
+</figure>
+
+{{ $path := printf "viz/%s.js" $id }}
+{{ $opts := dict "targetPath" $path "minify" "false"}}
+{{ $script := resources.Get (.Get "script") | js.Build $opts  }}
+<script type="text/javascript" src="{{ $script.Permalink }}"></script>
+
+{{ if .Get "style" }}
+{{ $style := resources.Get (.Get "style") | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end}}
