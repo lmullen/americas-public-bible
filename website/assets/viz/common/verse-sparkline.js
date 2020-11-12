@@ -6,7 +6,7 @@ export default class VerseSparkline extends Visualization {
   constructor(id, ref) {
     const dim = {
       width: 200,
-      height: 50,
+      height: 75,
     };
     const margin = {
       top: 0,
@@ -15,7 +15,7 @@ export default class VerseSparkline extends Visualization {
       left: 0,
     };
 
-    super(id, dim, margin, ref);
+    super(id, dim, margin, null);
 
     const v = encodeURIComponent(ref);
     this.url = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=chronam`;

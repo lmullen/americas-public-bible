@@ -17,15 +17,21 @@ topPromise
     let counter = 0;
     top.forEach((d) => {
       counter += 1;
-      const cell = `cell-${counter}`;
-      grid
-        .append('div')
-        .attr('id', cell)
+      const cellID = `cell-${counter}`;
+      const url = `/verse-viewer?ref=${encodeURIComponent(d.reference)}`;
+
+      const cell = grid
+        .append('a')
+        .attr('id', cellID)
+        .attr('title', d.text)
+        .attr('href', url)
         .classed('cell', true)
         .classed('medium-2', true)
         .classed('small-4', true);
 
-      const sparky = new VerseSparkline(`#${cell}`, d.reference);
+      cell.append('h4').classed('viz-title', true).text(d.reference);
+
+      const sparky = new VerseSparkline(`#${cellID}`, d.reference);
       sparky.render();
     });
   })
