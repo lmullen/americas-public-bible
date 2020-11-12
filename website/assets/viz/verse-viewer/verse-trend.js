@@ -211,8 +211,8 @@ export default class VerseTrend extends Visualization {
     };
     updateDetails(maxObs);
 
-    this.viz.on('mousemove click touchmove', () => {
-      const x = d3.mouse(this.viz.node())[0];
+    this.viz.on('mousemove click touchmove', (event) => {
+      const x = d3.pointer(event, this.viz.node())[0];
       const year = Math.round(this.xScale.invert(x));
       const i = bisect.left(chronam, year);
       const d = chronam[i];
