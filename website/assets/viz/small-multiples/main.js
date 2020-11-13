@@ -42,9 +42,10 @@ topPromise
       const sparky = new VerseSparkline(
         `#${cellID}`,
         d.reference,
-        200, 
+        200,
         75,
-        color(colorNum[counter])
+        color(colorNum[counter]),
+        true
       );
       sparky.render();
 

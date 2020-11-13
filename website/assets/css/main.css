@@ -201,3 +201,9 @@ figure figcaption:before {
   color: rgb(80, 80, 80);
   font-size: 0.8rem;
 }
+
+/* Verse viewer and indexes */
+.verse-index {
+  margin: 0;
+  padding: 0;
+}
