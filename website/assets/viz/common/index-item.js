@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
+import colorScale from './color-scale';
 import domID from './dom-id';
+import randomColorInt from './random-int';
 import VerseSparkline from './verse-sparkline';
 
 export default class IndexItem {
@@ -31,7 +33,7 @@ export default class IndexItem {
       this.reference,
       300,
       75,
-      'green',
+      colorScale(randomColorInt()),
       false
     );
 

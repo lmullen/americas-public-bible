@@ -1,10 +1,7 @@
 import * as d3 from 'd3';
 import config from '../config';
+import colorScale from '../common/color-scale';
 import VerseSparkline from '../common/verse-sparkline';
-
-const color = d3
-  .scaleSequential((t) => d3.hsl(t * 360, 1, 0.5).toString())
-  .domain([1, 36]);
 
 const colorNum = d3.shuffle(d3.range(36));
 
@@ -44,7 +41,7 @@ topPromise
         d.reference,
         200,
         75,
-        color(colorNum[counter]),
+        colorScale(colorNum[counter]),
         true
       );
       sparky.render();
