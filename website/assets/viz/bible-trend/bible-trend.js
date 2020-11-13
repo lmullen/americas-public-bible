@@ -21,7 +21,7 @@ export default class BibleTrend extends Visualization {
       id,
       dim,
       margin,
-      'Rate of quotations to the entire Bible in Chroncling America'
+      'Rate of quotations to the entire Bible in <em>Chronicling America</em>, 1836–1922'
     );
 
     this.url = `${config.API_BASE}/apb/bible-trend/`;
