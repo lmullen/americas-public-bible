@@ -1,4 +1,8 @@
-#small-multiples .viz-title {
+#small-multiples .cell .viz-title {
   font-weight: normal;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+#small-multiples a .viz-title {
+  color: black;
 }

@@ -3,7 +3,7 @@ import Visualization from './visualization';
 import config from '../config';
 
 export default class VerseSparkline extends Visualization {
-  constructor(id, ref) {
+  constructor(id, ref, color) {
     const dim = {
       width: 200,
       height: 75,
@@ -15,10 +15,11 @@ export default class VerseSparkline extends Visualization {
       left: 0,
     };
 
-    super(id, dim, margin, null);
+    super(id, dim, margin, ref);
 
     const v = encodeURIComponent(ref);
     this.url = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=chronam`;
+    this.color = color;
   }
 
   async fetch() {
@@ -71,7 +72,8 @@ export default class VerseSparkline extends Visualization {
       .datum(data)
       .classed('trend', true)
       .classed('chronam', true)
-      .attr('d', line);
+      .attr('d', line)
+      .style('stroke', this.color);
 
     return this.status;
   }
