@@ -204,6 +204,6 @@ figure figcaption:before {
 
 /* Verse viewer and indexes */
 .verse-index {
-  margin: 0;
+  margin: 2rem 0;
   padding: 0;
 }
