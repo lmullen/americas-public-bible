@@ -3,11 +3,8 @@ import Visualization from './visualization';
 import config from '../config';
 
 export default class VerseSparkline extends Visualization {
-  constructor(id, ref, color) {
-    const dim = {
-      width: 200,
-      height: 75,
-    };
+  constructor(id, ref, width, height, color) {
+    const dim = { width, height };
     const margin = {
       top: 0,
       right: 0,
