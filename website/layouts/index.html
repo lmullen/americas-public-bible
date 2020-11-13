@@ -100,6 +100,10 @@
 
   <section id="verse-viewer">
     <h2>Verse viewer</h2>
+    {{ with .Site.GetPage "/verse-viewer-overview" }}
+    {{ .Content }}
+    {{ end }}
+    <h3>Featured verses</h3>
     <div id="featured" class="grid-container verse-index"></div>
   </section>
 
