@@ -4,7 +4,7 @@ params:
   description: 'How the Bible was used throughout American history.'
   doi: https://doi.org/someDOIhere
   isbn: XXX-X-XX-XXXXXX-X
-  year: 2020
+  year: 2021
 
 baseURL: 'https://dev.americaspublicbible.org/'
 
