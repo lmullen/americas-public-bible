@@ -159,6 +159,16 @@ article.essay header {
   border: none;
 }
 
+.toc-description {
+  margin-left: 1rem;
+  border-left: 1px solid lightgray;
+  padding-left: 1rem;
+}
+
+.toc-verse {
+  font-style: italic;
+}
+
 /* Figures */
 article {
   counter-reset: figures;
