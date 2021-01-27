@@ -16,6 +16,7 @@
   <meta name="description" content="{{ .Page.Description }}" />
   {{ else }}
   <meta name="description" content="{{ .Site.Params.Description }}" />
+  <meta name="monetization" content="$ilp.uphold.com/3ZWiyMk9zAZE">
   {{ end }} {{ end }}
   {{ $foundation := resources.Get "css/foundation.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $foundation.Permalink }}" />
