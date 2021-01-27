@@ -7,7 +7,7 @@ const featuredPromise = d3.json(`${config.API_BASE}/apb/index/featured/`);
 featuredPromise
   .then((data) => {
     data.forEach((d) => {
-      const item = new IndexItem('#featured', d.reference, d.text);
+      const item = new IndexItem('#featured-verses', d.reference, d.text);
       item.render();
     });
   })
