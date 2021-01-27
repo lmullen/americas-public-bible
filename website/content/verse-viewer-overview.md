@@ -1,3 +1,3 @@
-The heart of this site is the interactive verse viewer, which lets you see the trend in the rate of quotations for any given verse in <em>Chronicling America</em> and <em>Nineteenth-century Newspapers</em>, then go see examples of those quotations on the newspaper page.
+The heart of this site is the interactive verse viewer, which lets you see the trend in the rate of quotations for any given verse in <em>Chronicling America</em> and <em>Nineteenth-century Newspapers</em>, then see examples of those quotations on the newspaper page.
 
-Below are featured verses, some of which are also the subject of the [verse histories](#verse-histories). You can also see listing of the most-quoted verses and a list of selected Bible verses in biblical order.
+Below are featured verses, some of which are also the subject of the [verse histories](#verse-histories). You can also browse the verses in three other ways: (1) the most quoted verses in descending order of frequency; (2) verses that had a peak of quotation in a given year, arranged chronologically; and (3) frequently quoted verses in their order in the Christian Bible.
