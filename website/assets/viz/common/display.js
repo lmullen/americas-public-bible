@@ -33,3 +33,4 @@ export function probLabel(p) {
 
 export const commaFormat = format(',');
 export const decimal1Format = format('.1f');
+export const bigNumberFormat = format('.2s');

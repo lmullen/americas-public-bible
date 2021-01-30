@@ -3,9 +3,10 @@ import colorScale from './color-scale';
 import domID from './dom-id';
 import randomColorInt from './random-int';
 import VerseSparkline from './verse-sparkline';
+import { bigNumberFormat } from './display';
 
 export default class IndexItem {
-  constructor(id, reference, text) {
+  constructor(id, reference, text, count) {
     this.node = d3
       .select(id)
       .append('div')
@@ -14,6 +15,7 @@ export default class IndexItem {
       .classed('grid-margin-y', true);
     this.reference = reference;
     this.text = text;
+    this.count = count;
 
     const r = encodeURIComponent(reference);
     this.link = `/verse-viewer?ref=${r}`;
@@ -44,7 +46,11 @@ export default class IndexItem {
       .classed('cell', true)
       .classed('medium-9', true)
       .html(
-        `<p><strong><a href="${this.link}">${this.reference}</a></strong>&mdash;${this.text}</p>`
+        `<h4><a href="${this.link}">${
+          this.reference
+        }</a> <small>(${bigNumberFormat(
+          this.count
+        )} quotations)</small></h4><p>&ldquo;${this.text}&rdquo;</p>`
       );
   }
 }
