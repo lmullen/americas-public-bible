@@ -31,6 +31,11 @@ export function probLabel(p) {
   return `<span class="label ${type}" title="Model probability estimate: ${p}">${type}</span>`;
 }
 
+export function peakDecade(y) {
+  if (typeof y === 'undefined') return '';
+  return `Peak in ${y}; `;
+}
+
 export const commaFormat = format(',');
 export const decimal1Format = format('.1f');
 export const bigNumberFormat = format('.2s');

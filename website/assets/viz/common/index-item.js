@@ -3,10 +3,10 @@ import colorScale from './color-scale';
 import domID from './dom-id';
 import randomColorInt from './random-int';
 import VerseSparkline from './verse-sparkline';
-import { bigNumberFormat } from './display';
+import { bigNumberFormat, peakDecade } from './display';
 
 export default class IndexItem {
-  constructor(id, reference, text, count) {
+  constructor(id, reference, text, count, peak) {
     this.node = d3
       .select(id)
       .append('div')
@@ -16,6 +16,7 @@ export default class IndexItem {
     this.reference = reference;
     this.text = text;
     this.count = count;
+    this.peak = peak;
 
     const r = encodeURIComponent(reference);
     this.link = `/verse-viewer?ref=${r}`;
@@ -46,11 +47,11 @@ export default class IndexItem {
       .classed('cell', true)
       .classed('medium-9', true)
       .html(
-        `<h4><a href="${this.link}">${
-          this.reference
-        }</a> <small>(${bigNumberFormat(
-          this.count
-        )} quotations)</small></h4><p>&ldquo;${this.text}&rdquo;</p>`
+        `<h4><a href="${this.link}">${this.reference}</a> <small>(${peakDecade(
+          this.peak
+        )}${bigNumberFormat(this.count)} quotations)</small></h4><p>&ldquo;${
+          this.text
+        }&rdquo;</p>`
       );
   }
 }
