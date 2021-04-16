@@ -1,0 +1,20 @@
+---
+title: "Verse peaks"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(jsonlite)
+
+peaks <- jsonlite::read_json("http://localhost:8090/apb/index/peaks/", simplifyVector = TRUE) %>% tibble()
+```
+
+When did verses peak by year?
+
+```{r}
+ggplot(peaks, aes(x = peak)) + geom_bar()
+```
+
+
+
