@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+<main>
+  <article class="verse-history">
+    <header>
+      <h2>{{ .Title }}</h2>
+      <p class="lead verse-history-snippet">
+        <span>
+          {{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;
+        </span>
+      </p>
+      <p class="lead"> {{ .Description | markdownify }}</p>
+    </header>
+
+    <div class="verse-snippet"> </div>
+    <figure>
+      <a href="/verse-viewer/?ref={{ .Params.Reference }}">
+        <div id="trend-preview" data-reference="{{ .Params.reference }}"></div>
+      </a>
+      <figcaption>
+        <p>
+          The rate of quotations to {{ .Params.Reference }} in
+          <em>Chronicling America</em>, 1836&ndash;1922.
+          <a href="/verse-viewer/?ref={{ .Params.Reference }}">
+            See the full visualization</a
+          >
+          for the complete trend line and to see quotations to this verse on
+          newspaper pages.
+        </p>
+      </figcaption>
+    </figure>
+
+    {{ $path := "viz/verse-history-viewer/main.js" }} {{ $opts := dict
+    "targetPath" $path "minify" "false"}} {{ $script := resources.Get ($path) |
+    js.Build $opts }}
+    <script type="text/javascript" src="{{ $script.Permalink }}"></script>
+    {{ $path = "viz/verse-viewer/style.css"}} {{ $style := resources.Get $path |
+    resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+    {{ .Content}}
+  </article>
+</main>
+
+{{ end }}

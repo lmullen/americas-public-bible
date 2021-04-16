@@ -155,7 +155,8 @@ a.permalink {
 }
 
 /* Essays and verse histories */
-article.essay header {
+article.essay header,
+article.verse-history header {
   border: none;
 }
 
@@ -216,4 +217,9 @@ figure figcaption:before {
 .verse-index {
   margin: 2rem 0;
   padding: 0;
+}
+
+/* Some visualizations are linked; make sure they aren't colored like a link */
+a div svg {
+  color: black;
 }

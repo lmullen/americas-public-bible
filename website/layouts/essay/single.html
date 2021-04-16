@@ -1,12 +1,13 @@
 {{ define "main" }}
 
 <main>
-
   <article class="essay">
-    {{ partial "page-header.html" . }}
+    <header>
+      <h2>{{ .Title }}</h2>
+      <p class="lead"> {{ .Description | markdownify }}</p>
+    </header>
     {{ .Content}}
   </article>
-
 </main>
 
 {{ end }}
