@@ -2,10 +2,10 @@
 title: Christianity against Imperialism
 newspaper: The Commoner
 date: 1916-11-01
-reference: Mark 16:15
+reference: "Mark 16:15"
 city: Lincoln
 state: NE
-chronam:https://chroniclingamerica.loc.gov/lccn/46032385/1916-11-01/ed-1/seq-8/#words=said+unto+go+ye+world+preach+gospel+every+creature
+chronam: "https://chroniclingamerica.loc.gov/lccn/46032385/1916-11-01/ed-1/seq-8/#words=said+unto+go+ye+world+preach+gospel+every+creature"
 featured: false
 author: Caitlin Gale
 ---
