@@ -1,107 +1,106 @@
 <!DOCTYPE html>
 <html lang="en-us">
+  {{- "<!-- Hi! Thanks for viewing source. You're a person after my own heart. This is a scholarly project, and so I've tried to make the code as accessible as the prose, albeit while trying to keep performance good. Viewing source is not quite as friendly as it would be in Web 1.0, but I've done what I can. People who viewed source also like the GitHub repositories for this project (https://github.com/lmullen/americas-public-bible) and for the data API (https://github.com/chnm/dataapi). -->"
+  | safeHTML -}}
 
-{{- "<!-- Hi! Thanks for viewing source. You're a person after my own heart. This is a scholarly project, and so I've tried to make the code as accessible as the prose, albeit while trying to keep performance good. Viewing source is not quite as friendly as it would be in Web 1.0, but I've done what I can. People who viewed source also like the GitHub repositories for this project (https://github.com/lmullen/americas-public-bible) and for the data API (https://github.com/chnm/dataapi). -->" | safeHTML -}}
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ block "metadata" . }} {{ if .Page.Title }}
+    <title>{{.Page.Title }} | {{ .Site.Title }}</title>
+    {{ else}}
+    <title>{{ .Site.Title }}</title>
+    {{ end }} {{ if .Page.Description }}
+    <meta name="description" content="{{ .Page.Description }}" />
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.Description }}" />
+    <meta name="monetization" content="$ilp.uphold.com/3ZWiyMk9zAZE" />
+    {{ end }} {{ end }} {{ $foundation := resources.Get "css/foundation.css" |
+    resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $foundation.Permalink }}" />
+    {{ $css := resources.Get "css/main.css" | resources.Minify |
+    resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+  </head>
 
-  {{ block "metadata" . }} {{ if .Page.Title }}
-  <title>{{.Page.Title }} | {{ .Site.Title }}</title>
-  {{ else}}
-  <title>{{ .Site.Title }}</title>
-  {{ end }} {{ if .Page.Description }}
-  <meta name="description" content="{{ .Page.Description }}" />
-  {{ else }}
-  <meta name="description" content="{{ .Site.Params.Description }}" />
-  <meta name="monetization" content="$ilp.uphold.com/3ZWiyMk9zAZE">
-  {{ end }} {{ end }}
-  {{ $foundation := resources.Get "css/foundation.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $foundation.Permalink }}" />
-  {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $css.Permalink }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-</head>
+  <body>
+    <div class="grid-container">
+      {{ block "header" . }}
 
-<body>
-  <div class="grid-container">
+      <header>
+        <nav class="top-bar">
+          <div class="top-bar-left">
+            <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
+          </div>
+          <div class="top-bar-right">
+            <a class="toc-link" href="/#toc">Table of Contents</a>
+          </div>
+        </nav>
+      </header>
 
-    {{ block "header" . }}
+      {{ end }} {{ block "main" . }}
 
-    <header>
-      <nav class="top-bar">
-        <div class="top-bar-left">
-          <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
+      <main> </main>
+
+      {{ end }} {{ block "footer" . }}
+
+      <footer>
+        <div class="grid-x grid-margin-x">
+          <div class="cell medium-6">
+            <a href="http://www.sup.org/digital/"
+              ><img
+                src="/SUP.png"
+                alt="Stanford University Press logo"
+                class="logo"
+            /></a>
+            <a href="https://rrchnm.org/"
+              ><img src="/RRCHNM.jpg" alt="RRCHNM logo" class="logo"
+            /></a>
+            <p><a href="/acknowledgements/">Acknowledgements</a></p>
+          </div>
+          <div class="cell medium-6">
+            <p>
+              Under contract with
+              <a href="http://www.sup.org/digital/">Stanford University Press</a
+              >.
+            </p>
+            <p>
+              ISBN: {{ .Site.Params.isbn }}<br />
+              DOI: <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>
+            </p>
+            <p>
+              This project is &copy; 2016&ndash;{{ .Site.Params.year }}
+              <a href="https://lincolnmullen.com">Lincoln Mullen</a>.<br />
+              All prose is licensed
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+                >CC BY-NC-ND 4.0</a
+              >.<br />
+              All code is licensed
+              <a href="https://opensource.org/licenses/MIT">MIT</a>.<br />
+              All data is licensed
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+                >CC0 1.0</a
+              >.
+            </p>
+          </div>
         </div>
-        <div class="top-bar-right">
-          <a class="toc-link" href="/">Table of Contents</a>
-        </div>
-      </nav>
-    </header>
+      </footer>
+    </div>
 
+    {{ end}} {{ if isset .Params "script" }} {{ $opts := dict "targetPath"
+    "viz/main.js" "minify" "true"}} {{ $script := resources.Get .Params.script |
+    js.Build $opts | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $script.Permalink }}"></script>
+    {{ end }} {{ if isset .Params "style" }} {{ $style := resources.Get
+    .Params.style | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
     {{ end }}
-
-
-    {{ block "main" . }}
-
-    <main>
-
-    </main>
-
-    {{ end }}
-
-
-    {{ block "footer" . }}
-
-    <footer>
-      <div class="grid-x grid-margin-x">
-        <div class="cell medium-6">
-          <a href="http://www.sup.org/digital/"><img src="/SUP.png" alt="Stanford University Press logo"
-              class="logo"></a>
-          <a href="https://rrchnm.org/"><img src="/RRCHNM.jpg" alt="RRCHNM logo" class="logo"></a>
-          <p><a href="/acknowledgements/">Acknowledgements</a></p>
-        </div>
-        <div class="cell medium-6">
-          <p>
-            Under contract with <a href="http://www.sup.org/digital/">Stanford University Press</a>.
-          </p>
-          <p>
-            ISBN: {{ .Site.Params.isbn }}<br>
-            DOI: <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>
-          </p>
-          <p>
-            This project is &copy; 2016&ndash;{{ .Site.Params.year }} <a href="https://lincolnmullen.com">Lincoln
-              Mullen</a>.<br>
-            All prose is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.<br>
-            All code is licensed <a href="https://opensource.org/licenses/MIT">MIT</a>.<br>
-            All data is licensed <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
-          </p>
-        </div>
-
-      </div>
-    </footer>
-
-  </div>
-
-  {{ end}}
-
-  {{ if isset .Params "script" }}
-  {{ $opts := dict "targetPath" "viz/main.js" "minify" "true"}}
-  {{ $script := resources.Get .Params.script | js.Build $opts | resources.Fingerprint }}
-  <script type="text/javascript" src="{{ $script.Permalink }}"></script>
-  {{ end }}
-
-  {{ if isset .Params "style" }}
-  {{ $style := resources.Get .Params.style | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
-  {{ end }}
-
-</body>
-
+  </body>
 </html>
