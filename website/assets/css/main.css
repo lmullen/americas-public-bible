@@ -56,6 +56,10 @@ code {
   border: none;
 }
 
+table {
+  width: unset;
+}
+
 /* Layout */
 html {
   overflow-y: scroll;
