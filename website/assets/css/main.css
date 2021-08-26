@@ -51,6 +51,11 @@ blockquote {
   color: black;
 }
 
+code {
+  background: none;
+  border: none;
+}
+
 /* Layout */
 html {
   overflow-y: scroll;
@@ -99,6 +104,15 @@ nav h1.nav-title a {
 
 article.abstract {
   margin-bottom: 2rem;
+}
+
+.footnotes {
+  margin-top: 6rem;
+}
+
+.footnotes ol li,
+.footnotes ol li p {
+  font-size: 0.9rem;
 }
 
 /* Footer */
@@ -168,6 +182,10 @@ article.verse-history header {
 
 .toc-verse {
   font-style: italic;
+}
+
+article.essay h3 {
+  margin-top: 2rem;
 }
 
 /* Figures */
