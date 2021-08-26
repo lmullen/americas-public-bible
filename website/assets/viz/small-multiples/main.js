@@ -17,7 +17,7 @@ const grid = d3
   .classed('grid-margin-x', true)
   .classed('grid-margin-y', true);
 
-const topPromise = d3.json(`${config.API_BASE}/apb/index/top/`);
+const topPromise = d3.json(`${config.API_BASE}/apb/index/top`);
 
 topPromise
   .then((data) => {

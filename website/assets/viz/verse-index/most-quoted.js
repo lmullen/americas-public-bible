@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import IndexItem from '../common/index-item';
 import config from '../config';
 
-const topPromise = d3.json(`${config.API_BASE}/apb/index/top/`);
+const topPromise = d3.json(`${config.API_BASE}/apb/index/top`);
 
 topPromise
   .then((data) => {

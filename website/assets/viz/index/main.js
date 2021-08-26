@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import IndexItem from '../common/index-item';
 import config from '../config';
 
-const featuredPromise = d3.json(`${config.API_BASE}/apb/index/featured/`);
+const featuredPromise = d3.json(`${config.API_BASE}/apb/index/featured`);
 
 featuredPromise
   .then((data) => {
