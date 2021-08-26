@@ -1,22 +1,24 @@
 ---
 description: How this site uses the methods of machine learning, but also an approach to humanistic analysis called disciplined serendipity.
 order: 2
-title: 'Methods: The How and the Why of Identifying Biblical Quotations'
+title: 'Methods: The How and the Why of Finding Biblical Quotations'
 ---
 
 _America's Public Bible_ is unusual, at least in comparison to conventional historical scholarship, as a work of history which is based on machine learning and data analysis, and which presents itself as an interactive scholarly work. Within the field of digital history, innovations in research technique or form have often spurred methodological discussion, and this project will be no different. However, the methodological discussion below is not simply about programming, statistics, and web development. Rather, I hope to show how those kinds of techniques are only a part of a broader humanistic methodology, which I am going to call disciplined serendipity. Accordingly this discussion of methodology has three parts: how the biblical quotations were identified and analyzed; why this website takes the form that it does; and how these kinds of digital history approaches amount to a method for learning about the past.[^1]
 
-### How the quotations were identified
+### The newspaper corpora
 
 The starting place for this project is [_Chronicling America: Historic American Newspapers_](https://chroniclingamerica.loc.gov/). Created by the Library of Congress, this project makes available over 15 million newspaper pages, the vast majority of which come during the period from the 1830s to the 1920s. The Library of Congress makes the data publicly available for both conventional and computational historical research.
 
 For this project, I downloaded the entirety of the _Chronicling America_ collection that was available at the time, which was 14,985,326 newspaper pages, to be exact. (The National Digital Newspaper Program adds pages continually, and so not everything that is in _Chronicling America_ currently has been used for this site.) _Chronicling America_ has a [good API](https://chroniclingamerica.loc.gov/about/api/): the newspaper metadata comes from the newspaper metadata API, and the OCR plain text of the newspaper pages was downloaded via the OCR Bulk Data API.
 
-An additional corpus of newspaper articles provides confirmation of the methods used on _Chronicling America_. Gale's [*Nineteenth-century Newspapers*](https://www.gale.com/c/nineteenth-century-us-newspapers) (hereafter NCNP) contains 19.6 million articles from the nineteenth-century United States. In some ways the contents of this collection overlap with _Chronicling America_, but it also contains distinct sources. Just as important, the texts are segmented by articles instead of pages, and they have independently been converted to plain text via optical character recognition (OCR). This collection was licensed by the George Mason University libraries for text analysis, and trend lines of rates of quotations from NCNP appear throughout the site. However, given the limitations of this license, which preclude the ability to reproduce the context of the quotations, this corpus is mostly included as a point of comparison with the trend lines from _Chronicling America_.
+An additional corpus of newspaper articles provides confirmation of the methods used on _Chronicling America_. Gale's [_Nineteenth-century Newspapers_](https://www.gale.com/c/nineteenth-century-us-newspapers) (hereafter NCNP) contains 19.6 million articles from the nineteenth-century United States. In some ways the contents of this collection overlap with _Chronicling America_, but it also contains distinct sources. Just as important, the texts are segmented by articles instead of pages, and they have independently been converted to plain text via optical character recognition (OCR). This collection was licensed by the George Mason University libraries for text analysis, and trend lines of rates of quotations from NCNP appear throughout the site. However, given the limitations of this license, which preclude the ability to reproduce the context of the quotations, this corpus is mostly included as a point of comparison with the trend lines from _Chronicling America_.
 
 Finally, all though it is not reproduced on this site, the machine-learning models below were also run on a corpus of Civil War--era sermons gathered by Jimmy Byrd for his book, _A Holy Baptism of Fire and Blood: The Bible and the American Civil War_. The full process by which quotations were identified in that corpus is explained in an appendix to the book.[^2] However, the fact that a meaningful set of quotations was identified from a very different corpus, containing a different kind of text altogether, demonstrates the success of the machine learning model in identifying biblical quotations.
 
 Given those corpora, I created a machine-learning model that predicts whether a particular verse from the Bible was quoted or alluded to on a particular newspaper page, in the case of _Chronicling America_, or in a particular article, in the case of NCNP. Below is a brief, mostly non-technical explanation of how this works. However, I have included certain statistical details, and the code for the machine-learning model as well as the exploratory notebooks for the model are available on GitHub.
+
+### How the quotations were identified
 
 The task of identifying the quotations had essentially two steps: measuring certain aspects of the text which indicate that a biblical quotation might be present, and then distinguishing between potential and genuine matches. Those two tasks could be called feature extraction and prediction.
 
@@ -31,52 +33,46 @@ To begin, each verse in the Bible is turned into tokens, or n-grams. Take, for i
 
 The tokens that were created for this project used the King James (or Authorized) Version, the American Standard Version, the Revised Version, and the Douay-Rheims Version, including the Apocrypha as well as the Old and New Testaments in most instances.[^3] Below I will describe how these different versions were distinguished from one another.
 
-These tokens then were used to create a document-term matrix, where the rows are
-the Bible verses, the columns are the tokens, and the cells indicate how many
-times that token appears in that verse. For instance, a subset of the Bible
-matrix might look like this.
- 
-|                   | beginning god created | god created heaven | without form void |
-|-------------------|-----------------------|--------------------|-------------------|
-| Genesis 1:1 (KJV) | 1                     | 1                  | 0                 |
-| Genesis 1:2 (KJV) | 0                     | 0                  | 1                 |
-| Genesis 1:3 (KJV) | 0                     | 0                  | 0                 |
+These tokens then were used to create a document-term matrix, where the rows are the Bible verses, the columns are the tokens, and the cells indicate how many times that token appears in that verse. For instance, a subset of the Bible matrix might look like this.
 
+|  | beginning god created | god created heaven | without form void |
+| --- | --- | --- | --- |
+| Genesis 1:1 (KJV) | 1 | 1 | 0 |
+| Genesis 1:2 (KJV) | 0 | 0 | 1 |
+| Genesis 1:3 (KJV) | 0 | 0 | 0 |
 
 Then each newspaper page or article is turned into tokens using the exact same function that was used for tokenizing the Bible. This creates a second matrix where the rows are newspaper pages, the columns are three to five word tokens from the Bible, and the cells indicate how many times that string of words from the Bible is found on the newspaper page. Although the newspapers include vastly more possible tokens than are found in just the Bible, this method restricts the number of columns in the newspaper document-term matrix to the same as in the Bible matrix.
 
 |        | beginning god created | god created heaven | without form void |
-|--------|-----------------------|--------------------|-------------------|
+| ------ | --------------------- | ------------------ | ----------------- |
 | page_A | 1                     | 1                  | 0                 |
-| page_A | 0                     | 0                  | 1                 |
-| page_A | 0                     | 0                  | 0                 |
+| page_B | 0                     | 0                  | 1                 |
+| page_C | 0                     | 0                  | 0                 |
 
 Because the two matrices share a dimension, the Bible matrix can be multiplied by the transpose of the newspaper matrix. The result is a matrix with Bible verses in the rows and newspaper pages in the columns. The numbers in the cells of the matrix indicate how many tokens from that verse were found on that newspaper page. So in the sample matrix below, page_A shares two tokens with Genesis 1:1 and page_B shares one token with Genesis 1:2, indicating that those verses might appear on those pages. Of course the vast majority of cells in the resulting matrix are zeros.
 
-|                   | beginning god created | god created heaven | without form void |
-|-------------------|-----------------------|--------------------|-------------------|
-| Genesis 1:1 (KJV) | 2                     | 0                  | 0                 |
-| Genesis 1:2 (KJV) | 0                     | 1                  | 0                 |
-| Genesis 1:3 (KJV) | 0                     | 0                  | 0                 |
+|                   | page_A | page_B | page_C |
+| ----------------- | ------ | ------ | ------ |
+| Genesis 1:1 (KJV) | 2      | 0      | 0      |
+| Genesis 1:2 (KJV) | 0      | 1      | 0      |
+| Genesis 1:3 (KJV) | 0      | 0      | 0      |
 
 The multiplication of these document-term matrices is the primary means I have used to find matches, but the token count is only one of the features about potential matches that I measure. I tried four different features in training the model. Each of these can be matched to a common sense understanding of what a quotation looks like on a newspaper page.
 
-- Token count: the number of tokens from a particular verse that appear on a particular newspaper page. Of course, the more words from a Bible verse that are present on a newspaper page, the
-- TF-IDF: Not every token contains the same amount of information about whether a newspaper page contains a particular biblical verse. For instance, the phrase "went into the city" could be a quotation from a dozen or more Bible verses, but it might just as well be any English sentence. But the phrase "through a glass, darkly" is obviously a reference to 1 Corinthians 13:12. By weighting the matching tokens according to their term frequency-inverse document frequency, more significant terms count for more in determining a match.
-- Proportion: Bible verses can vary in length, from just two words ("Jesus wept" \[John 11:35\] and "Rejoice evermore" \[1 Thessalonians 5:16\]) to the longest, Esther 8:9, which has ninety words in the King James Version. (In fact, Esther 8:9 appears in several _Chronicling America_ newspapers as the punchline of a joke about a "boy who boasted of his wonderful memory."[^4] This feature measures what proportion of the entire verse is found on the page.
-- Runs test: Where the matching tokens appear on the page is as important as how many matches there are. If the tokens appear widely scattered across the page, then they are likely to be just random matches to unimportant phrases. If the tokens are all clustered right next to each other (perhaps with a few gaps for incorrect OCR), then they are likely to be a quotation from the verse. This feature uses a statistical test to determine whether the sequence of matches (called a "run") is random or not.
+- **Token count:** the number of tokens from a particular verse that appear on a particular newspaper page. Of course, the more words from a Bible verse that are present on a newspaper page, the
+- **TF-IDF:** Not every token contains the same amount of information about whether a newspaper page contains a particular biblical verse. For instance, the phrase "went into the city" could be a quotation from a dozen or more Bible verses, but it might just as well be any English sentence. But the phrase "through a glass, darkly" is obviously a reference to 1 Corinthians 13:12. By weighting the matching tokens according to their term frequency-inverse document frequency, more significant terms count for more in determining a match.
+- **Proportion:** Bible verses can vary in length, from just two words ("Jesus wept" \[John 11:35\] and "Rejoice evermore" \[1 Thessalonians 5:16\]) to the longest, Esther 8:9, which has ninety words in the King James Version. (In fact, Esther 8:9 appears in several _Chronicling America_ newspapers as the punchline of a joke about a "boy who boasted of his wonderful memory."[^4] This feature measures what proportion of the entire verse is found on the page.
+- **Runs test:** Where the matching tokens appear on the page is as important as how many matches there are. If the tokens appear widely scattered across the page, then they are likely to be just random matches to unimportant phrases. If the tokens are all clustered right next to each other (perhaps with a few gaps for incorrect OCR), then they are likely to be a quotation from the verse. This feature uses a statistical test to determine whether the sequence of matches (called a "run") is random or not.
 
-After having created a technique for extracting these features from newspapers, I ran the feature extraction on a random selection of thousands of newspaper pages. The goal was to create some sample data, knowing that it contained many potential quotations only some of which were genuine quotations.
+After having created a technique for extracting these features from newspapers, I ran the feature extraction on a random selection of thousands of newspaper pages. The goal was to create some sample data, knowing that it contained many potential quotations, only some of which were genuine quotations.
 
 After measuring the potential matches, we need a means of distinguishing between accurate matches and false positives. This is a difficult problem because of the way that the Bible was quoted in newspapers (or indeed, used more generally). If we were looking for complete quotations, then we would look for candidates where there were many matching tokens, or where a high proportion of the matching verse is present on the page. But often quotations can be highly compressed. A single unusual phrase ("Quench not the Spirit" or "Remember Lot's wife" or "The Lord called Samuel") may be enough to identify one quotation, where even a half dozen commonplace matching phrases might not actually be a quotation. Then too, sometimes allusions function by changing the actual words while retaining the syntax or cadence, as in this joke.
 
-TODO: IMAGE OF JUG NOT
-
-"Jug not, lest ye be jugged," alluding to the verse "Judge not, that ye be not judged" (Matthew 7:1). The Pascagoula Democrat-Star (Pascagoula, Miss.), [10 Nov. 1899](http://chroniclingamerica.loc.gov/lccn/sn87065532/1899-11-10/ed-1/seq-1/)
+{{< fig-full src="jug-not.png" caption="\"Jug not, lest ye be jugged,\" alluding to the verse \"Judge not, that ye be not judged\" (Matthew 7:1). *Pascagoula Democrat-Star* (Pascagoula, Miss.), [10 Nov. 1899](http://chroniclingamerica.loc.gov/lccn/sn87065532/1899-11-10/ed-1/seq-1/)." >}}
 
 Rather than specify arbitrary thresholds, a more accurate approach is to teach an algorithm to distinguish between quotations and noise by showing it what many genuine matches and false positives look like. (Hence the term machine-learning.) After taking a sample of potential matches, I identified (or labeled) a couple of thousand of potential matches as genuine quotations or noise. This data was separated into training and testing sets. This makes it possible to observe patterns in the features that have been measured. The chart below, for instance, shows that genuine matches tend to have a much higher token count, a much higher TF-IDF score, and a very low p-value for the runs test. But it is not possible to draw a single line on either chart which cleanly distinguishes between all genuine matches and all false positives.
 
-TODO: CHART FROM MODEL TRAINING NOTEBOOK
+{{< fig-full src="quotations-vs-noise.png" caption="This chart shows potential quotations, with the number of tokens that were in both the Bible and the newspaper page across the x-axis, and the TF-IDF scores of the match across the y-axis. As you can see, genuine quotations are likely to have a higher number of tokens and higher TF-IDF score, but there is no simple way to draw a line between the two." >}}
 
 I then used that data to train and test an array of machine-learning models. These models used different techniques for setting the parameters for the models, especially which combination of features were used. This model takes the predictors mentioned above, and assigns it a class ("quotation" or not) and a probability that that classification is correct. While I evaluated a number of models, including random forests, support vector machines, neural networks, and ensembles of other models, a comparatively simple logistic classifier had the best performance and most understandable characteristics.[^5]
 
@@ -84,16 +80,26 @@ To determine which of the models I trained had the best performance, I measured 
 
 Having selected the best model, an additional question arose. When the machine-learning model distinguishes between a potential quotation which is genuinely a quotation, and one which is not, it returns a probability for that judgment. A high probability means that there is almost certainly a quotation; a low probability means it is almost certainly noise. The question is what the right threshold is for distinguishing between quotations and noise. This is a tradeoff between precision and recall, or between sensitivity and specificity, to use the technical terms. In everyday language, the tradeoff is between finding as many genuine matches as possible, knowing that will also increase the number of quotations that are returned which are not genuine. In the prototype version of this site, I used a very high threshold (a probability of 0.9). The intention there was to make sure to eliminate as many false positives as possible, but the downside was that it left many genuine matches undetected. For the current version of the site, I used the J-statistic, which is intended to find the threshold that balances all predictions. Using that statistic, I settled on a probability threshold of 0.58.[^6]
 
-Finally, I measured the performance of the model. The performance was measured using testing data which had been held back from the training data, so the model could not have learned from this smaller set of labeled data. It thus represents a genuine test of the model's accuracy. One way of representing the model's results is with a confusion matrix. A confusion matrix shows how many potential quotations in the testing dataset were predicted to be genuine or noise, and how many of those predictions were correct or incorrect. Below is the confusion matrix for the model used for this site.
+Finally, I measured the performance of the model. The performance was measured using testing data which had been held back from the training data, so the model could not have learned from this smaller set of labeled data. It thus represents a genuine test of the model's accuracy. One way of representing the model's results is with a confusion matrix. A confusion matrix shows how many potential quotations in the testing dataset were predicted to be genuine or noise, and how many of those predictions were correct or incorrect. Below is the confusion matrix for the testing data for the model used for this site.
 
-Confusion matrix: Truth Prediction quotation noise quotation 84 4 noise 10 47
+|                | **Truth** |       |
+| -------------- | --------- | ----- |
+| **Prediction** | quotation | noise |
+| quotation      | 84        | 4     |
+| noise          | 10        | 47    |
 
-There are a number of measures of a prediction model's accuracy. Below are the most relevant ones.
+There are a number of measures of a prediction model's accuracy. Below are the most relevant ones as measured on the testing data for the model used on this site.
 
-Sensitivity/Recall sens binary 0.8936170 Specificity spec binary 0.9215686 Precision ppv binary 0.9545455 Recall recall binary 0.8936170 accuracy binary 0.9034483\
-bal_accuracy binary 0.9075928
+| Measure            | Score     |
+| ------------------ | --------- |
+| Sensitivity/recall | 0.8936170 |
+| Specificity        | 0.9215686 |
+| Precision          | 0.9545455 |
+| Recall             | 0.8936170 |
+| Accuracy           | 0.9034483 |
+| Balanced accuracy  | 0.9075928 |
 
-Having trained the model, the next task was to run it across all of the newspaper pages in Chronicling America and NCNP. I did this using George Mason University's high-performance computing cluster. The result were millions of predicted quotations, stored in a PostgreSQL database.
+Having trained the model, the next task was to run it across all of the newspaper pages in _Chronicling America_ and NCNP. I did this using George Mason University's high-performance computing cluster. The result were millions of predicted quotations, stored in a PostgreSQL database.
 
 These quotations underwent a series of four further steps to clean them.
 
@@ -113,7 +119,9 @@ This site takes advantage of the dataset created by the machine learning model i
 
 In several places on this site, individual instances of quotations are made available to the users. One place where that happens is in the gallery of quotations. These quotations are the most interesting quotations that I have found in the course of my research. Interesting and even at times (if the demeanor of serious scholarship will permit me to say so) fun are the primary criteria for inclusion in this collection. However, there is a purpose to including these quotations in that way. They show something of the range of possibilities for biblical quotations. With millions of quotations, it is not possible to examine each one, so this gallery gives a sense of the quotations which are at the base of this project. And each of these is, in itself, a text or primary source that could be of scholarly interest even apart from the broader trends.
 
-The second place where one can find individual instances of quotations is in the tables that appear in the verse viewers. These tables contain all the predicted quotations for a given verse from _Chronicling America_.[^9] They are organized chronologically, and include the date of the newspaper and a link to where you can see the quotation in context at _Chronicling America_. These tables allow users to see the quotations in their context. Using them in this way is the basis of much of the writing on this site. These quotations function as a kind of q
+{{< fig-2up left="not-steal-apb.png" right="not-steal-chronam.png" caption="This interactive scholarly work allows you to see quotations from the Bible in two different kinds of context. **Left:** The biblical quotations trend viewer on this site shows the trend in the rate of quotation over time. Here we see a spike in the popularity of the verse, \"Thou shalt not steal.\" We can thus understand quotations of the verse in a chronological context. The table below the chart shows specific quotations on particular dates. **Right:** Following the links in the table takes you to *Chronicling America*. Here you can see the quotation in the [context of the newspaper page](https://chroniclingamerica.loc.gov/lccn/sn85038615/1912-06-27/ed-1/seq-8/#words=thou+shalt+steal+motto+roosevelt+quoted). (The words of the quotation are highlighted in red on the lower left, near the corner of the photograph.) In this case, the verse is being quoted to justify the formation of Theodore Roosevelt's Progressive, or Bull Moose, party in 1912.">}}
+
+The second place where one can find individual instances of quotations is in the tables that appear in the verse viewers. These tables contain all the predicted quotations for a given verse from _Chronicling America_.[^9] They are organized chronologically, and include the date of the newspaper and a link to where you can see the quotation in context at _Chronicling America_. These tables allow users to see the quotations in their context. Using them in this way is the basis of much of the writing on this site.
 
 The other form in which quotations are presented on this site are the trend lines. These trend lines show the rate of quotations over time. It is important to show the rate of quotation, rather than the simple number of quotations detected, because there are many more newspaper pages in the corpus over time, and using the rate normalizes the data and shows the change over time. It is thus possible to see not just when a verse was popular, but why. I caution users against reading a great deal into the overall magnitude of the rate: it is really the change over time that is significant. Change over time, however, is a fundamental scholarly primitive, especially for historians.[^10]
 
@@ -133,9 +141,11 @@ _America's Public Bible_ can be thought of as an interface (this website) on top
 
 But it is also an interface, designed with humanistic research principles in mind. The project creates serendipitous findings through computational history by surfacing sources that would otherwise go unnoticed. And the project disciplines those searches by setting the results in a much broader chronological context in which the typical and the exceptional can be identified. This disciplined serendipity constitutes a method of approaching the past, and in this case for approaching a past relevant to history, religious studies, and other humanistic disciplines.
 
+{{< fig-full src="lord-called-samuel.png" caption="The presidential election of 1876, in which Democrat Samuel Tilden ran against Republican Rutherford B.  Hayes, was disputed. As the votes were tallied and returns disputed, several Democratic newspapers used the verse \"The Lord called Samuel\" (1 Samuel 3:6) to advance the claims of their candidate. On this page, the verse is emblazoned at the bottom of the masthead. _Stark County Democrat_ (Canton, Ohio), [7 December 1876](https://chroniclingamerica.loc.gov/lccn/sn84028490/1876-12-07/ed-1/seq-1/)." >}}
+
 The ability to move between the trend line of the verses quotation and its location in the actual primary source is the way that the site enables disciplined serendipity. The serendipity lies in how the site surfaces hundreds of thousands of instances of quotations which the user can readily browse. This may be a subjective judgement, to be sure, but this has been the most fun project that I have ever worked on because I am constantly surprised by the quotation finder (and not just that it works at all!). For example, how could I have known to look for the time when a Democratic newspaper thought Samuel Tilden had been elected in the disputed presidential race of 1876, and plastered the banner "The Lord called Samuel" across the paper (figure 4). Biblical jokes are another frequent category that I did not expect.[^14] I take this as a sign that the method truly is serendipitous.
 
-The second context is the place of the text on the newspaper page itself (figure 5). This context allows the scholar to understand how the Bible verse was used. The Bible was a common yet contested text, and the fact that a verse was quoted does not show the meaning of that quotation. Take the trend for John 15:13 ("Greater love hath no man than this, that a man lay down his life for his friends"). This verse exploded in popularity around World War I, and looking at how the verse was used in specific newspapers confirms that it was popular because of obituaries. Investigating earlier uses of the verse shows that it was not associated with the military in any significant way until the Great War. It was more likely to be used to memorialize medical personnel who died taking care of people infected with cholera or yellow fever.
+The second context is the place of the text on the newspaper page itself (see figure 3). This context allows the scholar to understand how the Bible verse was used. The Bible was a common yet contested text, and the fact that a verse was quoted does not show the meaning of that quotation. Take the trend for {{< vv "John 15:13" >}} ("Greater love hath no man than this, that a man lay down his life for his friends"). This verse exploded in popularity around World War I, and looking at how the verse was used in specific newspapers confirms that it was popular because of obituaries. Investigating earlier uses of the verse shows that it was not associated with the military in any significant way until the Great War. It was more likely to be used to memorialize medical personnel who died taking care of people infected with cholera or yellow fever.
 
 In other words, the contribution of this site in terms of method is not just to bring computational searching to historians. Arguably, historians already do that all the time through keyword searching. Rather it is to try a particularly useful kind of prediction (quotation identification) and to build on top of it a disciplined interface. That interface turns up unusual sources, but also sets contextualizes them, in terms of chronology and on the page. Those contexts in turn enable historical inquiry, both as expressed on this site, and---I hope---also for its users.
 
