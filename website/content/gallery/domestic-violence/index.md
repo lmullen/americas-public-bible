@@ -6,6 +6,8 @@ reference: Ephesians 5:22
 city: Lancaster
 state: SC
 chronam: https://chroniclingamerica.loc.gov/lccn/sn84026900/1900-09-12/ed-1/seq-1/#words=wives+submit+yourselves+unto+own+husbands+unto+lord
+featured: false
+author: Lincoln Mullen
 ---
 
 

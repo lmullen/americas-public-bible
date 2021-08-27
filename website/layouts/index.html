@@ -4,27 +4,35 @@
   <div class="title">
     <h1>America&rsquo;s Public Bible</h1>
   </div>
-  <div class="subtitle">A Commentary <span class="author">by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
+  <div class="subtitle"
+    >A Commentary
+    <span class="author"
+      >by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
     </span>
   </div>
 </header>
 
-{{ end }}
-
-{{ define "main" }}
+{{ end }} {{ define "main" }}
 
 <main id="home">
-
   <section>
-    <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
-      {{ range where (where .Site.RegularPages "Type" "gallery") ".Params.featured" true | first 4 }}
+    <div
+      class="grid-x grid-margin-x"
+      data-equalizer
+      data-equalize-on="medium"
+      id="homepage-gallery"
+    >
+      {{ range where (where .Site.RegularPages "Type" "gallery")
+      ".Params.featured" true | first 4 }}
       <div class="cell medium-3 small-4">
         <div class="callout" data-equalizer-watch>
-          {{ $img := .Resources.GetMatch "quotation.png"}}
-          {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
-          {{ $anchor := urlize .Title }}
+          {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
+          $img.Fill "410x210 TopLeft" }} {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
-            <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
+            <img
+              src="{{ $thumbnail.Permalink }}"
+              alt="Thumbnail of {{ .Title }}"
+            />
           </a>
         </div>
       </div>
@@ -33,76 +41,83 @@
   </section>
 
   <section>
-
-    <article id="homepage-introduction">
-      {{ .Content }}
-    </article>
-
+    <article id="homepage-introduction"> {{ .Content }} </article>
   </section>
 
-  <hr>
+  <hr />
 
   <section id="how-to-use">
     <h3>How to use this website</h3>
-    {{ with .Site.GetPage "/how-to-use" }}
-    {{ .Content }}
-    {{ end }}
+    {{ with .Site.GetPage "/how-to-use" }} {{ .Content }} {{ end }}
   </section>
 
-  <hr>
+  <hr />
 
   <section id="essays">
     <h2>Essays</h2>
-      {{ range (where .Site.RegularPages "Type" "essay").ByParam "order" }}
-      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-      <p class="toc-description">
-        {{ .Description | markdownify }}
-      </p>
-      {{ end }}
+    {{ range (where .Site.RegularPages "Type" "essay").ByParam "order" }}
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <p class="toc-description"> {{ .Description | markdownify }} </p>
+    {{ end }}
   </section>
 
-  <hr>
+  <hr />
 
   <section id="verse-histories">
     <h2>Verse histories</h2>
-      {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
-      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-      <p class="toc-description">
-        <span class="toc-verse">{{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;</span> <br/>
-        {{ .Description | markdownify }}
-      </p>
-      {{ end }}
+    {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <p class="toc-description">
+      <span class="toc-verse"
+        >{{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;</span
+      >
+      <br />
+      {{ .Description | markdownify }}
+    </p>
+    {{ end }}
   </section>
 
-  <hr>
+  <hr />
 
   <section id="verse-viewer">
     <h2>Trends in biblical quotations</h2>
-    {{ with .Site.GetPage "/verse-viewer-overview" }}
-    {{ .Content }}
-    {{ end }}
+    {{ with .Site.GetPage "/verse-viewer-overview" }} {{ .Content }} {{ end }}
     <!-- <div class="button-group"> -->
-      <a class="large button" href="/verse-viewer/most-quoted/">Verses most quoted</a>
-      <a class="large button" href="/verse-viewer/peaks/">Verses chronologically</a>
-      <a class="large button" href="/verse-viewer/biblical/">Verses in biblical order</a>
+    <a class="large button" href="/verse-viewer/most-quoted/"
+      >Verses most quoted</a
+    >
+    <a class="large button" href="/verse-viewer/peaks/"
+      >Verses chronologically</a
+    >
+    <a class="large button" href="/verse-viewer/biblical/"
+      >Verses in biblical order</a
+    >
     <!-- </div> -->
     <h3>Featured verses</h3>
     <div id="featured-verses" class="grid-container verse-index"></div>
   </section>
 
-  <hr>
+  <hr />
 
   <section id="gallery">
     <h2>Quotations gallery</h2>
-    <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="homepage-gallery">
-      {{ range where (where .Site.RegularPages "Type" "gallery") ".Params.featured" nil | first 16 }}
+    <div
+      class="grid-x grid-margin-x"
+      data-equalizer
+      data-equalize-on="medium"
+      id="homepage-gallery"
+    >
+      {{ range where (where .Site.RegularPages "Type" "gallery")
+      ".Params.featured" false | first 24 }}
       <div class="cell medium-3 small-4">
         <div class="callout" data-equalizer-watch>
-          {{ $img := .Resources.GetMatch "quotation.png"}}
-          {{ $thumbnail := $img.Fill "410x210 TopLeft" }}
-          {{ $anchor := urlize .Title }}
+          {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
+          $img.Fill "410x210 TopLeft" }} {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
-            <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
+            <img
+              src="{{ $thumbnail.Permalink }}"
+              alt="Thumbnail of {{ .Title }}"
+            />
           </a>
         </div>
       </div>
@@ -113,38 +128,40 @@
     </p>
   </section>
 
-  <hr>
+  <hr />
 
   <section id="appendix">
     <h2>Appendix</h2>
-    {{ with .Site.GetPage "/appendix" }}
-    {{ .Content }}
-    {{ end }}
+    {{ with .Site.GetPage "/appendix" }} {{ .Content }} {{ end }}
   </section>
 
-  <hr>
+  <hr />
 
   <section>
     <h3>Suggested citation</h3>
     <p>
-      If you use this project, you can cite it using the following suggested format.
+      If you use this project, you can cite it using the following suggested
+      format.
     </p>
     <p id="suggested-citation">
-      Lincoln A. Mullen, <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University Press, forthcoming):
-      <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>, <a
-        href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
+      Lincoln A. Mullen,
+      <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University
+      Press, forthcoming):
+      <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>,
+      <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
     </p>
 
     <h3>Project news and changelog</h3>
     <ul id="news" class="no-bullet">
       {{ range (where .Site.RegularPages "Type" "news").ByDate.Reverse }}
-      <li><time datetime='{{ .Date.Format "2006-01-02" }}'>{{ .Date.Format "2 January 2006" }}</time>.
-        {{.Params.News | markdownify }}</li>
+      <li
+        ><time datetime='{{ .Date.Format "2006-01-02" }}'
+          >{{ .Date.Format "2 January 2006" }}</time
+        >. {{.Params.News | markdownify }}</li
+      >
       {{ end }}
     </ul>
-
   </section>
-
 </main>
 
 {{ end }}
