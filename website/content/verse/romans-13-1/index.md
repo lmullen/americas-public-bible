@@ -3,7 +3,7 @@ description: 'A leading text for those who advocated for law and order, from the
 order: 1
 reference: 'Romans 13:1'
 snippet: Let every soul be subject unto the higher powers ...
-title: Law and Order
+title: Law and order
 ---
 
 Should Christians be "Resistants" to unjust acts of their government, or "Non-Resistants"? Those were the terms under which a spirited debate about Christian's obedience to government were undertaken in the pages of the *Vermont Telegraph* in 1842.[^1] Whenever the government acted or legislated unjustly, that debate was repeated and Romans 13:1 was brought to bear.[^2] "Let every soul be subject unto the higher powers," the verse read, for "the powers that be are ordained of God." The powers that be and their supporters unusually found the verse more congenial to their side of the argument. But "rulers are not a terror to good works, but to the evil," the passage went on to read, which gave critics of unjust power a toehold in the argument.

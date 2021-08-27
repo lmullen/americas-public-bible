@@ -1,7 +1,7 @@
 ---
 description: How this site uses the methods of machine learning, but also an approach to humanistic analysis called disciplined serendipity.
 order: 2
-title: 'Methods: The How and the Why of Finding Biblical Quotations'
+title: 'Methods: The how and the why of finding biblical quotations'
 ---
 
 _America's Public Bible_ is unusual, at least in comparison to conventional historical scholarship, as a work of history which is based on machine learning and data analysis, and which presents itself as an interactive scholarly work. Within the field of digital history, innovations in research technique or form have often spurred methodological discussion, and this project will be no different. However, the methodological discussion below is not simply about programming, statistics, and web development. Rather, I hope to show how those kinds of techniques are only a part of a broader humanistic methodology, which I am going to call disciplined serendipity. Accordingly this discussion of methodology has three parts: how the biblical quotations were identified and analyzed; why this website takes the form that it does; and how these kinds of digital history approaches amount to a method for learning about the past.[^1]
