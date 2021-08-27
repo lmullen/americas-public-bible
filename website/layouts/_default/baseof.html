@@ -1,6 +1,6 @@
 <!-- prettier-ignore -->
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" class="no-js">
 {{- "<!-- Hi! Thanks for viewing source. You're a person after my own heart. This is a scholarly project, and so I've tried to make the code as accessible as the prose, albeit while trying to keep performance good. Viewing source is not quite as friendly as it would be in Web 1.0, but I've done what I can. People who viewed source also like the GitHub repositories for this project (https://github.com/lmullen/americas-public-bible) and for the data API (https://github.com/chnm/dataapi). -->"
   | safeHTML -}}
 
@@ -33,7 +33,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-
 </head>
 
 <body>
@@ -41,14 +40,16 @@
     {{ block "header" . }}
 
     <header>
-      <nav class="top-bar">
-        <div class="top-bar-left">
-          <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
-        </div>
-        <div class="top-bar-right">
-          <a class="toc-link" href="/">Table of Contents</a>
-        </div>
-      </nav>
+      <div data-sticky-container>
+        <nav class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1" style="width:100%">
+          <div class="top-bar-left">
+            <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
+          </div>
+          <div class="top-bar-right">
+            <a class="toc-link" href="/">Table of Contents</a>
+          </div>
+        </nav>
+      </div>
     </header>
     {{ end }}
 
@@ -98,6 +99,13 @@
   {{ $style := resources.Get .Params.style | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" />
   {{ end }}
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 
 </html>
