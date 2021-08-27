@@ -1,9 +1,8 @@
 <section>
   <div class="media-object stack-for-small">
     <div class="media-object-section">
-      {{ $img := .Resources.GetMatch "quotation.png"}}
-      {{ $thumbnail := $img.Fit "400x1600" }}
-      <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}" class="thumbnail">
+      {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail := $img.Fit "400x1600" }}
+      <img src="{{ $thumbnail.Permalink }}" alt="Image of quotation titled {{ .Title }}" class="thumbnail" />
     </div>
     <div class="media-object-section main-section">
       {{ $anchor := urlize .Page.Title }}
@@ -12,15 +11,27 @@
       {{ .Content }}
 
       <p>
-        <strong>Reference: </strong> {{ .Params.Reference }}.<br><a
-          href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'>See trend and related
-          quotations &rarr;</a>
+        <strong>Reference: </strong>
+        {{ .Params.Reference }}.<br /><a href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'
+          >See trend and related quotations &rarr;</a
+        >
       </p>
       <p>
-        <strong>Source:</strong> <em>{{ .Params.Newspaper }}</em> ({{ .Params.City }}, {{ .Params.State }}),
-        {{ .Params.Date.Format "2 January 2006" }}.<br><a href="{{ .Params.Chronam }}">See context at <em>Chronicling
-            America</em> &rarr;</a>
+        <strong>Source:</strong>
+        <em>{{ .Params.Newspaper }}</em>
+        ({{ .Params.City }}, {{ .Params.State }}), {{ .Params.Date.Format "2 January 2006" }}.<br /><a
+          href="{{ .Params.Chronam }}"
+          >See context at
+          <em>Chronicling America</em>
+          &rarr;</a
+        >
       </p>
+      {{ if ne .Params.Author "Lincoln Mullen"}}
+      <p>
+        <strong>Added by: </strong>
+        {{ .Params.Author }}.
+      </p>
+      {{ end }}
     </div>
   </div>
 </section>
