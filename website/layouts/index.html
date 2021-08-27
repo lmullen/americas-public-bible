@@ -1,38 +1,41 @@
 {{ define "header" }}
 
-<header class="title-block">
-  <div class="title">
-    <h1>America&rsquo;s Public Bible</h1>
-  </div>
-  <div class="subtitle"
-    >A Commentary
-    <span class="author"
-      >by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
-    </span>
+<header>
+  <div data-sticky-container>
+    <nav class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1" style="width:100%">
+      <div class="top-bar-left">
+        <div class="title">
+          <h1><a href="/">America&rsquo;s Public Bible</a></h1>
+        </div>
+        <div class="subtitle"><a href="/">A Commentary</a>
+          <span class="author">by <a href="https://lincolnmullen.com/">Lincoln A. Mullen</a>
+          </span>
+        </div>
+      </div>
+      <div class="top-bar-right" style="text-align: left!important;">
+        {{ partial "toc.html" }}
+      </div>
+    </nav>
   </div>
 </header>
 
-{{ end }} {{ define "main" }}
+{{ end }}
+
+
+{{ define "main" }}
 
 <main id="home">
+
   <section>
-    <div
-      class="grid-x grid-margin-x"
-      data-equalizer
-      data-equalize-on="medium"
-      id="homepage-gallery"
-    >
+    <div class="grid-x grid-margin-x" id="homepage-gallery">
       {{ range where (where .Site.RegularPages "Type" "gallery")
       ".Params.featured" true | first 4 }}
       <div class="cell medium-3 small-4">
-        <div class="callout" data-equalizer-watch>
+        <div class="gallery-item">
           {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
           $img.Fill "410x210 TopLeft" }} {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
-            <img
-              src="{{ $thumbnail.Permalink }}"
-              alt="Thumbnail of {{ .Title }}"
-            />
+            <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
           </a>
         </div>
       </div>
@@ -41,6 +44,7 @@
   </section>
 
   <section>
+
     <article id="homepage-introduction"> {{ .Content }} </article>
   </section>
 
@@ -54,7 +58,7 @@
   <hr />
 
   <section id="essays">
-    <h2>Essays</h2>
+    <h2>Essays and explorations</h2>
     {{ range (where .Site.RegularPages "Type" "essay").ByParam "order" }}
     <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
     <p class="toc-description"> {{ .Description | markdownify }} </p>
@@ -68,9 +72,7 @@
     {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
     <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
     <p class="toc-description">
-      <span class="toc-verse"
-        >{{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;</span
-      >
+      <span class="toc-verse">{{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;</span>
       <br />
       {{ .Description | markdownify }}
     </p>
@@ -79,19 +81,13 @@
 
   <hr />
 
-  <section id="verse-viewer">
+  <section id="verse-trends">
     <h2>Trends in biblical quotations</h2>
     {{ with .Site.GetPage "/verse-viewer-overview" }} {{ .Content }} {{ end }}
     <!-- <div class="button-group"> -->
-    <a class="large button" href="/verse-viewer/most-quoted/"
-      >Verses most quoted</a
-    >
-    <a class="large button" href="/verse-viewer/peaks/"
-      >Verses chronologically</a
-    >
-    <a class="large button" href="/verse-viewer/biblical/"
-      >Verses in biblical order</a
-    >
+    <a class="large button" href="/verse-viewer/most-quoted/">Verses most quoted</a>
+    <a class="large button" href="/verse-viewer/peaks/">Verses chronologically</a>
+    <a class="large button" href="/verse-viewer/biblical/">Verses in biblical order</a>
     <!-- </div> -->
     <h3>Featured verses</h3>
     <div id="featured-verses" class="grid-container verse-index"></div>
@@ -101,23 +97,15 @@
 
   <section id="gallery">
     <h2>Quotations gallery</h2>
-    <div
-      class="grid-x grid-margin-x"
-      data-equalizer
-      data-equalize-on="medium"
-      id="homepage-gallery"
-    >
+    <div class="grid-x grid-margin-x" id="homepage-gallery">
       {{ range where (where .Site.RegularPages "Type" "gallery")
       ".Params.featured" false | first 24 }}
       <div class="cell medium-3 small-4">
-        <div class="callout" data-equalizer-watch>
+        <div class="callout">
           {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
           $img.Fill "410x210 TopLeft" }} {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">
-            <img
-              src="{{ $thumbnail.Permalink }}"
-              alt="Thumbnail of {{ .Title }}"
-            />
+            <img src="{{ $thumbnail.Permalink }}" alt="Thumbnail of {{ .Title }}" />
           </a>
         </div>
       </div>
@@ -131,8 +119,8 @@
   <hr />
 
   <section id="appendix">
-    <h2>Appendix</h2>
-    {{ with .Site.GetPage "/appendix" }} {{ .Content }} {{ end }}
+    <h3>Appendix: Data and code</h2>
+      {{ with .Site.GetPage "/appendix" }} {{ .Content }} {{ end }}
   </section>
 
   <hr />
@@ -151,14 +139,13 @@
       <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
     </p>
 
+    <hr />
+
     <h3>Project news and changelog</h3>
     <ul id="news" class="no-bullet">
       {{ range (where .Site.RegularPages "Type" "news").ByDate.Reverse }}
-      <li
-        ><time datetime='{{ .Date.Format "2006-01-02" }}'
-          >{{ .Date.Format "2 January 2006" }}</time
-        >. {{.Params.News | markdownify }}</li
-      >
+      <li><time datetime='{{ .Date.Format "2006-01-02" }}'>{{ .Date.Format "2 January 2006" }}</time>.
+        {{.Params.News | markdownify }}</li>
       {{ end }}
     </ul>
   </section>

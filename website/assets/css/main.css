@@ -43,7 +43,7 @@ p {
   -o-text-justify: newspaper; */
 }
 
-ul li {
+ul:not(.menu) li {
   list-style-type: square;
 }
 
@@ -63,6 +63,8 @@ table {
 /* Layout */
 html {
   overflow-y: scroll;
+  /* Account for sticky header when using relative links */
+  scroll-padding-top: 200px;
 }
 
 .grid-container {
@@ -76,6 +78,12 @@ header {
   /* border-bottom: 1px solid lightgray; */
 }
 
+/* Avoid ugly overlap with the nav bar bottom border */
+main {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 header.title-block {
   border-bottom: 1px solid lightgray;
 }
@@ -84,6 +92,16 @@ header.title-block {
   font-size: 3.5rem;
   font-weight: bold;
 }
+
+.title h1 a,
+.title h1 a:hover,
+.title h1 a:visited,
+.subtitle a,
+.subtitle a:hover,
+.subtitle a:visited {
+  color: black;
+}
+
 
 .subtitle {
   margin-top: -1.2rem;
@@ -106,15 +124,23 @@ nav.top-bar {
   box-shadow: 0 1px lightgray;
 }
 
-nav.is-at-top.is-stuck {
-}
-
 nav h1.nav-title {
   font-size: 1.25rem;
 }
 
 nav h1.nav-title a {
   color: black;
+}
+
+.menu {
+  background-color: white;
+  /* border: none; */
+}
+
+.is-dropdown-submenu-parent,
+.is-dropdown-submenu-item {
+  width: 15rem !important;
+  background-color: white;
 }
 
 article.abstract {
@@ -151,9 +177,10 @@ a.permalink {
   margin-bottom: 4rem;
 }
 
-#homepage-gallery .callout {
+#homepage-gallery .gallery-item {
   /* margin: 0.25rem; */
   padding: 0.25rem;
+  border: 1px solid lightgrey;
 }
 
 /* Table of contents */
@@ -245,6 +272,11 @@ figure figcaption:before {
   color: rgb(80, 80, 80);
   font-size: 0.8rem;
 }
+
+/* figure.two-up {
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
+} */
 
 /* Quotations trends viewer and indexes */
 .verse-index {

@@ -24,8 +24,9 @@
   {{ end }}
   {{ end }}
 
-  {{ $foundation := resources.Get "css/foundation.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $foundation.Permalink }}" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css"
+    integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
   {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -45,8 +46,8 @@
           <div class="top-bar-left">
             <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
           </div>
-          <div class="top-bar-right">
-            <a class="toc-link" href="/">Table of Contents</a>
+          <div class="top-bar-right" style="text-align: left!important;">
+            {{ partial "toc.html" }}
           </div>
         </nav>
       </div>
