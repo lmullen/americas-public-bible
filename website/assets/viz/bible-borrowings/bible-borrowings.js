@@ -15,7 +15,7 @@ export default class BibleBorrowings extends Visualization {
       left: 10,
     };
 
-    super(id, dim, margin, 'How Books of the Bible refer to one another');
+    super(id, dim, margin, 'How Books of the Bible borrow from one another');
 
     this.viz.attr('transform', `translate(${dim.width / 2},${dim.height / 2})`);
 
