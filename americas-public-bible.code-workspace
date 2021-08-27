@@ -12,7 +12,6 @@
       "prototype-website/**": true,
       "scriptures/**": true,
       "scriptures/raw": true
-    },
-    "prettier.singleQuote": true
+    }
   }
 }
