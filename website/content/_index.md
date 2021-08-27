@@ -1,5 +1,7 @@
 ---
 script: viz/index/main.js
+aliases:
+- '/essay/'
 ---
 
 <span style="text-transform: uppercase;">For most of its issues in 1902,</span> the *Ellensburg Dawn* featured a quotation from Benjamin Franklin prominently on its front page. "A Bible and a newspaper in every house," [the masthead proclaimed](https://chroniclingamerica.loc.gov/lccn/sn88085012/1902-01-18/ed-1/seq-1/), "are the principal support of virtue, morality, and civil liberty." Though the quotation from Franklin was doubtless spurious, the combination of newspapers and the Bible would have been familiar to readers.
