@@ -27,7 +27,7 @@
 <main id="home">
 
   <section>
-    <div class="grid-x grid-margin-x" id="homepage-gallery">
+    <div class="grid-x grid-margin-x homepage-gallery">
       {{ range where (where .Site.RegularPages "Type" "gallery")
       ".Params.featured" true | first 4 }}
       <div class="cell medium-3 small-4">
@@ -97,11 +97,11 @@
 
   <section id="gallery">
     <h2>Quotations gallery</h2>
-    <div class="grid-x grid-margin-x" id="homepage-gallery">
+    <div class="grid-x grid-margin-x homepage-gallery">
       {{ range where (where .Site.RegularPages "Type" "gallery")
       ".Params.featured" false | first 24 }}
       <div class="cell medium-3 small-4">
-        <div class="callout">
+        <div class="gallery-item">
           {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
           $img.Fill "410x210 TopLeft" }} {{ $anchor := urlize .Title }}
           <a href="/gallery/#{{ $anchor }}">

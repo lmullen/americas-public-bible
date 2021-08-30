@@ -177,8 +177,8 @@ a.permalink {
   margin-bottom: 4rem;
 }
 
-#homepage-gallery .gallery-item {
-  /* margin: 0.25rem; */
+.homepage-gallery .gallery-item {
+  margin: 0.25rem;
   padding: 0.25rem;
   border: 1px solid lightgrey;
 }
