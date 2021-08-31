@@ -3,7 +3,7 @@
   {{ $id := urlize $ref }}
   <div id="{{ $id }}" data-ref="{{ $ref }}"></div>
   <figcaption>
-    <p>{{ .Get "caption" | markdownify }}. See the verse viewer for <a href="/verse-viewer/?ref={{ $ref }}">
+    <p>{{ .Get "caption" | markdownify }} See the verse viewer for <a href="/verse-viewer/?ref={{ $ref }}">
         {{ $ref }}</a> for more details.</p>
   </figcaption>
 </figure>
