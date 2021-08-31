@@ -4,7 +4,5 @@ import SimpleVerseTrend from './simple-trend';
 // const ref = p.get('ref');
 
 const ref = document.querySelector('#trend-preview').dataset.reference;
-console.log(ref);
-
 const trend = new SimpleVerseTrend('#trend-preview', ref);
 trend.render();

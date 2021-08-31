@@ -6,7 +6,6 @@ const topPromise = d3.json(`${config.API_BASE}/apb/index/biblical`);
 
 topPromise
   .then((data) => {
-    console.log(data);
     data.forEach((d) => {
       const item = new IndexItem(
         '#biblical-order',
