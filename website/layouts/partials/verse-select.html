@@ -1,0 +1,48 @@
+<form id="verse-select">
+	<div class="grid-container">
+		<div class="grid-x grid-padding-x">
+			<div class="medium-2 cell">
+				<label for="ref" class="text-right middle">Search for a verse:</label>
+			</div>
+			<div class="medium-6 cell">
+				<select id="ref" name="ref"></select>
+			</div>
+			<div class="medium-3 cell">
+				<button type="submit" class="button">See verse trend</button>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	const initSelector = function (data) {
+		$("#ref").selectize({
+			items: [],
+			options: data,
+			create: false,
+			maxItems: 1,
+			maxOptions: 3000,
+			valueField: 'reference',
+			labelField: 'reference',
+			searchField: 'reference',
+			placeholder: 'Type the reference of a verse',
+		});
+		$("#verse-select").submit(submitSelector);
+	}
+
+	const submitSelector = function (event) {
+		event.preventDefault();
+		var reference = $("#ref").val();
+		window.location.href = '/verse-viewer/?ref=' + encodeURIComponent(reference)
+	}
+
+	const allVersesURL = 'http://localhost:8090/apb/index/all';
+	fetch(allVersesURL)
+		.then(resp => resp.json())
+		.then(data => {
+			$(document).ready(function () {
+				initSelector(data)
+			});
+		}
+		)
+		.catch(error => console.log(error))
+</script>

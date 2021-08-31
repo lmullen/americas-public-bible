@@ -1,3 +1,0 @@
-The heart of this site is a set of interactive visualizations which let you see the trend in the rate of quotations for any given verse in <em>Chronicling America</em> and <em>Nineteenth-century Newspapers</em>, then see examples of those quotations on the newspaper page.
-
-Below are the trends for featured verses, some of which are also the subject of the [verse histories](#verse-histories). You can also browse the verses in three other ways: (1) the most quoted verses in descending order of frequency; (2) verses that had a peak of quotation in a given year, arranged chronologically; and (3) frequently quoted verses in their order in the Christian Bible.
