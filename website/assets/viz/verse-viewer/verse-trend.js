@@ -5,7 +5,7 @@ import { commaFormat, decimal1Format } from '../common/display';
 import config from '../config';
 
 export default class VerseTrend extends Visualization {
-  constructor(id, ref, title) {
+  constructor(id, ref, title, dispGale) {
     const dim = {
       width: 1000,
       height: 500,
@@ -22,6 +22,7 @@ export default class VerseTrend extends Visualization {
     const v = encodeURIComponent(ref);
     this.chronamURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=chronam`;
     this.ncnpURL = `${config.API_BASE}/apb/verse-trend?ref=${v}&corpus=ncnp`;
+    this.dispGale = (typeof dispGale === 'undefined') ? true : dispGale;
   }
 
   async fetch() {
@@ -134,20 +135,22 @@ export default class VerseTrend extends Visualization {
       .attr('y', 0)
       .text('Chronicling America');
 
-    xOffset += 225;
-    legend
-      .append('line')
-      .attr('x1', xOffset + 0)
-      .attr('y1', 0)
-      .attr('x2', xOffset + 40)
-      .attr('y2', 0)
-      .classed('trend', true)
-      .classed('ncnp', true);
-    legend
-      .append('text')
-      .attr('x', xOffset + 45)
-      .attr('y', 0)
-      .text('19c Newspapers');
+    if (this.dispGale) {
+      xOffset += 225;
+      legend
+        .append('line')
+        .attr('x1', xOffset + 0)
+        .attr('y1', 0)
+        .attr('x2', xOffset + 40)
+        .attr('y2', 0)
+        .classed('trend', true)
+        .classed('ncnp', true);
+      legend
+        .append('text')
+        .attr('x', xOffset + 45)
+        .attr('y', 0)
+        .text('19c Newspapers');
+    }
 
     xOffset += 220;
     legend
@@ -227,12 +230,14 @@ export default class VerseTrend extends Visualization {
       .x((d) => this.xScale(d.year))
       .y((d) => this.yScale(d.smoothed * config.MILLIONS));
 
-    this.viz
-      .append('path')
-      .datum(ncnp)
-      .classed('trend', true)
-      .classed('ncnp', true)
-      .attr('d', line);
+    if (this.dispGale) {
+      this.viz
+        .append('path')
+        .datum(ncnp)
+        .classed('trend', true)
+        .classed('ncnp', true)
+        .attr('d', line);
+    }
 
     this.viz
       .append('path')
