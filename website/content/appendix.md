@@ -2,8 +2,9 @@
 
 Data that was generated for this project is available for your use.
 
-- [public-bible-quotations.csv.gz](https://americaspublicbible.org/public-bible-quotations.csv.gz) (46 MB gzipped): all of the quotations found in this project with associated metadata.
-- [matches-for-model-training.csv](https://goo.gl/65yo6v) (840 KB): the labeled data used for training the model.
+- [apb-quotations.csv.gz](/data/apb-quotations.csv.gz) (17 MB gzipped): the quotations found for this version of the website.
+- [apb-quotations-prototype.csv.gz](/data/apb-quotations-prototype.csv.gz) (62 MB gzipped): the quotations found for the earlier prototype version of the website.
+- [apb-matches-for-model-training.csv.gz](/data/apb-matches-for-model-training.csv.gz) (248 KB gzipped): the labeled data used for training the model.
 
 #### Code
 
