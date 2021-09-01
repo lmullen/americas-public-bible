@@ -35,7 +35,7 @@
 		window.location.href = '/verse-viewer/?ref=' + encodeURIComponent(reference)
 	}
 
-	const allVersesURL = 'http://localhost:8090/apb/index/all';
+	const allVersesURL = 'https://data.chnm.org/apb/index/all';
 	fetch(allVersesURL)
 		.then(resp => resp.json())
 		.then(data => {
