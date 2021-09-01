@@ -4,7 +4,7 @@ description: 'An oft disputed text on family life and ninteenth-century feminism
 reference: 'Ephesians 5:22'
 snippet: 'Wives, submit yourselves unto your own husbands'
 order: 3
-draft: true
+draft: false
 author: Lincoln Mullen
 ---
 
