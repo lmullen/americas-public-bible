@@ -46,7 +46,7 @@ As a digital monograph, the site constitutes a particular configuration of sourc
 
 The sources for this project are two large collections of newspaper texts from the nineteenth and early twentieth century. The first, [*Chronicling America: Historic American Newspapers*](https://chroniclingamerica.loc.gov), is a collection of newspapers funded by the National Endowment for the Humanities and hosted by the Library of Congress.[^25] The second, *19th Century U.S. Newspapers* (hereafter NCNP), is a commercially available collection from Gale.[^26] *Chronicling America* offers the text of about 15 million newspaper pages, while NCNP offers the text of 1.9 million pages divided into 19.6 million items, including articles, editorials, advertisements and other types of newspaper content.[^27]
 
-This project uses a set of methods from computational history to find and then analyze a set of biblical quotations in those sources. A computer program has scanned these texts in order to find quotations from several of the most commonly used versions of the English Bible: chiefly the King James Version, but also the Revised Version (1885) and American Standard Version (1901) used by Protestants, the Douay-Rheims version used by Catholics, and the Jewish Publication Society (1917) version. The program measures certain things about those matching phrases: how many of them are there? Are they phrases which are distinct to the Bible (such as, "through a glass darkly") or are they common phrases in English? Is an entire verse present on a page, or only certain phrases? A machine-learning model then sorts through all the potential matches to find the ones that are likely to be genuine. The program has turned up millions of quotations, which are presented and analyzed in this digital monograph.[^28]
+This project uses a set of methods from computational history to find and then analyze a set of biblical quotations in those sources. A computer program has scanned these texts in order to find quotations from several of the most commonly used versions of the English Bible: chiefly the King James Version, but also the Revised Version (1885) and American Standard Version (1901) used by Protestants, the Douay-Rheims version used by Catholics, and the Jewish Publication Society (1917) version. The program measures certain things about those matching phrases: how many of them are there? Are they phrases which are distinct to the Bible (such as, "through a glass darkly") or are they common phrases in English? Is an entire verse present on a page, or only certain phrases? A machine-learning model then sorts through all the potential matches to find the ones that are likely to be genuine. The program has turned up millions of quotations, which are presented and analyzed in this digital monograph.
 
 While the computational techniques that identify the quotations obviously constitute a method, the approach to reading the quotations is no less a methodology. Too much of digital historical research describes quantitative or technical approaches but neglects to surface the methodologies of more conventional historical research.[^29] The computational methods surface a set of quotations which no reader could identify without their aid. This process is akin to the far more common historical approach of keyword searching---a method which is obviously computational and quantitative but which historians have not regarded as such.[^30] But the search process for this project is more disciplined, in the sense that computational methods turn up quotations not one by one but in the context of the newspapers and of the trends in quotations. Yet it is also serendipitous, in that the algorithm turns up many surprising quotations, which a researcher would likely have never thought of their own. To use Lauren Klein's memorable phrase, the computational methods are a form of "stirring the archive."[^31] This disciplined serendipity nevertheless requires careful reading of the context of the quotations like a more traditional cultural or religious historian would do.[^32] It is on such readings that most of the content of this site rests.
 
@@ -56,7 +56,7 @@ The form of this project likewise stands outside the norm. To readers accustomed
 
 But again, as with the methodology, the differences in form brought about by the digital nature of this project are only superficial. The more significant change to form is that this project is a commentary rather than a monograph. It is a commentary in the sense, to be elaborated further below, that it is structured around the biblical text itself. While not a commentary on the biblical text, it is a commentary on how the biblical text was used. That is not to say that this work is not argumentative or interpretative. A biblical commentary that claims only to be undertaking the exegesis of a text is of course taking one contested position on the text. But the text is structured explicitly as a paratext, rather than as a narrative or argument. In choosing this form, I have been motivated by the obvious harmony with other approaches to studying the Bible in America.[^34] But it has also been an attempt at finding a middle ground that respects the way that this research is rooted in a mass of sources for which a single explanation is probably not possible, but for which many explanations at a different level of analysis can be offered. It is thus an attempt to combine the exploratory and the argumentative, and thus combine computational digital history and more conventional historical approaches.
 
-Scholars have brought an enormous range of creativity to the study of the Bible, including ethnographic studies;[^35] counting texts that were used and the context in which they were used;[^36] studying marginalia;[^37] identifying allusions and writing commentaries on historical texts;[^38] surveys of readership;[^39] studies of the process of scripturalization of texts;[^40] studies of the material form of the text;[^41] intellectual histories of the Bible and its use;[^42] analysis of the major institutions that promoted the Bible, especially the American Bible Society;[^43] histories of the translation and interpretation of the Bible;[^44] explorations of the political contexts of the way that the Bible is used;[^45] and studies of readership of the Bible and its place in print culture.[^46] Recent edited collections have traced the Bible's significance through a huge array of time periods, religious traditions, and areas of human endeavor from art to politics.[^47] Among historical studies, Mark Noll has done the work of synthesizing the history of the Bible into a coherent narrative.[^48] Other scholars have traced the significance of the Bible down to the presence, finding its influence has shifted but that it still remains prominent.[^49]
+Scholars have brought an enormous range of creativity to the study of the Bible, including ethnographic studies;[^35] counting texts that were used and the context in which they were used;[^36] studying marginalia; identifying allusions and writing commentaries on historical texts;[^38] surveys of readership;[^39] studies of the process of scripturalization of texts;[^40] studies of the material form of the text;[^41] intellectual histories of the Bible and its use;[^42] analysis of the major institutions that promoted the Bible, especially the American Bible Society;[^43] histories of the translation and interpretation of the Bible;[^44] explorations of the political contexts of the way that the Bible is used;[^45] and studies of readership of the Bible and its place in print culture.[^46] Recent edited collections have traced the Bible's significance through a huge array of time periods, religious traditions, and areas of human endeavor from art to politics.[^47] Among historical studies, Mark Noll has done the work of synthesizing the history of the Bible into a coherent narrative.[^48] Other scholars have traced the significance of the Bible down to the presence, finding its influence has shifted but that it still remains prominent.[^49]
 
 This project takes its place among that already large literature. In its unusual configuration of sources and methods, form and interpretation, it offers an approach to studying the history of the Bible that combines a broad overview with attention to small details, thus allowing us to see the shape of the abstraction that is America's public Bible.
 
@@ -120,7 +120,7 @@ Besides such content that newspaper editors and readers would have obviously cla
 
 {{% fig-2up left="jcpenney.png" right="give-than-receive.png" caption="The Bible was used to encourage newspaper readers to visit department stores and to scan newspaper advertisements closely in preparation for Christmas gift giving. **Left:** _Devils Lake World_ (Devils Lake, N.D.), [21 Dec. 1921](https://chroniclingamerica.loc.gov/lccn/sn88076526/1921-12-21/ed-1/seq-5/), p. 5. **Right:** _Evening Times_ (Grand Forks, N.D.) [7 Dec. 1912](https://chroniclingamerica.loc.gov/lccn/sn85042373/1912-12-07/ed-1/seq-1/), p. 1." %}}
 
-The Bible appeared in the newspaper, then, for a variety of reasons. The trends in the rate of quotation were driven in some instances by connections to newsworthy events or the recirculation of texts, and in other instances by changes to the types of content that newspapers published. This site does try to identify specific instances of quotations which were popular for a moment, and more broadly to group verses together with similar trend lines to see which verses were used at the same time. But for the most part, the visualizations present those trends without attempting to sort out the multitude of factors that influenced them, which is probably not possible and likely not even desirable.[^67]
+The Bible appeared in the newspaper, then, for a variety of reasons. The trends in the rate of quotation were driven in some instances by connections to newsworthy events or the recirculation of texts, and in other instances by changes to the types of content that newspapers published. This site does try to identify specific instances of quotations which were popular for a moment, and more broadly to group verses together with similar trend lines to see which verses were used at the same time. But for the most part, the visualizations present those trends without attempting to sort out the multitude of factors that influenced them, which is probably not possible and likely not even desirable.
 
 These trends are therefore in need of further interpretation, to tease out the differences between the secular, the sacred and the vast difference in between; to identify trends driven by events and those driven by much deeper changes, particularly in the mindset and worldview of the people who quoted the Bible and the even larger array of people who read the articles containing those quotations. The trends can be combined with a more traditional reading of the articles and advertisements that contained the quotations, to find out not just what texts were used and when, but in what type of articles and for what purposes, and how the use of the Bible changed over time. What it needs is not just the evidence of America's public Bible, but a commentary on it.
 
@@ -158,152 +158,148 @@ The multiple and mutually exclusive ways in which newspapers used the Bible put 
 
 The significance of the Bible in public discourse, then, was less what it said---or was made to say---but in the fact that people said what they had to say in the language of the Bible. By looking at uses of the Bible in newspapers, we can see which parts of the Bible were in common currency among Americans, as well as the range of interpretations that were given to those verses. Verses that could be cited without a reference, or used in jokes and proverbs, indicated a kind of literacy or familiarity, and possibly a shared assumption about what those verses could be interpreted to mean. Verses that were used constantly were a shared cultural touchstone, while verses that were used only episodically reveal the tensions in a particular political or social situation. By looking at how the verses were actually used, we can see how the Bible was a contested yet common text. Like the markings that they made in their Bibles, the verses that they quoted tell us nothing about the Bible, but a lot about nineteenth-century Americans.
 
-[^1]: *Wheeling Sunday Register* (Wheeling, WV), 13 Dec. 1891, 9: <https://chroniclingamerica.loc.gov/lccn/sn86092523/1891-12-13/ed-1/seq-9/>. The poem was later published as "Mother's Version" in Robert Jones Burdette, *The Silver Trumpets* (Philadelphia: Sunday School Times Company, 1912), 35.
+[^1]: *Wheeling Sunday Register* (Wheeling, WV), [13 Dec. 1891](https://chroniclingamerica.loc.gov/lccn/sn86092523/1891-12-13/ed-1/seq-9/), p. 9. The poem was later published as "Mother's Version" in Robert Jones Burdette, *The Silver Trumpets* (Philadelphia: Sunday School Times Company, 1912), 35.
 
-[^2]: *News-Herald* (Hillsboro, OH), 18 Jan. 1894, 4: <https://chroniclingamerica.loc.gov/lccn/sn85038161/1894-01-18/ed-1/seq-4/>; *Columbus Journal* (Columbus, NE), 28 May 1902, 2: <https://chroniclingamerica.loc.gov/lccn/sn95073194/1902-05-28/ed-1/seq-2/>.
+[^2]: *News-Herald* (Hillsboro, OH), [18 Jan. 1894](https://chroniclingamerica.loc.gov/lccn/sn85038161/1894-01-18/ed-1/seq-4/), p. 4:; *Columbus Journal* (Columbus, NE), [28 May 1902](https://chroniclingamerica.loc.gov/lccn/sn95073194/1902-05-28/ed-1/seq-2/), p. 2.
 
-[^3]: "Pushes Bible Marking," *Los Angeles Herald*, 7 Sept. 1907, 7: <https://chroniclingamerica.loc.gov/lccn/sn85042462/1907-09-07/ed-1/seq-7/>.
+[^3]: "Pushes Bible Marking," *Los Angeles Herald*, [7 Sept. 1907](https://chroniclingamerica.loc.gov/lccn/sn85042462/1907-09-07/ed-1/seq-7/), p. 7.
 
-[^4]: "Willie Sells," *Chanute Times* (Chanute, KS), 22 Jan. 1897, 4: <https://chroniclingamerica.loc.gov/lccn/sn85030529/1897-01-22/ed-1/seq-4/>.
+[^4]: "Willie Sells," *Chanute Times* (Chanute, KS), [22 Jan. 1897](https://chroniclingamerica.loc.gov/lccn/sn85030529/1897-01-22/ed-1/seq-4/), p. 4.
 
-[^5]: "Pencil Marks in Bibles Help Criminologist in Mysteries," *Evening Star* (Washington, DC), 21 Feb. 1927, 12: <https://chroniclingamerica.loc.gov/lccn/sn83045462/1927-02-21/ed-1/seq-12/>.
+[^5]: "Pencil Marks in Bibles Help Criminologist in Mysteries," *Evening Star* (Washington, DC), [21 Feb. 1927](https://chroniclingamerica.loc.gov/lccn/sn85030529/1897-01-22/ed-1/seq-4/), p. 12.
 
-[^6]: TODO Cite Candy Gunther Brown.
+[^6]: Candy Gunther Brown, _The Word in the World: Evangelical Writing, Publishing, and Reading in America, 1789--1880_ (University of North Carolina Press, 2004).
 
-[^7]: My colleague Mack Holt is doing precisely this with a study of marginal annotations in early modern French Bibles. TODO
+[^7]: My colleague Mack Holt is doing precisely this with a study of marginal annotations in early modern French Bibles.
 
-[^8]: Goff et al have studied, for example, how congregations use the Bible. TOOD Bible in American Life.
+[^8]: Goff et al. have studied, for example, how congregations use the Bible. Philip Goff, Arthur E Farnsley II, and Peter J. Thuesen, eds., _The Bible in American Life_ (Oxford University Press, 2017).
 
-[^9]: TODO Cite Luhrman; cite IUPUI book of surveys.
+[^9]: T. M. Luhrmann, _When God Talks Back: Understanding the American Evangelical Relationship with God_ (Knopf, 2012).
 
-[^10]: Noll, In the Beginning was the Word.
+[^10]: Mark A. Noll, _In the Beginning Was the Word: The Bible in American Public Life, 1492--1783_ (Oxford University Press, 2016).
 
-[^11]: Steve Green, Bible in schools, TODO.
+[^11]: Steven K. Green, The Bible, the School, and the Constitution: The Clash That Shaped the Modern Church-State Doctrine (Oxford University Press, 2012).
 
-[^12]: The Museum of the Bible's "Washington Revelations" takes exactly this approach, providing visitors with a video that allows them to "fly past iconic places like the Lincoln Memorial, through the U.S. Capitol and over the Washington Monument as you discover biblical imagery and verses all around Washington, D.C." https://www.museumofthebible.org/visit/current-attractions/washington-revelations (accessed February 25, 2019). On the Museum of the Bible more generally, see TODO JAH review.
+[^12]: The Museum of the Bible's "[Washington Revelations](https://www.museumofthebible.org/visit/current-attractions/washington-revelations)" takes exactly this approach, providing visitors with a video that allows them to "fly past iconic places like the Lincoln Memorial, through the U.S. Capitol and over the Washington Monument as you discover biblical imagery and verses all around Washington, D.C." (accessed February 25, 2019). On the Museum of the Bible more generally, see Kelly Gannon and Kimberly Wagner, "Museum of the Bible, Washington, D.C.," _Journal of American History_ 105, no. 3 (2018): 618--25, <https://doi.org/10.1093/jahist/jay283>.
 
-[^13]: TODO books on Second Inaugural. On the jeremiad tradition, see TODO.
+[^13]: Andrew R. Murphy, _Prodigal Nation: Moral Decline and Divine Punishment from New England to 9/11_ (Oxford University Press, 2009).
 
-[^14]: Benedict Anderson. TODO.
+[^14]: Benedict Anderson, Imagined Communities: Reflections on the Origin and Spread of Nationalism, Rev. ed (Verso, 2006).
 
-[^15]: Susan Schulten, Mapping the Nation, TODO.
+[^15]: Susan Schulten, Mapping the Nation: History and Cartography in Nineteenth-Century America (The University of Chicago Press, 2012).
 
-[^16]: TOOD Noll on Bible and Christianity; cite raft of books on Christian nationalism.
+[^16]: Nathan O. Hatch and Mark A. Noll, eds., _The Bible in America: Essays in Cultural History_ (Oxford University Press, 1982); Mark A. Noll, “Presidential Death and the Bible: 1799, 1865, 1881” (American Society of Church History, Atlanta, 2016).
 
-[^17]: Perry, Bible Culture and Authority in the Early United States, xv.
+[^17]: Seth Perry, _Bible Culture and Authority in the Early United States_ (Princeton University Press, 2018), xv.
 
-[^18]: Paul Gutjahr, American Bible, TODO.
+[^18]: Paul C. Gutjahr, _An American Bible: A History of the Good Book in the United States, 1777--1880_ (Stanford University Press, 1999).
 
-[^19]: TODO Sarna on Jewish Bibles
+[^19]: Jonathan D. Sarna, “The Bible and Judaism in America,” in _The Oxford Handbook of the Bible in America_, ed. Paul C. Gutjahr (Oxford University Press, 2017), 505–16; Jonathan D. Sarna and Nahum M. Sarna, “Jewish Bible Scholarship and Translations in the United States,” in _The Bible and Bibles in America_, ed. Ernest S. Frerichs (Atlanta: Scholars Press, 1988), 83–116.
 
-[^20]: Thuesen, In Discordance with the Scriptures, TODO.
+[^20]: Peter J. Thuesen, In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible (Oxford University Press, 1999).
 
-[^21]: TODO Gutjahr, An American Bible.
+[^21]: Gutjahr, _An American Bible_.
 
-[^22]: Christian Smith, The Bible Made Impossible.
+[^22]: Christian Smith, _The Bible Made Impossible: Why Biblicism Is Not a Truly Evangelical Reading of Scripture_ (Brazos, 2011).
 
-[^23]: TODO Noll, Civil War as a Theological Crisis.
+[^23]: Mark A. Noll, _The Civil War as a Theological Crisis_ (University of North Carolina Press, 2006).
 
-[^24]: TODO compare Dabney and Maria Stewart.
+[^24]: Valerie C. Cooper, Word, Like Fire: Maria Stewart, the Bible, and the Rights of African Americans (University of Virginia Press, 2011).
 
-[^25]: TODO Cite Chronicling America
+[^25]: _Chronicling America: Historic American Newspapers_, Library of Congress, <https://chroniclingamerica.loc.gov>.
 
-[^26]: TODO Cite Gale.
+[^26]: Nineteenth Century U.S. Newspapers, Gale, <https://www.gale.com/c/nineteenth-century-us-newspapers>.
 
-[^27]: There is some overlap between the two collections, which, as described below, is useful for validating the method. Chronicling America continues to add to its collection; the figures given are correct as of the date when I did the analysis. In practice, pages with poor OCR are thrown away.
+[^27]: There is some overlap between the two collections, which, as described below, is useful for validating the method. _Chronicling America_ continues to add to its collection; the figures given are correct as of the date when I did the analysis. In practice, pages with poor OCR are thrown away.
 
-[^28]: TODO: Update the number of quotations.
+[^29]: Stephen Robertson has pointed out that digital history often requires us to more formally conceptualize the methods of traditional history. Stephen Robertson, "The Differences between Digital Humanities and Digital History," _Debates in the Digital Humanities 2016_, edited by Matt Gold and Lauren Klein (University of Minnesota Press, 2016), 289--307.
 
-[^29]: Stephen Robertson has pointed out that digital history often requires us to more formally conceptualize the methods of traditional history.
+[^30]: Lara Putnam, "The Transnational and the Text-Searchable: Digitized Sources and the Shadows They Cast," _American Historical Review_ 121, no. 2 (2016): 377--402, <https://doi.org/10.1093/ahr/121.2.377>; Julia Laite, "The Emmet's Inch: Small History in a Digital Age," _Journal of Social History_ 53, no. 4 (2020): 963--89, <https://doi.org/10.1093/jsh/shy118>.
 
-[^30]: TODO: Lara Putnam; article in JSH about biographies.
+[^31]: Lauren F. Klein, "[The Carework and Codework of the Digital Humanities](http://lklein.com/archives/the-carework-and-codework-of-the-digital-humanities/)," Digital Antiquarian conference (May 2015).
 
-[^31]: TODO Cite Klein.
+[^32]: The idea of disciplined serendipity is more fully explained in Lincoln Mullen, "The Making of America's Public Bible: Computational Text Analysis for Religious History," in *Introduction to Digital Humanities: Research Methods for the Study of Religion*, edited by Christopher D. Cantwell and Kristian Petersen (DeGruyter, 2021), 31--52: <https://doi.org/10.1515/9783110573022-003>.
 
-[^32]: The idea of disciplined serendipity is more fully explained in Lincoln Mullen, "The Making of America's Public Bible: Computational Text Analysis for Religious History," in *Introduction to Digital Humanities: Research Methods for the Study of Religion*, edited by Christopher D. Cantwell and Kristian Petersen (DeGruyter, forthcoming).
 
-[^33]: Some have already done so. TODO Cite Jimmy Byrd; Seth Perry.
+[^33]: Two books which have made use of this project are James P. Byrd, _A Holy Baptism of Fire and Blood: The Bible and the American Civil War_ (Oxford University Press, 2020) and Seth Perry, _Bible Culture and Authority in the Early United States_ (Princeton University Press, 2018).
 
-[^34]: TODO Cite Valerie Cooper.
+[^34]: Valerie C. Cooper, _Word, Like Fire: Maria Stewart, the Bible, and the Rights of African Americans_ (University of Virginia Press, 2011).
 
-[^35]: James Bielo, TODO
+[^35]: James S. Bielo, _Words upon the Word: An Ethnography of Evangelical Group Bible Study_ (New York University Press, 2009).
 
-[^36]: James Byrd, TODO
+[^36]: James P. Byrd, _Sacred Scripture, Sacred War: The Bible and the American Revolution_ (New York: Oxford University Press, 2013).
 
-[^37]: Mack Holt, TODO; ? and Seth Perry?
 
-[^38]: Valerie Cooper TODO
+[^38]: Valerie C. Cooper, _Word, Like Fire: Maria Stewart, the Bible, and the Rights of African Americans_ (University of Virginia Press, 2011).
 
-[^39]: Introductory essay in Goff et al.
+[^39]: Introductory essay in Philip Goff, Arthur E Farnsley II, and Peter J. Thuesen, eds., _The Bible in American Life_ (Oxford University Press, 2017).
 
-[^40]: Wimbush?? TODO; Wilfred Cantwell Smith, What Is Scripture, TODO.
+[^40]: Vincent L. Wimbush, _Theorizing Scriptures: New Critical Orientations to a Cultural Phenomenon_ (Rutgers University Press, 2008); Vincent L. Wimbush and Rosamond C. Rodman, eds., _African Americans and the Bible: Sacred Texts and Social Textures_ (Continuum, 2000); Wilfred Cantwell Smith, _What Is Scripture? A Comparative Approach_ (Fortress Press, 1993).
 
-[^41]: Gutjahr, American Bible
+[^41]: Paul C. Gutjahr, _An American Bible: A History of the Good Book in the United States, 1777--1880_ (Stanford University Press, 1999).
 
-[^42]: Noll, In the Beginning was the Word
+[^42]: Mark A. Noll, _In the Beginning Was the Word: The Bible in American Public Life, 1492--1783_ (Oxford University Press, 2016).
 
-[^43]: Fea, TODO; Wosh, Spreading the Word, TODO; Nord essay on finance in God and Mammon
+[^43]: John Fea, _The Bible Cause: A History of the American Bible Society_ (Oxford University Press, 2016); Peter J. Wosh, _Spreading the Word: The Bible Business in Nineteenth-Century America_ (Cornell University Press, 1994); David Paul Nord, "Benevolent Capital: Financing Evangelical Book Publishing in Early Nineteenth-Century America" in Mark A. Noll, ed., _God and Mammon: Protestants, Money, and the Market, 1790--1860_ (Oxford University Press, 2002).
 
-[^44]: Thuessen, In Discordance with the Scriptures
+[^44]: Peter J. Thuesen, _In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible_ (Oxford University Press, 1999).
 
-[^45]: Jemison, Bible in Black and White.
+[^45]: Elizabeth L. Jemison, Christian Citizens: Reading the Bible in Black and White in the Postemancipation South (Chapel Hill: The University of North Carolina Press, 2020).
 
-[^46]: Candy Gunther Brown, The Word in the World; Nord, Faith in Reading.
+[^46]:  David Paul Nord, _Faith in Reading: Religious Publishing and the Birth of Mass Media in America_ (Oxford University Press, 2004).
 
-[^47]: Gutjahr, ed., Oxford Handbook of the Bible in America;
+[^47]: Paul Gutjahr, ed., _The Oxford Handbook of the Bible in America_ (New York: Oxford University Press, 2017).
 
-[^48]: Noll, In the Beginning Was the Word.
+[^48]: Mark A. Noll, _The Civil War as a Theological Crisis_ (University of North Carolina Press, 2006).
 
-[^49]: Goff, Farnsley, Thussen, Bible in American Life.
+[^49]: Philip Goff, Arthur E Farnsley II, and Peter J. Thuesen, eds., _The Bible in American Life_ (Oxford University Press, 2017).
 
-[^50]: Ellensburg Dawn (Ellensburg, Wash.), 18 Jan. 1902. Also quoted in the Liberty Advocate (Liberty, Miss.), 18 Oct. 1845.
+[^50]: _Ellensburg Dawn_ (Ellensburg, Wash.), 18 Jan. 1902. Also quoted in the _Liberty Advocate_ (Liberty, Miss.), 18 Oct. 1845.
 
-[^51]: Background on newspapers. TODO.
+[^51]: David Paul Nord, _Communities of Journalism: A History of American Newspapers and Their Readers_ (University of Illinois Press, 2001);
 
-[^52]: This is not subject to the problem that Lara Putnam points out that you can find a few examples of anything in a large corpus TODO QUOTATION, because the point of this project is to count those references rather than simply find them. Putnam, "The Transnational and the Text Searchable," TODO.
+[^52]: This is not subject to the problem that Lara Putnam points out that you can find a few examples of anything in a large corpus, because the point of this project is to count those references rather than simply find them. Putnam, "The Transnational and the Text Searchable." 
 
-[^53]: See the Viral Texts project on reprinting of newspapers. TODO
+[^53]: Ryan Cordell, David Smith, et al., _Viral Texts: Mapping Networks of Reprinting in 19th-Century Newspapers and Magazines_ (2017), <http://viraltexts.org>.
 
-[^54]: Perrysburg Journal (Perrysburg, Ohio), 18 Sept. 1919; Amador Ledger (Jackson, Amador County, Calif.), 19 Feb. 1909.
+[^54]: _Perrysburg Journal_ (Perrysburg, Ohio), 18 Sept. 1919; _Amador Ledger_ (Jackson, Calif.), 19 Feb. 1909.
 
-[^55]: St. Louis Republic. (St. Louis, Mo.), 1 June 1902; Los Angeles Herald (Los Angeles, Calif.), 14 Feb. 1909.
+[^55]: _St. Louis Republic_ (St. Louis, Mo.), 1 June 1902; _Los Angeles Herald_ (Los Angeles, Calif.), 14 Feb. 1909.
 
-[^56]: Evening Standard (Ogden City, Utah), 21 March 1913; Memphis Daily Appeal (Memphis, Tenn.), 25 Dec. 1871.
+[^56]: _Evening Standard_ (Ogden City, Utah), 21 March 1913; _Memphis Daily Appeal_ (Memphis, Tenn.), 25 Dec. 1871.
 
-[^57]: The Sun (New York, N.Y.), 10 Aug. 1919; Bismarck Tribune (Bismarck, Dakota Territory), 20 May 1881.
+[^57]: _The Sun_ (New York, N.Y.), 10 Aug. 1919; _Bismarck Tribune_ (Bismarck, Dakota Territory), 20 May 1881.
 
-[^58]: The Minneapolis journal., October 24, 1903, Page 10.
+[^58]: _Minneapolis Journal_ (Minneapolis, MN), 24 October 1903, p. 10.
 
-[^59]: On changes in printing Bibles, see Gutjahr, American Bible; Fea, Bible Cause.
+[^59]: On changes in printing Bibles, see Gutjahr, _American Bible_; Fea, _Bible Cause_.
 
-[^60]: *The California Outlook*, Los Angeles, 29 June 1912, p. 6, <https://books.google.com/books?id=Qgs9AQAAIAAJ&lpg=PP14>.
+[^60]: *The California Outlook* (Los Angeles, CA), 29 June 1912, p. 6, <https://books.google.com/books?id=Qgs9AQAAIAAJ&lpg=PP14>.
 
-[^61]: The Viral Texts project, for instance, has shown the significance of "information literature" Cordell, "Reprinting, Circulation, and the Network Author in Antebellum Newspapers," {TODO}. {TODO: Cite Viral Texts}.
+[^61]: The Viral Texts project, for instance, has shown the significance of "information literature." Ryan Cordell, "Reprinting, Circulation, and the Network Author in Antebellum Newspapers," _American Literary History_ 27, no. 3 (2015): 417--45, <https://doi.org/10.1093/alh/ajv028>; David A. Smith, Ryan Cordell, and Abby Mullen, "Computational Methods for Uncovering Reprinted Texts in Antebellum Newspapers," _American Literary History_ 27, no. 3 (2015): E1–15, <https://doi.org/10.1093/alh/ajv029>.
 
-[^62]: On Sunday Schools, see Anne Boylan {TODO}.
+[^62]: On Sunday Schools, see Anne M. Boylan, _Sunday School: The Formation of an American Institution, 1790--1880_ (Yale University Press, 2000).
 
-[^63]: Amador ledger., February 19, 1909, p. 3.
+[^63]: _Amador Ledger_, 19 February 1909, p. 3.
 
-[^64]: Thuesen, In Discordance with the Scriptures, {TODO}.
+[^64]: Thuesen, _In Discordance with the Scriptures_.
 
-[^65]: On Christmas, see Schmidt, Consumer Rites, {TODO}.
+[^65]: On Christmas, see Leigh Eric Schmidt, _Consumer Rites: The Buying & Selling of American Holidays_ (Princeton University Press, 1997).
 
-[^66]: On the connections between religion and the rise of retail, see Kirk, Wannamaker's Temple, {TODO}.
+[^66]: On the connections between religion and the rise of retail, see Nicole C. Kirk, _Wanamaker’s Temple: The Business of Religion in an Iconic Department Store_ (New York: New York University Press, 2018); Daniel Vaca, _Evangelicals Incorporated: Books and the Business of Religion in America_ (Harvard University Press, 2019).
 
-[^67]: In this I am following Cameron Blevin's example in describing carefully what mentions of place names mean in a way that does not require an extreme amount of labor to parse out minor differences.
-
-[^68]: Cooper, Word, Like Fire, ch. 1.
+[^68]: Cooper, _Word, Like Fire_, ch. 1.
 
 [^69]: Gutjahr, "Introduction," xx--xxi.
 
 [^70]: Gutjahr, "Introduction," xx--xxx.
 
-[^71]: Of course other scholars have studied the reception history of the Bible, though scholars of contemporary research have methods available to them, such as surveys and ethnographies, that historians do not. Bielo, Words upon the Word; Luhrmann, When God Talks Back.
+[^71]: Of course other scholars have studied the reception history of the Bible, though scholars of contemporary research have methods available to them, such as surveys and ethnographies, that historians do not.
 
-[^72]: For copyright reasons explained in the essay on methodology, it is not possible to reproduce the text of articles from Gale's 19th Century U.S. Newspapers.
+[^72]: For copyright reasons explained in the [essay on methodology](/essay/methods/), it is not possible to reproduce the text of articles from Gale's 19th Century U.S. Newspapers.
 
-[^73]: On the role of argumentation, see the "Digital History and Argument" white paper.
+[^73]: On the role of argumentation, see the "Digital History and Argument" white paper. Arguing with Digital History working group, “Digital History and Argument” (Roy Rosenzweig Center for History & New Media, November 13, 2017), <https://rrchnm.org/argument-white-paper/>.
 
-[^74]: Noll, The Civil War as a Theological Crisis.
+[^74]: Mark A. Noll, _The Civil War as a Theological Crisis_ (University of North Carolina Press, 2006).
 
-[^75]: For a related argument, see Christian Smith, The Bible Made Impossible.
+[^75]: For a related argument, see Christian Smith, _The Bible Made Impossible: Why Biblicism Is Not a Truly Evangelical Reading of Scripture_ (Brazos, 2011).
