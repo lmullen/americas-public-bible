@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 /* Typography */
 body {
-  font-family: 'IBM Plex Serif', serif;
+  font-family: "IBM Plex Serif", serif;
 }
 
 h1,
@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'IBM Plex Serif', serif;
+  font-family: "IBM Plex Serif", serif;
   font-weight: bold;
 }
 
@@ -31,6 +31,11 @@ h4,
 h5,
 h6 {
   font-size: 1rem;
+}
+
+h2 small,
+h3 small {
+  color: rgb(95, 95, 95);
 }
 
 p {
@@ -101,7 +106,6 @@ header.title-block {
 .subtitle a:visited {
   color: black;
 }
-
 
 .subtitle {
   margin-top: -1.2rem;
@@ -189,7 +193,7 @@ a.permalink {
 }
 
 #home h2::before {
-  content: counter(outline, upper-roman) '. ';
+  content: counter(outline, upper-roman) ". ";
   counter-increment: outline;
 }
 
@@ -265,7 +269,7 @@ figure figcaption p strong {
 }
 
 figure figcaption:before {
-  content: 'Figure ' counter(figures) '. ';
+  content: "Figure " counter(figures) ". ";
   white-space: nowrap;
   display: inline;
   font-weight: bold;
@@ -299,12 +303,11 @@ a div svg {
 
 /* Callouts */
 .callout.primary {
-  background-color:rgba(255, 168, 55, 0.116);
+  background-color: rgba(255, 168, 55, 0.116);
 }
 
-
 #how-to-use.callout {
-  width:50%;
-  float:right;
+  width: 50%;
+  float: right;
   margin: 0 0 1rem 1rem;
 }

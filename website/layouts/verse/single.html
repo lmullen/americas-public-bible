@@ -1,9 +1,15 @@
 {{ define "main" }}
 
 <main>
+
   <article class="verse-history">
+
     <header>
-      <h2>{{ .Title }}</h2>
+      <h2>{{ .Title }}
+        {{ if ne .Params.Author "Lincoln Mullen" }}
+        <small>by {{ .Params.Author }}</small>
+        {{ end }}
+      </h2>
       <p class="lead verse-history-snippet">
         <span>
           {{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;
@@ -22,8 +28,7 @@
           The rate of quotations to {{ .Params.Reference }} in
           <em>Chronicling America</em>, 1836&ndash;1922.
           <a href="/verse-viewer/?ref={{ .Params.Reference }}">
-            See the full visualization</a
-          >
+            See the full visualization</a>
           for the complete trend line and to see quotations to this verse on
           newspaper pages.
         </p>

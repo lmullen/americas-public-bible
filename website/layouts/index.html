@@ -70,7 +70,11 @@
   <section id="verse-histories">
     <h2>Verse histories</h2>
     {{ range (where .Site.RegularPages "Type" "verse").ByParam "order" }}
-    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ if ne .Params.Author "Lincoln Mullen" }}
+      <small>by {{ .Params.Author }}</small>
+      {{ end }}
+    </h3>
     <p class="toc-description">
       <span class="toc-verse">{{ .Params.Reference }}&mdash;&ldquo;{{ .Params.Snippet }}&rdquo;</span>
       <br />
