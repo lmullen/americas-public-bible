@@ -8,11 +8,15 @@ Anderson, Benedict. Imagined Communities: Reflections on the Origin and Spread o
 
 Arguing with Digital History working group. “Digital History and Argument.” Roy Rosenzweig Center for History & New Media, November 13, 2017. https://rrchnm.org/argument-white-paper/.
 
+Barr, Beth Allison. The Making of Biblical Womanhood: How the Subjugation of Women Became Gospel Truth. Brazos Press, 2021.
+
 Bielo, James S. Words upon the Word: An Ethnography of Evangelical Group Bible Study. New York University Press, 2009.
 
 Boylan, Anne M. Sunday School: The Formation of an American Institution, 1790-1880. Yale University Press, 2000.
 
 Brekus, Catherine A. “Contested Words: History, America, Religion.” The William and Mary Quarterly 75, no. 1 (February 6, 2018): 3–36.
+
+———. Sarah Osborn’s World: The Rise of Evangelical Christianity in Early America. Yale University Press, 2013.
 
 Brown, Candy Gunther. The Word in the World: Evangelical Writing, Publishing, and Reading in America, 1789-1880. University of North Carolina Press, 2004.
 
@@ -25,6 +29,10 @@ Callahan, Allen Dwight. The Talking Book: African Americans and the Bible. Yale 
 Cooper, Valerie C. Word, Like Fire: Maria Stewart, the Bible, and the Rights of African Americans. University of Virginia Press, 2011.
 
 Cordell, Ryan. “Reprinting, Circulation, and the Network Author in Antebellum Newspapers.” American Literary History 27, no. 3 (September 1, 2015): 417–45. https://doi.org/10.1093/alh/ajv028.
+
+Du Mez, Kristin Kobes. A New Gospel for Women: Katharine Bushnell and the Challenge of Christian Feminism. Oxford University Press, 2015.
+
+———. Jesus and John Wayne: How White Evangelicals Corrupted a Faith and Fractured a Nation. Liveright, 2020.
 
 Fea, John. The Bible Cause: A History of the American Bible Society. Oxford University Press, 2016.
 
@@ -61,6 +69,8 @@ Lum, Kathryn Gin. “The Historyless Heathen and the Stagnating Pagan: History a
 McDannell, Colleen. Material Christianity: Religion and Popular Culture in America. New Haven: Yale University Press, 1995.
 
 Milligan, Ian. “Illusionary Order: Online Databases, Optical Character Recognition, and Canadian History, 1997–2010.” Canadian Historical Review, January 1, 2013. https://doi.org/10.3138/chr.694.
+
+Mullen, Lincoln A. America’s Public Bible: Biblical Quotations in U.S. Newspapers. Stanford University Press, forthcoming. http://americaspublicbible.org.
 
 Murphy, Andrew R. Prodigal Nation: Moral Decline and Divine Punishment from New England to 9/11. Oxford University Press, 2009.
 
@@ -129,3 +139,9 @@ Wimbush, Vincent L. Theorizing Scriptures: New Critical Orientations to a Cultur
 Wimbush, Vincent L., and Rosamond C. Rodman, eds. African Americans and the Bible: Sacred Texts and Social Textures. New York: Continuum, 2000.
 
 Wosh, Peter J. Spreading the Word: The Bible Business in Nineteenth-Century America. Ithaca: Cornell University Press, 1994.
+
+Zagarri, Rosemarie. Revolutionary Backlash: Women and Politics in the Early American Republic. University of Pennsylvania Press, 2007.
+
+
+
+
