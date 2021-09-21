@@ -2,10 +2,18 @@
 <figure class='two-up'>
   <div class="grid-x grid-margin-x">
     <div class="cell medium-6">
-      <img src='{{ .Get "left" }}' alt='Left: {{ .Get "caption" | markdownify| plainify }}' />
+      {{ $rawLeft := .Get "left" | $.Page.Resources.GetMatch }}
+      {{ $regularLeft := $rawLeft.Fit "1000x4000 webp" }}
+      {{ $retinaLeft := $rawLeft.Fit "2000x8000 webp" }}
+      <img src="{{ $regularLeft.Permalink }}"
+        srcset="{{ $regularLeft.Permalink}}, {{ $retinaLeft.Permalink }} 1.5x, {{ $retinaLeft.Permalink }} 2x" />
     </div>
     <div class="cell medium-6">
-      <img src='{{ .Get "right" }}' alt='Right: {{ .Get "caption" | markdownify| plainify }}' />
+      {{ $rawRight := .Get "right" | $.Page.Resources.GetMatch }}
+      {{ $regularRight := $rawRight.Fit "500x1500 webp"}}
+      {{ $retinaRight := $rawRight.Fit "1000x3000 webp"}}
+      <img src="{{ $regularRight.Permalink }}"
+        srcset="{{ $regularRight.Permalink }}, {{ $retinaRight.Permalink }} 1.5x, {{ $retinaRight.Permalink }} 2x" />
     </div>
   </div>
   <figcaption>

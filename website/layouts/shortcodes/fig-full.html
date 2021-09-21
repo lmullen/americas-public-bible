@@ -1,6 +1,11 @@
 <!-- Cf. https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/figure.html -->
 <figure class='full'>
-  <img src='{{ .Get "src" }}' alt='{{ .Get "caption" | markdownify| plainify }}' />
+  {{ $raw := .Get "src" | $.Page.Resources.GetMatch }}
+  {{ $regular := $raw.Fit "1000x4000 webp"}}
+  {{ $retina := $raw.Fit "2000x8000 webp"}}
+  <img src='{{ $regular.Permalink }}'
+    srcset="{{ $regular.Permalink }}, {{ $retina.Permalink }} 1.5x, {{ $retina.Permalink }} 2x"
+    alt='{{ .Get "caption" | markdownify | plainify }}' />
   <figcaption>
     <p>
       {{ .Get "caption" | markdownify }}
