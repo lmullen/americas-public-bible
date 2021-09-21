@@ -1,6 +1,6 @@
 ---
-title: "Super Pages"
-order: 4
+title: "Bible-filled Pages"
+order: 3
 description: "Which newspaper pages were entirely covered in Bible verses?"
 ---
 
