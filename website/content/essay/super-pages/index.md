@@ -6,7 +6,7 @@ description: "Which newspaper pages were entirely covered in Bible verses?"
 
 Much of this website shows the most quoted verses in the newspapers. But what about the newspapers that quoted the most verses? Sometimes the Bible almost entirely took over the newspaper page, covering document with holy writ. Consider this example from the _Rock Island Argus_, which filled a newspaper side with quotations selected from the Bible, surrounded by stories of conversions, a hymn, and an advertisment for a Billy Sunday revival (figure 1).
 
-{{% fig-full src="rock-island-argus.png" caption="Newspaper sometimes were completely taken over by the Bible. _Rock Island Argus_ (Rock Island, IL), [26 August 1919](https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-08-26/ed-1/seq-12/), p. 11." %}}
+{{< fig-full src="rock-island-argus.png" caption="Newspaper sometimes were completely taken over by the Bible. _Rock Island Argus_ (Rock Island, IL), [26 August 1919](https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-08-26/ed-1/seq-12/), p. 11." >}}
 
 Below are the the 25 pages in _Chronicling America_ that each had the most quotations from the Bible. Viewed collectively, these pages offer a view of the several reasons why the Bible showed up over entire newspaper pages. They furthermore show a kind of easy assumption that the Bible was legible and meaningful, often without commentary, and of general interest to the readers of these papers. TODO Flesh this out.
 
@@ -16,13 +16,13 @@ Holidays---whether Christian or national---were the most common reason that a ne
 
 Good Friday and Easter, the two holidays associated with the death of Jesus and his resurrection, commonly featured excerpts from the Gospels on those events. The _Evening Standard_ of Ogden, Utah, reprinted two whole chapters from the Gospel of John. They also advertised "new spring suits" and "dainty new dresses" as Easter finery for readers of the newspaper and customers of a local clothier (figure 2).^[Cf. Leigh Eric Schmidt, _Consumer Rites: The Buying and Selling of American Holidays_ (Princeton University Press, 1997), ch. TODO.]
 
-{{% fig-full src="good-friday.png" caption="John chapters 19--20 reprinted for Good Friday. _Evening Standard_ (Ogden City, Utah), [21 March 1913](https://chroniclingamerica.loc.gov/lccn/sn85058397/1913-03-21/ed-1/seq-5/), p. 5." %}}
+{{< fig-full src="good-friday.png" caption="John chapters 19--20 reprinted for Good Friday. _Evening Standard_ (Ogden City, Utah), [21 March 1913](https://chroniclingamerica.loc.gov/lccn/sn85058397/1913-03-21/ed-1/seq-5/), p. 5." >}}
 
 The easy assumption that all the readers of a secular newspaper sometimes played out in ugly ways that were visible on the page. The Gospel readings around the crucifixion, especially those from the Gospel of John, squarely blamed "the Jews" for the death of Jesus, and that was often taken as the jumping off point for antisemitism. In fact, Good Friday had for centuries been a time when Jews were subjected to violence for the charge of "deicide."^[TODO CITATION] In 1840, for example, the New York _Morning Herald_ blamed the death of Jesus on "the Chief Priests of the bloody Jewish nation," calling them the "the politicians, the financies, brokers, the bankers, and the fashionable leaders of society among the Jews." To the antisemitic claim of deicide the newspaper added the antisemitic stereotypes of Jews as unscrupulous financiers and money changers who "had turned the temple of Solomon into a palce for brokers, where money was changed, and the country people of Judah shaved as country people are shaved in Wall street."^[_Morning Herald_ (New York, NY), [18 April 1840](https://chroniclingamerica.loc.gov/lccn/sn83030312/1840-04-18/ed-1/seq-2/), p. 2] Reprinting the Good Friday account was thus a means for critiquing the financial and political classes, but also for indulging in the antisemitism customary to the season. 
 
 Other holidays came in for lengthy biblical excerpts as well. Christmas, the other most important holiday to Christians, and increasingly a holiday of consumption for most Americans, frequently excerpted the biblical accounts of Jesus birth.^[Schmidt, _Consumer Rites_, ch. TODO.] But other texts, not related to Jesus' birth, were also used, such as the Sermon on the Mount, for Christmas excerpts. In anticipation of the Fourth of July, the _Port Tobacco Times_ reprinted another sermon preached on a mountain. A newspaper reader sent in "the patriotic address of Moses, the Jewish Lawgiver," asking that it be reprinted without chapter and verse divisions, in the hopes that Moses's instruction to the Jews on "how they should preserve their national purity and integrity, and how they should make their institutions perpetual" would be an example to Ameriacns.^[Cf. Bruce Feiler, America’s Prophet: Moses and the American Story (William Morrow, 2009).]
 
-{{% fig-2up left="christmas.png" right="moses.png" caption="**Left:** An excerpt from the Gospels for Christmas. _New York Herald_ (New York, NY), [25 Dec. 1846](https://chroniclingamerica.loc.gov/lccn/sn83030313/1846-12-25/ed-1/seq-2/), p. 2. **Right:** An excerpt from Deuteronomy for the Fourth of July. _Port Tobacco Times, and Charles County Advertiser_ (Port Tobacco, MD), [15 June 1848](https://chroniclingamerica.loc.gov/lccn/sn89060060/1848-06-15/ed-1/seq-1/), p. 1." %}}
+{{< fig-2up left="christmas.png" right="moses.png" caption="**Left:** An excerpt from the Gospels for Christmas. _New York Herald_ (New York, NY), [25 Dec. 1846](https://chroniclingamerica.loc.gov/lccn/sn83030313/1846-12-25/ed-1/seq-2/), p. 2. **Right:** An excerpt from Deuteronomy for the Fourth of July. _Port Tobacco Times, and Charles County Advertiser_ (Port Tobacco, MD), [15 June 1848](https://chroniclingamerica.loc.gov/lccn/sn89060060/1848-06-15/ed-1/seq-1/), p. 1." >}}
 
 ### Editions of the Bible
 
@@ -30,109 +30,38 @@ The late nineteenth century saw the beginning of a major set of new editions of 
 
 Because people were curious about the changes to the text of the English Bible, or alternatively because they were outraged about them, newspapers sometimes printed the verse by verse comparisons of the changes.
 
-{{% fig-full src="version-comparison.png" caption="When new versions of the Bible were translated, newspapers sometimes published detailed comparisons of the changes. This newspaper was mostly positive about the changes made for the Revised Version. _Press and Daily Dakotaian_ (Yankton, Dakota Territory), [23 May 1881](https://chroniclingamerica.loc.gov/lccn/sn91099608/1881-05-23/ed-1/seq-2/), p. 2." %}}
+{{< fig-full src="version-comparison.png" caption="When new versions of the Bible were translated, newspapers sometimes published detailed comparisons of the changes. This newspaper was mostly positive about the changes made for the Revised Version. _Press and Daily Dakotaian_ (Yankton, Dakota Territory), [23 May 1881](https://chroniclingamerica.loc.gov/lccn/sn91099608/1881-05-23/ed-1/seq-2/), p. 2." >}}
 
 Of course, the venerable King James Version, or Authorized Version, had never gone completely unchallenged. Isaac Leeser, for example, had created a Jewish translation of the Bible into English as early as 1853, and the Jewish Publication Society created a translation finished in 1917.^[Jonathan D. Sarna and Nahum M. Sarna, “Jewish Bible Scholarship and Translations in the United States,” in _The Bible and Bibles in America_, ed. Ernest S. Frerichs (Atlanta: Scholars Press, 1988), 83–116.] Catholics used the Douay-Rheims edition, and famously resisted attempts by public schools to force children to use the King James Version.^[Steven K. Green, _The Bible, the School, and the Constitution: The Clash That Shaped the Modern Church-State Doctrine_ (Oxford University Press, 2012).]
 
 But editing the text of the Bible was also a tradition, and there was no more famous example in American history than Thomas Jefferson's _Life and Morals of Jesus of Nazareth_, created by taking a penknife and glue to the pages of a couple King James Bibles to create an edition of the Gospels that fit Jefferson's predilictions. In 1895 the federal government purchased Jefferson's bible, and in 1904 Congress authorized an edition brought out by the Government Printing Office (though not without controversy).^[Peter Manseau, _The Jefferson Bible: A Biography_ (Princeton University Press, 2020), 111--118. For the facsimile edition, see _The Life and Morals of Jesus of Nazareth_ (Government Printing Office, 1904): <https://www.loc.gov/item/mtjbib026581/>.] When Congress decided to create the facsimile edition, the St. Louis _Republic_ defended the text, published a brief synopsis and a facsimile of one page, and reprinted large portions of the text (figure 5). 
 
-{{% fig-full src="jefferson-bible.png" caption="A synopsis, facsimile, and lengthy excerpt for Thomas Jefferson's _Life and Morals of Jesus of Nazareth_. _St. Louis Republic_ (St. Louis, MO), [01 June 1902](https://chroniclingamerica.loc.gov/lccn/sn84020274/1902-06-01/ed-1/seq-44/)." %}}
+{{< fig-full src="jefferson-bible.png" caption="A synopsis, facsimile, and lengthy excerpt for Thomas Jefferson's _Life and Morals of Jesus of Nazareth_. _St. Louis Republic_ (St. Louis, MO), [01 June 1902](https://chroniclingamerica.loc.gov/lccn/sn84020274/1902-06-01/ed-1/seq-44/)." >}}
 
-# Sermon on the Mount
-https://chroniclingamerica.loc.gov/lccn/sn85033995/1872-03-02/ed-1/seq-4/
-Weekly Caucasian (white supremacist?)
-Original sermon by the Son of God
+### The classics
 
-Christmas 
-NY Herald
-https://chroniclingamerica.loc.gov/lccn/sn83030313/1859-12-25/ed-1/seq-1/
+When newspapers needed to fill column inches, one approach was to reprint the classics. Newspapers were filled with all kinds of content that was not news or advertisements.^[Ryan Cordell, “Reprinting, Circulation, and the Network Author in Antebellum Newspapers,” _American Literary History_ 27, no. 3 (2015): 417–45, https://doi.org/10.1093/alh/ajv028.] Just as newspaper might reprint literary works or advice literature, the Bible was an evergreen source of content. Particularly common were the Sermon on the Mount (Matthew 5–7) and the Ten Commandments, though other texts like Psalm 23 were also prevalent.
 
-Detroit Tribune also includes it, along with Ten Commandments
-https://chroniclingamerica.loc.gov/lccn/sn92063852/1951-05-05/ed-1/seq-16/
+{{< fig-full src="original-sermon.png" caption="The _Lexington Weekly Caucasian_ reprinted the Sermon on the Mount under the bold title, \"An Original Sermon by the Son of God.\" The Democratic newspaper was fervently anti-Reconstruction and opposed to the rights of recently emancipated African Americans. _Lexington Weekly Caucasian_ (Lexington, MO), [02 March 1872](https://chroniclingamerica.loc.gov/lccn/sn85033995/1872-03-02/ed-1/seq-4/)." >}}
 
-Sermon on the Mount on Thanksgiving day
-https://chroniclingamerica.loc.gov/lccn/sn83030312/1839-11-28/ed-1/seq-2/
+### The Bible section
 
-Sermon on Mount for Christmas again
-https://chroniclingamerica.loc.gov/lccn/sn85026941/1885-12-25/ed-1/seq-2/
+Newspapers were often characterized by recurring content, such as obituaries, columns, and advertisements. Some newspaper made a point of having recurring sections that reprinted large numbers of Bible verses. The layout of the _Rock Island Argus_ was particularly striking, with a bold headline followed by a central column of Bible verses thematically selected but usually presented without much commentary, if any (figure 9).
 
+{{< fig-full src="labor-and-capital.png" caption="A page of this newspaper was routinely dedicated to listing out Bible verses on a topic. Here the topic is \"labor and capital.\" _Rock Island Argus_ (Rock Island, IL.), [01 Sept. 1919](https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-09-01/ed-1/seq-5/), p. 5." >}}
 
-# Evangelism / sections of Bible
+Other examples focused more on serializing the Bible, like newspapers might serialize fiction. And other such sections took a more catechetical approach, explaining the content of the verses (figure 8).
 
-https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-08-30/ed-1/seq-5/
-Rock Island Argus
-Bunch of verses about salvation without much explanation. Includes stories of conversion. 
+{{< fig-2up left="moses-headshot.png" right="questions-about-sin.png" caption="Lengthy excerpts from the Bible could present it as an exciting adventure story, or as a rather academic catechesis. **Left:** _Evening Star_ (Washington, DC), [12 Nov. 1949](https://chroniclingamerica.loc.gov/lccn/sn83045462/1949-11-12/ed-1/seq-8/), p. 8. **Right:** _Connecticut Western News_ (Salisbury, CT), [11 May 1922](https://chroniclingamerica.loc.gov/lccn/sn84027718/1922-05-11/ed-1/seq-8/), p. 8." >}}
 
-Rock Island Argus again withs imilar structure. https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-08-26/ed-1/seq-12/
+Such instances of quotations triangulated between three concerns: relevance, authority, and perspicacity. The placement of lengthy excerpts from the Bible assumed their relevance, whether to the readers' personal lives or ongoing political concerns. The use of the Bible likewise assumed the authority of the Bible to speak to those concerns. Obviously the assumption may or may not have matched the readers' assumptions, just as the presence of a horoscope in a modern newspaper does not indicate belief or acceptance of astrology on the parts of all readers. But the presence of the Bible often assumed that it spoke plainly, without needing extraneous interpretation. The actual multiplicity of uses to which the Bible was put belied that assumption, but newspapers practiced Scripture "without notes or commentary" more rigorously than any Protestant.
 
-Rock Island Argus: God's Word Obeyed provides peace/prosperity to labor and capital
-https://chroniclingamerica.loc.gov/lccn/sn92053934/1919-09-01/ed-1/seq-5/
+### Support for services
 
-Man Asks and God Answers questions about sin
-https://chroniclingamerica.loc.gov/lccn/sn84027718/1922-05-11/ed-1/seq-8/
+Finally, many newspapers printed materials that supported local congregations, such as sermons and Sunday school lessons. Some of these examples were striking, such as the sermons reprinted following the assassination of President William McKinley (figure 9).^[Cf. Mark A. Noll, “Presidential Death and the Bible: 1799, 1865, 1881” (American Society of Church History, Atlanta, 2016).] Many others were simply routine reprints of sermons or [Sunday school lessons](https://chroniclingamerica.loc.gov/lccn/sn83045462/1923-04-21/ed-1/seq-12/).
 
-Man Asks and God Answers question on Man
-https://chroniclingamerica.loc.gov/lccn/sn84027718/1922-04-06/ed-1/seq-7/
+{{< fig-full src="mckinley.png" caption="This newspaper reprinted excerpts from sermons from many denominations following the assassination of President William McKinley. _Cameron County Press_ (Emporium, PA), [19 Sept. 1901](https://chroniclingamerica.loc.gov/lccn/sn83032040/1901-09-19/ed-1/seq-1/), p. 1.">}}
 
+While such materials were usually in support of local congregations, sometimes there were an alternative sphere to such congregations. Newspaper Bible clubs were one such example (see introduction). Another striking example is a selection of Bibel readings presented in a Chattanooga newspaper when churches were closed due to the 1918 influenza pandmic. 
 
-# Short quotations/proverbial (or recurring segments)
-
-Bible Brilliants, Bossier Banner
-https://chroniclingamerica.loc.gov/lccn/sn85034235/1901-07-18/ed-1/seq-4/
-
-# Recurring printing of Biblical texts
-
-Gospels printed in serial form every Saturday
-https://chroniclingamerica.loc.gov/lccn/sn82016014/1922-04-29/ed-1/seq-7/
-
-Bible Story, no 7, Moses.
-In the midsts of other religious news
-https://chroniclingamerica.loc.gov/lccn/sn83045462/1949-11-12/ed-1/seq-8/
-
-Section from OT on the poor and immigrants. From a version of the Bible called "Our Mothers Bible"
-Washington Herald
-https://chroniclingamerica.loc.gov/lccn/sn83045433/1920-08-01/ed-1/seq-4/
-More our Mothers Bible
-https://chroniclingamerica.loc.gov/lccn/sn83045433/1920-06-18/ed-1/seq-4/
-
-# Pandemic
-
-https://chroniclingamerica.loc.gov/lccn/sn85038531/1918-10-26/ed-1/seq-10/
-Sabbath readings closed during pandemic.
-
-# Prophecies and War
-
-https://chroniclingamerica.loc.gov/lccn/sn83045389/1915-04-18/ed-1/seq-56/
-Set of prophesies connected to World War I
-
-
-# Sermons
-
-Death of "General Harrison" Former president Benjamin Harrison. President McKinley attended
-https://chroniclingamerica.loc.gov/lccn/sn82015679/1901-03-18/ed-1/seq-3/
-
-Sermon by Lyman Abbott on Job. https://chroniclingamerica.loc.gov/lccn/sn82015679/1897-02-14/ed-1/seq-14/
-
-Sermon on Matthew. https://chroniclingamerica.loc.gov/lccn/sn85042354/1905-10-02/ed-1/seq-4/
-
-Sermon on Blessedness of Humility. https://chroniclingamerica.loc.gov/lccn/sn92051487/1901-09-20/ed-1/seq-10/
-
-Letter from a Catholic Prelate on slavery: https://chroniclingamerica.loc.gov/lccn/sn82014306/1864-01-04/ed-1/seq-1/
-
-Celebration of St. Patrick's Cathedral. https://chroniclingamerica.loc.gov/lccn/sn84022472/1910-06-18/ed-1/seq-3/
-
-Sermon on Jesus' Miracles: https://chroniclingamerica.loc.gov/lccn/sn85042354/1905-10-23/ed-1/seq-4/
-
-Collect/Epistle/Gospel: https://chroniclingamerica.loc.gov/lccn/sn88064339/1914-04-04/ed-1/seq-3/
-
-Sermon on right to enforce Sabbath: https://chroniclingamerica.loc.gov/lccn/sn89058354/1919-08-01/ed-1/seq-6/
-
-
-# Bible quiz and sunday school lesson in church news
-https://chroniclingamerica.loc.gov/lccn/sn83045462/1923-04-21/ed-1/seq-12/
-
-# Political commentary
-
-Gold and silver in the Bible
-
-https://chroniclingamerica.loc.gov/lccn/sn86063034/1896-07-27/ed-1/seq-7/
+{{< fig-full src="pandemic.png" caption="This newspaper tried to fill in the gap when churches were closed due to the 1918 influenza. _Chattanooga News_, (Chattanooga, TN), [26 Oct. 1918](https://chroniclingamerica.loc.gov/lccn/sn85038531/1918-10-26/ed-1/seq-10/), p. 10.">}}
