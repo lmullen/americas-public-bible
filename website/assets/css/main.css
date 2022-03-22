@@ -311,3 +311,14 @@ a div svg {
   float: right;
   margin: 0 0 1rem 1rem;
 }
+
+@media only screen and (max-width: 800px) {
+  #how-to-use.callout {
+    display: inline-block;
+    width: 90%;
+    width: fit-content;
+    float: none;
+    margin: 0 0 1rem 1rem;
+    margin: 1rem;
+  }
+}
