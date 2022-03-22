@@ -1,4 +1,5 @@
 ---
+script: viz/index/main.js
 aliases:
 - '/essay/'
 ---

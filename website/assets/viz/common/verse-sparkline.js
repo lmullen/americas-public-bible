@@ -1,6 +1,6 @@
-import * as d3 from 'd3';
-import Visualization from './visualization';
-import config from '../config';
+import * as d3 from "d3";
+import Visualization from "./visualization";
+import config from "../config";
 
 export default class VerseSparkline extends Visualization {
   constructor(id, ref, width, height, color, title) {
@@ -24,14 +24,14 @@ export default class VerseSparkline extends Visualization {
   async fetch() {
     try {
       this.data = await d3.json(this.url);
-      this.status = 'ok';
+      this.status = "ok";
     } catch (e) {
-      if (e.message === '404 Not Found') {
+      if (e.message === "404 Not Found") {
         console.log(e);
-        this.status = 'missing';
+        this.status = "missing";
       } else {
         console.log(e);
-        this.status = 'failed';
+        this.status = "failed";
       }
     }
     return this.status;
@@ -40,7 +40,7 @@ export default class VerseSparkline extends Visualization {
   async render() {
     await this.fetch();
 
-    if (this.status !== 'ok') {
+    if (this.status !== "ok") {
       this.node.remove();
       return this.status;
     }
@@ -67,13 +67,14 @@ export default class VerseSparkline extends Visualization {
       .y((d) => this.yScale(d.smoothed * config.MILLIONS));
 
     this.viz
-      .append('path')
+      .append("path")
       .datum(data)
-      .classed('trend', true)
-      .classed('sparkline', true)
-      .attr('d', line)
-      .style('stroke', this.color)
-      .style('stroke-width', 2);
+      .classed("trend", true)
+      .classed("sparkline", true)
+      .attr("d", line)
+      .style("stroke", this.color)
+      .style("stroke-width", 2)
+      .style("fill", "none");
 
     return this.status;
   }
