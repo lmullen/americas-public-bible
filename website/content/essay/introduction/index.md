@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-order: 1
+order: 2
 description: "What does it mean to study America's public Bible in newspapers?"
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Which newspaper pages were entirely covered in Bible verses?
-order: 3
+order: 4
 title: Bible-filled Pages
 ---
 

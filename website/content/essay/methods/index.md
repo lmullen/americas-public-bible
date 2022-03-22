@@ -1,6 +1,6 @@
 ---
 description: How this site uses the methods of machine learning, but also an approach to humanistic analysis called disciplined serendipity.
-order: 2
+order: 3
 title: 'Methods: The how and the why of finding biblical quotations'
 ---
 
