@@ -1,6 +1,6 @@
 ---
 title: "Bibliography"
-order: 5
+order: 7
 description: '"Render therefore to all their due: ... honor to whom honor."'
 ---
 

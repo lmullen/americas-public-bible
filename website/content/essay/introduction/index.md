@@ -1,7 +1,7 @@
 ---
-title: "Introduction"
+title: "Introduction: Commenting on America’s public Bible"
 order: 2
-description: "What does it mean to study America's public Bible in newspapers?"
+description: "What does it mean to study America's public Bible in historical newspapers?"
 ---
 
 ### Marking up the Bible

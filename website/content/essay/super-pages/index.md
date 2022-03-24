@@ -1,7 +1,7 @@
 ---
-description: Which newspaper pages were entirely covered in Bible verses?
+description: Which newspaper pages were entirely covered in Bible verses and why?
 order: 4
-title: Bible-filled Pages
+title: 'Bible-filled pages: Newspaper issues that were primarily Bible quotations'
 ---
 
 Much of this website shows the most quoted verses in the newspapers. But what about the newspapers that quoted the most verses? Sometimes the Bible almost entirely took over the newspaper page, covering document with holy writ. Consider this example from the *Rock Island Argus*, which filled a newspaper side with quotations selected from the Bible, surrounded by stories of conversions, a hymn, and an advertisment for a Billy Sunday revival (figure 1).
