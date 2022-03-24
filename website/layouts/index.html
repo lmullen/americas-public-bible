@@ -31,11 +31,17 @@
     <article id="homepage-introduction"> {{ .Content }} </article>
   </section>
 
-  <hr />
-
   <section id="how-to-use">
-    <h3>How to use this website</h3>
-    {{ with .Site.GetPage "/how-to-use" }} {{ .Content }} {{ end }}
+    <ul class="accordion" data-accordion data-allow-all-closed="true">
+      <li class="accordion-item" data-accordion-item>
+        <a href="#" class="accordion-title">
+          <h3>How to use this website</h3>
+        </a>
+        <div class="accordion-content" data-tab-content>
+          {{ with .Site.GetPage "/how-to-use" }} {{ .Content }} {{ end }}
+        </div>
+      </li>
+    </ul>
   </section>
 
   <hr />

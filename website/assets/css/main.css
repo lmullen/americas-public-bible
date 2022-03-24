@@ -52,6 +52,20 @@ ul:not(.menu) li {
   list-style-type: square;
 }
 
+li.accordion-item {
+  list-style-type: none !important;
+}
+
+li.accordion-item h3 {
+  color: black;
+  margin: 0;
+}
+
+#how-to-use .accordion-item .accordion-title,
+#how-to-use .accordion-content {
+  background: rgba(255, 168, 55, 0.116) !important;
+}
+
 blockquote {
   color: black;
 }
