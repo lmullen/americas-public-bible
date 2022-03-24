@@ -336,3 +336,9 @@ a div svg {
     margin: 1rem;
   }
 }
+
+#teasers a {
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
