@@ -14,6 +14,8 @@ Bielo, James S. Words upon the Word: An Ethnography of Evangelical Group Bible S
 
 Boylan, Anne M. Sunday School: The Formation of an American Institution, 1790-1880. Yale University Press, 2000.
 
+Blight, David W. Race and Reunion: The Civil War in American Memory. Belknap Press of Harvard University Press, 2002.
+
 Brekus, Catherine A. “Contested Words: History, America, Religion.” The William and Mary Quarterly 75, no. 1 (February 6, 2018): 3–36.
 
 ———. Sarah Osborn’s World: The Rise of Evangelical Christianity in Early America. Yale University Press, 2013.
@@ -35,6 +37,8 @@ Du Mez, Kristin Kobes. A New Gospel for Women: Katharine Bushnell and the Challe
 ———. Jesus and John Wayne: How White Evangelicals Corrupted a Faith and Fractured a Nation. Liveright, 2020.
 
 Fea, John. The Bible Cause: A History of the American Bible Society. Oxford University Press, 2016.
+
+Fox, Richard Wightman. Jesus in America: Personal Savior, Cultural Hero, National Obsession. HarperSanFrancisco, 2004.
 
 Gannon, Kelly, and Kimberly Wagner. “Museum of the Bible, Washington, D.C.” Journal of American History 105, no. 3 (December 1, 2018): 618–25. https://doi.org/10.1093/jahist/jay283.
 
@@ -96,6 +100,8 @@ Perry, Seth. Bible Culture and Authority in the Early United States. Princeton U
 
 Powery, Emerson B. The Genesis of Liberation: Biblical Interpretation in the Antebellum Narratives of the Enslaved. Westminster John Knox Press, 2016.
 
+Prothero, Stephen R. American Jesus: How the Son of God Became a National Icon. Farrar, Straus, and Giroux, 2003.
+
 Putnam, Lara. “The Transnational and the Text-Searchable: Digitized Sources and the Shadows They Cast.” American Historical Review 121, no. 2 (2016): 377–402. https://doi.org/10.1093/ahr/121.2.377.
 
 Rutner, Jennifer, and Roger Schonfeld. “Supporting the Changing Research Practices of Historians.” New York: Ithaka S+R, August 11, 2015. https://doi.org/10.18665/sr.22532.
@@ -141,7 +147,3 @@ Wimbush, Vincent L., and Rosamond C. Rodman, eds. African Americans and the Bibl
 Wosh, Peter J. Spreading the Word: The Bible Business in Nineteenth-Century America. Ithaca: Cornell University Press, 1994.
 
 Zagarri, Rosemarie. Revolutionary Backlash: Women and Politics in the Early American Republic. University of Pennsylvania Press, 2007.
-
-
-
-
