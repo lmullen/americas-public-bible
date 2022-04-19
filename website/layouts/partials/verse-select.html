@@ -1,14 +1,11 @@
 <form id="verse-select">
 	<div class="grid-container">
 		<div class="grid-x grid-padding-x">
-			<div class="medium-2 cell">
-				<label for="ref" class="text-right middle">Search for a verse:</label>
-			</div>
-			<div class="medium-6 cell">
+			<div class="medium-9 cell">
 				<select id="ref" name="ref"></select>
 			</div>
 			<div class="medium-3 cell">
-				<button type="submit" class="button">See verse trend</button>
+				<button type="submit" class="button" id="selectize-submit">See verse trend</button>
 			</div>
 		</div>
 	</div>
@@ -22,9 +19,17 @@
 			maxItems: 1,
 			maxOptions: 3000,
 			valueField: 'reference',
-			labelField: 'reference',
-			searchField: 'reference',
-			placeholder: 'Type the reference of a verse',
+			labelField: 'text',
+			searchField: ['reference', 'text'],
+			placeholder: 'Type the reference or text of a verse',
+			render: {
+				item: function (item, escape) {
+					return `<div class='select-option'><strong>${escape(item.reference)}</strong>&mdash;${escape(item.text)}</div>`;
+				},
+				option: function (item, escape) {
+					return `<div class='select-option'><strong>${escape(item.reference)}</strong>&mdash;${escape(item.text)}</div>`;
+				},
+			},
 		});
 		$("#verse-select").submit(submitSelector);
 	}
@@ -35,6 +40,7 @@
 		window.location.href = '/verse-viewer/?ref=' + encodeURIComponent(reference)
 	}
 
+	// const allVersesURL = 'http://localhost:8090/apb/index/all';
 	const allVersesURL = 'https://data.chnm.org/apb/index/all';
 	fetch(allVersesURL)
 		.then(resp => resp.json())

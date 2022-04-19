@@ -311,8 +311,17 @@ a div svg {
   margin: 2rem 0 1rem 0;
 }
 
-.selectize-input {
-  height: 2.6rem;
+.selectize-input,
+#selectize-submit {
+  height: 3.4rem;
+}
+
+.selectize-input::placeholder {
+  margin-top: 0.4rem;
+}
+
+.select-option {
+  margin: 0.2rem 1rem 0.2rem 0;
 }
 
 /* Callouts */
