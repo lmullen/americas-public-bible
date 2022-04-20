@@ -8,6 +8,10 @@ If you use this project for academic work, here is a suggested citation.
 
 Lincoln Mullen, *America's Public Bible: A Commentary* (Stanford University Press, forthcoming 2022): &lt;<http://americaspublicbible.org>&gt;.
 
+## Repository organization
+
+This repository supersedes the [original repositories](https://github.com/public-bible/). The `website` directory contains the code and visualizations for the digital monograph. The `quotation-finder` directory contains the code to find the quotations in the text corpora. The data is served by RRCHNM's [data API](https://github.com/chnm/dataapi).
+
 ## Copyright and license
 
 All prose is copyright 2016-2020 Lincoln Mullen and is released under the CC-BY-NC-ND license.
@@ -18,6 +22,7 @@ All data is copyright 2016-2020 Lincoln Mullen and is released under the CC0 lic
 
 ## Project news
 
+*   14 March 2022. This digital monograph has been approved by the Stanford University Press editorial board and will soon be submitted for publication.
 *   24 June 2021. The _Wall Street Journal_ [featured this project](https://www.wsj.com/articles/library-of-congress-looks-to-ai-to-help-users-sift-through-its-collection-11624552197) in a story titled “Library of Congress Looks to AI to Help Users Sift Through Its Collection.”
 *   17 June 2021. The Library of Congress Labs announced that I will be applying my search for biblical quotations across their digital collections as part of [Computing Cultural Heritage in the Cloud](https://www.loc.gov/item/prn-21-032/renowned-digital-humanities-researchers-begin-computing-cultural-heritage-in-the-cloud/2021-06-17/).
 *   22 February 2021. A chapter on “[The Making of America’s Public Bible: Computational Text Analysis for Religious History](https://doi.org/10.1515/9783110573022-003)” was published in _Digital Humanities and Research Methods in Religious Studies_.
