@@ -2,9 +2,9 @@
 
 Data that was generated for this project is available for your use.
 
-- [apb-quotations.csv.gz](/data/apb-quotations.csv.gz) (17 MB gzipped): the quotations found for this version of the website.
-- [apb-quotations-prototype.csv.gz](/data/apb-quotations-prototype.csv.gz) (62 MB gzipped): the quotations found for the earlier prototype version of the website.
-- [apb-matches-for-model-training.csv.gz](/data/apb-matches-for-model-training.csv.gz) (248 KB gzipped): the labeled data used for training the model.
+- [apb-quotations.csv.gz](/data/apb-quotations.csv.gz) (16.7 MB gzipped): the quotations found for this version of the website.
+- [apb-quotations-prototype.csv.gz](/data/apb-quotations-prototype.csv.gz) (46.9 MB gzipped): the quotations found for the earlier prototype version of the website.
+- [apb-matches-for-model-training.csv.gz](/data/apb-matches-for-model-training.csv.gz) (252 KB gzipped): the labeled data used for training the model.
 
 #### Code
 
