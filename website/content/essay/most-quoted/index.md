@@ -118,7 +118,7 @@ Rank 7. John 15:13. "Greater love hath no man than this, that a man lay down his
 
 Rank 8. Revelation 7:17. "For the Lamb which is in the midst of the throne shall feed them, and shall lead them unto living fountains of waters: and God shall wipe away all tears from their eyes."
 
-Rank 9. 2 Timoth 4:7. "I have fought a good fight, I have finished my course, I have kept the faith:"
+Rank 9. 2 Timothy 4:7. "I have fought a good fight, I have finished my course, I have kept the faith:"
 
 [^1]: *Colporteur Reports of the American Tract Society*, 1841--1846 (Newark: New Jersey Historical Records Survey Project, 1940), p. 4--5, 11, 20, 29; for the distribution of the Bible, see John Fea, *The Bible Cause: A History of the American Bible Society* (Oxford University Press, 2016).
 
