@@ -90,31 +90,47 @@ Matthew 22:14 also started to become vastly more popular over time, starting in 
 
 {{% fig-verse ref="Matthew 22:14" caption="TK" %}}
 
-By way of contrast, John 8:32 was also a verse whose popularity increased over time. But unlike Matthew 22:14, the phrase "the truth shall set you free" was mostly used as a direct quotation from the Bible. A great deal of its usage in the newspapers in the second half of the century were
+By way of contrast, John 8:32 was also a verse whose popularity increased over time. But unlike Matthew 22:14, the phrase "the truth shall set you free" was mostly used as a direct quotation from the Bible. A great deal of its usage in the newspapers in the second half of the century were sermons or other religious reflections. 
 
 {{% fig-verse ref="John 8:32" caption="TK" %}}
 
-{{% fig-verse ref="Matthew 6:33" caption="TK" %}}
-
 ## Other proverbial
+
+The sayings of Jesus were not the only proverbial statements to make it into the list of most quoted verses across the century, though it is perhaps somewhat surprising that the Book of Proverbs or for that matter the Psalms did not have a higher representation. 
+
+One verse from the Proverbs made the top 25. Just as with Luke 18:16, the prevalence of Proverbs 22:6 shows how when the Bible was resorted to, it was often on the theme of family and children.
 
 Rank 7. Proverbs 22:6. "Train up a child in the way he should go: and when he is old, he will not depart from it."
 
+{{% fig-verse ref="Proverbs 22:6" caption="TK" %}}
+
+The next two verses were those whose key phrases were broadly applicable in non-Biblical contexts. In other words, like Matthew 22:14, they were verses where the turn of phrase was as important or more so than the theological reflection contained within it.
+
 Rank 17. 1 Thessalonians 5:21. "Prove all things; hold fast that which is good."
+
+{{% fig-verse ref="1 Thessalonians 5:21" caption="TK" %}}
 
 Rank 18. Galatians 6:7. "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
 
+{{% fig-verse ref="Galatians 6:7" caption="TK" %}}
+
+Romans 8:28 was also broadly speaking a proverbial verse, in the sense that it was a pithy saying that captured some important truth. 
+
 Rank 19. Romans 8:28. "And we know that all things work together for good to them that love God, to them who are the called according to his purpose."
+
+{{% fig-verse ref="Romans 8:28" caption="TK" %}}
 
 ## Obituaries.
 
-Not just incidential to newspapers. But also about the place of Christianity in the life cycle.
+Finally, some of the most frequently used verses were those that were common in newspaper obituaries. Certain the importance of obituaries to newspapers (and newspapers' business model) overstates the importance of these verses. But these verses were popular not simply becaue of obituaries, but because of the significance that death played in the life cycle of Christianity. The following five verses were the most commonly used in obituaries (or commemorative speeches and sermons). Especially noteworthy is John 15:13, a verse which had especially popularity in times of war or other disaster to commemorate soldiers and sailors, and which those shows the significance of the verse not just in private mourning but also public mourning.
 
 Rank 5. Matthew 25:21. "Well done, thou good and faithful servant."
 
 Rank 6. Matthew 16:26. "For what is a man profited, if he shall gain the whole world, and lose his own soul? or what shall a man give in exchange for his soul?"
 
 Rank 7. John 15:13. "Greater love hath no man than this, that a man lay down his life for his friends."
+
+{{% fig-verse ref="John 15:13" caption="TK" %}}
 
 Rank 8. Revelation 7:17. "For the Lamb which is in the midst of the throne shall feed them, and shall lead them unto living fountains of waters: and God shall wipe away all tears from their eyes."
 
