@@ -1,6 +1,6 @@
 <figure>
   {{ $ref := .Get "ref" }}
-  {{ $id := urlize $ref }}
+  {{ $id := urlize $ref | printf "verse-%s" }}
   <div id="{{ $id }}" data-ref="{{ $ref }}"></div>
   <figcaption>
     <p>{{ .Get "caption" | markdownify }} See the verse viewer for <a href="/verse-viewer/?ref={{ $ref }}">
