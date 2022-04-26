@@ -1,5 +1,5 @@
 ---
-title: Woes of Telephone Girls
+title: Woes of telephone girls
 newspaper: The Yale Expositor
 date: 1903-05-01
 reference: Matthew 22:14

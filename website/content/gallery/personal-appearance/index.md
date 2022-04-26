@@ -1,5 +1,5 @@
 ---
-title: Duty of Personal Appearance 
+title: Duty of personal appearance 
 newspaper: Yorkville Enquirer
 date: 1891-03-11
 reference: Luke 12:17

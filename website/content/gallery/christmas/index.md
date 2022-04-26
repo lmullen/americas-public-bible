@@ -5,7 +5,7 @@ date: '1871-25-12'
 newspaper: Memphis Daily Appeal
 reference: 'Matthew 1:18-25'
 state: TN
-title: The First Christmas
+title: The first Christmas
 featured: false
 author: Olivia Vermane
 ---

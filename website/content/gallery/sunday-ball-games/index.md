@@ -1,5 +1,5 @@
 ---
-title: Sunday Ball Games
+title: Sunday ball games
 newspaper: Belding Banner
 date: 1906-05-31  
 reference: Exodus 20:8

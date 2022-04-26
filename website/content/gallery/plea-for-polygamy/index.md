@@ -1,5 +1,5 @@
 ---
-title: Mormon Plea for Polygamy
+title: Mormon plea for polygamy
 newspaper: Wilmington journal
 date: 1852-08-13
 reference: Luke 18:16

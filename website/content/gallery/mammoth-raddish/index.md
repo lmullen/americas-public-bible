@@ -1,5 +1,5 @@
 ---
-title: Mammoth Raddish 
+title: Mammoth raddish 
 newspaper: Semi-weekly Standard
 date: 1856-12-03
 reference: Proverbs 21:39

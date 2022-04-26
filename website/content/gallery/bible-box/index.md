@@ -1,5 +1,5 @@
 ---
-title: Everybody's Bible Box
+title: Everybody's Bible box
 newspaper: Bennington Evening Banner
 date: 1912-01-24
 reference: 1 Timothy 2:12

@@ -1,5 +1,5 @@
 ---
-title: Reading Between the Lines
+title: Reading between the lines
 newspaper: Owingsville Outlook
 date: 1899-03-02
 reference: Luke 10:36

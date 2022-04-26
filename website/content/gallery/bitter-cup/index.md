@@ -1,5 +1,5 @@
 ---
-title: A Bitter Cup
+title: A bitter cup
 newspaper: Holly Springs Gazette 
 date: 1843-03-03
 reference: Proverbs 23:32

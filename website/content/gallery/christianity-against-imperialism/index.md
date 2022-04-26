@@ -1,5 +1,5 @@
 ---
-title: Christianity against Imperialism
+title: Christianity against imperialism
 newspaper: The Commoner
 date: 1916-11-01
 reference: "Mark 16:15"

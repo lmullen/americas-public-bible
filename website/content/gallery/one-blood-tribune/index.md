@@ -1,5 +1,5 @@
 ---
-title: Republican Political Convictions
+title: Republican political convictions
 newspaper: Lamoille Newsdealer
 date: 1862-12-18
 reference: Acts 17:26

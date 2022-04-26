@@ -1,5 +1,5 @@
 ---
-title: Obituaries for Soldiers and Sailors
+title: Obituaries for soldiers and sailors
 newspaper: Rock Island Argus
 date: 1919-11-14
 reference: John 15:13

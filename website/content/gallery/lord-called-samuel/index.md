@@ -1,5 +1,5 @@
 ---
-title: The Lord Called Samuel
+title: The Lord called Samuel
 newspaper: Stark County Democrat
 date: 1876-11-09
 reference: 1 Samuel 3:4

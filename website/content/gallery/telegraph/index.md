@@ -1,5 +1,5 @@
 ---
-title: The Great Work the Age Accomplished
+title: The great work the age accomplished
 newspaper: Lewistown Gazette
 date: 1858-08-19
 reference: Luke 2:14

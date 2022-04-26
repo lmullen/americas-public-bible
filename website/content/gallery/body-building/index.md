@@ -1,5 +1,5 @@
 ---
-title: Value of Body Building
+title: Value of body building
 newspaper: The Scranton tribune
 date: 1895-01-21
 reference: Luke 7:16

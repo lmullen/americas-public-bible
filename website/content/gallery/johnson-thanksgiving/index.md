@@ -1,5 +1,5 @@
 ---
-title: A National Day of Thanksgiving
+title: A national day of thanksgiving
 newspaper: Daily National Republican
 date: 1865-28-10
 reference: Proverbs 14:34

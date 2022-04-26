@@ -1,5 +1,5 @@
 ---
-title: Titanic Heroines
+title: Titanic heroines
 newspaper: New York Tribune
 date: 1912-14-24
 reference: John 15:13

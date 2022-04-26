@@ -1,5 +1,5 @@
 ---
-title: Thou Shalt Make Money
+title: Thou shalt make money
 newspaper: The Forest Republican
 date: 1872-28-08
 reference: Exodus 20:15
