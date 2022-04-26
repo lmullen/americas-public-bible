@@ -23,7 +23,7 @@ As we consider the other top verses, we can categorize the reason that they were
 
 ## Key texts
 
-AMong the most quoted texts were those from the Ten Commandments, and the Lord's Prayer. Of any texts in the Bible, these are the most commonly used and the innermost part of the canon within the canon. The Tecn Commandments and the Lord's Prayer have been since ancient times two of the key texts in the catechesis of new Christians, as well as frequent subjects of sermons and moral and theological reflection. Below are the three verses from the Decalogue that were most frequently quoted.
+AMong the most quoted texts were those from the Ten Commandments, and the Lord's Prayer. Of any texts in the Bible, these are the most commonly used and the innermost part of the canon within the canon. The Ten Commandments and the Lord's Prayer have been since ancient times two of the key texts in the catechesis of new Christians, as well as frequent subjects of sermons and moral and theological reflection. Below are the three verses from the Decalogue that were most frequently quoted.
 
 Rank 4. Exodus 20:15. "Thou shalt not steal."[^3]
 
