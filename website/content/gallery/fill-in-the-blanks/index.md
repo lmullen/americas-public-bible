@@ -2,7 +2,7 @@
 title: Fill in the blanks
 newspaper: Fayetteville Observer
 date: 1858-11-04
-reference: "1 Thessalonians 5:29"
+reference: "1 Thessalonians 5:21"
 city: Fayetteville
 state: TN
 chronam: "https://chroniclingamerica.loc.gov/lccn/sn85033395/1858-11-04/ed-1/seq-1/#words=prove+things+hold+fast+good"
