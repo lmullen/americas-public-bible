@@ -7,7 +7,7 @@ city: Doublas City
 state: AK
 chronam: "https://chroniclingamerica.loc.gov/lccn/sn84021930/1913-02-26/ed-1/seq-4/#words=man+die+shall+live+days+appointed+time+wait+till+change+come"
 featured: false
-author: Caitlin Gale
+author: Caitlin McGeever
 ---
 
 Extending Job 14:14, "If a man die, shall he live again?," to animals, this

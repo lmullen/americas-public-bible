@@ -7,7 +7,7 @@ city: Yorkville
 state: SC
 chronam: https://chroniclingamerica.loc.gov/lccn/sn84026925/1891-03-11/ed-1/seq-4/#words=consider+lilies+grow+toil+spin+yet+say+unto+solomon+glory+arrayed+like+one
 featured: false
-author: Caitlin Gale
+author: Caitlin McGeever
 ---
 
 Proclaiming that "To Look Well Is A Duty," this author asserts that God must be

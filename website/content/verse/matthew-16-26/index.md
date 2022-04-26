@@ -5,7 +5,7 @@ reference: 'Matthew 16:26'
 snippet: 'For what is a man profited, if he shall gain the whole world, and lose his own soul?'
 order: 2
 draft: false
-author: Caitlin Gale
+author: Caitlin McGeever
 ---
 
 When considering the cost of a soul, a contributor to the *Rocky Ford
