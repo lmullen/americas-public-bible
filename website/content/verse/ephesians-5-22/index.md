@@ -2,7 +2,7 @@
 author: Lincoln Mullen
 description: A text on the relationships between husbands and wives had broader connections to slavery and political authority.
 draft: false
-order: 3
+order: 4
 reference: "Ephesians 5:22"
 snippet: Wives, submit yourselves unto your own husbands.
 title: Submission and authority

@@ -3,7 +3,7 @@ title: Losing the soul to greed
 description: 'A text at the intersection of American capitalism and American Christianity.'
 reference: 'Matthew 16:26'
 snippet: 'For what is a man profited, if he shall gain the whole world, and lose his own soul?'
-order: 2
+order: 3
 draft: false
 author: Caitlin McGeever
 ---
