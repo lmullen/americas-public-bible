@@ -22,6 +22,8 @@ Brekus, Catherine A. “Contested Words: History, America, Religion.” The Will
 
 Brown, Candy Gunther. The Word in the World: Evangelical Writing, Publishing, and Reading in America, 1789-1880. University of North Carolina Press, 2004.
 
+Bushman, Richard L. _The Refinement of America: Persons, Houses, Cities_. Vintage Books, 1993. 
+
 Byrd, James P. A Holy Baptism of Fire and Blood: The Bible and the American Civil War. Oxford University Press, 2020.
 
 ———. Sacred Scripture, Sacred War: The Bible and the American Revolution. New York: Oxford University Press, 2013.
@@ -65,6 +67,8 @@ Hempton, David. Evangelical Disenchantment: Nine Portraits of Faith and Doubt. N
 Hitchcock, Tim. “Confronting the Digital: Or How Academic History Writing Lost the Plot.” Cultural and Social History 10, no. 1 (March 2013): 9–23. https://doi.org/10.2752/147800413X13515292098070.
 
 Jemison, Elizabeth L. Christian Citizens: Reading the Bible in Black and White in the Postemancipation South. Chapel Hill: The University of North Carolina Press, 2020.
+
+Kamensky, Jane. Governing the Tongue: The Politics of Speech in Early New England. Oxford University Press, 1999.
 
 Luhrmann, T. M. When God Talks Back: Understanding the American Evangelical Relationship with God. Knopf, 2012.
 
