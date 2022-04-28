@@ -1,7 +1,7 @@
 ---
 author: Lincoln Mullen
 description: Newspapers were full of advice literature, and where better to learn how to govern the tongue than the Proverbs?
-draft: true
+draft: false
 order: 6
 reference: "Proverbs 15:1"
 snippet: "A soft answer turneth away wrath: but grievous words stir up anger."
