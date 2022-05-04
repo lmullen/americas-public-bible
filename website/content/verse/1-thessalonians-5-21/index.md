@@ -1,5 +1,5 @@
 ---
-description: 'A proverbial verse which could fit nearly any context'
+description: 'A proverbial verse which could fit nearly any context.'
 order: 5
 reference: '1 Thessalonians 5:21'
 snippet: 'Prove all things; hold fast that which is good.'

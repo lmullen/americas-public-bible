@@ -108,20 +108,26 @@
     <h2>Trends in biblical quotations</h2>
 
     <p>The heart of this site is a set of interactive visualizations which let you see the trend in the rate of
-      quotations for any given verse in <em>Chronicling America</em> and <em>Nineteenth-century Newspapers</em>, then
-      see examples of those quotations on the newspaper page.</p>
+      quotations for any given verse in <em><a href="https://chroniclingamerica.loc.gov/">Chronicling America</a></em>
+      and <em><a href="https://www.gale.com/c/nineteenth-century-us-newspapers">Nineteenth-century Newspapers</a></em>,
+      then
+      see examples of those quotations on the newspaper page at <em>Chronicling America</em>.</p>
 
-    <p>If you have a verse you want to look up directly, you can search for it. (Note that the lists of verses below are
-      selective, and so return verses with higher quality results, but the verse search feature below returns nearly
-      every verse, and the quality of the results for some verses may be lower.) You can search for either the reference
-      of the verse (e.g., "Genesis 1:1") or the text of the verse in the King James Version (e.g., "In the beginning,
-      God created the heaven and the earth").</p>
+    <p>If you have a verse you want to look up directly, you can search for it below. (Note that the lists of verses
+      below are
+      rather selective, and so return verses with higher quality results. The verse search feature below returns many
+      more verses, and the quality of the results for some verses may therefore be lower.) You can search for either the
+      reference
+      of the verse (e.g., &ldquo;Genesis 1:1&rdquo;) or the text of the verse in the King James Version (e.g., &ldquo;In
+      the beginning,
+      God created the heaven and the earth&rdquo;).</p>
 
     {{ partial "verse-select.html" }}
 
-    <p>Below are the trends for featured verses, some of which are also the subject of the <a
+    <p>Below are the trends for featured verses, a few of which are also the subject of the <a
         href="#verse-histories">verse histories</a>. You can also browse the verses in three other ways: (1) the most
-      quoted verses in descending order of frequency; (2) verses that had a peak of quotation in a given year, arranged
+      quoted verses in descending order of frequency; (2) verses that had a peak rate of quotation in a given year,
+      arranged
       chronologically;
       and (3) frequently quoted verses in their order in the Christian Bible.</p>
 
@@ -137,6 +143,7 @@
 
   <section id="gallery">
     <h2>Quotations gallery</h2>
+    <p>Striking examples of quotations from the Bible in newspapers.</p>
     <div class="grid-x grid-margin-x homepage-gallery">
       {{ range where .Site.RegularPages "Type" "gallery" | first 64 }}
       <div class="cell medium-3 small-4">
@@ -178,7 +185,7 @@
   <section>
     <h3>Suggested citation</h3>
     <p>
-      If you use this project, you can cite it using the following suggested
+      If you use this project, you can cite it using this suggested
       format.
     </p>
     <p id="suggested-citation">
