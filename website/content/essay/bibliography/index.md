@@ -42,6 +42,8 @@ Fea, John. The Bible Cause: A History of the American Bible Society. Oxford Univ
 
 Fox, Richard Wightman. Jesus in America: Personal Savior, Cultural Hero, National Obsession. HarperSanFrancisco, 2004.
 
+Funk, Kellen, and Lincoln A. Mullen. "The Spine of American Law: Digital Text Analysis and U.S. Legal Practice." _American Historical Review_ 123, no. 1 (2018): 132--64. <https://doi.org/10.1093/ahr/123.1.132>.
+
 Gannon, Kelly, and Kimberly Wagner. “Museum of the Bible, Washington, D.C.” Journal of American History 105, no. 3 (December 1, 2018): 618–25. https://doi.org/10.1093/jahist/jay283.
 
 Glaude, Eddie S. Exodus! Religion, Race, and Nation in Early Nineteenth-Century Black America. Chicago: University of Chicago Press, 2000.
@@ -82,19 +84,21 @@ Mullen, Lincoln A. America’s Public Bible: Biblical Quotations in U.S. Newspap
 
 Murphy, Andrew R. Prodigal Nation: Moral Decline and Divine Punishment from New England to 9/11. Oxford University Press, 2009.
 
-Noll, Mark A., ed. God and Mammon: Protestants, Money, and the Market, 1790-1860. Oxford University Press, 2002.
+Noll, Mark A. _America's Book: The Rise and Decline of a Bible Civilization, 1794--1911_. Oxford University Press, 2022.
 
-———. In the Beginning Was the Word: The Bible in American Public Life, 1492-1783. Oxford University Press, 2016.
+———. _The Civil War as a Theological Crisis_. University of North Carolina Press, 2006.
+
+———, ed. _God and Mammon: Protestants, Money, and the Market, 1790--1860_. Oxford University Press, 2002.
+
+———. _In the Beginning Was the Word: The Bible in American Public Life_, 1492--1783. Oxford University Press, 2016.
 
 ———. “Presidential Death and the Bible: 1799, 1865, 1881.” Atlanta, 2016.
-
-———. The Civil War as a Theological Crisis. University of North Carolina Press, 2006.
 
 Nord, David Paul. Communities of Journalism: A History of American Newspapers and Their Readers. University of Illinois Press, 2001.
 
 ———. Faith in Reading: Religious Publishing and the Birth of Mass Media in America. Religion in America Series. Oxford University Press, 2004.
 
-Perry, Samuel L. “Whitewashing Evangelical Scripture: The Case of Slavery and Antisemitism in the English Standard Version.” Journal of the American Academy of Religion 89, no. 2 (July 7, 2021): 612–43. https://doi.org/10.1093/jaarel/lfab054.
+Perry, Samuel L. “Whitewashing Evangelical Scripture: The Case of Slavery and Antisemitism in the English Standard Version.” _Journal of the American Academy of Religion_ 89, no. 2 (2021): 612–43. <https://doi.org/10.1093/jaarel/lfab054>.
 
 Perry, Seth. Bible Culture and Authority in the Early United States. Princeton University Press, 2018.
 
