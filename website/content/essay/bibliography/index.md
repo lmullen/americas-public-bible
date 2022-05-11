@@ -40,6 +40,8 @@ Du Mez, Kristin Kobes. A New Gospel for Women: Katharine Bushnell and the Challe
 
 Fea, John. The Bible Cause: A History of the American Bible Society. Oxford University Press, 2016.
 
+Feiler, Bruce. _America's Prophet: Moses and the American Story_. William Morrow, 2009.
+
 Fox, Richard Wightman. Jesus in America: Personal Savior, Cultural Hero, National Obsession. HarperSanFrancisco, 2004.
 
 Funk, Kellen, and Lincoln A. Mullen. "The Spine of American Law: Digital Text Analysis and U.S. Legal Practice." _American Historical Review_ 123, no. 1 (2018): 132--64. <https://doi.org/10.1093/ahr/123.1.132>.
@@ -75,6 +77,8 @@ Kamensky, Jane. Governing the Tongue: The Politics of Speech in Early New Englan
 Luhrmann, T. M. When God Talks Back: Understanding the American Evangelical Relationship with God. Knopf, 2012.
 
 Lum, Kathryn Gin. “The Historyless Heathen and the Stagnating Pagan: History as Non-Native Category?” Religion and American Culture: A Journal of Interpretation 28, no. 1 (January 1, 2018): 52–91. https://doi.org/10.1525/rac.2018.28.1.52.
+
+Manseau, Peter. *The Jefferson Bible: A Biography*. Princeton University Press, 2020. 
 
 McDannell, Colleen. Material Christianity: Religion and Popular Culture in America. New Haven: Yale University Press, 1995.
 
