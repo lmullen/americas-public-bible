@@ -16,7 +16,7 @@ Boylan, Anne M. _Sunday School: The Formation of an American Institution, 1790--
 
 Blight, David W. _Race and Reunion: The Civil War in American Memory_. Belknap Press of Harvard University Press, 2002.
 
-Brekus, Catherine A. “Contested Words: History, America, Religion.” _William and Mary Quarterly_ 75, no. 1 (2018): 3–36.
+Brekus, Catherine A. "Contested Words: History, America, Religion." _William and Mary Quarterly_ 75, no. 1 (2018): 3--36.
 
 ———. _Sarah Osborn’s World: The Rise of Evangelical Christianity in Early America_. Yale University Press, 2013.
 
@@ -46,7 +46,7 @@ Fox, Richard Wightman. _Jesus in America: Personal Savior, Cultural Hero, Nation
 
 Funk, Kellen, and Lincoln A. Mullen. "The Spine of American Law: Digital Text Analysis and U.S. Legal Practice." _American Historical Review_ 123, no. 1 (2018): 132--64. <https://doi.org/10.1093/ahr/123.1.132>.
 
-Gannon, Kelly, and Kimberly Wagner. "Museum of the Bible, Washington, D.C." _Journal of American History_ 105, no. 3 (2018): 618–25. <https://doi.org/10.1093/jahist/jay283>.
+Gannon, Kelly, and Kimberly Wagner. "Museum of the Bible, Washington, D.C." _Journal of American History_ 105, no. 3 (2018): 618--25. <https://doi.org/10.1093/jahist/jay283>.
 
 Glaude, Eddie S. _Exodus! Religion, Race, and Nation in Early Nineteenth-Century Black America_. University of Chicago Press, 2000.
 
@@ -112,9 +112,9 @@ Putnam, Lara. "The Transnational and the Text-Searchable: Digitized Sources and 
 
 Rutner, Jennifer, and Roger Schonfeld. "Supporting the Changing Research Practices of Historians." New York: Ithaka S+R, August 11, 2015. <https://doi.org/10.18665/sr.22532>.
 
-Sarna, Jonathan D. "The Bible and Judaism in America." In _The Oxford Handbook of the Bible in America_, edited by Paul C. Gutjahr, 505–--16. Oxford University Press, 2017.
+Sarna, Jonathan D. "The Bible and Judaism in America." In _The Oxford Handbook of the Bible in America_, edited by Paul C. Gutjahr, 505--16. Oxford University Press, 2017.
 
-Sarna, Jonathan D., and Nahum M. Sarna. "Jewish Bible Scholarship and Translations in the United States." In _The Bible and Bibles in America_, edited by Ernest S. Frerichs, 83–116. Scholars Press, 1988.
+Sarna, Jonathan D., and Nahum M. Sarna. "Jewish Bible Scholarship and Translations in the United States." In _The Bible and Bibles in America_, edited by Ernest S. Frerichs, 83--116. Scholars Press, 1988.
 
 Schmidt, Leigh Eric. _Consumer Rites: The Buying and Selling of American Holidays_. Princeton University Press, 1997.
 
@@ -126,7 +126,7 @@ Smith, Christian. _The Bible Made Impossible: Why Biblicism Is Not a Truly Evang
 
 Smith, David A., and Ryan Cordell. "A Research Agenda for Historical and Multilingual Optical Character Recognition." NUlab, Northeastern University, 2018. https://ocr.northeastern.edu/report/.
 
-Smith, David A., Ryan Cordell, and Abby Mullen. "Computational Methods for Uncovering Reprinted Texts in Antebellum Newspapers." _American Literary History_ 27, no. 3 (2015): E1–15. https://doi.org/10.1093/alh/ajv029.
+Smith, David A., Ryan Cordell, and Abby Mullen. "Computational Methods for Uncovering Reprinted Texts in Antebellum Newspapers." _American Literary History_ 27, no. 3 (2015): E1--15. https://doi.org/10.1093/alh/ajv029.
 
 Smith, Wilfred Cantwell. _What Is Scripture? A Comparative Approach_. Fortress Press, 1993.
 
@@ -134,7 +134,7 @@ Stein, Stephen J. "America’s Bibles: Canon, Commentary, and Community." _Churc
 
 Thuesen, Peter J. _In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible_. Oxford University Press, 1999.
 
-Twaddell, Elizabeth. "The American Tract Society, 1814--1860." _Church History_ 15, no. 2 (1946): 116–32. <https://doi.org/10.2307/3160400>.
+Twaddell, Elizabeth. "The American Tract Society, 1814--1860." _Church History_ 15, no. 2 (1946): 116--32. <https://doi.org/10.2307/3160400>.
 
 Underwood, Ted. "Theorizing Research Practices We Forgot to Theorize Twenty Years Ago." _Representations_ 127, no. 1 (2014): 64--72. <https://doi.org/10.1525/rep.2014.127.1.64>.
 
