@@ -12,4 +12,4 @@ All of the code for this project is available on [GitHub](https://github.com/lmu
 
 #### Computing Cultural Heritage in the Cloud
 
-In fall 2021, I had the good fortune to work with the LC Labs to extend my work on _Chronicling America_ across the entire Library of Congress digital collections. You can find more about the [Computing Cultural Heritage in the Cloud](https://labs.loc.gov/work/experiments/cchc/) project at their website. You can find my work [for that project on GitHub](https://github.com/lmullen/cchc).
+Working in collaboration with the LC Labs in fall 2021, I extended this project beyond _Chronicling America_ to other Library of Congress digital collections. You can find more about the [Computing Cultural Heritage in the Cloud](https://labs.loc.gov/work/experiments/cchc/) project at the LC Labs website. You can find my work [for that project on GitHub](https://github.com/lmullen/cchc).

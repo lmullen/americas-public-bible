@@ -1,11 +1,11 @@
 ---
-title: Everybody's Bible box
+title: Everybody’s Bible box
 newspaper: Bennington Evening Banner
 date: 1912-01-24
 reference: 1 Timothy 2:12
 city: Bennington
 state: VT
-chronam: https://chroniclingamerica.loc.gov/lccn/sn95066012/1912-01-24/ed-1/seq-2/
+chronam: https://chroniclingamerica.loc.gov/lccn/sn95066012/1912-01-24/ed-1/seq-2/#words=woman+teach+usurp+authority
 featured: false
 author: Lincoln Mullen
 ---

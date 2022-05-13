@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-As women began to replace men as the primary switchboard operators, questions arose if women would be able to keep up with the job. Advising that "Many are called but few are chosen," (Matthew 22:14) this article cautioned female applicants on the high-presured and energy-draining nature of telephone operating. 
+As women began to replace men as the primary switchboard operators, questions arose if women would be able to keep up with the job. Noting that "many are called but few are chosen," this article cautioned female applicants on the high-presured and energy-draining nature of telephone operating. 

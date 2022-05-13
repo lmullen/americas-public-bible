@@ -1,6 +1,6 @@
 ---
 title: Value of body building
-newspaper: The Scranton tribune
+newspaper: The Scranton Tribune
 date: 1895-01-21
 reference: Luke 7:16
 city: Scranton
@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-This advertisement for the YMCA promotes the health and career benefits of weight training and classes. It boasts the ability to transform young men from "a perfect little physical coward" into successful businessmen, reflected by their physical appearance. 
+This advertisement for the YMCA promotes the health and career benefits of weight training and classes. It boasts the ability to transform young men from "a perfect little physical coward" into successful businessmen, reflected by their physical appearance. The YMCA could thus be known by its "fruits."

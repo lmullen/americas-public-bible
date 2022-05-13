@@ -11,4 +11,4 @@ author: Lincoln Mullen
 ---
 
 
-In this article, Edward Spencer quotes Ephesians 5:22 as an excuse for domestic violence before a courtroom. In a fit of anger, Spencer argued with his wife and accused her of not upholding her vows in the marriage. He quotes this verse to support his argument that "the wife should be subject to the husband in all things." 
+In this article, Edward Spencer quotes Ephesians 5:22 in a courtroom as an excuse for domestic violence. In a fit of anger, Spencer argued with his wife and accused her of not upholding her vows in the marriage. He quotes this verse to support his argument that "the wife should be subject to the husband in all things." 

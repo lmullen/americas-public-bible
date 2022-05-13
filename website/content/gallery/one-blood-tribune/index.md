@@ -10,4 +10,5 @@ featured: false
 author: Lincoln Mullen
 ---
 
-The *New York Tribune* identified itself as Republican and anti-slavery by quoting Acts 17:26. Other newspapers reprinted this notice or advertisement.
+The *New York Tribune* identified itself as Republican and anti-slavery by quoting Acts 17:26, "God has made of one blood all nations of men." Other newspapers reprinted this advertisement.
+

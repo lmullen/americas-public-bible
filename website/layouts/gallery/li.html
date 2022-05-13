@@ -12,24 +12,21 @@
 
       <p>
         <strong>Reference: </strong>
-        {{ .Params.Reference }}.<br /><a href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'
-          >See trend and related quotations &rarr;</a
-        >
+        {{ .Params.Reference }}<br /><a href='/verse-viewer/?{{ (querify "ref" .Params.Reference) | safeURL }}'>See
+          trend and related quotations &rarr;</a>
       </p>
       <p>
         <strong>Source:</strong>
         <em>{{ .Params.Newspaper }}</em>
-        ({{ .Params.City }}, {{ .Params.State }}), {{ .Params.Date.Format "2 January 2006" }}.<br /><a
-          href="{{ .Params.Chronam }}"
-          >See context at
+        ({{ .Params.City }}, {{ .Params.State }}), {{ .Params.Date.Format "2 January 2006" }}<br /><a
+          href="{{ .Params.Chronam }}">See context at
           <em>Chronicling America</em>
-          &rarr;</a
-        >
+          &rarr;</a>
       </p>
       {{ if ne .Params.Author "Lincoln Mullen"}}
       <p>
         <strong>Added by: </strong>
-        {{ .Params.Author }}.
+        {{ .Params.Author }}
       </p>
       {{ end }}
     </div>

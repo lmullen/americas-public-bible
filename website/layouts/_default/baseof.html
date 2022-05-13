@@ -49,12 +49,12 @@
 
     <header>
       <div data-sticky-container>
-        <nav class="top-bar" style="width:100%">
+        <nav class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1" style="width:100%">
           <div class="top-bar-left">
             <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
           </div>
           <div class="top-bar-right" style="text-align: left!important;">
-            <a href="/">Table of Contents</a>
+            <a href="/#toc">Table of Contents</a>
           </div>
         </nav>
       </div>
@@ -85,8 +85,9 @@
           <p>
             <a href="/acknowledgements/">Acknowledgements</a>
           </p>
-          <p>Published by <a href="http://www.sup.org/digital/">Stanford University Press</a>. Created at the <a
-              href="">Roy Rosenzweig Center for History and New Media</a>.</p>
+          <p>
+            Created at the <a href="">Roy Rosenzweig Center for History and New Media</a>. Published by <a
+              href="http://www.sup.org/digital/">Stanford University Press</a>. </p>
           <p>
             This project is &copy; 2016&ndash;{{ .Site.Params.year }}
             <a href="https://lincolnmullen.com">Lincoln Mullen</a>.<br />

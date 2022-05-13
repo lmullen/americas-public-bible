@@ -1,5 +1,5 @@
 ---
-title: Jug not Lest ye be jugged
+title: Jug not lest ye be jugged
 newspaper: Pascagoula Democrat-Star
 date: 1899-11-10
 reference: Matthew 7:1
