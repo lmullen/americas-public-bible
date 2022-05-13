@@ -85,7 +85,7 @@ At the turn of the twentieth century the *Los Angeles Herald* condemned commerci
 
 [^23]: *The New York Herald* (New York, NY) [20 June 1870](https://chroniclingamerica.loc.gov/lccn/sn83030313/1870-06-20/ed-1/seq-4/#words=man+profited+shall+gain+whole+world+lose+soul+shall+man+give+exchange+soul).
 
-[^24]: Michael McGerr, _A Fierce Discontent: The Rise and Fall of the Progressive Movement in America 1870--1920_ (Free Press, 2003).
+[^24]: Michael McGerr, _A Fierce Discontent: The Rise and Fall of the Progressive Movement in America, 1870--1920_ (Free Press, 2003).
 
 [^25]: *The Progressive Farmer* (Winston, NC), [30 May 1893](https://chroniclingamerica.loc.gov/lccn/sn92073049/1893-05-30/ed-1/seq-2/#words=man+profited+shall+gain+whole+world+lose+soul+shall+man+give+exchange+soul).
 

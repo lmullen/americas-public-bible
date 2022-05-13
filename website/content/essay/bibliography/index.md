@@ -82,7 +82,7 @@ Manseau, Peter. _The Jefferson Bible: A Biography_. Princeton University Press, 
 
 McDannell, Colleen. _Material Christianity: Religion and Popular Culture in America_. Yale University Press, 1995.
 
-McGerr, Michael. _A Fierce Discontent: The Rise and Fall of the Progressive Movement in America 1870--1920. Free Press, 2003.
+McGerr, Michael. _A Fierce Discontent: The Rise and Fall of the Progressive Movement in America, 1870--1920_. Free Press, 2003.
 
 Milligan, Ian. "Illusionary Order: Online Databases, Optical Character Recognition, and Canadian History, 1997--2010." _Canadian Historical Review_ 94, no. 4 (2013): 540--569. <https://doi.org/10.3138/chr.694>.
 
