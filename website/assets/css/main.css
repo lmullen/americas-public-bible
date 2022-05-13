@@ -351,3 +351,13 @@ a div svg {
   font-weight: bold;
   font-size: 1.1rem;
 }
+
+.verse-list-button {
+  margin-right: 0.25rem;
+}
+
+#gallery-link {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 1rem;
+}
