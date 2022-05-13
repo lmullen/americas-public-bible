@@ -1,7 +1,7 @@
 ---
 title: Thou shalt make money
 newspaper: The Forest Republican
-date: 1872-28-08
+date: 1872-08-28
 reference: Exodus 20:15
 city: Tionesta
 state: PA

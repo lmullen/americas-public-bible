@@ -1,6 +1,6 @@
 ---
 title: Mammoth raddish 
-newspaper: Semi-weekly Standard
+newspaper: Semi-Weekly Standard
 date: 1856-12-03
 reference: Proverbs 21:39
 city: Raleigh
@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-This Raleigh, NC newspaper praised Mrs. James Turner for her the size of her raddish, an indicator of her gardening and housekeeping skills. According to the author, this accomplishment warrants for "Her children arise up, and call her belssed; her husband also, and he praiseth her" as she fulfills expectations of womanhood and domesticity. 
+This Raleigh newspaper praised Mrs. James Turner for her the size of her raddish, an indicator of her gardening and housekeeping skills. She was praised in the words of the Proverbs: "Her children arise up, and call her blessed; her husband also, and he praiseth her" as she fulfills expectations of womanhood and domesticity. 
