@@ -9,5 +9,5 @@ aliases:
 </p>
 
 <p>
-Here are some suggestions about how to get started, or you can begin with the table of contents below.
+Here are some suggestions about how to get started, or you can begin with the <a href="/#toc">table of contents</a> below.
 </p>
