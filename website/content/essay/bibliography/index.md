@@ -16,6 +16,8 @@ Boylan, Anne M. _Sunday School: The Formation of an American Institution, 1790--
 
 Blight, David W. _Race and Reunion: The Civil War in American Memory_. Belknap Press of Harvard University Press, 2002.
 
+Bowman, Matthew. _Christian: The Politics of a Word in America_. Harvard University Press, 2018.
+
 Brekus, Catherine A. "Contested Words: History, America, Religion." _William and Mary Quarterly_ 75, no. 1 (2018): 3--36.
 
 ———. _Sarah Osborn’s World: The Rise of Evangelical Christianity in Early America_. Yale University Press, 2013.
