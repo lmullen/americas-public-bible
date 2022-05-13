@@ -38,6 +38,8 @@ Du Mez, Kristin Kobes. _A New Gospel for Women: Katharine Bushnell and the Chall
 
 ———. _Jesus and John Wayne: How White Evangelicals Corrupted a Faith and Fractured a Nation_. Liveright, 2020.
 
+Faust, Drew Gilpin. _This Republic of Suffering: Death and the American Civil War_. Knopf, 2008.
+
 Fea, John. _The Bible Cause: A History of the American Bible Society_. Oxford University Press, 2016.
 
 Feiler, Bruce. _America's Prophet: Moses and the American Story_. William Morrow, 2009.
@@ -79,6 +81,8 @@ Lum, Kathryn Gin. "The Historyless Heathen and the Stagnating Pagan: History as 
 Manseau, Peter. _The Jefferson Bible: A Biography_. Princeton University Press, 2020. 
 
 McDannell, Colleen. _Material Christianity: Religion and Popular Culture in America_. Yale University Press, 1995.
+
+McGerr, Michael. _A Fierce Discontent: The Rise and Fall of the Progressive Movement in America 1870--1920. Free Press, 2003.
 
 Milligan, Ian. "Illusionary Order: Online Databases, Optical Character Recognition, and Canadian History, 1997--2010." _Canadian Historical Review_ 94, no. 4 (2013): 540--569. <https://doi.org/10.3138/chr.694>.
 
