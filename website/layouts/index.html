@@ -145,7 +145,7 @@
     <h2>Quotations gallery</h2>
     <p>Striking examples of quotations from the Bible in newspapers.</p>
     <div class="grid-x grid-margin-x homepage-gallery">
-      {{ range where .Site.RegularPages "Type" "gallery" | first 64 }}
+      {{ range where .Site.RegularPages "Type" "gallery" | first 20 }}
       <div class="cell medium-3 small-4">
         <div class="gallery-item">
           {{ $img := .Resources.GetMatch "quotation.png"}} {{ $thumbnail :=
