@@ -62,6 +62,8 @@ Gutjahr, Paul C. _An American Bible: A History of the Good Book in the United St
 
 Gutjahr, Paul, ed. _The Oxford Handbook of the Bible in America_. New York: Oxford University Press, 2017.
 
+Hall, David D., ed. _A History of the Book in America_. 5 vols. Published in association with the American Antiquarian Society by the University of North Carolina Press, 2000--2010.
+
 Harrill, J. Albert. "The Use of the New Testament in the American Slave Controversy: A Case History in the Hermeneutical Tension between Biblical Criticism and Christian Moral Debate." _Religion and American Culture: A Journal of Interpretation_ 10, no. 2 (2000): 149--86. <https://doi.org/10.2307/1123945>.
 
 Hatch, Nathan O., and Mark A. Noll, eds. _The Bible in America: Essays in Cultural History_. Oxford University Press, 1982.
@@ -72,9 +74,13 @@ Hempton, David. _Evangelical Disenchantment: Nine Portraits of Faith and Doubt_.
 
 Hitchcock, Tim. "Confronting the Digital: Or How Academic History Writing Lost the Plot." _Cultural and Social History_ 10, no. 1 (2013): 9--23. <https://doi.org/10.2752/147800413X13515292098070>.
 
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. _An Introduction to Statistical Learning with Applications in R_. Springer, 2013.
+
 Jemison, Elizabeth L. _Christian Citizens: Reading the Bible in Black and White in the Postemancipation South_. University of North Carolina Press, 2020.
 
 Kamensky, Jane. _Governing the Tongue: The Politics of Speech in Early New England_. Oxford University Press, 1999.
+
+Kuhn, Max. _Applied Predictive Modeling_. Springer, 2013.
 
 Luhrmann, T. M. _When God Talks Back: Understanding the American Evangelical Relationship with God_. Knopf, 2012.
 
