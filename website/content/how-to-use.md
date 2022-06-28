@@ -1,3 +1,5 @@
+This setence has a typo.
+
 This website contains elements akin to a traditionally published book, but it also contains interactive elements that take advantage of the medium of the web. All of the elements of this website are accessible from the [home page](/), which serves as a table of contents. 
 
 The different elements of the site form an interpretative pyramid, something like [the e-books that Robert Darnton envisioned](https://www.nybooks.com/articles/1999/03/18/the-new-age-of-the-book/):
