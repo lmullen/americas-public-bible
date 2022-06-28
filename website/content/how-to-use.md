@@ -1,4 +1,4 @@
-This setence has a typo.
+This sentence does not have a typo.
 
 This website contains elements akin to a traditionally published book, but it also contains interactive elements that take advantage of the medium of the web. All of the elements of this website are accessible from the [home page](/), which serves as a table of contents. 
 
