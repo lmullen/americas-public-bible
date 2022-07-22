@@ -10,4 +10,4 @@ featured: true
 author: Lincoln Mullen
 ---
 
-A memorial to an Rock Island, Illinois, soldier who died in World War I after saving other soldiers in a mustard gas attack. The text "greater love has no man than this, that he lay down his life for his friend" was commonly used in obituaries for soldiers and sailors during the Great War.
+A memorial to a Rock Island, Illinois, soldier who died in World War I after saving other soldiers in a mustard gas attack. The text "greater love has no man than this, that he lay down his life for his friend" was commonly used in obituaries for soldiers and sailors during the Great War.
