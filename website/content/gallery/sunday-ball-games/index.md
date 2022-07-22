@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-This author questions the influence of sports culture on the nation's ability to keep the Christian Sabbath. They urge readers to "Remember the Sabbath day and keep it holy" and not attend baseball games on Sundays. The author interpreted the death of multiple people from a lightening strike as direct reaction from God and felt called to print a warning. 
+This author questions the influence of sports culture on the nation's ability to keep the Christian Sabbath. They urge readers to "Remember the Sabbath day and keep it holy" and not attend baseball games on Sundays. The author interpreted the death of multiple people from a lightning strike as direct reaction from God and felt called to print a warning. 
