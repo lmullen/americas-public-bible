@@ -10,4 +10,4 @@ featured: true
 author: Olivia Vermane
 ---
 
-On August 16, 1858, Cyrus Field sent the first official message across the transatlantic cable, which read, "Glory to God in the highest; on earth peace, good will toward men." In the following days, newspapers across the country recounted the historic exchange that followed between President James Buchanan and Queen Victoria. Communication that once took upwards of 10 days to deliver could now be transmitted in minutes. 
+On August 16, 1858, Cyrus Field sent the first official message across the transatlantic cable. It read, "Glory to God in the highest; on earth peace, good will toward men." In the following days, newspapers across the country recounted the historic exchange that followed between President James Buchanan and Queen Victoria. Communication that once took upwards of 10 days to deliver could now be transmitted in minutes. 
