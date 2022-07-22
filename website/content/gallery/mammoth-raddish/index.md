@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-This Raleigh newspaper praised Mrs. James Turner for her the size of her raddish, an indicator of her gardening and housekeeping skills. She was praised in the words of the Proverbs: "Her children arise up, and call her blessed; her husband also, and he praiseth her" as she fulfills expectations of womanhood and domesticity. 
+This Raleigh newspaper praised Mrs. James Turner for her the size of her raddish, an indicator of her gardening skills. She was praised in the words of the Proverbs: "Her children arise up, and call her blessed; her husband also, and he praiseth her" for her fulfillment of expectations of womanhood and domesticity. 
