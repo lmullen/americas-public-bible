@@ -70,7 +70,7 @@ The nineteenth century saw the start of a woman's rights movement in the United 
 
 [^12]: *Alexandria Gazette* (Alexandria, VA), [08 April 1913](https://chroniclingamerica.loc.gov/lccn/sn85025007/1913-04-08/ed-1/seq-4/), p. 4.
 
-[^13]: *The Examiner* (Louisville, KY), [09 Dec. 1848](https://chroniclingamerica.loc.gov/lccn/sn82015050/1848-12-09/ed-1/seq-1/), p. 1).
+[^13]: *The Examiner* (Louisville, KY), [09 Dec. 1848](https://chroniclingamerica.loc.gov/lccn/sn82015050/1848-12-09/ed-1/seq-1/), p. 1.
 
 [^14]: *Chicago Daily Tribune* (Chicago, IL), [19 March 1876](https://chroniclingamerica.loc.gov/lccn/sn84031492/1876-03-19/ed-1/seq-16/), p. 16.
 
@@ -86,4 +86,4 @@ The nineteenth century saw the start of a woman's rights movement in the United 
 
 [^20]: Cf. Kristin Kobes Du Mez, *Jesus and John Wayne: How White Evangelicals Corrupted a Faith and Fractured a Nation* (Liveright, 2020); Beth Allison Barr, *The Making of Biblical Womanhood: How the Subjugation of Women Became Gospel Truth* (Brazos Press, 2021).
 
-[^100]: *Daily Missoulian* (Missoula, MT), [13 Jan. 1914](https://chroniclingamerica.loc.gov/lccn/sn83025316/1914-01-13/ed-1/seq-4/#words=wives+submit+unto+husbands+unto+lord), p. 4).
+[^100]: *Daily Missoulian* (Missoula, MT), [13 Jan. 1914](https://chroniclingamerica.loc.gov/lccn/sn83025316/1914-01-13/ed-1/seq-4/#words=wives+submit+unto+husbands+unto+lord), p. 4.
