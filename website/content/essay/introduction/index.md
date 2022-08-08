@@ -118,7 +118,7 @@ The quotation commemorating fallen soldiers was popular because newspapers publi
 
 Besides such content that newspaper editors and readers would have obviously classified as Christian or religious, such as the sermons or Sunday school lessons, or content such as obituaries that were connected to lifecycle events associated with religious observances, there were also types of newspaper content that blurred any naive line between the secular and the sacred even in religiously unaffiliated newspapers. Chief among these were newspaper advertisements, especially advertisements for Bibles sold by newspapers. Over the course of the nineteenth century, newspapers increasingly became dependent on advertisements for their revenue. And advertisements sometimes used the Holy Writ to encourage people to buy products. As Christmas, and to a lesser extent, Easter became holidays for gift giving, newspapers found that the Bible could help their advertisements in those seasons.[^65] Retailers and department store pioneers like James Cash Penny were fond of quoting the verse "It is more blessed to give than to receive" (Acts 20:35) in their advertisements.[^66] Sometimes newspapers even advertised their advertisements using the Bible. For instance, under a quotation of this verse in large type, the *Evening Times* of Grand Forks instructed readers, "Start now and read The Times' advertisements closely and constantly every day. Then you will know where to buy and what to give and purchase all your Christmas presents to best advantage" (see figure 6).
 
-{{< fig-2up left="jcpenney.png" right="give-than-receive.png" caption="The Bible was used to encourage newspaper readers to visit department stores and to scan newspaper advertisements closely in preparation for Christmas gift giving. **Left:** _Devils Lake World_ (Devils Lake, N.D.), [21 Dec. 1921](https://chroniclingamerica.loc.gov/lccn/sn88076526/1921-12-21/ed-1/seq-5/), p. 5. **Right:** _Evening Times_ (Grand Forks, N.D.) [7 Dec. 1912](https://chroniclingamerica.loc.gov/lccn/sn85042373/1912-12-07/ed-1/seq-1/), p. 1." >}}
+{{< fig-2up left="jcpenney.png" right="give-than-receive.png" caption="The Bible was used to encourage newspaper readers to visit department stores and to scan newspaper advertisements closely in preparation for Christmas gift giving. **Left:** _Devils Lake World_ (Devils Lake, ND), [21 Dec. 1921](https://chroniclingamerica.loc.gov/lccn/sn88076526/1921-12-21/ed-1/seq-5/), p. 5. **Right:** _Evening Times_ (Grand Forks, ND) [7 Dec. 1912](https://chroniclingamerica.loc.gov/lccn/sn85042373/1912-12-07/ed-1/seq-1/), p. 1." >}}
 
 The Bible appeared in the newspaper, then, for a variety of reasons. The trends in the rate of quotation were driven in some instances by connections to newsworthy events or the recirculation of texts, and in other instances by changes to the types of content that newspapers published. This site does try to identify specific instances of quotations which were popular for a moment, and more broadly to group verses together with similar trend lines to see which verses were used at the same time. But for the most part, the visualizations present those trends without attempting to sort out the multitude of factors that influenced them, which is probably not possible and likely not even desirable.
 
@@ -150,7 +150,7 @@ In short, *America's Public Bible* is a work of scholarship that has adopted a d
 
 So what does the commentary show? Like any commentary, the usefulness of this site is less in its overarching claims than in the details that it uncovers. As with any commentary, readers will come to this site seeking to make their own interpretations, and it is quite likely that the reader will be more interested in the materials that this site provides than the arguments that it advances. You are invited to make use of this site as a reference work, a commentary, or an argument as it suits your purposes. You may find many entry points into the project, either through this introduction or the discussion of methodology; through the visualizations; or through any of the thematic essays.
 
-But the commentary's overarching argument is that the Bible is primarily a medium through which public discourse happened, rather than primarily a substantive source for that discourse. Many American Protestants who thought of the Bible seriously as the source for all human endeavors walked a fine line between the clarity and mystery of the Scriptures. On the one hand, many Protestants believed wholeheartedly in the perspicacity of the Scriptures, a doctrine which held that the meaning of the Scriptures was sufficiently plain that any believer could understand it on his own, without even the aid of pastor or priest. God had written the Scriptures so plain that "he who runs may read," in the memorable phrase from the prophet Habakkuk. But on the other hand, those same Protestants wrestled with the text, and filled their bookshelves with commentaries, Sunday school lessons, and sermons in the hopes of better understanding the Word of life. The Scriptures were full of the "the words of the wise, and their dark sayings," as king Solomon had said.
+But the commentary's overarching argument is that the Bible is primarily a medium through which public discourse happened, rather than primarily a substantive source for that discourse. Many American Protestants who thought of the Bible seriously as the source for all human endeavors walked a fine line between the clarity and mystery of the Scriptures. On the one hand, many Protestants believed wholeheartedly in the perspicacity of the Scriptures, a doctrine which held that the meaning of the Scriptures was sufficiently plain that any believer could understand it on his own, without even the aid of pastor or priest. God had written the Scriptures so plain that "he who runs may read," in the memorable phrase from the prophet Habakkuk. But on the other hand, those same Protestants wrestled with the text, and filled their bookshelves with commentaries, Sunday school lessons, and sermons in the hopes of better understanding the Word of life. The Scriptures were full of the "the words of the wise, and their dark sayings," as King Solomon had said.
 
 When the Bible was quoted in the newspapers, the way it was used mirrored that paradox of clarity and confusion. On the one hand, when the Bible was cited on one side or the other of an issue, only rarely was its meaning explicated rather than assumed. It was far more common to treat the text as an authority to be cited rather than as a text to be understood. Those who cited the text most typically thought that their readers would understand its meaning precisely as they did.
 
@@ -208,7 +208,7 @@ The significance of the Bible in public discourse, then, was less what in it sai
 
 [^25]: _Chronicling America: Historic American Newspapers_, Library of Congress, <https://chroniclingamerica.loc.gov>.
 
-[^26]: _Nineteenth-century U.S. Newspapers_, Gale, <https://www.gale.com/c/nineteenth-century-us-newspapers>.
+[^26]: _Nineteenth Century U.S. Newspapers_, Gale, <https://www.gale.com/c/nineteenth-century-us-newspapers>.
 
 [^27]: There is some overlap between the two collections, which, as described below, is useful for validating the method. _Chronicling America_ continues to add to its collection; the figures given are correct as of the date when I did the analysis. In practice, pages with truly poor OCR are thrown away as are any matches that happen to be found in those pages.
 
@@ -226,27 +226,27 @@ The significance of the Bible in public discourse, then, was less what in it sai
 
 [^36]: James P. Byrd, _Sacred Scripture, Sacred War: The Bible and the American Revolution_ (New York: Oxford University Press, 2013).
 
-[^38]: Valerie C. Cooper, _Word, Like Fire_.
+[^38]: Cooper, _Word, Like Fire_.
 
 [^39]: Introductory essay in Philip Goff, Arthur E Farnsley II, and Peter J. Thuesen, eds., _The Bible in American Life_ (Oxford University Press, 2017).
 
 [^40]: Vincent L. Wimbush, _Theorizing Scriptures: New Critical Orientations to a Cultural Phenomenon_ (Rutgers University Press, 2008); Vincent L. Wimbush and Rosamond C. Rodman, eds., _African Americans and the Bible: Sacred Texts and Social Textures_ (Continuum, 2000); Wilfred Cantwell Smith, _What Is Scripture? A Comparative Approach_ (Fortress Press, 1993).
 
-[^41]: Paul C. Gutjahr, _An American Bible_.
+[^41]: Gutjahr, _An American Bible_.
 
-[^42]: Mark A. Noll, _In the Beginning Was the Word_.
+[^42]: Noll, _In the Beginning Was the Word_.
 
 [^43]: John Fea, _The Bible Cause: A History of the American Bible Society_ (Oxford University Press, 2016); Peter J. Wosh, _Spreading the Word: The Bible Business in Nineteenth-Century America_ (Cornell University Press, 1994); David Paul Nord, "Benevolent Capital: Financing Evangelical Book Publishing in Early Nineteenth-Century America" in Mark A. Noll, ed., _God and Mammon: Protestants, Money, and the Market, 1790--1860_ (Oxford University Press, 2002).
 
 [^44]: Peter J. Thuesen, _In Discordance with the Scriptures: American Protestant Battles Over Translating the Bible_ (Oxford University Press, 1999).
 
-[^45]: Elizabeth L. Jemison, _Christian Citizens: Reading the Bible in Black and White in the Postemancipation South_ (Chapel Hill: The University of North Carolina Press, 2020); Mark A. Noll, _The Civil War as a Theological Crisis_ (University of North Carolina Press, 2006).
+[^45]: Elizabeth L. Jemison, _Christian Citizens: Reading the Bible in Black and White in the Postemancipation South_ (Chapel Hill: The University of North Carolina Press, 2020); Noll, _The Civil War as a Theological Crisis_.
 
 [^46]: David Paul Nord, _Faith in Reading: Religious Publishing and the Birth of Mass Media in America_ (Oxford University Press, 2004).
 
 [^47]: Paul Gutjahr, ed., _The Oxford Handbook of the Bible in America_ (New York: Oxford University Press, 2017).
 
-[^48]: Mark A. Noll, _In the Beginning Was the Word_; Mark A. Noll, _America's Book: The Rise and Decline of a Bible Civilization, 1794--1911_ (Oxford University Press, 2022).
+[^48]: Noll, _In the Beginning Was the Word_; Mark A. Noll, _America's Book: The Rise and Decline of a Bible Civilization, 1794--1911_ (Oxford University Press, 2022).
 
 [^49]: Goff, Farnsley, and Thuesen, _The Bible in American Life_.
 
@@ -268,7 +268,7 @@ The significance of the Bible in public discourse, then, was less what in it sai
 
 [^58]: _Minneapolis Journal_ (Minneapolis, MN), 24 October 1903, p. 10.
 
-[^59]: On changes in printing Bibles, see Gutjahr, _American Bible_; Fea, _Bible Cause_.
+[^59]: On changes in printing Bibles, see Gutjahr, _An American Bible_; Fea, _Bible Cause_.
 
 [^60]: *The California Outlook* (Los Angeles, CA), 29 June 1912, [p. 6](https://books.google.com/books?id=Qgs9AQAAIAAJ&lpg=PP14).
 
@@ -296,7 +296,7 @@ The significance of the Bible in public discourse, then, was less what in it sai
 
 [^73]: On the role of argumentation, see the "Digital History and Argument" white paper. Arguing with Digital History working group, "Digital History and Argument" (Roy Rosenzweig Center for History & New Media, November 13, 2017), <https://rrchnm.org/argument-white-paper/>.
 
-[^74]: Mark A. Noll, _The Civil War as a Theological Crisis_, ch. 3.
+[^74]: Noll, _The Civil War as a Theological Crisis_, ch. 3.
 
 [^75]: For a related argument, see Christian Smith, _The Bible Made Impossible_.
 
