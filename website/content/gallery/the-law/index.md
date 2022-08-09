@@ -1,6 +1,6 @@
 ---
 title: Interlinear commentary on the Law
-newspaper: The Globe-Republican
+newspaper: Globe-Republican
 date: 1907-09-19
 reference: Matthew 22:37
 city: Dodge City
