@@ -1,6 +1,6 @@
 ---
 title: Dr. Spencer's vegetable pills
-newspaper: The North Carolina Standard
+newspaper: North Carolina Standard
 date: 1845-04-02
 reference: 1 Thessalonians 5:21
 city: Raleigh
