@@ -17,13 +17,13 @@ What made these verses of the canon within the canon so comparatively quotable r
 
 The most quoted verse was {{% vv "Luke 2:14" %}}, "Glory to God in the highest, and on earth peace, good will toward men." This verse, coming in the Gospels in connection with the story of Jesus' birth, was quite obviously a Christmas verse. But even a cursory look at the dates on which the verse was quoted shows that it was used in far more context than just Christmas. The verse was often used for a humanitarian purpose, with the phrase "peace, good will toward men" lending itself to use during war time. The cyclical nature of the verse shows ascending popularity during the lead up to and aftermath of the Civil War, during the Spanish-American War and the war in the Philippines, and during the Great War. The celebrity preacher Thomas De Witt Talmage used the verse in a Decoration Day sermon that asked, "Can we not be at peace on earth when this moment in Heaven dwell in perfect love Ulysses S. Grant and Robert E. Lee, William T. Sherman and Stonewall Jackson and tens of thousands of northern and southern men who, though once looked askance at each other from the opposite banks of the Potomac and Chickahominy and the James and the Tennessee, now are on the same side of the river, keeping jubilee with some of those old angels who near nineteen centuries ago cam down one Christmas night to chant over Bethlehem: 'Glory to God in the highest; on earth peace, good will to men.'"[^2]
 
-{{% fig-verse ref="Luke 2:14" caption="Note that the peaks for this verse correspond with times of war." %}}
+{{% fig-verse ref="Luke 2:14" caption=`Note that the peaks for this verse correspond with times of war.` %}}
 
 **Rank 2.** {{% vv "Luke 18:16" %}}. "Suffer little children to come unto me, and forbid them not: for of such is the kingdom of God."
 
 The second most quoted verse was {{% vv "Luke 8:16" %}} (and the other references with substantially the same text). This verse was used whenever children and religion were concerned. In particular it was part of the rising Sunday school movement of the early nineteenth century, as sometimes newspapers included Sunday school lessons with this verse emblazoned across the top. But it was also used for obituaries of children, whose mortality rate was high in the nineteenth century.
 
-{{% fig-verse ref="Luke 18:16" caption="The usage of this verse peaked with the burgeoning Sunday school movement, but remained constantly high throughout the nineteenth century." %}}
+{{% fig-verse ref="Luke 18:16" caption=`The usage of this verse peaked with the burgeoning Sunday school movement, but remained constantly high throughout the nineteenth century.` %}}
 
 ### Key Christian texts
 
@@ -37,9 +37,9 @@ Among the most quoted texts were those from the Ten Commandments and the Lord's 
 
 When charted, you can see that both "Thou shalt not steal" and "Remember the sabbath day" have a more-or-less similar baseline, apart from sudden spike in the early twentieth century when Theodore Roosevelt used the verse as part of a speech decrying how the Republican nomination for president was "stolen" from him.
 
-{{% fig-verse ref="Exodus 20:8" caption="This verse shows the baseline of quotations for the Ten Commandments." %}}
+{{% fig-verse ref="Exodus 20:8" caption=`This verse shows the baseline of quotations for the Ten Commandments.` %}}
 
-{{% fig-verse ref="Exodus 20:15" caption="Quotations to this part of the Ten Commandments shows an episodic deviation from the baseline rate." %}}
+{{% fig-verse ref="Exodus 20:15" caption=`Quotations to this part of the Ten Commandments shows an episodic deviation from the baseline rate.` %}}
 
 The other key text often quoted, sometimes together as a passage and sometimes as individual verses, was the Lord's Prayer. The Lord's Prayer tended to be a steadily quoted verse, though individual verses in the Lord's Prayer had their own peaks. Below is the chart for {{% vv "Matthew 6:9" %}}, which is more or less the baseline for all of the verses in the Lord's Prayer, and which shows a roughly constant rate of quotation throughout the century. However, you can consult the pages for other verses, including {{% vv "Matthew 6:9" %}}, {{% vv "Matthew 6:10" %}}, {{% vv "Matthew 6:11" %}}, {{% vv "Matthew 6:12" %}}, and {{% vv "Matthew 6:13" %}} to see the different peaks individual verses had.
 
@@ -49,7 +49,7 @@ The other key text often quoted, sometimes together as a passage and sometimes a
 
 **Rank 15.** {{% vv "Matthew 6:11" %}}. "Give us this day our daily bread."
 
-{{% fig-verse ref="Matthew 6:9" caption="The Lord's Prayer was a critical Christian text which was frequently quoted." %}}
+{{% fig-verse ref="Matthew 6:9" caption=`The Lord's Prayer was a critical Christian text which was frequently quoted.` %}}
 
 ### Proverbial or memorable verses
 
@@ -59,7 +59,7 @@ The next major category of steadily quoted verses were those that were proverbia
 
 An example of these would be {{% vv "Matthew 7:16" %}}, "Ye shall know them by their fruits." This saying of Jesus from the Gospel of Matthew takes the form of a proverbial saying. It is New Testament wisdom literature, like much of the parables or other sayings of Jesus, modeled on the wisdom literature of the Hebrew Bible. In the specific context, Jesus was referring to"false prophets." But the imagery of the apothogem was so compelling that many people used the phrase to refer to many other contexts. To give but one example, in his book *The Varieties of Religious Experience*, William James referred to "our empiricism criterion: By their fruits ye shall know them, not by their roots."[^4] Perhaps in this kind of context it is better to understand the use of this verse not properly as a quotation, or even as an allusion, but rather as a turn of phrase which had entered the English language. This particular passage again shows a very steady rate of quotation across the period under study, demonstrating that it was not episodically quoted but part of the stock of the canon within a canon or even a part of the language itself.
 
-{{% fig-verse ref="Matthew 7:16" caption="The sayings of Jesus were often proverbial, and so quotable." %}}
+{{% fig-verse ref="Matthew 7:16" caption=`The sayings of Jesus were often proverbial, and so quotable.` %}}
 
 By far the majority of these most frequently quoted texts are the words of Jesus from the Gospels. While this is not particularly surprising, especially given the centrality of Jesus in American Christians' thinking, it is still noteworthy.[^5] While Jesus' words are pithy, so are many other parts of the Bible, not least the Proverbs and Psalms. 
 
@@ -89,15 +89,15 @@ By far the majority of these most frequently quoted texts are the words of Jesus
 
 {{% vv "John 3:16" %}}, perhaps the most recognizable of all verses in contemporary America, was not always so popular. Rather, its popularity grew gradually over time.
 
-{{% fig-verse ref="John 3:16" caption="This verse is perhaps the most recognizable verse in contemporary America, but its popularity grew gradually over time." %}}
+{{% fig-verse ref="John 3:16" caption=`This verse is perhaps the most recognizable verse in contemporary America, but its popularity grew gradually over time.` %}}
 
 {{% vv "Matthew 22:14" %}} ("many are called, but few are chosen") also started to become vastly more popular over time, starting in the 1870s. With this particular passage it appears to be fair to say that there is no discernible pattern to the ascendancy. The verse was used for vacancies on the New York City policy force, political elections, sermons on predestination, missions, and so forth. Somtimes it was quoted as a Bible verse, but other times it was used simply as a useful turn of phrase. It may be safest to attribute the popularity of the verse to the popularity of the phrase, which gained new force in the national lexicon but which was divorced in many instances from any obvious connection to the Bible.
 
-{{% fig-verse ref="Matthew 22:14" caption="This verse was multipurpose, usable in virtually any context." %}}
+{{% fig-verse ref="Matthew 22:14" caption=`This verse was multipurpose, usable in virtually any context.` %}}
 
 By way of contrast, John 8:32 was also a verse whose popularity increased over time. But unlike Matthew 22:14, the phrase "the truth shall set you free" was mostly used as a direct quotation from the Bible. A great deal of its usage in the newspapers in the second half of the century were sermons or other religious reflections. 
 
-{{% fig-verse ref="John 8:32" caption="Although containing a memorable and even proverbial phrase, this verse was almost entirely used in sermons or other Christian literature, rather than as a common phrase in the language." %}}
+{{% fig-verse ref="John 8:32" caption=`Although containing a memorable and even proverbial phrase, this verse was almost entirely used in sermons or other Christian literature, rather than as a common phrase in the language.` %}}
 
 ### Other proverbial verses
 
@@ -107,23 +107,23 @@ One verse from the Proverbs made the top twenty. Just as with Luke 18:16, the pr
 
 **Rank 7.** {{% vv "Proverbs 22:6" %}}. "Train up a child in the way he should go: and when he is old, he will not depart from it."
 
-{{% fig-verse ref="Proverbs 22:6" caption="This verse was often used to describe how children should be raised." %}}
+{{% fig-verse ref="Proverbs 22:6" caption=`This verse was often used to describe how children should be raised.` %}}
 
 The next two verses were those whose key phrases were broadly applicable in non-Biblical contexts. In other words, like Matthew 22:14, they were verses where the turn of phrase was as important or more so than the theological reflection contained within it.
 
 **Rank 17.** {{% vv "1 Thessalonians 5:21" %}}. "Prove all things; hold fast that which is good."
 
-{{% fig-verse ref="1 Thessalonians 5:21" caption="This verse was used more for its turn of phrase." %}}
+{{% fig-verse ref="1 Thessalonians 5:21" caption=`This verse was used more for its turn of phrase.` %}}
 
 **Rank 18.** {{% vv "Galatians 6:7" %}}. "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
 
-{{% fig-verse ref="Galatians 6:7" caption="Sowing and reaping were such a compelling phrase that they could be used independently of the biblical context." %}}
+{{% fig-verse ref="Galatians 6:7" caption=`Sowing and reaping were such a compelling phrase that they could be used independently of the biblical context.` %}}
 
 Romans 8:28 was also broadly speaking a proverbial verse, in the sense that it was a pithy saying that captured some important truth. 
 
 **Rank 19.** {{% vv "Romans 8:28" %}}. "And we know that all things work together for good to them that love God, to them who are the called according to his purpose."
 
-{{% fig-verse ref="Romans 8:28" caption="This verse was among the most optimistic of the proverbial phrases drawn from the Bible." %}}
+{{% fig-verse ref="Romans 8:28" caption=`This verse was among the most optimistic of the proverbial phrases drawn from the Bible.` %}}
 
 ### Verses uses in obituaries
 
@@ -139,7 +139,7 @@ Finally, some of the most frequently used verses were those that were common in 
 
 **Rank 9.** {{% vv "2 Timothy 4:7" %}}. "I have fought a good fight, I have finished my course, I have kept the faith:"
 
-{{% fig-verse ref="John 15:13" caption="This verse came to be used to commemorate the deaths of military personnel." %}}
+{{% fig-verse ref="John 15:13" caption=`This verse came to be used to commemorate the deaths of military personnel.` %}}
 
 
 [^1]: *Colporteur Reports of the American Tract Society*, 1841--1846 (Newark: New Jersey Historical Records Survey Project, 1940), p. 4--5, 11, 20, 29; for the distribution of the Bible, see John Fea, *The Bible Cause: A History of the American Bible Society* (Oxford University Press, 2016).
