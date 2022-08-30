@@ -38,6 +38,10 @@ h3 small {
   color: rgb(95, 95, 95);
 }
 
+h4 small {
+  color: #757575;
+}
+
 p {
   font-size: 1rem;
   /* text-align: justify;
