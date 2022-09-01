@@ -20,8 +20,9 @@
   <meta name="description" content="{{ .Page.Description }}" />
   {{ else }}
   <meta name="description" content="{{ .Site.Params.Description }}" />
-  <meta name="monetization" content="$ilp.uphold.com/3ZWiyMk9zAZE" />
   {{ end }}
+  <meta name="monetization" content="$ilp.uphold.com/3ZWiyMk9zAZE" />
+  {{ partial "meta" . }}
   {{ end }}
 
   <link rel="stylesheet"
@@ -30,12 +31,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.css"
     integrity="sha256-PaAZL3VjvuBsQSngzjA8dTdYa2mU88xmjd0vw8biXfg=" crossorigin="anonymous">
   {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+
   <link rel="stylesheet" href="{{ $css.Permalink }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+
+  <link rel="shortcut icon" href="/sup-icon.jpg">
+  <link rel="apple-touch-icon" href="sup-icon.jpg">
 
   {{ partial "analytics.html" . }}
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
