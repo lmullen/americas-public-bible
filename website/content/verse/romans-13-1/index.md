@@ -1,7 +1,7 @@
 ---
 description: 'A leading text for those who advocated for law and order, from the Fugitive Slave Act to immigration laws.'
 order: 1
-reference: 'Romans 13'
+reference: 'Romans 13:1'
 snippet: Let every soul be subject unto the higher powers ...
 title: Law and order
 author: Lincoln Mullen
