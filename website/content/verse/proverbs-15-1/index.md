@@ -8,7 +8,7 @@ snippet: "A soft answer turneth away wrath: but grievous words stir up anger."
 title: Good advice, ancient and modern
 ---
 
-Nineteenth-century newspapers were full of advice literature.[^1] Periodicals dispensed all kinds of practical, moral, business, and social advice, often but not always in story form. The Bible too had its share of advice, usually called the wisdom literature. The book of Proverbs, full of easily digestible advice, mostly practical and moral rather than theological, was historically a popular book of the Bible. 
+Nineteenth-century newspapers were full of advice literature.[^1] Periodicals dispensed all kinds of practical, moral, business, and social advice, often but not always in story form. The Bible too had its share of advice, usually called the wisdom literature. The book of Proverbs, full of easily digestible advice, mostly practical and moral rather than theological, was historically a popular book of the Bible. The parables of Jesus---also very popular---were wisdom literature put into story form.
 
 It was natural then for newspapers to draw some of their advice literature from the book of Proverbs. The types of advice were of course tied to the themes in that book. Sexual morality was one major theme, as was the correct (or rather, incorrect) use of alcohol, along with general admonitions to diligence and hard work. Chief among those borrowings was advice on how to govern the tongue, the "unruly member" as {{% vv "James 3:11" %}} put it. {{% vv "Proverbs 15:1" %}}, "A soft answer turneth away wrath: but grievous words stir up anger," was among the texts quoted to that effect. In this instance, it is worthwhile to see not just what advice was given, but to whom that advice was dispensed.
 
