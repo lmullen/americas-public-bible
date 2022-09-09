@@ -1,0 +1,38 @@
+{{ if .IsHome }}
+<meta name="citation_title" content="{{ .Site.Title }}" />
+<meta name="citation_isbn" content="{{ .Site.Params.ISBN }}" />
+<meta name="citation_author" content="Mullen, Lincoln A." />
+<meta name="citation_publication_date" content="{{ .Site.Params.Year }}" />
+<meta name="citation_language" content="en" />
+<meta name="citation_publisher" content="Stanford University Press" />
+<meta name="citation_DOI" content="{{ .Site.Params.DOI }}" />
+<!-- <meta name="citation_OCLC" content="[TBD]" /> -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ .Site.Title }}" />
+<meta name="twitter:description" content="{{ .Site.Params.Description }}" />
+<meta name="twitter:image" content="{{ .Site.BaseURL}}cover.png" />
+<meta name="twitter:domain" content="americaspublicbible.org" />
+
+<meta property="og:title" content="{{ .Site.Title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ .Site.BaseURL }}" />
+<meta property="og:description" content="{{ .Site.Params.Description }}" />
+<meta property="og:image" content="{{ .Site.BaseURL}}cover.png" />
+
+{{ else }}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ .Title }}" />
+{{ if .Description }}
+<meta name="twitter:description" content="{{ .Description }}" />
+{{ end }}
+<meta name="twitter:image" content="{{ .Site.BaseURL}}cover.png" />
+<meta name="twitter:domain" content="americaspublicbible.org" />
+
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{ if .Description }}
+<meta property="og:description" content="{{ .Description }}" />
+{{ end }}
+<meta property="og:image" content="{{ .Site.BaseURL}}cover.png" />
+{{ end }}

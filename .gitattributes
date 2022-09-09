@@ -1,0 +1,6 @@
+**/*.nb.html linguist-generated
+**/foundation.css linguist-vendored
+**/selectize.css linguist-vendored
+**/foundation.min.js linguist-vendored
+**/jquery.min.js linguist-vendored
+**/selectize.min.js linguist-vendored

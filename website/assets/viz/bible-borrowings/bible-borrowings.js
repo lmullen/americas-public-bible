@@ -87,9 +87,6 @@ export default class BibleBorrowings extends Visualization {
       uniqueNodes.has(book.book)
     );
 
-    console.log(this.edges);
-    console.log(booksInGraph);
-
     const links = this.edges.map((d) => Object.create(d));
     const nodes = booksInGraph.map((d) => Object.create(d));
 
