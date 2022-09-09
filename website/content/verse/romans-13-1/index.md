@@ -7,7 +7,7 @@ title: Law and order
 author: Lincoln Mullen
 ---
 
-Should Christians be "Resistants" to unjust acts of their government, or "Non-Resistants"? Those were the terms under which a spirited debate about Christians' obedience to government was undertaken in the pages of the *Vermont Telegraph* in 1842.[^1] Whenever the government acted or legislated unjustly, that debate was repeated and Romans 13:1 was brought to bear.[^2] "Let every soul be subject unto the higher powers," the verse read, for "the powers that be are ordained of God." The powers that be and their supporters unusually found that half of the verse more congenial to their side of the argument. But "rulers are not a terror to good works, but to the evil," the passage went on to read, which gave critics of unjust power a toehold in the argument.
+Should Christians be "Resistants" to unjust acts of their government, or "Non-Resistants"? Those were the terms under which a spirited debate about Christians' obedience to government was undertaken in the pages of the *Vermont Telegraph* in 1842.[^1] Whenever the government acted or legislated unjustly, that debate was repeated and Romans 13:1 was brought to bear.[^2] "Let every soul be subject unto the higher powers," the verse read, for "the powers that be are ordained of God." The powers that be and their supporters usually found that part of the passage more congenial to their side of the argument. But "rulers are not a terror to good works, but to the evil," the passage went on to read, which gave critics of unjust power a toehold in the argument.
 
 Romans 13 played a critical role in the American Revolution. Loyalists who favored obedience to King and Parliament quoted Romans 13 on their behalf. Law, order, and loyalty to an imperial government were all bound up in the phrase "the powers that be." But surprisingly, political and religious leaders who favored the American Revolution were just as eager to quote Romans 13. Their reasoning turned on the justification that Paul gave for obeying government. In a study of how the Bible was used in the American Revolution, the historian James Byrd argues that "American patriots" rejected the notion that Romans 13 required unconditional obedience. Instead, he wrote, they preached from the text "to deny that Paul gave kings the right to be tyrants." As the Anglican priest and regimental chaplain David Griffith said in a sermon on Romans 13, Paul "never meant ... to give sanction to the crimes of wicked and despotic men."[^3]
 
@@ -25,7 +25,7 @@ But by far the key issue that Romans 13 was made to speak to was the question of
 
 Likewise, those opponents of slavery who wished to remain within what they regarded as the orthodox view of a Christian's obligation to government had to contend with the duty for obedience they felt from Romans 13. Take as an example Asa Donaldson's "Bible Anti-Slavery Catechism," published in 1845. Donaldson argued that slavery was contrary to the Declaration of Independence and "at variance ... with the spirit, and general maxims of scripture." Furthermore, slavery was sinful both individually and for the body politic. But since the Constitution was lawful and permitted slavery, he cited Romans 13 as a reason that Christians could not work to "abolish slavery with the sword." Recognizing that the hotter sort of abolitionists might charge him with being "pro-slavery," Donaldson claimed that such charges in that case would have to be laid "against the scriptures." Due to Romans 13, Donaldson would admit only lawful measures to repeal an unjust institution.[^12]
 
-{{< fig-full src="antislavery-catechism.png" caption="Illinois minister Asa Donaldson's 'Bible Anti-Slavery Catechism' was firmly anti-slavery, yet on the basis of Romans 13 it also constrained the actions that Christians could take to resist slavery. *The Ottawa Free Trader* (Ottawa, IL), [31 October 1845](https://chroniclingamerica.loc.gov/lccn/sn84038582/1845-10-31/ed-1/seq-1//#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god)." >}}
+{{< fig-full src="antislavery-catechism.png" caption=`Illinois minister Asa Donaldson's "Bible Anti-Slavery Catechism" was firmly anti-slavery, yet on the basis of Romans 13 it also constrained the actions that Christians could take to resist slavery. *The Ottawa Free Trader* (Ottawa, IL), [31 October 1845](https://chroniclingamerica.loc.gov/lccn/sn84038582/1845-10-31/ed-1/seq-1//#words=let+every+soul+subject+unto+higher+powers+power+god+powers+ordained+god).` >}}
 
 Romans 13 erupted into the public debate in 1850 with the passage of the [Fugitive Slave Act](https://memory.loc.gov/cgi-bin/ampage?collId=llsl&fileName=009/llsl009.db&recNum=489). That law gave teeth to an [existing provision](https://www.law.cornell.edu/constitution/articleiv#section2) in the Constitution by requiring that state officials and even "all good citizens" aid in returning people who had escaped slavery to bondage. Though the theoretical implications for white Christians of resistance to government over slavery had long been discussed, those provisions of the Fugitive Slave Act made the debate theoretical no longer.
 
@@ -73,10 +73,10 @@ To give a prominent recent example, in 2018 Attorney General Jeff Sessions defen
 
 [^16]: *Anti-Slavery Bugle* (New Lisbon, OH), [1 December 1849](https://chroniclingamerica.loc.gov/lccn/sn83035487/1849-12-01/ed-1/seq-3/#words=every+soul+subject+unto+higher+powers+power+god+powers+ordained+god). See David Hempton, *Evangelical Disenchantment*, ch. 4.
 
-[^17]: Cf. Glaude, *Exodus!*.
+[^17]: Cf. Eddie S. Glaude, _Exodus! Religion, Race, and Nation in Early Nineteenth-Century Black America_ (University of Chicago Press, 2000).
 
 [^18]: David Walker, *Walker's Appeal, in Four Articles* (Boston, 1830), 7, <https://docsouth.unc.edu/nc/walker/walker.html>.
 
-[^19]: Cooper, *Word, Like Fire*, ch. 1.
+[^19]: Valerie C. Cooper, _Word, Like Fire: Maria Stewart, the Bible, and the Rights of African Americans_ (University of Virginia Press, 2011), ch. 1.
 
 [^100]: Mark A. Noll, _The Civil War as a Theological Crisis_ (University of North Carolina Press, 2006), ch. 3.

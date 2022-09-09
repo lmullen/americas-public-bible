@@ -41,7 +41,7 @@ When charted, you can see that both "Thou shalt not steal" and "Remember the sab
 
 {{% fig-verse ref="Exodus 20:15" caption=`Quotation of this part of the Ten Commandments shows an episodic deviation from the baseline rate.` %}}
 
-The other key text often quoted, sometimes together as a passage and sometimes as individual verses, was the Lord's Prayer. The Lord's Prayer tended to be a steadily quoted verse, though individual verses in the Lord's Prayer had their own peaks. Below is the chart for {{% vv "Matthew 6:9" %}}, which is more or less the baseline for all of the verses in the Lord's Prayer, and which shows a roughly constant rate of quotation throughout the century. However, you can consult the pages for other verses, including {{% vv "Matthew 6:9" %}}, {{% vv "Matthew 6:10" %}}, {{% vv "Matthew 6:11" %}}, {{% vv "Matthew 6:12" %}}, and {{% vv "Matthew 6:13" %}} to see the different peaks individual verses had.
+The other key text often quoted, sometimes together as a passage and sometimes as individual verses, was the Lord's Prayer. The Lord's Prayer tended to be a steadily quoted verse, though individual verses in the Lord's Prayer had their own peaks. Below is the chart for {{% vv "Matthew 6:9" %}}, which is more or less the baseline for all of the verses in the Lord's Prayer, and which shows a roughly constant rate of quotation throughout the century. However, you can consult the pages for other verses, including {{% vv "Matthew 6:10" %}}, {{% vv "Matthew 6:11" %}}, {{% vv "Matthew 6:12" %}}, and {{% vv "Matthew 6:13" %}} to see the different peaks individual verses had.
 
 **Rank 13.** {{% vv "Matthew 6:9" %}}. "After this manner therefore pray ye: Our Father which art in heaven, Hallowed be thy name."
 
@@ -53,7 +53,7 @@ The other key text often quoted, sometimes together as a passage and sometimes a
 
 ### Proverbial or memorable verses
 
-The next major category of steadily quoted verses were those that were proverbial in some way or which had some memorable phrase that encapsulated a key idea of Christianity. Alternatively, the words of the verse were an interesting phrase applicable to different contexts even if divorced from any sense of the biblical context.
+The next major category of steadily quoted verses were those that were proverbial in some way or which had some memorable image that encapsulated a key idea of Christianity. Alternatively, the words of the verse were an interesting phrase applicable to different contexts even if divorced from any sense of the biblical context.
 
 **Rank 3.** {{% vv "Matthew 7:16" %}}. "Ye shall know them by their fruits."
 
@@ -127,7 +127,7 @@ Romans 8:28 was also broadly speaking a proverbial verse in the sense that it wa
 
 ### Verses used in obituaries
 
-Finally, some of the most frequently used verses were those that were common in newspaper obituaries. Certainly the importance of obituaries to newspapers (and newspapers' business) overstates the importance of these verses. But these verses were popular not simply becaue of obituaries, but because of the significance that death played in the life cycle of Christians. Religious observance was usually closely tied to key moments in the life cycle, from birth to marriage to death. The following five verses were the most commonly used in obituaries (or commemorative speeches and sermons). Especially noteworthy is {{% vv "John 15:13" %}}, a verse which had especially popularity in times of war or other disaster to commemorate soldiers and sailors, and which shows the significance of the verse to public mourning.
+Finally, some of the most frequently used verses were those that were common in newspaper obituaries. Certainly the importance of obituaries to newspapers (and newspapers' business) overstates the importance of these verses. But these verses were popular not simply becaue of obituaries, but because of the significance that death played in the life cycle of Christians. Religious observance was usually closely tied to key moments in the life cycle, from birth to marriage to death. The following five verses were most commonly used in obituaries (or commemorative speeches and sermons). Especially noteworthy is {{% vv "John 15:13" %}}, a verse which had especially popularity in times of war or other disaster to commemorate soldiers and sailors, and which shows the significance of the verse to public mourning.
 
 **Rank 5.** {{% vv "Matthew 25:21" %}}. "Well done, thou good and faithful servant."
 
