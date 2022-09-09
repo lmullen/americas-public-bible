@@ -10,4 +10,4 @@ featured: false
 author: Lincoln Mullen
 ---
 
-This brief snippet offers a tongue-in-cheek admonition to "worship the Almighty Dollar," and ends with the rather clever play on the words "law" and "profits." This quotation is an example of a joke, but it is also an example of a kind of interlinear commentary, in which the language of Scripture is interleaved with language from some other source, thus changing the meaning of the text.
+This brief snippet offers a tongue-in-cheek admonition to "worship the Almighty Dollar," and ends with the rather clever play on the words "law and profits." This quotation is an example of a joke, but it is also an example of a kind of interlinear commentary, in which the language of Scripture is interleaved with language from some other source, thus changing the meaning of the text.
