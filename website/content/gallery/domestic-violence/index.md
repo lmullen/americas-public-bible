@@ -1,6 +1,6 @@
 ---
 title: He whipped his wife, then quoted scripture
-newspaper: The Lancaster Ledger
+newspaper: Lancaster Ledger
 date: 1900-09-12
 reference: Ephesians 5:22
 city: Lancaster

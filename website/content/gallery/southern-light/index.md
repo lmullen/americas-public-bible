@@ -10,4 +10,4 @@ featured: false
 author: Lincoln Mullen
 ---
 
-_The Southern Light_ advertised itself using the biblical phrase, "Prove all things, hold fast that which is good." That expression was [so pliable](/verse/1-thessalonians-5-21/) that it could be used in nearly any context. In this instance, the phrase fit with the newspaper's idealized purpose of being a source of truth.
+The _Southern Light_ advertised itself using the biblical phrase, "Prove all things, hold fast that which is good." That expression was [so pliable](/verse/1-thessalonians-5-21/) that it could be used in nearly any context. In this instance, the phrase fit with the newspaper's idealized purpose of being a source of truth.
