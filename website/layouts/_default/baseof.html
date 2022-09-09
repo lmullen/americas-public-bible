@@ -25,21 +25,20 @@
   {{ partial "meta" . }}
   {{ end }}
 
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css"
-    integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.css"
-    integrity="sha256-PaAZL3VjvuBsQSngzjA8dTdYa2mU88xmjd0vw8biXfg=" crossorigin="anonymous">
+  {{ $foundationCSS := resources.Get "css/foundation.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $foundationCSS.Permalink }}" />
+  {{ $selectize := resources.Get "css/selectize.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $selectize.Permalink }}" />
   {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-
   <link rel="stylesheet" href="{{ $css.Permalink }}" />
 
   <link rel="shortcut icon" href="/sup-icon.jpg">
-  <link rel="apple-touch-icon" href="sup-icon.jpg">
+  <link rel="apple-touch-icon" href="/sup-icon.jpg">
 
   {{ partial "analytics.html" . }}
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  {{ $jquery := resources.Get "js/jquery.min.js" | resources.Fingerprint }}
+  <script src="{{ $jquery.Permalink }}"></script>
 
 </head>
 
@@ -112,10 +111,10 @@
   <link rel="stylesheet" href="{{ $style.Permalink }}" />
   {{ end }}
 
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js"
-    integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  {{ $foundationJS := resources.Get "js/foundation.min.js" | resources.Fingerprint }}
+  <script src="{{ $foundationJS.Permalink }}"></script>
+  {{ $selectize := resources.Get "js/selectize.min.js" | resources.Fingerprint }}
+  <script src="{{ $selectize.Permalink }}"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $(document).foundation();
