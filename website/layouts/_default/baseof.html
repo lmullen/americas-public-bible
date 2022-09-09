@@ -102,18 +102,18 @@
     <footer id="footer">
       <!-- Copyright Information -->
       <div class="copyright">
-        <p>© 2022 Stanford University. <a href="https://americaspublicbible.org/tou/index.html">Terms of Use</a>.</p>
+        <p>© 2022 Stanford University. <a href="">Terms of Use</a>.</p>
       </div>
       <!-- ISBN Information -->
       <ul class="info">
-        <li>ISBN 9781503615045</li>
-        <li>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DOI 10.21627/2022apb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</li>
-        <li>OCLC <a href="#" target="_blank">##########</a></li>
+        <li>ISBN: {{ .Site.Params.ISBN }}</li>
+        <li>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DOI: {{ .Site.Params.DOI }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</li>
+        <li>OCLC: <a href="" target="_blank">{{ .Site.Params.OCLC }}</a></li>
       </ul>
       <!-- Publishing Information -->
       <div class="press">
         <p>Published by <a href="https://www.sup.org/" target="_blank">Stanford University Press</a></p>
-        <a class="img" href="https://www.sup.org/" target="_blank"><img src="logo_stanford.svg" width="16" height="34"
+        <a class="img" href="https://www.sup.org/" target="_blank"><img src="/logo_stanford.svg" width="16" height="34"
             alt="Stanford University Press"></a>
       </div>
     </footer>
