@@ -52,7 +52,7 @@ p {
   -o-text-justify: newspaper; */
 }
 
-ul:not(.menu) li {
+ul:not(.menu, .info) li {
   list-style-type: square;
 }
 
@@ -181,7 +181,7 @@ article.essay .footnotes {
 /* Footer */
 footer {
   border-top: 1px solid lightgray;
-  margin: 2rem 0 2rem 0;
+  margin: 2rem 0 0 0;
   padding: 1rem 0 1rem 0;
 }
 
@@ -394,15 +394,12 @@ a div svg {
 }
 #footer {
   background-color: #941515;
-  padding: 12px;
   color: #ffffff;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  line-height: 2;
 }
 #footer:after {
   position: absolute;
@@ -428,17 +425,18 @@ a div svg {
 }
 @media (min-width: 1200px) {
   #footer {
-    padding: 9px 19px 4px 25px;
+    padding: 4px 10px 0px 10px;
     font-size: 12px;
   }
 }
 #footer p {
   margin-bottom: 0;
+  font-size: .8rem;
 }
 
 .info {
   margin: 0;
-  padding: 5;
+  padding: 0;
   list-style: none;
 }
 .info {
@@ -450,12 +448,12 @@ a div svg {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  padding-top: 10px;
+  padding-top: .75rem;
   max-width: none;
   margin: 0;
 }
 .info li {
-  padding: 0 21px 0 0;
+  padding: 0 1rem 0 0;
 }
 .info li:after {
   right: 11px;
@@ -471,6 +469,7 @@ a div svg {
   background-color: #fff;
   content: "";
 }
+
 .info a {
   color: #ffffff;
   text-decoration: underline;
@@ -479,8 +478,10 @@ a div svg {
 .copyright {
   width: 100%;
   text-align: center;
-  margin-bottom: 10;
+  margin-bottom: 0;
+  padding-top: .75rem;
 }
+
 @media (min-width: 980px) {
   .copyright {
     width: auto;
@@ -492,7 +493,7 @@ a div svg {
 }
 .copyright a:hover {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: underline;
 }
 .copyright a.link {
   color: #ffffff;
@@ -507,6 +508,7 @@ a div svg {
 .press {
   margin: 0 auto;
   width: 100%;
+  padding-top: .75rem;
 }
 @media (min-width: 980px) {
   .press {
@@ -520,7 +522,9 @@ a div svg {
   text-transform: uppercase;
 }
 .press .img {
-  margin-left: 15px;
+  margin-left: 1rem;
+  margin-bottom: .5rem;
+  vertical-align: top;
 }
 @media (min-width: 480px) {
   .press .img {
@@ -538,11 +542,11 @@ a div svg {
     margin-top: 0px;
   }
 }
-.press .img img {
+.press .img {
   width: 20px;
 }
 @media (min-width: 1200px) {
-  .press .img img {
+  .press .img {
     width: 20px;
   }
 }
