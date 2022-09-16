@@ -182,7 +182,19 @@
 
   <hr />
 
-  <section>
+  <section id="how-to-use" style="margin-top:2rem; margin-bottom:4rem;">
+    <ul class="accordion" data-accordion data-allow-all-closed="true">
+      <li class="accordion-item" data-accordion-item>
+        <a href="#" class="accordion-title">
+          <h3>Acknowledgements</h3>
+        </a>
+        <div class="accordion-content" data-tab-content>
+          {{ with .Site.GetPage "/acknowledgements" }} {{ .Content }} {{ end }}
+        </div>
+      </li>
+    </ul>
+  </section>
+  <!--<section>
     <h3>Suggested citation</h3>
     <p>
       If you use this project, you can cite it using this suggested
@@ -192,10 +204,10 @@
       Lincoln A. Mullen,
       <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University
       Press, {{ .Site.Params.year }}):
-      <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>,
+      <a href="https://americaspublicbible.org">https://americaspublicbible.org</a>,
       <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
     </p>
-  </section>
+  </section>-->
 
 </main>
 

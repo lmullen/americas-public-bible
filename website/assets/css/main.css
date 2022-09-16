@@ -393,9 +393,9 @@ a div svg {
   align-items: flex-start;
 }
 #footer {
-  background-color: #941515;
+  background-color: #000000;
   color: #ffffff;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "IBM Plex Serif", "Georgia", Times, serif;
   position: fixed;
   left: 0;
   right: 0;
@@ -409,11 +409,12 @@ a div svg {
   /*background-image: -webkit-linear-gradient(rgba(4, 33, 87, 0.01), rgba(4, 33, 87, 0.51));
         background-image: linear-gradient(rgba(4, 33, 87, 0.01), rgba(4, 33, 87, 0.51));*/
   content: "";
-  height: 30px;
+  /*height: 30px;*/
 }
 @media (min-width: 768px) {
   #footer:after {
     height: 66px;
+    font-size: 12px;
   }
 }
 @media (min-width: 980px) {
@@ -421,6 +422,7 @@ a div svg {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    font-size: 12px;
   }
 }
 @media (min-width: 1200px) {
@@ -431,7 +433,7 @@ a div svg {
 }
 #footer p {
   margin-bottom: 0;
-  font-size: .8rem;
+  font-size: .75rem;
 }
 
 .info {
@@ -448,22 +450,23 @@ a div svg {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  padding-top: .75rem;
+  padding-top: .5rem;
   max-width: none;
   margin: 0;
 }
 .info li {
-  padding: 0 1rem 0 0;
+  padding: 0 .6rem 0 0;
+  font-size: .75rem;
 }
 .info li:after {
   right: 11px;
-  top: 6px;
-  bottom: 6px;
+  /*top: 6px;
+  bottom: 6px;*/
 }
 .info li:after {
-  top: 7px;
+  /*top: 7px;
+  bottom: 6px;*/
   right: -10px;
-  bottom: 6px;
   position: absolute;
   width: 1px;
   background-color: #fff;
@@ -479,7 +482,7 @@ a div svg {
   width: 100%;
   text-align: center;
   margin-bottom: 0;
-  padding-top: .75rem;
+  padding-top: .5rem;
 }
 
 @media (min-width: 980px) {
@@ -508,7 +511,7 @@ a div svg {
 .press {
   margin: 0 auto;
   width: 100%;
-  padding-top: .75rem;
+  padding-top: .5rem;
 }
 @media (min-width: 980px) {
   .press {
