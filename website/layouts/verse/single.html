@@ -38,7 +38,7 @@
     {{ $path := "viz/verse-history-viewer/main.js" }} {{ $opts := dict
     "targetPath" $path "minify" "false"}} {{ $script := resources.Get ($path) |
     js.Build $opts }}
-    <script type="text/javascript" src="{{ $script.Permalink }}"></script>
+    <script src="{{ $script.Permalink }}"></script>
     {{ $path = "viz/verse-viewer/style.css"}} {{ $style := resources.Get $path |
     resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />

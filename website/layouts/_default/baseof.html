@@ -97,7 +97,7 @@
   {{ if isset .Params "script" }}
   {{ $opts := dict "targetPath" "viz/main.js" "minify" "true"}}
   {{ $script := resources.Get .Params.script | js.Build $opts | resources.Fingerprint }}
-  <script type="text/javascript" src="{{ $script.Permalink }}"></script>
+  <script src="{{ $script.Permalink }}"></script>
   {{ end }}
   {{ if isset .Params "style" }}
   {{ $style := resources.Get .Params.style | resources.Minify | resources.Fingerprint }}
@@ -108,7 +108,7 @@
   <script src="{{ $foundationJS.Permalink }}"></script>
   {{ $selectize := resources.Get "js/selectize.min.js" | resources.Fingerprint }}
   <script src="{{ $selectize.Permalink }}"></script>
-  <script type="text/javascript">
+  <script>
     $(document).ready(function () {
       $(document).foundation();
     });
