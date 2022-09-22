@@ -1,9 +1,12 @@
 title: "America’s Public Bible: A Commentary"
 params:
   author: "Lincoln A. Mullen"
-  doi: https://doi.org/10.21627/2022apb
+  doiURL: "https://doi.org/10.21627/2022apb"
+  doi: 10.21627/2022apb
   isbn: 978-1-5036-0524-4
   oclc: TBD
+  oclcURL: "#"
+  termsUrl: "#"
   year: 2022
   description: |
     Throughout the nineteenth century and into the twentieth century, newspapers in the United States—even newspapers which were not published by a religious denomination or organization—made frequent recourse to the Bible. Newspapers printed sermons and Sunday school lessons. They featured jokes whose punchlines required familiarity with the Bible and aired political commentary that cited the Bible on all sides of a given issue. 

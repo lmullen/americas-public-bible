@@ -172,6 +172,23 @@
   <hr />
 
   <section>
+    <h3>Suggested citation</h3>
+    <p>
+      If you use this project, you can cite it using this suggested
+      format.
+    </p>
+    <p id="suggested-citation">
+      Lincoln A. Mullen,
+      <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University
+      Press, {{ .Site.Params.year }}):
+      <a href="https://americaspublicbible.org">https://americaspublicbible.org</a>,
+      <a href="{{ .Site.Params.doiURL }}">{{ .Site.Params.doiURL }}</a>.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
     <h3>About the author</h3>
 
     {{ with .Site.GetPage "/about-the-author" }} {{ .Content }} {{ end }}
@@ -179,10 +196,38 @@
     {{ partial "newsletters.html" . }}
 
   </section>
+  <hr />
+
+  <section>
+    <h3>About RRCHNM</h3>
+
+
+    <div class="grid-x grid-margin-x">
+      <div class="cell medium-8">
+        <p>
+          This work of scholarship was created at the <a href="https://rrchnm.org">Roy Rosenzweig Center for History and
+            New Media</a>.
+        </p>
+        <p>
+          At the Roy Rosenzweig Center for History and New Media, we use digital media and computer technology to
+          democratize history: to incorporate multiple voices, reach diverse audiences, and encourage popular
+          participation in presenting and preserving the past. Since 1994, RRCHNM has worked to create digital history
+          and software that is free and fully available to
+          all.
+        </p>
+      </div>
+      <div class="cell medium-4">
+        <a href="https://rrchnm.org/"><img src="/RRCHNM.jpg" alt="RRCHNM logo" class="logo" /></a>
+      </div>
+    </div>
+
+  </section>
+
+
 
   <hr />
 
-  <section id="how-to-use" style="margin-top:2rem; margin-bottom:4rem;">
+  <section id="acknowledgements" style="margin-top:2rem; margin-bottom:4rem;">
     <ul class="accordion" data-accordion data-allow-all-closed="true">
       <li class="accordion-item" data-accordion-item>
         <a href="#" class="accordion-title">
@@ -194,20 +239,6 @@
       </li>
     </ul>
   </section>
-  <!--<section>
-    <h3>Suggested citation</h3>
-    <p>
-      If you use this project, you can cite it using this suggested
-      format.
-    </p>
-    <p id="suggested-citation">
-      Lincoln A. Mullen,
-      <em>America&rsquo;s Public Bible: A Commentary</em> (Stanford University
-      Press, {{ .Site.Params.year }}):
-      <a href="https://americaspublicbible.org">https://americaspublicbible.org</a>,
-      <a href="{{ .Site.Params.doi }}">{{ .Site.Params.doi }}</a>.
-    </p>
-  </section>-->
 
 </main>
 
