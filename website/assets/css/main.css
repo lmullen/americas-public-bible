@@ -3,6 +3,7 @@
 /* Typography */
 body {
   font-family: "IBM Plex Serif", "Georgia", Times, serif;
+  margin-bottom: 6rem;
 }
 
 h1,
