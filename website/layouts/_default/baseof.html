@@ -69,27 +69,26 @@
 
     {{ block "footer" . }}
 
-    <footer id="footer">
+    <footer class="footer">
+      <div class="container">
       <!-- Copyright Information -->
-      <div class="copyright">
-        <p>© 2022 Stanford University. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND</a>. <a
+      <div class="left">
+        <p>© 2022 Stanford University. <a
             href="{{ .Site.Params.termsURL }}">Terms of Use</a>.</p>
       </div>
       <!-- ISBN Information -->
-      <ul class="info">
-        <li>ISBN: {{ .Site.Params.ISBN }}</li>
-        <li>|&nbsp;&nbsp;&nbsp;&nbsp;DOI: <a
-            href="{{ .Site.Params.doiURL }}">{{ .Site.Params.doi }}</a>&nbsp;&nbsp;&nbsp;&nbsp;|</li>
-        <li>OCLC: <a href=" {{ .Site.Params.oclcURL }}" target=" _blank">{{ .Site.Params.OCLC }}</a></li>
-      </ul>
-      <!-- Publishing Information -->
-      <div class="press">
-        <p>Created at <a href="https://rrchnm.org">RRCHNM</a>. Published by <a href="https://www.sup.org/"
-            target="_blank">Stanford
-            University Press</a></p>
-        <a class="img" href="https://www.sup.org/" target="_blank"><img src="/logo_stanford.svg" width="10" height="21"
-            alt="Stanford University Press"></a>
+      <div class="center">
+        <p>ISBN: {{ .Site.Params.ISBN }}  |  DOI: <a
+            href="{{ .Site.Params.doiURL }}">{{ .Site.Params.doi }}</a>  |  OCLC: <a href=" {{ .Site.Params.oclcURL }}" target=" _blank">{{ .Site.Params.OCLC }}</a></p>
       </div>
+      <!-- Publishing Information -->
+      <div class="right">
+        <p>Published by <a href="https://www.sup.org/"
+            target="_blank">STANFORD UNIVERSITY PRESS</a></p>
+        <div class="footer-graphic"><img src="/logo_stanford.svg" width="15" height="33"
+            alt="Stanford University Press"></div>
+      </div>
+    </div>
     </footer>
     {{ end}}
 
