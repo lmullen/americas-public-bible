@@ -5,4 +5,4 @@ This project was created by [Lincoln Mullen](https://lincolnmullen.com), a histo
 [DataScribe](https://datascribe.tech), and
 [Mapping Early American Elections](https://earlyamericanelections.org).
 
-For updates about this project and about other work at the intersection of the history of American religion and digital history, you can subscribe to either his personal newsletter, "[Working on It](https://buttondown.email/lmullen)," or to the "[American Religion @ RRCHNM](https://us14.campaign-archive.com/home/?u=36898c6824a31b8e1d4434a55&id=18c732c256)" newsletter.
+For updates about this project and about other work at the intersection of the history of American religion and digital history, you can subscribe to either his personal newsletter, "[Working on It](https://buttondown.email/lmullen)," or to the "[American Religion @ RRCHNM](https://rrchnm.org/subscribe/)" newsletter.

@@ -124,8 +124,7 @@
 
     {{ partial "verse-select.html" }}
 
-    <p>Below are the trends for featured verses, a few of which are also the subject of the <a
-        href="#verse-histories">verse histories</a>. You can also browse the verses in three other ways: (1) the most
+    <p>Below are the trends for featured verses, a few of which are also the subject of the <a href="#verse-histories">verse histories</a>. You can also browse the verses in three other ways: (1) the most
       quoted verses in descending order of frequency; (2) verses that had a peak rate of quotation in a given year,
       arranged
       chronologically;
@@ -192,7 +191,6 @@
     <h3>About the author</h3>
 
     {{ with .Site.GetPage "/about-the-author" }} {{ .Content }} {{ end }}
-
     {{ partial "newsletters.html" . }}
 
   </section>
