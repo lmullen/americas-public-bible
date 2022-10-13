@@ -10,4 +10,4 @@ featured: false
 author: Caitlin McGeever
 ---
 
-In this letter Elder Phelps defends the Mormon practice of polygamy against accusations made by James Beunett in the New York *Herald*. Phelps uses Luke 18:16 to emphasize the justification of polygamy as the virtuous, original intention of scripture and that neither federal or local government has control over Mormon religious practices. He closes by calling into question alleged sexual proclivities of national elites, flipping the accusation of who acts beyond the bounds of morality.
+In this letter, Elder Phelps defends the Mormon practice of polygamy against accusations made by James Beunett in the *New York Herald*. Phelps uses Luke 18:16 to emphasize the justification of polygamy as the virtuous, original intention of scripture and that neither federal or local government has control over Mormon religious practices. He closes by calling into question alleged sexual proclivities of national elites, flipping the accusation of who acts beyond the bounds of morality.

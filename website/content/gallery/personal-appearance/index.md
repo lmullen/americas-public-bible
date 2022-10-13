@@ -14,6 +14,6 @@ Proclaiming that "To Look Well Is A Duty," this author asserts that God must be
 "a lover of the beautiful" because of the beauty of nature. They reference part
 of Luke 12:17, "but Solomon in all his glory was not arrayed like one of these,"
 asserting that the option of a non-beautiful creation proves that God prefers
-beauty. Therefore, the maintainance of an individual's personal appearance is an
+beauty. Therefore, the maintenance of an individual's personal appearance is an
 act of tribute to Him and should be continuously pursued, contrary to warnings
 against vanity. 
