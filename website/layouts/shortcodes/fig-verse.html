@@ -11,7 +11,7 @@
 {{ $path := "viz/verse-figure/main.js" }}
 {{ $opts := dict "targetPath" $path "minify" "false"}}
 {{ $script := resources.Get $path | js.Build $opts  }}
-<script type="text/javascript" src="{{ $script.Permalink }}" data-ref="{{ $ref }}" data-id="{{ $id }}" defer></script>
+<script src="{{ $script.Permalink }}" data-ref="{{ $ref }}" data-id="{{ $id }}" defer></script>
 
 {{ $style := resources.Get "viz/verse-viewer/style.css" | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}">

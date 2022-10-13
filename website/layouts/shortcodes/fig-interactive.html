@@ -9,7 +9,7 @@
 {{ $path := printf "viz/%s.js" $id }}
 {{ $opts := dict "targetPath" $path "minify" "false"}}
 {{ $script := resources.Get (.Get "script") | js.Build $opts  }}
-<script type="text/javascript" src="{{ $script.Permalink }}" defer></script>
+<script src="{{ $script.Permalink }}" defer></script>
 
 {{ if .Get "style" }}
 {{ $style := resources.Get (.Get "style") | resources.Minify | resources.Fingerprint }}

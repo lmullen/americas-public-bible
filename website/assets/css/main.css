@@ -3,6 +3,7 @@
 /* Typography */
 body {
   font-family: "IBM Plex Serif", "Georgia", Times, serif;
+  margin-bottom: 6rem;
 }
 
 h1,
@@ -52,7 +53,7 @@ p {
   -o-text-justify: newspaper; */
 }
 
-ul:not(.menu) li {
+ul:not(.menu, .info) li {
   list-style-type: square;
 }
 
@@ -181,13 +182,13 @@ article.essay .footnotes {
 /* Footer */
 footer {
   border-top: 1px solid lightgray;
-  margin: 2rem 0 2rem 0;
+  margin: 2rem 0 0 0;
   padding: 1rem 0 1rem 0;
 }
 
 .logo {
-  width: 365px;
-  margin: 0 0 1rem 0;
+  width: 300px;
+  margin: 0 0 0rem 0;
 }
 
 /* Gallery */
@@ -364,4 +365,117 @@ a div svg {
   font-size: 1.2rem;
   font-weight: bold;
   padding-top: 1rem;
+}
+
+.footer {
+	top: auto;
+	bottom: 0;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	min-width: 320px;
+	background: #000;
+	color: #fff;
+	font-family: "IBM Plex Serif", "Georgia", Times, serif;
+	z-index: 2;
+	text-align: center;
+	padding: 18px 4px 4px;
+}
+
+.footer a {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.footer a:hover {
+	text-decoration: none;
+}
+
+.footer p {
+	margin-bottom: 10px;
+  font-size: 0.75rem;
+}
+
+.footer .container {
+	max-width: none;
+}
+
+.footer .left a {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 6px;
+}
+
+.footer .right {
+	position: relative;
+}
+
+.footer .right p {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.footer .right .footer-graphic {
+	display: inline-block;
+	vertical-align: top;
+	margin: -6px 0 0 8px;
+}
+
+@media (min-width: 970px) {
+	.container {
+		padding: 0 15px;
+	}
+
+	.footer {
+		padding: 14px 0 4px;
+	}
+
+	.footer .container {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
+
+	.footer .left {
+		max-width: 30%;
+		text-align: left;
+	}
+
+	.footer .center {
+		max-width: 40%;
+  }
+
+	.footer .right {
+		max-width: 30%;
+		padding-right: 26px;
+		text-align: right;
+	}
+
+	.footer .right p {
+		display: block;
+	}
+
+	.footer .right .footer-graphic {
+		display: block;
+		position: absolute;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		right: 0;
+		margin: -2px -2px 0 0;
+	}
 }
