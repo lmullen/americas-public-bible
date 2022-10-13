@@ -1,0 +1,13 @@
+{{ define "main" }}
+<h1>404 — Reference not found</h1>
+<p>
+	Sorry, but that page does not exist. Please try finding what you are looking for at the <a href="/">table of contents</a>.
+</p>
+
+{{ $raw := resources.Get "bible-box.png"}}
+{{ $img := $raw.Fit "600x1000 webp" }}
+<a href="/"><img src="{{ $img.Permalink }}" alt="An image of a Bible box from a newspaper"></a>
+
+<script>plausible("404", { props: { path: document.location.pathname } });</script>
+
+{{ end }}
