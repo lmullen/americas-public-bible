@@ -6,19 +6,26 @@
 
 If you use this project for academic work, here is a suggested citation.
 
-Lincoln Mullen, *America's Public Bible: A Commentary* (Stanford University Press, forthcoming 2022): &lt;<http://americaspublicbible.org>&gt;.
+Lincoln A. Mullen, *America's Public Bible: A Commentary* (Stanford University Press, 2023): &lt;<http://doi.org/10.21627/2022apb>&gt;.
 
 ## Repository organization
 
 This repository supersedes the [original repositories](https://github.com/public-bible/). The `website` directory contains the code and visualizations for the digital monograph. The `quotation-finder` directory contains the code to find the quotations in the text corpora. The data is served by RRCHNM's [data API](https://github.com/chnm/dataapi).
 
-## Copyright and license
+## Copyright
 
-All prose is copyright 2016-2020 Lincoln Mullen and is released under the CC-BY-NC-ND license.
+Except for the illustrations credited to third party sources, the copyright to the [America's Public Bible](https://americaspublicbible.org) website is held by Stanford University.
 
-All code is copyright 2016-2020 Lincoln Mullen and is released under the MIT license.
+ISBN 9781503605244 | DOI 10.21627/2022apb | OCLC tbd
 
-All data is copyright 2016-2020 Lincoln Mullen and is released under the CC0 license.
+The copyright to the code is held by Lincoln A. Mullen.
+
+All data is copyright 2016-2022 Lincoln A. Mullen. 
+
+## License
+
+The website's content, including text, user interface design, style, and imagery---unless otherwise indicated---are licensed under the creative Commons License CC BY-NC-ND 4.0. The code is licensed under the MIT license
+and the underlying data is licensed under the Creative Commons License CC0. For more information and the complete text of the license for the website, please go to <https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>. See the file `LICENSE.md` in this repository for the license for the code.
 
 ## Project news
 
