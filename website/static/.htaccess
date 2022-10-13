@@ -1,0 +1,51 @@
+ErrorDocument 404 /404.html
+
+Redirect 301 /exploration.html https://americaspublicbible.org/
+Redirect 301 /methods.html https://americaspublicbible.org/essay/methods/
+Redirect 301 /topics.html https://americaspublicbible.org/
+Redirect 301 /most-quoted-by-decade.html https://americaspublicbible.org/
+Redirect 301 /quoted-together.html https://americaspublicbible.org/
+
+<ifModule mod_gzip.c>
+mod_gzip_on Yes
+mod_gzip_dechunk Yes
+mod_gzip_item_include file .(html?|txt|css|js|php|pl)$
+mod_gzip_item_include handler ^cgi-script$
+mod_gzip_item_include mime ^text/.*
+mod_gzip_item_include mime ^application/x-javascript.*
+mod_gzip_item_exclude mime ^image/.*
+mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+</IfModule>
+
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access"
+ExpiresByType image/jpg "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/webp "access plus 1 month"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/pdf "access plus 1 day"
+ExpiresByType text/x-javascript "access plus 1 day"
+ExpiresByType text/javascript "access plus 1 day"
+ExpiresByType image/x-icon "access plus 1 week"
+ExpiresDefault "access plus 1 day"
+</IfModule>
+
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
