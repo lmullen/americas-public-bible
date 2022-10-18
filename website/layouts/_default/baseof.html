@@ -50,7 +50,7 @@
       <div data-sticky-container>
         <nav class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1" style="width:100%">
           <div class="top-bar-left">
-            <h1 class="nav-title"><a href="/">{{ .Site.Title }}</a></h1>
+            <h1 class="nav-title"><a href="{{ .Site.Params.CoverURL }}">{{ .Site.Title }}</a></h1>
           </div>
           <div class="top-bar-right" style="text-align: left!important;">
             <a href="/#toc">Table of Contents</a><br>
@@ -71,24 +71,20 @@
 
     <footer class="footer">
       <div class="container">
-      <!-- Copyright Information -->
-      <div class="left">
-        <p>© 2022 Stanford University. <a
-            href="{{ .Site.Params.termsURL }}">Terms of Use</a>.</p>
+        <!-- Copyright Information -->
+        <div class="left">
+          <p>© 2022 Stanford University. <a href="{{ .Site.Params.termsURL }}">Terms of Use</a>.</p>
+        </div>
+        <!-- ISBN Information -->
+        <div class="center">
+          <p>ISBN: {{ .Site.Params.ISBN }} | DOI: <a href="{{ .Site.Params.doiURL }}">{{ .Site.Params.doi }}</a> | OCLC: <a href=" {{ .Site.Params.oclcURL }}" target=" _blank">{{ .Site.Params.OCLC }}</a></p>
+        </div>
+        <!-- Publishing Information -->
+        <div class="right">
+          <p>Published by <a href="https://www.sup.org/" target="_blank">STANFORD UNIVERSITY PRESS</a></p>
+          <div class="footer-graphic"><img src="/logo_stanford.svg" width="15" height="33" alt="Stanford University Press"></div>
+        </div>
       </div>
-      <!-- ISBN Information -->
-      <div class="center">
-        <p>ISBN: {{ .Site.Params.ISBN }}  |  DOI: <a
-            href="{{ .Site.Params.doiURL }}">{{ .Site.Params.doi }}</a>  |  OCLC: <a href=" {{ .Site.Params.oclcURL }}" target=" _blank">{{ .Site.Params.OCLC }}</a></p>
-      </div>
-      <!-- Publishing Information -->
-      <div class="right">
-        <p>Published by <a href="https://www.sup.org/"
-            target="_blank">STANFORD UNIVERSITY PRESS</a></p>
-        <div class="footer-graphic"><img src="/logo_stanford.svg" width="15" height="33"
-            alt="Stanford University Press"></div>
-      </div>
-    </div>
     </footer>
     {{ end}}
 
