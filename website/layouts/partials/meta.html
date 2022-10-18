@@ -10,14 +10,14 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ .Site.Title }}" />
 <meta name="twitter:description" content="{{ .Site.Params.Description }}" />
-<meta name="twitter:image" content="{{ .Site.BaseURL}}/cover.png" />
+<meta name="twitter:image" content="{{ .Site.BaseURL}}/cover.jpg" />
 <meta name="twitter:domain" content="americaspublicbible.org" />
 
 <meta property="og:title" content="{{ .Site.Title }}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ .Site.BaseURL }}" />
 <meta property="og:description" content="{{ .Site.Params.Description }}" />
-<meta property="og:image" content="{{ .Site.BaseURL}}/cover.png" />
+<meta property="og:image" content="{{ .Site.BaseURL}}/cover.jpg" />
 
 {{ else }}
 <meta name="twitter:card" content="summary" />
@@ -25,7 +25,7 @@
 {{ if .Description }}
 <meta name="twitter:description" content="{{ .Description }}" />
 {{ end }}
-<meta name="twitter:image" content="{{ .Site.BaseURL}}/cover.png" />
+<meta name="twitter:image" content="{{ .Site.BaseURL}}/cover.jpg" />
 <meta name="twitter:domain" content="americaspublicbible.org" />
 
 <meta property="og:title" content="{{ .Title }}" />
@@ -34,5 +34,5 @@
 {{ if .Description }}
 <meta property="og:description" content="{{ .Description }}" />
 {{ end }}
-<meta property="og:image" content="{{ .Site.BaseURL}}/cover.png" />
+<meta property="og:image" content="{{ .Site.BaseURL}}/cover.jpg" />
 {{ end }}
