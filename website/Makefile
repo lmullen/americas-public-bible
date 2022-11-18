@@ -15,3 +15,12 @@ deploy : build
 		--checksum -avz \
 		--itemize-changes \
 		public/ reclaim:~/dev.americaspublicbible.org/ | egrep -v '^\.'
+
+deploy-prod : build
+	@echo "\nDeploying the website to SUP Digital ..."
+	rsync --delete --omit-dir-times \
+	  --exclude '.well-known/' \
+	  --exclude '.htaccess' \
+		--checksum -avz \
+		--itemize-changes \
+		public/ supdigital:~/public_html/ | egrep -v '^\.'
