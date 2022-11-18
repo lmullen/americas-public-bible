@@ -8,15 +8,6 @@ build :
 	@echo "Website finished building."
 
 deploy : build
-	@echo "\nDeploying the website ..."
-	rsync --delete --omit-dir-times \
-	  --exclude '.well-known/' \
-	  --exclude '.htaccess' \
-		--checksum -avz \
-		--itemize-changes \
-		public/ reclaim:~/dev.americaspublicbible.org/ | egrep -v '^\.'
-
-deploy-prod : build
 	@echo "\nDeploying the website to SUP Digital ..."
 	rsync --delete --omit-dir-times \
 	  --exclude '.well-known/' \
