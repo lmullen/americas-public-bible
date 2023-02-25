@@ -7,6 +7,6 @@ require (
 	github.com/lib/pq v1.1.1
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/mattn/go-runewidth v0.0.4 // indirect
-	golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	gopkg.in/cheggaaa/pb.v1 v1.0.28
 )
